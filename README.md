@@ -1,37 +1,25 @@
-## Welcome to GitHub Pages
+# Ljusspel 
 
-You can use the [editor on GitHub](https://github.com/Byssis/Project2017/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Projektsida för grupp 4
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+[Editor on GitHub](https://github.com/Byssis/Project2017/edit/master/README.md) 
 
-### Markdown
+### Gruppmedlemmar
+**Product owner:** Senad Delic <senadmd@kth.se> <br/>
+**Scrum master:** Victor Bodell <vbodell@kth.se> <br/>
+Sara Ersson <saraers@kth.se><br/>
+Albin Byström <albinby@kth.se><br/>
+Benedith Mulongo <mulongobent@yahoo.fr><br/>
+Niklas Lindqvist <nlindqv@kth.se><br/>
+Emma Good <egood@kth.se><br/>
+Michaela Falk <mija5666@student.su.se><br/>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Kontakt
 
-```markdown
-Syntax highlighted code block
+[Mail](https://github.com/contact).
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
+## Entry 1
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Byssis/Project2017/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
