@@ -12,7 +12,7 @@ Albin Byström <albinby@kth.se><br/>
 Benedith Mulongo <mulongobent@yahoo.fr><br/>
 Niklas Lindqvist <nlindqv@kth.se><br/>
 Emma Good <egood@kth.se><br/>
-Michaela Falk <mija5666@student.su.se><br/>
+Michaela Jangefalk <mija5666@kth.se><br/>
 
 ### Kontakt
 
