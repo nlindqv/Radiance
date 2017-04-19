@@ -19,7 +19,9 @@ Michaela Jangefalk <mija5666@kth.se><br/>
 [Mail](https://github.com/contact).
 
 
-## Entry 1
+## Sprint 1
+
+För sprint 1 har vi fokuserat på de utmaningar som finns i att jobba med nya verktyg och platform som de flesta av oss inte har använt oss av förut. Vårt fokus ligger i att få en bra rutin i git-hantering men även att snabbt komma in i arbetet genom att bland annat använda parprogrammering. Just nu står vi inför en lång upplärrningsbacke och har som sprintmål att producera ett spel med grundläggande  funktionalitet utifrån vår spelidé och fokus på design kommer att prioriteras senare i projektet. 
 
 
 
