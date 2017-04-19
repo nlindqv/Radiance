@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33934394113702144}
   - component: {fileID: 64374426721162634}
   - component: {fileID: 23592487532079562}
+  - component: {fileID: 114393247302846708}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -95,3 +96,17 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114393247302846708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1186638503894468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 091ade173a0eec3429cc7408199f149e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameField: {fileID: 1186638503894468}
+  gameFieldHeight: 1000
+  gameFieldWidth: 1000
