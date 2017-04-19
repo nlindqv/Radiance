@@ -8,7 +8,6 @@ public class LaserRay : MonoBehaviour
     //public Vector3 Direction;
     public Color Color;
     public int BounceValue;
-    private Vector3 startCordinates;
     private LineRenderer laserRay;
     private Transform transform;
 
@@ -21,9 +20,9 @@ public class LaserRay : MonoBehaviour
     }
     public void GenerateLaserRay()
     {
-        Ray ray = new Ray(startCordinates,transform.forward);
+        Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
-        laserRay.SetPosition(0, startCordinates);
+        laserRay.SetPosition(0, transform.position);
         Material material = laserRay.material;
         material.color = Color;
         if (Physics.Raycast(ray, out hit))
