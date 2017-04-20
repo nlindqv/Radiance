@@ -6,37 +6,30 @@ using UnityEngine;
 public class TargetMaster : MonoBehaviour {
 
 	private Target[] Targets;
-	private bool[] hits;
 
 	void Start () {
-
-		//Get all Target-scripts
+		//Get all Target-scripts children-targets
 		Targets = GetComponentsInChildren<Target> ();
-		hits = new bool[Targets.Length];
-
 	}
 	
 
 	// Update is called late in every frame to make sure all target hits are registered correctly
 	void LateUpdate () {
 
+		//Check if all are hit
+		bool nextLevel = false;
+
 		//Get all current hits for targets on level
 		for(int i = 0; i < Targets.Length; i++){
-			Target targScript = Targets [i];
-			hits [i] = targScript.hit;
-			//Debug.Log ("Target " + i + " hit: " + hits[i]);
 
-		}
-		//Check if all are hit (Optimize later)
-		bool nextLevel = false;
-		foreach(bool h in hits){
-			if (!h) {
+			//Debug.Log ("Target " + i + " hit: " + Targets[i].hit);
+
+			if (Targets[i].hit) {
+				nextLevel = true;
+			} else {
 				nextLevel = false;
 				break;
-			} else {
-				nextLevel = true;
 			}
-			//Debug.Log ("Should go to next level: " + nextLevel);
 		}
 
 		//if all are hit go to next scene
