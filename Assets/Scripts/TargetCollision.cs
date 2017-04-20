@@ -19,7 +19,6 @@ public class TargetCollision : MonoBehaviour
 		//Upon start 
 		hit = false;
 
-		Debug.Log ("Color initiated");
 		//Assign the neutral color
 		Material mat = rend.material;
 		mat.color = neutral;
