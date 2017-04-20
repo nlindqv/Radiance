@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetCollision : MonoBehaviour
+public class TargetCollision : MonoBehaviour, IInteractables
 {
 	private Renderer rend;
 	public Color neutral;
@@ -22,10 +22,11 @@ public class TargetCollision : MonoBehaviour
 		//Assign the neutral color
 		Material mat = rend.material;
 		mat.color = neutral;
-
+		Debug.Log (this + " color assigned");
 	}
 
 	//Target is hit
+	/*
 	void OnCollisionEnter (Collision col)
 	{
 		if (col.gameObject.name == "ray") {
@@ -34,7 +35,7 @@ public class TargetCollision : MonoBehaviour
 			hit = true;
 		}
 	}
-
+	*/
 	void Update() {
 		if (!hit) {
 			Material mat = rend.material;
@@ -50,21 +51,16 @@ public class TargetCollision : MonoBehaviour
 		hit = false;
 	}
 
-	/*
-	 * void HandleLaserCollision (Gameobject ray)
+
+	public void HandleLaserCollision (LaserRay ray)
 	{
+		Debug.Log ("Laser Collision");
 		Material mat = rend.material;
 		mat.color = targetHit;
 		hit = true;
 	}
 
-	void Update()
-	{
-		hit = false;
-		
-	}
-	 * /
-
+	/*
 	//Target is no longer hit
 	void OnCollisionExit (Collision col)
 	{
@@ -74,8 +70,5 @@ public class TargetCollision : MonoBehaviour
 			hit = false;
 		}
 	}
-
-
-}
-*/
+	*/
 }
