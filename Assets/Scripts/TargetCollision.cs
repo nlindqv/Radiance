@@ -40,6 +40,13 @@ public class TargetCollision : MonoBehaviour
 			Material mat = rend.material;
 			mat.color = neutral;
 		}
+
+		//Debugging, until update problem with collision solved!
+		/*else{
+			Material mat = rend.material;
+			mat.color = targetHit;
+		} */
+		//Comment the following line for hit-debug
 		hit = false;
 	}
 
