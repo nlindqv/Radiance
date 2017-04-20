@@ -2,25 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Use with Target Master, A master object with Targets as children
+//Use with Targets, A master object with Targets as children
 public class TargetMaster : MonoBehaviour {
 
 	private Target[] Targets;
 	private bool[] hits;
 
-	// Use this for initialization
 	void Start () {
 
+		//Get all Target-scripts
 		Targets = GetComponentsInChildren<Target> ();
 		hits = new bool[Targets.Length];
-		//Debug.Log ("Get all children");
 
 	}
 	
+
 	// Update is called late in every frame to make sure all target hits are registered correctly
 	void LateUpdate () {
-		
-		//Debug.Log ("Getting all " + Targets.Length + " hits.");
 
 		//Get all current hits for targets on level
 		for(int i = 0; i < Targets.Length; i++){
@@ -45,8 +43,7 @@ public class TargetMaster : MonoBehaviour {
 		if (nextLevel) {
 			//next scene code here...
 			Debug.Log ("Entering next scene");
-		} //else
-			//Debug.Log ("No new scene");
+		}
 
 	}
 }

@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Used with Targetmaster as parent
 public class Target : MonoBehaviour, IInteractables
 {
 	private Renderer rend;
-	public Color neutral;
-	public Color targetHit;
 
 	public bool hit;
+	//Colors to toggle between laser hit and not hit
+	public Color defaultCol;
+	public Color targetHit;
 
 	void Start()
 	{
@@ -16,28 +18,30 @@ public class Target : MonoBehaviour, IInteractables
 		rend = GetComponentInChildren<Renderer>();
 		rend.enabled = true;
 
-		//Upon start 
+		//Default is no hit from laser
 		hit = false;
 
-		//Assign the neutral color
+		//Assign the default color
 		Material mat = rend.material;
-		mat.color = neutral;
-		//Debug.Log (this + " color assigned");
+		mat.color = defaultCol;
 	}
-		
+
+
 	void Update() {
+		//If there is no hit make sure target is default color
 		if (!hit) {
 			Material mat = rend.material;
-			mat.color = neutral;
+			mat.color = defaultCol;
 		}
 
+		//updates hit to false every frame, happens before laserCollision
 		hit = false;
 	}
 
-
+	//Handles Collision with laser
 	public void HandleLaserCollision (LaserRay ray)
 	{
-		//Debug.Log ("Laser Collision");
+		//Change material and indicate hit to targetmaster
 		Material mat = rend.material;
 		mat.color = targetHit;
 		hit = true;
