@@ -7,25 +7,38 @@ using UnityEngine;
 [RequireComponent(typeof(Transform))]
 public class Mirror : MonoBehaviour, IInteractables
 {
-    public GameObject laserSource;
+    private GameObject prev;
+    public GameObject ray;
+    public int bounceValue;
     private Transform objTransform;
-	// Use this for initialization
-	void Start () {
+
+    public float mirrWidth; // x component
+    public float mirrHeight; // y component
+    public float mirrDepth;  // z component
+
+    // Use this for initialization
+    void Start () {
         objTransform = GetComponent<Transform>();
-	}
+        mirrWidth = 6;
+        mirrHeight = 3;
+        mirrDepth = 1;
+        transform.localScale = new Vector3(mirrWidth, mirrHeight, mirrDepth);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        Destroy(prev);
+    }
 
     public void HandleLaserCollision(LaserRay laserHit)
-    {
+    {        
         //reflektera map. laserns riktningsvektor samt ytans normal
         Vector3 direction = Vector3.Reflect(laserHit.transform.forward,laserHit.HitNormal);
-        LaserRay newLaser = Instantiate(laserSource, laserHit.HitPoint, Quaternion.LookRotation(direction)).GetComponent<LaserRay>(); 
+        prev = Instantiate(ray, laserHit.HitPoint, Quaternion.LookRotation(direction));
+        LaserRay newLaser = prev.GetComponent<LaserRay>();
         //sätt färg och minska bouncevalue
-        newLaser.BounceValue = laserHit.BounceValue- 1;
+        newLaser.BounceValue = laserHit.BounceValue- bounceValue;
         newLaser.Color = laserHit.Color;
+         
     }
 }
