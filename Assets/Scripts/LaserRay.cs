@@ -31,20 +31,23 @@ public class LaserRay : MonoBehaviour
         laserRay.SetPosition(0, transform.position);
         Material material = laserRay.material;
         material.color = Color;
+        //kolla om vi får träff
         if (Physics.Raycast(ray, out hit))
         {
+            //sätt publika egenskaper som normal och träffpunkts
             hitPoint = hit.point;
             hitNormal = hit.normal;
+            //sätt slutpunkt på lasern
             laserRay.SetPosition(1, hitPoint);
+            // kolla om komponenten ugör en interactable
             Component interactableObj = hit.collider.GetComponentInParent(typeof(IInteractables));
             if (interactableObj != null)
             {
+                //generera event för laserträff
                 ((IInteractables)interactableObj).HandleLaserCollision(this);
             }
         }else{
             laserRay.SetPosition(1, ray.GetPoint(100));
         }
-        if (BounceValue <= 0)           // Destory laser ray if bounce value less or equal than 0
-            Destroy(this);
     }
 }

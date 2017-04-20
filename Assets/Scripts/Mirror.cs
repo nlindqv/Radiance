@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/// <summary>
+/// Klass för att hantera reflektion map. spegeln
+/// </summary>
 [RequireComponent(typeof(Transform))]
 public class Mirror : MonoBehaviour, IInteractables
 {
@@ -18,10 +21,11 @@ public class Mirror : MonoBehaviour, IInteractables
 
     public void HandleLaserCollision(LaserRay laserHit)
     {
-        float angle = Vector3.Angle(laserHit.HitNormal, laserHit.transform.forward); // laserHit.HitPoint
-        Vector3 direction = laserHit.HitNormal;//laserHit.transform.eulerAngles;
-        direction += Vector3.up + new Vector3(0, angle); //90 + 
-        LaserRay newLaser = Instantiate(laserSource, laserHit.HitPoint, Quaternion.Euler(direction)).GetComponent<LaserRay>();
+        //reflektera map. laserns riktningsvektor samt ytans normal
+        Vector3 direction = Vector3.Reflect(laserHit.transform.forward,laserHit.HitNormal);
+        LaserRay newLaser = Instantiate(laserSource, laserHit.HitPoint, Quaternion.LookRotation(direction)).GetComponent<LaserRay>(); 
+        //sätt färg och minska bouncevalue
         newLaser.BounceValue = laserHit.BounceValue- 1;
+        newLaser.Color = laserHit.Color;
     }
 }
