@@ -6,9 +6,10 @@ public class TouchInput : MonoBehaviour
 {
 	public GameObject laser;
 	public Transform ls;
+
 	private float rot;
 	private Rigidbody rb;
-	private GameObject prev;
+	private GameObject previousLaser;
 	private bool changeDir;
 	private Vector2 startPos;
 	private Vector2 direction;
@@ -24,14 +25,19 @@ public class TouchInput : MonoBehaviour
 	void Update ()
 	{
 		if (Input.touchCount > 0) {
+
+            // only consider the first touch on the screen
 			Touch touch = Input.GetTouch (0);
+
 			switch (touch.phase) {
+
 			case TouchPhase.Began: 
 				startPos = touch.position;
 				changeDir = false;
 				break;
 			
 			case TouchPhase.Stationary:
+                startPos = touch.position;
 				changeDir = false;
 				break;
 			
@@ -49,16 +55,23 @@ public class TouchInput : MonoBehaviour
 				break;
 			}
 		}
-		if (changeDir) {
-			if (direction.y > 0)
-				rot += 1.0f;
-			else if (direction.y < 0)
-				rot -= 1.0f;
-		} else
-			rot = 0.0f;
-		
-		Destroy (prev);
-		rb.rotation = Quaternion.Euler (0.0f, rot, 0.0f);
-		prev = Instantiate (laser, ls.position, ls.rotation);
-	}
+
+        if (changeDir) {
+			if (direction.y > 8)
+				rot += 2.5f;
+			else if (direction.y < -8)
+				rot -= 2.5f;
+		}
+        
+		Destroy (previousLaser);
+        // if rotation should depend on both x and y 
+        /*
+        float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg * 0.3f;
+        rb.rotation = Quaternion.Euler(0.0f, angle, 0.0f);
+        */
+
+        rb.rotation = Quaternion.Euler (0.0f, rot, 0.0f);
+		previousLaser = Instantiate (laser, ls.position, ls.rotation);
+
+    }
 }
