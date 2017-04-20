@@ -59,5 +59,6 @@ public class TouchInput : MonoBehaviour
 		
 		Destroy (prev);
 		rb.rotation = Quaternion.Euler (0.0f, rot, 0.0f);
-		prev = Instantiate (laser, ls.position, ls.position);
+		prev = Instantiate (laser, ls.position, ls.rotation);
 	}
+}
