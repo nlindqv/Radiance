@@ -31,7 +31,7 @@ public class LaserRay : MonoBehaviour
         }else{
             laserRay.SetPosition(1, ray.GetPoint(100));
         }
-        if (BounceValue <= 0)           // Destory laser ray if bounce value less or equal to 0
+        if (BounceValue <= 0)           // Destory laser ray if bounce value less or equal than 0
             Destroy(this);
     }
 }
