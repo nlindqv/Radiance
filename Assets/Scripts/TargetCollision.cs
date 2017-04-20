@@ -22,53 +22,25 @@ public class TargetCollision : MonoBehaviour, IInteractables
 		//Assign the neutral color
 		Material mat = rend.material;
 		mat.color = neutral;
-		Debug.Log (this + " color assigned");
+		//Debug.Log (this + " color assigned");
 	}
-
-	//Target is hit
-	/*
-	void OnCollisionEnter (Collision col)
-	{
-		if (col.gameObject.name == "ray") {
-			Material mat = rend.material;
-			mat.color = targetHit;
-			hit = true;
-		}
-	}
-	*/
+		
 	void Update() {
 		if (!hit) {
 			Material mat = rend.material;
 			mat.color = neutral;
 		}
 
-		//Debugging, until update problem with collision solved!
-		/*else{
-			Material mat = rend.material;
-			mat.color = targetHit;
-		} */
-		//Comment the following line for hit-debug
 		hit = false;
 	}
 
 
 	public void HandleLaserCollision (LaserRay ray)
 	{
-		Debug.Log ("Laser Collision");
+		//Debug.Log ("Laser Collision");
 		Material mat = rend.material;
 		mat.color = targetHit;
 		hit = true;
 	}
 
-	/*
-	//Target is no longer hit
-	void OnCollisionExit (Collision col)
-	{
-		if (col.gameObject.name == "ray") {
-			Material mat = rend.material;
-			mat.color = neutral;
-			hit = false;
-		}
-	}
-	*/
 }

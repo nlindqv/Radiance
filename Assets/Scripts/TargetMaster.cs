@@ -13,20 +13,20 @@ public class TargetMaster : MonoBehaviour {
 
 		Targets = GetComponentsInChildren<TargetCollision> ();
 		hits = new bool[Targets.Length];
-		Debug.Log ("Get all children");
+		//Debug.Log ("Get all children");
 
 	}
 	
 	// Update is called once per frame
 	// SHOULD NOT BE UPDATED EVERY FRAME??
-	void Update () {
+	void LateUpdate () {
 		
 		//Debug.Log ("Getting all " + Targets.Length + " hits.");
 		//Get all current hits for targets on level
 		for(int i = 0; i < Targets.Length; i++){
 			TargetCollision targScript = Targets [i];
 			hits [i] = targScript.hit;
-			Debug.Log ("Target " + i + " hit: " + hits[i]);
+			//Debug.Log ("Target " + i + " hit: " + hits[i]);
 
 		}
 		//Check if all are hit (Optimize later)
@@ -45,8 +45,8 @@ public class TargetMaster : MonoBehaviour {
 		if (nextLevel) {
 			//next scene code here...
 			Debug.Log ("Entering next scene");
-		} else
-			Debug.Log ("No new scene");
+		} //else
+			//Debug.Log ("No new scene");
 
 	}
 }
