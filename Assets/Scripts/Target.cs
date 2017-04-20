@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetCollision : MonoBehaviour, IInteractables
+public class Target : MonoBehaviour, IInteractables
 {
 	private Renderer rend;
 	public Color neutral;

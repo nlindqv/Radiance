@@ -5,26 +5,26 @@ using UnityEngine;
 //Use with Target Master, A master object with Targets as children
 public class TargetMaster : MonoBehaviour {
 
-	private TargetCollision[] Targets;
+	private Target[] Targets;
 	private bool[] hits;
 
 	// Use this for initialization
 	void Start () {
 
-		Targets = GetComponentsInChildren<TargetCollision> ();
+		Targets = GetComponentsInChildren<Target> ();
 		hits = new bool[Targets.Length];
 		//Debug.Log ("Get all children");
 
 	}
 	
-	// Update is called once per frame
-	// SHOULD NOT BE UPDATED EVERY FRAME??
+	// Update is called late in every frame to make sure all target hits are registered correctly
 	void LateUpdate () {
 		
 		//Debug.Log ("Getting all " + Targets.Length + " hits.");
+
 		//Get all current hits for targets on level
 		for(int i = 0; i < Targets.Length; i++){
-			TargetCollision targScript = Targets [i];
+			Target targScript = Targets [i];
 			hits [i] = targScript.hit;
 			//Debug.Log ("Target " + i + " hit: " + hits[i]);
 
