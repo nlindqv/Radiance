@@ -11,6 +11,11 @@ public class LaserRay : MonoBehaviour
     private LineRenderer laserRay;
     private Transform transform;
 
+    private Vector3 hitPoint;
+    private Vector3 hitNormal;
+    public Vector3 HitPoint { get { return hitPoint; } }
+    public Vector3 HitNormal { get { return hitNormal; } }
+
 	// Use this for initialization
     void Start()
     {
@@ -20,14 +25,22 @@ public class LaserRay : MonoBehaviour
     }
     public void GenerateLaserRay()
     {
-        Ray ray = new Ray(transform.position, transform.forward);
+        Vector3 direction = transform.forward;
+        Ray ray = new Ray(transform.position, direction);
         RaycastHit hit;
         laserRay.SetPosition(0, transform.position);
         Material material = laserRay.material;
         material.color = Color;
         if (Physics.Raycast(ray, out hit))
         {
-            laserRay.SetPosition(1, hit.point);
+            hitPoint = hit.point;
+            hitNormal = hit.normal;
+            laserRay.SetPosition(1, hitPoint);
+            Component interactableObj = hit.collider.GetComponentInParent(typeof(IInteractables));
+            if (interactableObj != null)
+            {
+                ((IInteractables)interactableObj).HandleLaserCollision(this);
+            }
         }else{
             laserRay.SetPosition(1, ray.GetPoint(100));
         }
