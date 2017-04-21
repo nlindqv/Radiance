@@ -20,7 +20,8 @@ public class TouchInput : MonoBehaviour
         rb = GetComponent<Transform>();
     }
 
-    private Vector3 CalculateDirectionVector(Vector3 hitPoint) {
+    private Vector3 CalculateDirectionVector(Vector3 hitPoint)
+    {
         //hämta planets kordinatssystem
         Transform planeTransform = Plane.GetComponent<Transform>();
         // riktningvektor i 3D
@@ -31,21 +32,44 @@ public class TouchInput : MonoBehaviour
         // i X-led
         Vector3 rightUnit = Vector3.Project(direction, planeTransform.right);
         // beräkna ny riktningsvektor
-        return  forwardUnit + rightUnit;
+        return forwardUnit + rightUnit;
     }
-
-    private bool SetPreviousDirectionVector() {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+    /// <summary>
+    /// Ger det träffade planet som Rayen träffat
+    /// </summary>
+    /// <param name="ray">Ray att använda för att träffa planet</param>
+    /// <returns>Det kordinater för träffade planet</returns>
+    private Vector3? GetHitPointPlane(Ray ray)
+    {
+        RaycastHit[] hit = Physics.RaycastAll(ray);
+        if (hit.Length > 0)
         {
-            // beräkna föregående riktningsvektor
-            prevDirection = CalculateDirectionVector(hit.point);
+            for (int i = 0; i < hit.Length; i++)
+            {
+                Component hitPlane = hit[i].collider.GetComponentInParent(typeof(Plane));
+                if (hitPlane != null) return hit[i].point;
+            }
+        }
+        return null;
+    }
+    /// <summary>
+    /// Sätter föregående riktningsvektor från vilken vinkeln kommer beräknas
+    /// </summary>
+    /// <returns>Boolean indikerar om föregående riktningsvektorn är satt</returns>
+    private bool SetPreviousDirectionVector()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Vector3? planeHitPoint = GetHitPointPlane(ray);
+        if (planeHitPoint != null)
+        {
+            // beräkna föregående riktningsvektor om ett plan träffats
+            prevDirection = CalculateDirectionVector(planeHitPoint.Value);
             return true; // indikera träff på plan
         }
-        return false; // indikera ingen träff på plan
+        else return false; // indikera ingen träff på plan
+
     }
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -63,10 +87,11 @@ public class TouchInput : MonoBehaviour
         else if ((Input.GetMouseButton(0) && next)) //|| Input.GetMouseButtonUp(0)
         {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+
+            Vector3? planeHitPoint = GetHitPointPlane(ray);
+            if (planeHitPoint != null)
             {
-                Vector3 currentDirection = CalculateDirectionVector(hit.point);
+                Vector3 currentDirection = CalculateDirectionVector(planeHitPoint.Value);
                 //beräkna vinkel mellan föregående riktningsvektor och nuvarande
                 angle = Vector3.Angle(prevDirection, currentDirection);
 
@@ -76,7 +101,7 @@ public class TouchInput : MonoBehaviour
             }
 
         }
-  
+
         Destroy(previousLaser);
         previousLaser = Instantiate(laser, ls.position, ls.rotation);
     }
