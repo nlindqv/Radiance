@@ -23,8 +23,11 @@ Michaela Jangefalk <mija5666@kth.se><br/>
 
 För sprint 1 har vi fokuserat på de utmaningar som finns i att jobba med nya verktyg och platform som de flesta av oss inte har använt oss av förut. Vårt fokus ligger i att få en bra rutin i git-hantering men även att snabbt komma in i arbetet genom att bland annat använda parprogrammering. Just nu står vi inför en lång upplärrningsbacke och har som sprintmål att producera ett spel med grundläggande  funktionalitet utifrån vår spelidé och fokus på design kommer att prioriteras senare i projektet. 
 
-###Stories
+### Stories
 
-####Target & TargetMaster
+#### Lightsource
+Lightsource innehåller en sfär som kropp samt ett lightspawn-objekt som används för startposition till ljusstrålen. Testscriptet roterar Lightsource en grad/frame. Scriptet kräver att första child till lightsource är lightspawn-objektet (standard). Det krävs även att man specar vilken laserstråle man vill använda, Standard är Assets/Prefabs/LaserRay.prefab
+
+#### Target & TargetMaster
 
 Target väntar på en laserstråle som vid träff anropar HandleLaserCollision. Vid träff ändras färg på target från Röd till Grön samt Hit registreras. TargetMaster är parent till alla targets som finns på banan och undersöker varje frame om samtliga targets har registrerat hit, isåfall avancerar man till nästa nivå. Nya targets måste klassas som children till TargetMaster för att hits skall registreras korrekt.
