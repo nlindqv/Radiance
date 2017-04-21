@@ -11,6 +11,13 @@ public class Mirror : MonoBehaviour, IInteractables
     public GameObject ray;
     public int bounceValue;
 
+
+	
+	// Update is called once per frame
+	void Update () {
+        Destroy(prev);
+    }
+
     public void HandleLaserCollision(LaserRay laserHit)
     {        
         //reflektera map. laserns riktningsvektor samt ytans normal
