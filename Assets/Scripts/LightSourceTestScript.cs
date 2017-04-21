@@ -17,9 +17,12 @@ public class LightSourceTestScript : MonoBehaviour {
 
 		rot = 0.0f;
 
-		//Gets all transform and adds first child as lightsource
+		//Gets all transform and adds LightSource as ls
 		Transform[] trans = GetComponentsInChildren<Transform> ();
-		ls = trans [0];
+		foreach (Transform t in trans) {
+			if (t.name == "LightSpawn")
+				ls = t;
+		}
 	}
 	
 	// Update is called once per frame
