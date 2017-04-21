@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 //Use with Targets, A master object with Targets as children
 public class TargetMaster : MonoBehaviour {
 
@@ -35,6 +35,8 @@ public class TargetMaster : MonoBehaviour {
 		//if all are hit go to next scene
 		if (nextLevel) {
 			//next scene code here...
+            Scene activeScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(activeScene.buildIndex + 1);
 			Debug.Log ("Entering next scene");
 		}
 
