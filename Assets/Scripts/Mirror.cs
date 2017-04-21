@@ -12,17 +12,10 @@ public class Mirror : MonoBehaviour, IInteractables
     public int bounceValue;
     private Transform objTransform;
 
-    public float mirrWidth; // x component
-    public float mirrHeight; // y component
-    public float mirrDepth;  // z component
 
     // Use this for initialization
     void Start () {
         objTransform = GetComponent<Transform>();
-        mirrWidth = 6;
-        mirrHeight = 3;
-        mirrDepth = 1;
-        transform.localScale = new Vector3(mirrWidth, mirrHeight, mirrDepth);
     }
 	
 	// Update is called once per frame
