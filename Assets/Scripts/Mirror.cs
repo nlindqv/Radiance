@@ -10,13 +10,8 @@ public class Mirror : MonoBehaviour, IInteractables
     private GameObject prev;
     public GameObject ray;
     public int bounceValue;
-    private Transform objTransform;
 
 
-    // Use this for initialization
-    void Start () {
-        objTransform = GetComponent<Transform>();
-    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -32,6 +27,5 @@ public class Mirror : MonoBehaviour, IInteractables
         //sätt färg och minska bouncevalue
         newLaser.BounceValue = laserHit.BounceValue- bounceValue;
         newLaser.Color = laserHit.Color;
-         
     }
 }
