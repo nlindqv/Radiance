@@ -44,7 +44,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1856445618452732
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,3 +256,5 @@ MonoBehaviour:
   mirrWidth: 10
   mirrHeight: 10
   mirrDepth: 10
+  rotateTool: {fileID: 0}
+  delay: 0
