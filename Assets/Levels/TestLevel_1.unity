@@ -182,6 +182,11 @@ Prefab:
     - {fileID: 114393247302846708, guid: ce99be2fb402f694bb491edc1f6b1e5a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: ce99be2fb402f694bb491edc1f6b1e5a, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &214257970 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1186638503894468, guid: ce99be2fb402f694bb491edc1f6b1e5a,
+    type: 2}
+  m_PrefabInternal: {fileID: 214257969}
 --- !u!1 &287591710
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,8 +216,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b0622385cff40ba93b9954027838f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Plane: {fileID: 214257970}
   laser: {fileID: 1549347449294414, guid: 9e60ae4442605b74d8b67e554c6815d2, type: 2}
   ls: {fileID: 1892430258}
+  mainCamera: {fileID: 1945650414}
 --- !u!54 &287591712
 Rigidbody:
   m_ObjectHideFlags: 0

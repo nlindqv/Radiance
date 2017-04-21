@@ -4,74 +4,80 @@ using UnityEngine;
 
 public class TouchInput : MonoBehaviour
 {
-	public GameObject laser;
-	public Transform ls;
+    public GameObject Plane;
+    public GameObject laser;
+    public Transform ls;
+    public Camera mainCamera;
 
-	private float rot;
-	private Rigidbody rb;
-	private GameObject previousLaser;
-	private bool changeDir;
-	private Vector2 startPos;
-	private Vector2 direction;
+    private Transform rb;
+    private GameObject previousLaser;
 
-	// Use this for initialization
-	void Start ()
-	{
-		rb = GetComponent<Rigidbody> ();
-		rot = 0.0f;
-	}
+    bool next;
+    private Vector3 prevDirection;
+    // Use this for initialization
+    void Start()
+    {
+        rb = GetComponent<Transform>();
+    }
 
-	// Update is called once per frame
-	void Update ()
-	{
-		if (Input.touchCount > 0) {
+    private Vector3 CalculateDirectionVector(Vector3 hitPoint) {
+        //hämta planets kordinatssystem
+        Transform planeTransform = Plane.GetComponent<Transform>();
+        // riktningvektor i 3D
+        Vector3 direction = hitPoint - rb.position;
+        //projecera riktningsvektorn på planet
+        // i Z-led
+        Vector3 forwardUnit = Vector3.Project(direction, planeTransform.forward);
+        // i X-led
+        Vector3 rightUnit = Vector3.Project(direction, planeTransform.right);
+        // beräkna ny riktningsvektor
+        return  forwardUnit + rightUnit;
+    }
 
-            // only consider the first touch on the screen
-			Touch touch = Input.GetTouch (0);
+    private bool SetPreviousDirectionVector() {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            // beräkna föregående riktningsvektor
+            prevDirection = CalculateDirectionVector(hit.point);
+            return true; // indikera träff på plan
+        }
+        return false; // indikera ingen träff på plan
+    }
+    
+    // Update is called once per frame
+    void Update()
+    {
+        float angle = 0;
+        if (Input.GetMouseButtonDown(0))
+        {
+            //sätt föregående riktningsvektor och indikera att nästa frame skall generera riktningsvektor där vinkeln kan beräknas
+            if (SetPreviousDirectionVector()) next = true;
+        }
+        else if (Input.GetMouseButton(0) && !next)
+        {
+            //sätt föregående riktningsvektor och indikera att nästa frame skall generera riktningsvektor där vinkeln kan beräknas
+            if (SetPreviousDirectionVector()) next = true;
+        }
+        else if ((Input.GetMouseButton(0) && next)) //|| Input.GetMouseButtonUp(0)
+        {
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                Vector3 currentDirection = CalculateDirectionVector(hit.point);
+                //beräkna vinkel mellan föregående riktningsvektor och nuvarande
+                angle = Vector3.Angle(prevDirection, currentDirection);
 
-			switch (touch.phase) {
+                // kontrollera tecken på vinkeln med hjälp av kryssprodukten
+                rb.eulerAngles += new Vector3(0, angle) * Mathf.Sign(Vector3.Cross(prevDirection, currentDirection).y);
+                next = false;
+            }
 
-			case TouchPhase.Began: 
-				startPos = touch.position;
-				changeDir = false;
-				break;
-			
-			case TouchPhase.Stationary:
-                startPos = touch.position;
-				changeDir = false;
-				break;
-			
-			case TouchPhase.Moved:
-				direction = startPos - touch.position;
-				changeDir = true;
-				break;
-			
-			case TouchPhase.Ended:
-				changeDir = false;
-				break;
-
-			case TouchPhase.Canceled:
-				changeDir = false;
-				break;
-			}
-		}
-
-        if (changeDir) {
-			if (direction.y > 8)
-				rot += 2.5f;
-			else if (direction.y < -8)
-				rot -= 2.5f;
-		}
-        
-		Destroy (previousLaser);
-        // if rotation should depend on both x and y 
-        /*
-        float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg * 0.3f;
-        rb.rotation = Quaternion.Euler(0.0f, angle, 0.0f);
-        */
-
-        rb.rotation = Quaternion.Euler (0.0f, rot, 0.0f);
-		previousLaser = Instantiate (laser, ls.position, ls.rotation);
-
+        }
+  
+        Destroy(previousLaser);
+        previousLaser = Instantiate(laser, ls.position, ls.rotation);
     }
 }
