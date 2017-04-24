@@ -81,41 +81,40 @@ public class TouchInput : MonoBehaviour
 
     IEnumerator FireLaser() {
         float angle = 0;
-        if (Input.GetMouseButtonDown(0))
-        {
-            //sätt föregående riktningsvektor och indikera att nästa frame skall generera riktningsvektor där vinkeln kan beräknas
-            if (SetPreviousDirectionVector()) next = true;
-            yield return null;
-        }
-        else if (Input.GetMouseButton(0) && !next)
-        {
-            //sätt föregående riktningsvektor och indikera att nästa frame skall generera riktningsvektor där vinkeln kan beräknas
-            if (SetPreviousDirectionVector()) next = true;
-            yield return null;
-        }
-        else if ((Input.GetMouseButton(0) && next)) //|| Input.GetMouseButtonUp(0)
-        {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+		if (ViewController.gameMode) {
+			if (Input.GetMouseButtonDown (0)) {
+				//sätt föregående riktningsvektor och indikera att nästa frame skall generera riktningsvektor där vinkeln kan beräknas
+				if (SetPreviousDirectionVector ())
+					next = true;
+				yield return null;
+			} else if (Input.GetMouseButton (0) && !next) {
+				//sätt föregående riktningsvektor och indikera att nästa frame skall generera riktningsvektor där vinkeln kan beräknas
+				if (SetPreviousDirectionVector ())
+					next = true;
+				yield return null;
+			} else if ((Input.GetMouseButton (0) && next)) { //|| Input.GetMouseButtonUp(0)
+				Ray ray = mainCamera.ScreenPointToRay (Input.mousePosition);
 
-            Vector3? planeHitPoint = GetHitPointPlane(ray);
-            if (planeHitPoint != null)
-            {
-                Vector3 currentDirection = CalculateDirectionVector(planeHitPoint.Value);
-                //beräkna vinkel mellan föregående riktningsvektor och nuvarande
-                angle = Vector3.Angle(prevDirection, currentDirection);
+				Vector3? planeHitPoint = GetHitPointPlane (ray);
+				if (planeHitPoint != null) {
+					Vector3 currentDirection = CalculateDirectionVector (planeHitPoint.Value);
+					//beräkna vinkel mellan föregående riktningsvektor och nuvarande
+					angle = Vector3.Angle (prevDirection, currentDirection);
 
-                // kontrollera tecken på vinkeln med hjälp av kryssprodukten
-                rb.eulerAngles += new Vector3(0, angle) * Mathf.Sign(Vector3.Cross(prevDirection, currentDirection).y);
-                next = false;
+					// kontrollera tecken på vinkeln med hjälp av kryssprodukten
+					rb.eulerAngles += new Vector3 (0, angle) * Mathf.Sign (Vector3.Cross (prevDirection, currentDirection).y);
+					next = false;
 
-            }
-        }
+				}
+			}
+		}
 
         //förstör alla tidigare barn-laser
         foreach (Transform child in ls.transform)
         {
             GameObject.Destroy(child.gameObject);
         }
+
 
         //skapa ny laserstråle
         GameObject newLaser = Instantiate(laser, rb.position, rb.rotation);
