@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114160177545294508}
   - component: {fileID: 114646356797357806}
   m_Layer: 0
-  m_Name: Mirror 1
+  m_Name: MirrorRotate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,5 +148,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b2448897884d045bb3948c32292c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tool: {fileID: 0}
+  tool: {fileID: 1566759639936482, guid: 017de6d5e222d584db6c14e65feedc81, type: 2}
   MoveHeight: 5
