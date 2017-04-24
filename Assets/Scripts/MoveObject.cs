@@ -45,7 +45,7 @@ public class MoveObject : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (ViewController.gameMode)
+        if (!ViewController.gameMode)
         {
             transform.position = new Vector3(transform.position.x, startHeight, transform.position.z);
             move = false;
