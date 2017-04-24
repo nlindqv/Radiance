@@ -8,9 +8,7 @@ public class TouchInput : MonoBehaviour
     public GameObject laser;
     public Transform ls;
     public Camera mainCamera;
-
     private Transform rb;
-    private GameObject previousLaser;
 
     bool next;
     private Vector3 prevDirection;
@@ -18,6 +16,7 @@ public class TouchInput : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Transform>();
+        StartCoroutine("FireLaser");
     }
 
     private Vector3 CalculateDirectionVector(Vector3 hitPoint)
@@ -73,36 +72,53 @@ public class TouchInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButton(0))
+        {
+            StopCoroutine("FireLaser");
+            StartCoroutine("FireLaser");
+        }
+    }
+
+    IEnumerator FireLaser() {
         float angle = 0;
-        if (Input.GetMouseButtonDown(0))
+		if (ViewController.gameMode) {
+			if (Input.GetMouseButtonDown (0)) {
+				//sätt föregående riktningsvektor och indikera att nästa frame skall generera riktningsvektor där vinkeln kan beräknas
+				if (SetPreviousDirectionVector ())
+					next = true;
+				yield return null;
+			} else if (Input.GetMouseButton (0) && !next) {
+				//sätt föregående riktningsvektor och indikera att nästa frame skall generera riktningsvektor där vinkeln kan beräknas
+				if (SetPreviousDirectionVector ())
+					next = true;
+				yield return null;
+			} else if ((Input.GetMouseButton (0) && next)) { //|| Input.GetMouseButtonUp(0)
+				Ray ray = mainCamera.ScreenPointToRay (Input.mousePosition);
+
+				Vector3? planeHitPoint = GetHitPointPlane (ray);
+				if (planeHitPoint != null) {
+					Vector3 currentDirection = CalculateDirectionVector (planeHitPoint.Value);
+					//beräkna vinkel mellan föregående riktningsvektor och nuvarande
+					angle = Vector3.Angle (prevDirection, currentDirection);
+
+					// kontrollera tecken på vinkeln med hjälp av kryssprodukten
+					rb.eulerAngles += new Vector3 (0, angle) * Mathf.Sign (Vector3.Cross (prevDirection, currentDirection).y);
+					next = false;
+
+				}
+			}
+		}
+
+        //förstör alla tidigare barn-laser
+        foreach (Transform child in ls.transform)
         {
-            //sätt föregående riktningsvektor och indikera att nästa frame skall generera riktningsvektor där vinkeln kan beräknas
-            if (SetPreviousDirectionVector()) next = true;
-        }
-        else if (Input.GetMouseButton(0) && !next)
-        {
-            //sätt föregående riktningsvektor och indikera att nästa frame skall generera riktningsvektor där vinkeln kan beräknas
-            if (SetPreviousDirectionVector()) next = true;
-        }
-        else if ((Input.GetMouseButton(0) && next)) //|| Input.GetMouseButtonUp(0)
-        {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-            Vector3? planeHitPoint = GetHitPointPlane(ray);
-            if (planeHitPoint != null)
-            {
-                Vector3 currentDirection = CalculateDirectionVector(planeHitPoint.Value);
-                //beräkna vinkel mellan föregående riktningsvektor och nuvarande
-                angle = Vector3.Angle(prevDirection, currentDirection);
-
-                // kontrollera tecken på vinkeln med hjälp av kryssprodukten
-                rb.eulerAngles += new Vector3(0, angle) * Mathf.Sign(Vector3.Cross(prevDirection, currentDirection).y);
-                next = false;
-            }
-
+            GameObject.Destroy(child.gameObject);
         }
 
-        Destroy(previousLaser);
-        previousLaser = Instantiate(laser, ls.position, ls.rotation);
+
+        //skapa ny laserstråle
+        GameObject newLaser = Instantiate(laser, rb.position, rb.rotation);
+        newLaser.transform.parent = ls.transform;
+
     }
 }
