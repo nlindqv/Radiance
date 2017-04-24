@@ -23,11 +23,13 @@ public class MoveObject : MonoBehaviour
     
     private void OnMouseDown()
     {
-        previousPosition = transform.position;
-        prevRotate = transform.rotation;
-        distance = Vector3.Distance(transform.position, Camera.main.transform.position);
-        move = true;
-        transform.position = new Vector3(transform.position.x, MoveHeight, transform.position.z);
+        if (ViewController.Instantiate.ga) {
+            previousPosition = transform.position;
+            prevRotate = transform.rotation;
+            distance = Vector3.Distance(transform.position, Camera.main.transform.position);
+            move = true;
+            transform.position = new Vector3(transform.position.x, MoveHeight, transform.position.z);
+        }
     }
 
     private void OnMouseDrag()

@@ -44,6 +44,7 @@ public class Rotate : MonoBehaviour
         {
             drag = false;
         }
+        if (ViewController.gameMode) Destroy(activeTool);
     }
 
     private void OnMouseDown()
