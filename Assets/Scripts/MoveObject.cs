@@ -9,6 +9,7 @@ public class MoveObject : MonoBehaviour
     private Quaternion prevRotate;
     private bool move;
     private float distance;
+    private float startHeight;
 
     public float MoveHeight;
 
@@ -17,6 +18,7 @@ public class MoveObject : MonoBehaviour
         GetComponent<Rigidbody>().freezeRotation = true;
         move = false;
         previousPosition = transform.position;
+        startHeight = transform.position.y;
     }
     
     private void OnMouseDown()
@@ -41,7 +43,7 @@ public class MoveObject : MonoBehaviour
 
     private void OnMouseUp()
     {     
-        transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, startHeight, transform.position.z);
         move = false;
     }
 
