@@ -40,7 +40,8 @@ public class MoveObject : MonoBehaviour
         if (move && !ViewController.gameMode)
         {
             Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Vector3 rayPoint = r.GetPoint(distance);            
+            Vector3 rayPoint = r.GetPoint(distance);
+            rigidbody.position = rayPoint;
             rigidbody.position = new Vector3(rigidbody.position.x, moveHeight, rigidbody.position.z);
         }
     }
