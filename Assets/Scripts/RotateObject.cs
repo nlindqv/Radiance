@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateObjects : MonoBehaviour
+public class RotateObject : MonoBehaviour
 {
     public Transform mirror;
     public float rotateSpeed;
@@ -10,7 +10,6 @@ public class RotateObjects : MonoBehaviour
     private void OnMouseDown()
     {
         Vector3 pos = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-
         baseAngle = Mathf.Atan2(pos.x, pos.y) * Mathf.Rad2Deg;
         baseAngle -= mirror.eulerAngles.y;
     }

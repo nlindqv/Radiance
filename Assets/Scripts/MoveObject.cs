@@ -15,8 +15,10 @@ public class MoveObject : MonoBehaviour
     private void Start()
     {
         GetComponent<Rigidbody>().freezeRotation = true;
+        move = false;
+        previousPosition = transform.position;
     }
-  
+    
     private void OnMouseDown()
     {
         previousPosition = transform.position;
@@ -47,5 +49,10 @@ public class MoveObject : MonoBehaviour
     {
         GetComponent<Rigidbody>().position = previousPosition;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
+    }
+
+    public bool getMove()
+    {
+        return move;
     }
 }
