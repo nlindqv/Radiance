@@ -6,7 +6,7 @@ using UnityEngine;
 public class Target : MonoBehaviour, IInteractables
 {
 	private Renderer rend;
-
+	private LaserRay lastHitRay;
 	public bool hit;
 	//Colors to toggle between laser hit and not hit
 	public Color defaultCol;
@@ -33,9 +33,10 @@ public class Target : MonoBehaviour, IInteractables
 			Material mat = rend.material;
 			mat.color = defaultCol;
 		}
-
+		if (lastHitRay == null)
+			hit = false;
 		//updates hit to false every frame, happens before laserCollision
-		hit = false;
+		//hit = false;
 	}
 
 	//Handles Collision with laser
@@ -45,6 +46,7 @@ public class Target : MonoBehaviour, IInteractables
 		Material mat = rend.material;
 		mat.color = targetHit;
 		hit = true;
+		lastHitRay = ray;
 	}
 
 }
