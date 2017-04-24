@@ -9,6 +9,7 @@ public class ViewController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		text = GetComponentInChildren<Button> ().gameObject.GetComponentInChildren<Text>();
+		text.text = "Laser Mode";
 	}
 	
 	// Update is called once per frame
