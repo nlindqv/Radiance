@@ -9,25 +9,28 @@ public class MoveObject : MonoBehaviour
     private bool move;
     private float distance;
     private float startHeight;
+    private Rigidbody rigidbody;
 
-    public float MoveHeight;
+    public float moveHeight;
 
     private void Start()
     {
+        rigidbody = GetComponent<Rigidbody>();
         GetComponent<Rigidbody>().freezeRotation = true;
         move = false;
-        previousPosition = transform.position;
-        startHeight = transform.position.y;
+        previousPosition = rigidbody.position;
+        startHeight = rigidbody.position.y;
     }
     
     private void OnMouseDown()
     {
         if (!ViewController.gameMode) {
-            previousPosition = transform.position;
+            previousPosition = rigidbody.position;
             prevRotate = transform.rotation;
-            distance = Vector3.Distance(transform.position, Camera.main.transform.position);
+            distance = Vector3.Distance(rigidbody.position, Camera.main.transform.position);
             move = true;
-            transform.position = new Vector3(transform.position.x, MoveHeight, transform.position.z);
+            
+            rigidbody.position = new Vector3(rigidbody.position.x, moveHeight, rigidbody.position.z);
         }
 
     }
@@ -37,17 +40,16 @@ public class MoveObject : MonoBehaviour
         if (move && !ViewController.gameMode)
         {
             Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Vector3 rayPoint = r.GetPoint(distance);
-            transform.position = rayPoint;
-            transform.position = new Vector3(transform.position.x, MoveHeight, transform.position.z);
+            Vector3 rayPoint = r.GetPoint(distance);            
+            rigidbody.position = new Vector3(rigidbody.position.x, moveHeight, rigidbody.position.z);
         }
     }
 
     private void OnMouseUp()
     {
         if (!ViewController.gameMode)
-        {
-            transform.position = new Vector3(transform.position.x, startHeight, transform.position.z);
+        {          
+            rigidbody.position = new Vector3(rigidbody.position.x, startHeight, rigidbody.position.z);
             move = false;
         }
     }
