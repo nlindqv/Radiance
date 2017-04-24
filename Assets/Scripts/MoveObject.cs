@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveObject : MonoBehaviour
-{
-    
+{    
     private Vector3 previousPosition;
     private Quaternion prevRotate;
     private bool move;
     private float distance;
+    private float startHeight;
 
     public float MoveHeight;
 
@@ -17,20 +17,24 @@ public class MoveObject : MonoBehaviour
         GetComponent<Rigidbody>().freezeRotation = true;
         move = false;
         previousPosition = transform.position;
+        startHeight = transform.position.y;
     }
     
     private void OnMouseDown()
     {
-        previousPosition = transform.position;
-        prevRotate = transform.rotation;
-        distance = Vector3.Distance(transform.position, Camera.main.transform.position);
-        move = true;
-        transform.position = new Vector3(transform.position.x, MoveHeight, transform.position.z);
+        if (!ViewController.gameMode) {
+            previousPosition = transform.position;
+            prevRotate = transform.rotation;
+            distance = Vector3.Distance(transform.position, Camera.main.transform.position);
+            move = true;
+            transform.position = new Vector3(transform.position.x, MoveHeight, transform.position.z);
+        }
+
     }
 
     private void OnMouseDrag()
     {
-        if (move)
+        if (move && !ViewController.gameMode)
         {
             Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
             Vector3 rayPoint = r.GetPoint(distance);
@@ -40,9 +44,12 @@ public class MoveObject : MonoBehaviour
     }
 
     private void OnMouseUp()
-    {     
-        transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
-        move = false;
+    {
+        if (!ViewController.gameMode)
+        {
+            transform.position = new Vector3(transform.position.x, startHeight, transform.position.z);
+            move = false;
+        }
     }
 
     private void OnCollisionEnter(Collision col)

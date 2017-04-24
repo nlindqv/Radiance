@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Transform))]
 public class LaserRay : MonoBehaviour
 {
-    //public Vector3 Direction;
     public Color Color;
     public int BounceValue;
     private LineRenderer laserRay;
