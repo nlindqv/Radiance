@@ -357,6 +357,11 @@ Prefab:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 521384681}
+    - target: {fileID: 114846087204495574, guid: 94b223e450a3a4c8480e8a8aa5598de2,
+        type: 2}
+      propertyPath: Plane
+      value: 
+      objectReference: {fileID: 1926676284}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94b223e450a3a4c8480e8a8aa5598de2, type: 2}
   m_IsPrefabParent: 0
@@ -472,11 +477,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1621157166}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fde1973a3e16bd14eba6470fd3ec40e2, type: 3}
+  m_Script: {fileID: 11500000, guid: 6de761147480b4b449a2e6a995d7a587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ray: {fileID: 1549347449294414, guid: 9e60ae4442605b74d8b67e554c6815d2, type: 2}
-  bounceValue: 1
+  ray: {fileID: 1549347449294414, guid: 7b43f807828af40b582199ab1902235b, type: 2}
+  bounceValue: 0
 --- !u!23 &1621157168
 MeshRenderer:
   m_ObjectHideFlags: 0
