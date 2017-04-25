@@ -31,6 +31,6 @@ Lightsource innehåller en sfär som kropp samt ett lightspawn-objekt som använ
 #### Target & TargetMaster
 Target väntar på en laserstråle som vid träff anropar HandleLaserCollision. Vid träff ändras färg på target från Röd till Grön samt Hit registreras. TargetMaster är parent till alla targets som finns på banan och undersöker varje frame om samtliga targets har registrerat hit, isåfall avancerar man till nästa nivå. Nya targets måste klassas som children till TargetMaster för att hits skall registreras korrekt.
 
-## Sammanfattning för sprint 1
+### Sammanfattning för sprint 1
 
 
