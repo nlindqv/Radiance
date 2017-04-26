@@ -1,3 +1,4 @@
+﻿
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,14 @@ public class LaserRay : MonoBehaviour
         laserRay = GetComponent<LineRenderer>();
         tf = GetComponent<Transform>();
         if (BounceValue > 0) GenerateLaserRay();
+    }
+    public void SetColor(int newBounceValue, Color existingColor)
+    {
+        float deacreaseRelativeToValue = (float)newBounceValue / (float)BounceValue;
+        Color = new Color(existingColor.r, existingColor.g, existingColor.b, existingColor.a * deacreaseRelativeToValue);
+        Color = new Color(existingColor.r, existingColor.g, existingColor.b, existingColor.a * deacreaseRelativeToValue);
+        laserRay.startColor = Color;
+        laserRay.endColor = Color;
     }
     public void GenerateLaserRay()
     {
