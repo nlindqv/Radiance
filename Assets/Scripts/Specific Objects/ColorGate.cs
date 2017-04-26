@@ -31,7 +31,11 @@ public class ColorGate : MonoBehaviour, IInteractables {
 		Vector3 norm = Vector3.Normalize(direction);
 		Vector3 margin = Vector3.Scale(norm, new Vector3(0.01f, 0.01f, 0.01f));
 
+		Transform parentTransform = ray.transform.parent;
+
 		ray.Color = color;
-		Instantiate (ray, ray.HitPoint+margin, Quaternion.LookRotation(direction));
+		LaserRay newRay = Instantiate (ray, ray.HitPoint+margin, Quaternion.LookRotation(direction));
+		newRay.transform.parent = parentTransform;
+
 	}
 }
