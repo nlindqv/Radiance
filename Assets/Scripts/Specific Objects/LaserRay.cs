@@ -6,6 +6,7 @@ using UnityEngine;
 public class LaserRay : MonoBehaviour
 {
     public Color Color;
+
     public int BounceValue;
     private LineRenderer laserRay;
     private Transform transform;
@@ -14,13 +15,23 @@ public class LaserRay : MonoBehaviour
     private Vector3 hitNormal;
     public Vector3 HitPoint { get { return hitPoint; } }
     public Vector3 HitNormal { get { return hitNormal; } }
+    
 
 	// Use this for initialization
     void Start()
     {
         laserRay = GetComponent<LineRenderer>();
         transform = GetComponent<Transform>();
+        laserRay.startColor = Color;
+        laserRay.endColor = Color;
         if (BounceValue > 0) GenerateLaserRay();
+    }
+    public void SetColor(int newBounceValue,Color existingColor) {
+        float deacreaseRelativeToValue = (float)newBounceValue / (float) BounceValue;
+        Color = new Color(existingColor.r, existingColor.g, existingColor.b, existingColor.a * deacreaseRelativeToValue);
+        Color = new Color(existingColor.r, existingColor.g, existingColor.b, existingColor.a * deacreaseRelativeToValue);
+        laserRay.startColor = Color;
+        laserRay.endColor = Color;
     }
     public void GenerateLaserRay()
     {
@@ -28,8 +39,6 @@ public class LaserRay : MonoBehaviour
         Ray ray = new Ray(transform.position, direction);
         RaycastHit hit;
         laserRay.SetPosition(0, transform.position);
-        Material material = laserRay.material;
-        material.color = Color;
         //kolla om vi får träff
         if (Physics.Raycast(ray, out hit))
         {
