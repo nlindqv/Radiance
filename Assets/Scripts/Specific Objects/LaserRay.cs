@@ -8,7 +8,7 @@ public class LaserRay : MonoBehaviour
     public Color Color;
     public int BounceValue;
     private LineRenderer laserRay;
-    private Transform transform;
+    private Transform tf; // ts = transform
 
     private Vector3 hitPoint;
     private Vector3 hitNormal;
@@ -19,15 +19,15 @@ public class LaserRay : MonoBehaviour
     void Start()
     {
         laserRay = GetComponent<LineRenderer>();
-        transform = GetComponent<Transform>();
+        tf = GetComponent<Transform>();
         if (BounceValue > 0) GenerateLaserRay();
     }
     public void GenerateLaserRay()
     {
-        Vector3 direction = transform.forward;
-        Ray ray = new Ray(transform.position, direction);
+        Vector3 direction = tf.forward;
+        Ray ray = new Ray(tf.position, direction);
         RaycastHit hit;
-        laserRay.SetPosition(0, transform.position);
+        laserRay.SetPosition(0, tf.position);
         Material material = laserRay.material;
         material.color = Color;
         //kolla om vi får träff
