@@ -15,11 +15,14 @@ public class ColorGate : MonoBehaviour, IInteractables {
         foreach (Renderer rend in this.GetComponentsInChildren<Renderer>())
         {
 			rend.enabled = true;
+			//modify alpha of color
+			color = new Color (color.r, color.g, color.b, 0.6f);
             rend.material.color = color;          
         }
         
 		Vector3 scale = this.transform.Find("GateModel").gameObject.transform.localScale;
-        col.size =  new Vector3(0.0f, scale.y, scale.z);    
+        col.size =  new Vector3(0.0f, scale.y, scale.z);
+
 
 	}
 
@@ -33,9 +36,9 @@ public class ColorGate : MonoBehaviour, IInteractables {
 
 		Transform parentTransform = ray.transform.parent;
 
-		ray.Color = color;
 		LaserRay newRay = Instantiate (ray, ray.HitPoint+margin, Quaternion.LookRotation(direction));
 		newRay.transform.parent = parentTransform;
+		newRay.SetColor (ray.BounceValue-1, color);
 
 	}
 }
