@@ -30,6 +30,8 @@ public class LaserRay : MonoBehaviour
         float deacreaseRelativeToValue = (float)newBounceValue / (float) BounceValue;
         Color = new Color(existingColor.r, existingColor.g, existingColor.b, existingColor.a * deacreaseRelativeToValue);
         Color = new Color(existingColor.r, existingColor.g, existingColor.b, existingColor.a * deacreaseRelativeToValue);
+        laserRay.startColor = Color;
+        laserRay.endColor = Color;
     }
     public void GenerateLaserRay()
     {
