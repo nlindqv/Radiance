@@ -17,7 +17,7 @@ public class ColorGate : MonoBehaviour, IInteractables {
 			rend.enabled = true;
 			//modify alpha of color
 			color = new Color (color.r, color.g, color.b, 0.6f);
-            rend.material.color = color;          
+            rend.material.color = color;
         }
         
 		Vector3 scale = this.transform.Find("GateModel").gameObject.transform.localScale;
