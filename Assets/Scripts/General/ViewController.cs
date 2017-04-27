@@ -49,17 +49,20 @@ public class ViewController : MonoBehaviour {
 		}
 
 		tutorial.gameObject.SetActive(true);       
-        tutorial.Find("Tilte").GetComponent<RectTransform>().GetComponent<Text>().text = title;
+        tutorial.Find("Title").GetComponent<RectTransform>().GetComponent<Text>().text = title;
         tutorial.Find("Text").GetComponent<RectTransform>().GetComponent<Text>().text = text;        
     }
 	public void Replay () {
 		select = Select.replay;
+		endScreen.gameObject.SetActive (false);
 	}
 	public void Next () {
 		select = Select.next;
+		endScreen.gameObject.SetActive (false);
 	}
 	public void Menu () {
 		select = Select.menu;
+		endScreen.gameObject.SetActive (false);
 	}
 	public Select getSelect(){
 		return select;
@@ -67,6 +70,13 @@ public class ViewController : MonoBehaviour {
 	public void ShowEndScreen(string levelName, int starCount){
 		endScreen.gameObject.SetActive (true);
 		endScreen.Find ("Level").GetComponent<RectTransform> ().GetComponent<Text> ().text = levelName;
-		// Visa rätt antal stjärnor beroende på starCount
+		endScreen.Find ("Star1").transform.GetChild(0).gameObject.SetActive (true);
+		if (starCount > 1)
+			LightStar (2);
+		if (starCount > 2)
+			LightStar (3);
+	}
+	private void LightStar(int i){
+		endScreen.Find ("Star" + i).transform.GetChild(0).gameObject.SetActive (true);
 	}
 }
