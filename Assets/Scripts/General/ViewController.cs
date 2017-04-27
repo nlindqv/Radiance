@@ -7,11 +7,18 @@ public class ViewController : MonoBehaviour {
 	public static bool gameMode = true;
 	Text text;
 
+    private Transform tutoraial;
+
 
 	void Start () {
 		// Access button label and set default mode to lasermode
-		text = GetComponentInChildren<Button> ().gameObject.GetComponentInChildren<Text>();
-		text.text = "Laser Mode";
+		//text = GetComponentInChildren<Button> ().gameObject.GetComponentInChildren<Text>();
+        text = transform.Find("toggleGameMode").gameObject.GetComponentInChildren<Text>();
+        text.text = "Laser Mode";
+        tutoraial = transform.Find("Tut_UI");
+        Debug.Log(tutoraial);
+        //NewTutorial("Bajs", "Lite text", null);
+
 	}
 	
 
@@ -24,6 +31,19 @@ public class ViewController : MonoBehaviour {
 		else text.text = "Laser Mode";
 
 		gameMode = !gameMode; // Toggle global variable
-
 	}
+
+    public void OkClick()
+    {
+        tutoraial.gameObject.SetActive(false);
+    }
+
+    public void NewTutorial(string title, string text, Image image)
+    {
+        tutoraial.gameObject.SetActive(true);       
+        tutoraial.Find("Tilte").GetComponent<RectTransform>().GetComponent<Text>().text = title;
+        tutoraial.Find("Text").GetComponent<RectTransform>().GetComponent<Text>().text = text;        
+    }
+
+
 }

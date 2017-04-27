@@ -15,11 +15,13 @@ public class Reflective : MonoBehaviour, IInteractables
             //reflektera map. laserns riktningsvektor samt ytans normal
             Vector3 direction = Vector3.Reflect(laserHit.transform.forward, laserHit.HitNormal);
             Transform parentTransform = laserHit.transform.parent;
-            GameObject prev = Instantiate(ray, laserHit.HitPoint, Quaternion.LookRotation(direction));
-            prev.transform.parent = parentTransform;
-            LaserRay newLaser = prev.GetComponent<LaserRay>();
+
+            GameObject newRayGameObj = Instantiate(ray, laserHit.HitPoint, Quaternion.LookRotation(direction));
+            newRayGameObj.transform.parent = parentTransform;
+            LaserRay newLaserRay = newRayGameObj.GetComponent<LaserRay>();
+            int newBounceValue = laserHit.BounceValue - bounceValue;
+            newLaserRay.SetColor(newBounceValue, laserHit.Color); //, laserHit.BounceValue
             //sätt färg och minska bouncevalue
-            newLaser.BounceValue = laserHit.BounceValue - bounceValue;
-            newLaser.Color = laserHit.Color;
+            newLaserRay.BounceValue = newBounceValue;
     }
 }
