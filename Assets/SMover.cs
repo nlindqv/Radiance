@@ -7,11 +7,11 @@ public class SMover : MonoBehaviour {
 	Vector3 center;
 	Vector3 start;
 	Vector3 end;
-	Vector3 direction;
 
 	float step;
 
 	BezierCurve curve;
+	public Collider col;
 
 	bool togglDir;
 

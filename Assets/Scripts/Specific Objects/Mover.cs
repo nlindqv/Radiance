@@ -47,7 +47,6 @@ public class Mover : MonoBehaviour {
 
 	void OnTriggerStay(Collider Other)
 	{
-		
 		Vector3 prevTransform = Other.gameObject.transform.position;
 
 		if (prevTransform.Equals (end) || prevTransform.Equals(start)) {
