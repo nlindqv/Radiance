@@ -243,7 +243,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &521384683
 MonoBehaviour:
@@ -319,7 +319,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 74.758, y: -53.660004, z: -49.499}
 --- !u!1001 &857472403
 Prefab:
@@ -383,6 +383,12 @@ Prefab:
       propertyPath: Plane
       value: 
       objectReference: {fileID: 1926676284}
+    - target: {fileID: 114846087204495574, guid: 94b223e450a3a4c8480e8a8aa5598de2,
+        type: 2}
+      propertyPath: laser
+      value: 
+      objectReference: {fileID: 1160677337147254, guid: 7b43f807828af40b582199ab1902235b,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114057939371015136, guid: 94b223e450a3a4c8480e8a8aa5598de2, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 94b223e450a3a4c8480e8a8aa5598de2, type: 2}
@@ -533,6 +539,12 @@ Prefab:
       propertyPath: moveHeight
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114312052988215608, guid: c2b88d38d5c4fe541bbed0c39a4ebac0,
+        type: 2}
+      propertyPath: ray
+      value: 
+      objectReference: {fileID: 1160677337147254, guid: 7b43f807828af40b582199ab1902235b,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2b88d38d5c4fe541bbed0c39a4ebac0, type: 2}
   m_IsPrefabParent: 0

@@ -37,7 +37,6 @@ public class TargetMaster : MonoBehaviour {
 			//next scene code here...
             Scene activeScene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(activeScene.buildIndex + 1);
-			Debug.Log ("Entering next scene");
 		}
 
 	}

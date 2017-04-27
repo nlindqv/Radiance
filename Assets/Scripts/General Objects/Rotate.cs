@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Rotate : MonoBehaviour
 {
-
     private bool move;
     public GameObject tool;
     private GameObject activeTool;
@@ -22,21 +21,16 @@ public class Rotate : MonoBehaviour
     void Update()
     {
         move = gameObject.GetComponent<Movable>().getMove();
-
-        if (!move && Input.GetMouseButton(0))
+        if (!ViewController.gameMode && !move && Input.GetMouseButton(0) && activeTool != null)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            //Debug.Log(ray);
-            if (Physics.Raycast(ray, out hit)  && hit.collider.name.Equals(activeTool.name))
-            {
-                //Debug.Log(hit.collider.name);
+            RaycastHit hit;            
+            if (Physics.Raycast(ray, out hit)  && hit.collider != null && hit.collider.name.Equals(activeTool.name))
+            {                
                 drag = true;
             }
             else if (!drag)
-            {
-                //tool.SetActive(false);
-                ///Debug.Log("No drag");
+            {                
                 Destroy(activeTool);
             }
         }
