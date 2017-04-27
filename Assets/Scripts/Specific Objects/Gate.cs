@@ -19,7 +19,8 @@ public class Gate : MonoBehaviour, IInteractables {
 	public void HandleLaserCollision(LaserRay laserHit){
 		if (laserHit.Color.Equals(gateColor)) {
 			Vector3 direction = laserHit.transform.forward;
-			GameObject newRay = Instantiate (ray, laserHit.HitPoint, Quaternion.LookRotation (laserHit.transform.forward));
+			Vector3 startPoint = new Vector3 (laserHit.HitPoint.x+0.01f, laserHit.HitPoint.y, laserHit.HitPoint.z + 0.01f);
+			GameObject newRay = Instantiate (ray, startPoint, Quaternion.LookRotation (laserHit.transform.forward));
 			Transform parentTranform = laserHit.transform.parent;
 			newRay.transform.parent = parentTranform;
 			LaserRay newLaser = newRay.GetComponent<LaserRay> ();
