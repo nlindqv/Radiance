@@ -23,12 +23,8 @@ public class Mover : MonoBehaviour {
 
 		Debug.DrawLine (start, end, Color.green, 10f);
 	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
+
+
 	void OnTriggerEnter(Collider Other)
 	{
 		Vector3 hitPoint = Other.gameObject.transform.position;
