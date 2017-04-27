@@ -4,12 +4,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 //Use with Targets, A master object with Targets as children
 public class TargetMaster : MonoBehaviour {
-
+	public GameObject MiddleMenu;
 	private Target[] Targets;
+	private Collectable[] Collectables;
 
+	private bool levelCompleted;
 	void Start () {
 		//Get all Target-scripts children-targets
 		Targets = GetComponentsInChildren<Target> ();
+		levelCompleted = false;
+		Collectables = GetComponentsInChildren<Collectable> ();
 	}
 	
 
@@ -34,10 +38,21 @@ public class TargetMaster : MonoBehaviour {
 
 		//if all are hit go to next scene
 		if (nextLevel) {
-			//next scene code here...
-            Scene activeScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(activeScene.buildIndex + 1);
+			levelCompleted = true;
 		}
 
+	}
+	public bool checkLevelCompleted(){
+		return levelCompleted;
+	}
+	public int getCollectables(){
+		int collectedCollectables = 0;
+		if (Collectables.Length == 0)
+			return 3;
+		for (int i = 0; i < Collectables.Length; i++) {
+			if (Collectables [i].collected())
+				collectedCollectables++;
+		}
+		return (int)Mathf.Floor (collectedCollectables / Collectables.Length * 2 + 1);
 	}
 }
