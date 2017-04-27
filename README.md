@@ -29,7 +29,7 @@ För sprint 1 har vi fokuserat på de utmaningar som finns i att jobba med nya v
 Lightsource innehåller en sfär som kropp samt ett lightspawn-objekt som används för startposition till ljusstrålen. Testscriptet roterar Lightsource en grad/frame. Scriptet kräver att första child till lightsource är lightspawn-objektet (standard). Det krävs även att man specar vilken laserstråle man vill använda, Standard är Assets/Prefabs/LaserRay.prefab
 
 #### LaserRay
-LaserRay är en komponent var moder innehåller en linerenderer som utgör själva laserstrålen som visas. Laserstrålen genereras med hjälp av linerenderer från lightspawns objektets (finns i lightsource)  position och riktning. Strålens längd bestäms utifrån raycast som genererar en osynligt stråle i spelet och kan meddela om strålen träffar något objekt. Träffar raycast något objekt så skall laserstrålen sluta vid den punkten.
+LaserRay är en komponent var moder innehåller en linerenderer som utgör själva laserstrålen som visas. Laserstrålen genereras med hjälp av linerenderer från lightspawns objektets (finns i lightsource)  position och riktning. Strålens längd bestäms utifrån raycast som genererar en osynlig stråle i spelet och kan meddela om strålen träffar något objekt. Träffar raycast något objekt så skall laserstrålen sluta vid den punkten.
 
 #### LaserMode
 LaserMode hanterar input från användaren när spelet är i laserläge. Input/musklick projeceras på spelplanen i spelet och på så sätt bestäms riktning på lightsource. Tidpunkten för genereringen av laserstrålar bestäms utifrån klassen "LaserMode". Nya laserstrålar genereras i coroutine "FireLaser" där meningen är att denna körs bara då musen/input förflyttas på skärmen vilket kräver att de gamla laserstrålarna skall förstöras och nya genereras.
