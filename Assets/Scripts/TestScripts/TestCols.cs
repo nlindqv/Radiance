@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// Should print collider & "Collision" upon collision with trigger & non-trigger
 /// If child has collider & parent should trigger, try adding rigidbody 
-/// where Gravity=false, isKinematic=true
+/// where Gravity=false, isKinematic=true – Only works one parent up
 /// </summary>
 public class TestCols : MonoBehaviour {
 
