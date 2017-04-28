@@ -7,6 +7,9 @@ public class ColorGate : MonoBehaviour, IInteractables {
 	//Color of gate and laserRay-conversion
     public Color color;
 
+	//Use dirty to render new color of gate during gameplay
+	public bool dirty;
+
     private BoxCollider col;
     private Transform child; 
 
@@ -25,6 +28,23 @@ public class ColorGate : MonoBehaviour, IInteractables {
 
 
 	}
+
+	void Update(){
+		if(dirty){
+			UpdateColor ();
+		}
+	}
+
+	void UpdateColor(){
+		foreach (Renderer rend in this.GetComponentsInChildren<Renderer>())
+		{
+			rend.enabled = true;
+			//modify alpha of color
+			color = new Color (color.r, color.g, color.b, 0.6f);
+			rend.material.color = color;
+		}
+	}
+
 
 	public void HandleLaserCollision(LaserRay ray){
 		//Direction of LaserRay
