@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Basic : MonoBehaviour {
+
+/// <summary>
+/// Should print collider & "Collision" upon collision with trigger
+/// decomment OnCollisionEnter() to get same behavior for non-trigger
+/// </summary>
+public class CollisionTest : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
