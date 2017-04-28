@@ -11,7 +11,6 @@ public class SMover : MonoBehaviour {
 	float step;
 
 	BezierCurve curve;
-	public Collider col;
 
 	bool togglDir;
 
