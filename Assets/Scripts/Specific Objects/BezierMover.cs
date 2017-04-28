@@ -6,7 +6,7 @@ using UnityEngine;
 /// Drag BezierCurve into script
 /// </summary>
 
-public class BezierTest : MonoBehaviour {
+public class BezierMover : MonoBehaviour {
 
 	bool toggl;
 	bool closedCurve;
