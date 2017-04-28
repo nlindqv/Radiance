@@ -38,7 +38,7 @@ public class Rotate : MonoBehaviour
         {
             drag = false;
         }
-        if (GameManager.gameMode == GameManager.GameMode.laserMode) Destroy(activeTool);
+        if (GameManager.gameMode != GameManager.GameMode.mirrorMode) Destroy(activeTool);
     }
 
     private void OnMouseDown()

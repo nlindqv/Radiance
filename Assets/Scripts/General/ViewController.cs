@@ -17,7 +17,7 @@ public class ViewController : MonoBehaviour
         // Access button label and set default mode to lasermode
         toogleButton = transform.Find("toggleGameMode").gameObject;
         Debug.Log(toogleButton);
-        //toogleButton.GetComponent<Text>().text = "Laser Mode";
+        toogleButton.GetComponentInChildren<Text>().text = "Laser Mode";
         tutorial = transform.Find("Tut_UI");
         endScreen = transform.Find("MellanMeny");
         fadePanel = transform.Find("FadePanel").GetComponent<Image>();
@@ -38,27 +38,26 @@ public class ViewController : MonoBehaviour
         // On button click, toggle between Mirror and Laser mode
         if (GameManager.gameMode == GameManager.GameMode.laserMode)
         {
-            //toogleButton.GetComponent<Text>().text = "Mirror Mode";
+            toogleButton.GetComponentInChildren<Text>().text = "Mirror Mode";
             GameManager.gameMode = GameManager.GameMode.mirrorMode;
         }
         else
         {
-            //toogleButton.GetComponent<Text>().text = "Laser Mode";
+            toogleButton.GetComponentInChildren<Text>().text = "Laser Mode";
             GameManager.gameMode = GameManager.GameMode.laserMode;
         }
     }
 
     public void ShowGameModeButton()
     {
-        //Debug.Log(toogleButton.GetComponent<Text>().text);
         toogleButton.SetActive(true);
         if (GameManager.gameMode == GameManager.GameMode.mirrorMode)
         {
-           // toogleButton.GetComponent<Text>().text = "Mirror Mode";        
+            toogleButton.GetComponentInChildren<Text>().text = "Mirror Mode";        
         }
         else
         {
-            //toogleButton.GetComponent<Text>().text = "Laser Mode";           
+            toogleButton.GetComponentInChildren<Text>().text = "Laser Mode";           
         }
     }
 
