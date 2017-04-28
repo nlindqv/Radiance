@@ -27,7 +27,8 @@ public class SMover : MonoBehaviour {
 		start = curve.GetPointAt (0);
 		end = curve.GetPointAt (1);
 
-		for (float t = 0.01f; t < 1f; t += 0.01f) {
+		for (float t = 0f; t > 0.99f; t += 0.01f) {
+			Debug.Log (t);
 			Debug.DrawLine (Vector3.zero, curve.GetPointAt(t), Color.red, 10f);
 		}
 //		Debug.DrawLine (start, end, Color.cyan, 10f);
@@ -36,7 +37,7 @@ public class SMover : MonoBehaviour {
 
 	void OnTriggerEnter(Collider Other)
 	{
-//		if (!isMoving) {
+		if (!isMoving) {
 			Vector3 hitPoint = Other.gameObject.transform.position;
 
 			//get closest point from hitPoint to BezierCurve
@@ -72,23 +73,20 @@ public class SMover : MonoBehaviour {
 			}
 //			Debug.DrawLine (Vector3.zero, transport, Color.blue, 10f);
 //			Debug.DrawLine (Vector3.zero, hitPoint, Color.red, 10f);
-//		}
+		}
 	}
 
 	void OnTriggerStay(Collider Other)
 	{
 		isMoving = true;
 		Vector3 prevTransform = Other.gameObject.transform.position;
-//
-//		if (prevTransform.Equals (end) || prevTransform.Equals(start)) {
-//			togglDir = !togglDir;
-//		}
+
 		if (togglDir) {
 			Other.gameObject.transform.position = Vector3.MoveTowards (prevTransform, curve.GetPointAt (step), 1f);
 			step += 0.005f;
 
-			if (step >= 0.99) {
-				step = 1;
+			if (step > 0.99f) {
+				step = 0.99f;
 				togglDir = !togglDir;
 			}
 		} else {
