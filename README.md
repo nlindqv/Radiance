@@ -18,6 +18,9 @@ Michaela Jangefalk <mija5666@kth.se><br/>
 
 [Mail](https://github.com/contact).
 
+## Spelidé
+Vi har tänkt att utveckla ett "laserspel" som först och främst kommer utvecklas för android och eventuellt för IOS om vi har tid. Spelidén grundar sig i att spelaren ska kunna styra en ljuskälla som i sin tur genererar en laserstråle. Denna laserstråle ska riktas mot olika objekt på spelplanen. Ett exempel på ett objekt som vi ska implementera är speglar som används för att vinkla laserstrålen för att ta sig fram till målet och klara av banan. 
+
 
 ## Sprint 1
 
