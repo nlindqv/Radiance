@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class ViewController : MonoBehaviour {
 	public static bool gameMode = true;
 	Text text;
-
-    private Transform tutoraial;
+	public enum Select {menu, replay, next, none};
+	public Select select = Select.none;
+    private Transform tutorial;
+	private Transform endScreen;
 
 
 	void Start () {
@@ -15,8 +17,10 @@ public class ViewController : MonoBehaviour {
 		//text = GetComponentInChildren<Button> ().gameObject.GetComponentInChildren<Text>();
         text = transform.Find("toggleGameMode").gameObject.GetComponentInChildren<Text>();
         text.text = "Laser Mode";
-        tutoraial = transform.Find("Tut_UI");
-        Debug.Log(tutoraial);
+        tutorial = transform.Find("Tut_UI");
+
+		endScreen = transform.Find ("MellanMeny");
+        Debug.Log(tutorial);
         //NewTutorial("Bajs", "Lite text", null);
 
 	}
@@ -35,15 +39,42 @@ public class ViewController : MonoBehaviour {
 
     public void OkClick()
     {
-        tutoraial.gameObject.SetActive(false);
+        tutorial.gameObject.SetActive(false);
     }
 
     public void NewTutorial(string title, string text, Image image)
     {
-        tutoraial.gameObject.SetActive(true);       
-        tutoraial.Find("Tilte").GetComponent<RectTransform>().GetComponent<Text>().text = title;
-        tutoraial.Find("Text").GetComponent<RectTransform>().GetComponent<Text>().text = text;        
+		if (tutorial == null) {
+			tutorial = transform.Find("Tut_UI");
+		}
+
+		tutorial.gameObject.SetActive(true);       
+        tutorial.Find("Title").GetComponent<RectTransform>().GetComponent<Text>().text = title;
+        tutorial.Find("Text").GetComponent<RectTransform>().GetComponent<Text>().text = text;        
     }
+	public void Replay () {
+		select = Select.replay;
+		endScreen.gameObject.SetActive (false);
+	}
+	public void Next () {
+		select = Select.next;
+		endScreen.gameObject.SetActive (false);
+	}
+	public void Menu () {
+		select = Select.menu;
+		endScreen.gameObject.SetActive (false);
+	}
 
-
+	public void ShowEndScreen(string levelName, int starCount){
+		endScreen.gameObject.SetActive (true);
+		endScreen.Find ("Level").GetComponent<RectTransform> ().GetComponent<Text> ().text = levelName;
+		endScreen.Find ("Star1").transform.GetChild(0).gameObject.SetActive (true);
+		if (starCount > 1)
+			LightStar (2);
+		if (starCount > 2)
+			LightStar (3);
+	}
+	private void LightStar(int i){
+		endScreen.Find ("Star" + i).transform.GetChild(0).gameObject.SetActive (true);
+	}
 }
