@@ -4,28 +4,33 @@ using UnityEngine;
 [RequireComponent(typeof(Transform))]
 public class LightSplitter : MonoBehaviour, IInteractables
 {
-	private GameObject pr;
-	private GameObject pr1;
-	private GameObject pr2;
+    //Color of gate and laserRay-conversion
+    public Color One;
+    public Color Two;
+    public Color Three;
 
-	public GameObject ray;
-	private Vector3 tr = new Vector3(0,0,-1);
-	private Vector3 tr1 = new Vector3(1,0,-1);
-	private Vector3 tr2 = new Vector3(-1,0,-1);
+    private Transform laserOne; 
+    private Transform laserTwo; 
+    private Transform laserThree; 
 
-	public int bounceValue;
+    void Start()
+    {
+        laserOne = this.transform.Find("Spawn1");
+        laserTwo = this.transform.Find("Spawn2");
+        laserThree = this.transform.Find("Spawn3");
+    }
 
-	public void HandleLaserCollision(LaserRay laserHit)
-	{        
-		Transform parentTransform = laserHit.transform.parent;
-
-		if (laserHit.HitNormal.z > 0) {
-			pr = Instantiate (ray, transform.position, Quaternion.LookRotation (tr)); 
-			pr.transform.parent = parentTransform;
-			pr1 = Instantiate (ray, transform.position, Quaternion.LookRotation (tr1));
-			pr1.transform.parent = parentTransform;
-			pr2 = Instantiate (ray, transform.position, Quaternion.LookRotation (tr2));
-			pr2.transform.parent = parentTransform;
-		} 
-	}
+    public void HandleLaserCollision(LaserRay ray)
+    {
+        Transform parentTransform = ray.transform.parent;        
+        LaserRay newRay = Instantiate(ray, laserOne.position, Quaternion.LookRotation(laserOne.up));
+        newRay.transform.parent = parentTransform;
+        newRay.SetColor(ray.BounceValue - 1, One);
+        LaserRay newRay1 = Instantiate(ray, laserTwo.position, Quaternion.LookRotation(laserTwo.up));
+        newRay1.transform.parent = parentTransform;
+        newRay1.SetColor(ray.BounceValue - 1, Two);
+        LaserRay newRay2 = Instantiate(ray, laserThree.position, Quaternion.LookRotation(laserThree.up));
+        newRay2.transform.parent = parentTransform;
+        newRay2.SetColor(ray.BounceValue - 1, Three);
+    }
 }
