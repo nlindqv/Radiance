@@ -14,6 +14,7 @@ public class TargetMaster : MonoBehaviour {
 		Targets = GetComponentsInChildren<Target> ();
 		levelCompleted = false;
 		Collectables = GetComponentsInChildren<Collectable> ();
+		if (Collectables == null) Collectables = new Collectable[0];
 	}
 	
 
@@ -47,10 +48,11 @@ public class TargetMaster : MonoBehaviour {
 	}
 	public int GetCollectables(){
 		int collectedCollectables = 0;
+		Debug.Log (Collectables);
 		if (Collectables.Length == 0)
 			return 3;
 		for (int i = 0; i < Collectables.Length; i++) {
-			if (Collectables [i].collected())
+			if (Collectables [i].Collected())
 				collectedCollectables++;
 		}
 		return (int)Mathf.Floor (collectedCollectables / Collectables.Length * 2 + 1);
