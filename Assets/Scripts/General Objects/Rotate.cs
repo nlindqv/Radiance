@@ -21,7 +21,7 @@ public class Rotate : MonoBehaviour
     void Update()
     {
         move = gameObject.GetComponent<Movable>().getMove();
-        if (!ViewController.gameMode && !move && Input.GetMouseButton(0) && activeTool != null)
+        if (GameManager.gameMode == GameManager.GameMode.mirrorMode && !move && Input.GetMouseButton(0) && activeTool != null)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;            
@@ -38,7 +38,7 @@ public class Rotate : MonoBehaviour
         {
             drag = false;
         }
-        if (ViewController.gameMode) Destroy(activeTool);
+        if (GameManager.gameMode == GameManager.GameMode.laserMode) Destroy(activeTool);
     }
 
     private void OnMouseDown()

@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class ViewController : MonoBehaviour
 {
-    public static bool gameMode = true;
-
     private GameObject toogleButton;
     public enum Select { menu, replay, next, none };
     public Select select = Select.none;
@@ -18,7 +16,7 @@ public class ViewController : MonoBehaviour
     {
         // Access button label and set default mode to lasermode
         toogleButton = transform.Find("toggleGameMode").gameObject;
-        Debug.Log(toogleButton);        
+        Debug.Log(toogleButton);
         //toogleButton.GetComponent<Text>().text = "Laser Mode";
         tutorial = transform.Find("Tut_UI");
         endScreen = transform.Find("MellanMeny");
@@ -27,7 +25,7 @@ public class ViewController : MonoBehaviour
     }
 
     public void initScene()
-    {        
+    {
         //HideTutorial();
         HideEndScreen();
         HideFadePanel();
@@ -36,16 +34,32 @@ public class ViewController : MonoBehaviour
 
     public void Click()
     {
+        if (GameManager.gameMode == GameManager.GameMode.none) return;
         // On button click, toggle between Mirror and Laser mode
-        if (gameMode) toogleButton.GetComponent<Text>().text = "Mirror Mode";
-        else toogleButton.GetComponent<Text>().text = "Laser Mode";
-
-        gameMode = !gameMode; // Toggle global variable
+        if (GameManager.gameMode == GameManager.GameMode.laserMode)
+        {
+            //toogleButton.GetComponent<Text>().text = "Mirror Mode";
+            GameManager.gameMode = GameManager.GameMode.mirrorMode;
+        }
+        else
+        {
+            //toogleButton.GetComponent<Text>().text = "Laser Mode";
+            GameManager.gameMode = GameManager.GameMode.laserMode;
+        }
     }
 
     public void ShowGameModeButton()
     {
+        //Debug.Log(toogleButton.GetComponent<Text>().text);
         toogleButton.SetActive(true);
+        if (GameManager.gameMode == GameManager.GameMode.mirrorMode)
+        {
+           // toogleButton.GetComponent<Text>().text = "Mirror Mode";        
+        }
+        else
+        {
+            //toogleButton.GetComponent<Text>().text = "Laser Mode";           
+        }
     }
 
     public void HideGameModeButton()
@@ -56,6 +70,7 @@ public class ViewController : MonoBehaviour
     public void OkClick()
     {
         HideTutorial();
+        GameManager.gameState = GameManager.GameState.gameRunning;
     }
 
     public void NewTutorial(string title, string text, Image image)
