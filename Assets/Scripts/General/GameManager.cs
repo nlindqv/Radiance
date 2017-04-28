@@ -26,12 +26,14 @@ public class GameManager : MonoBehaviour
 		levelName = loadName();
 		loadScore();
 		loadTutorialIndex();
+
 		*/
+
 		gameState = GameState.gameRunning;
 		UI = GameObject.Find ("UI").GetComponent<ViewController> ();
 		targetMaster = GameObject.Find ("TargetMaster").GetComponent<TargetMaster> ();
 		UI.transform.Find ("MellanMeny").gameObject.SetActive (false);
-		Debug.Log (targetMaster.GetCollectables ());
+
 		if (tutorialIndex >= 0) {
 			LoadTutorial (tutorialIndex);
 
@@ -108,11 +110,13 @@ public class GameManager : MonoBehaviour
 	private void NextScene ()
 	{
 		NewScene (1);
+		gameState = GameState.gameRunning;
 	}
 
 	private void Replay ()
 	{
 		NewScene (0);
+		gameState = GameState.gameRunning;
 	}
 
 	private void MainMenu ()
