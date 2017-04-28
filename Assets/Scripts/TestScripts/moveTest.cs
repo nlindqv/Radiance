@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(float))]
 public class moveTest : MonoBehaviour {
 
 	private Vector3 lastPos;
 	private Vector3 reverse;
 
 	private Rigidbody rb;
+	private Camera cam;
 
+	public float speed;
 	public bool printPos;
 	private bool useRB;
 
@@ -19,6 +22,10 @@ public class moveTest : MonoBehaviour {
 		if (rb != null) {
 			useRB = true;
 		}
+		speed = 0.1f;
+
+		cam = Camera.main;
+
 		reverse = new Vector3 (-1, -1, -1);
 	}
 	
@@ -26,22 +33,22 @@ public class moveTest : MonoBehaviour {
 	void Update () {
 		if (useRB) {
 			if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.UpArrow))
-				rb.position = Vector3.MoveTowards (lastPos, transform.forward + lastPos, 0.1f);
+				rb.position = Vector3.MoveTowards (lastPos, cam.transform.up + lastPos, speed);
 			if (Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.DownArrow))
-				rb.position = Vector3.MoveTowards (lastPos, Vector3.Scale (transform.forward, reverse) + lastPos, 0.1f);
+				rb.position = Vector3.MoveTowards (lastPos, Vector3.Scale (cam.transform.up, reverse) + lastPos, speed);
 			if (Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.RightArrow))
-				rb.position = Vector3.MoveTowards (lastPos, transform.right + lastPos, 0.1f);
+				rb.position = Vector3.MoveTowards (lastPos, cam.transform.right + lastPos, speed);
 			if (Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.LeftArrow))
-				rb.position = Vector3.MoveTowards (lastPos, Vector3.Scale (transform.right, reverse) + lastPos, 0.1f);
+				rb.position = Vector3.MoveTowards (lastPos, Vector3.Scale (cam.transform.right, reverse) + lastPos, speed);
 		} else {
 			if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.UpArrow))
-				transform.position = Vector3.MoveTowards (lastPos, transform.forward + lastPos, 0.1f);
+				transform.position = Vector3.MoveTowards (lastPos, cam.transform.up + lastPos, speed);
 			if (Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.DownArrow))
-				transform.position = Vector3.MoveTowards (lastPos, Vector3.Scale (transform.forward, reverse) + lastPos, 0.1f);
+				transform.position = Vector3.MoveTowards (lastPos, Vector3.Scale (cam.transform.up, reverse) + lastPos, speed);
 			if (Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.RightArrow))
-				transform.position = Vector3.MoveTowards (lastPos, transform.right + lastPos, 0.1f);
+				transform.position = Vector3.MoveTowards (lastPos, cam.transform.right + lastPos, speed);
 			if (Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.LeftArrow))
-				transform.position = Vector3.MoveTowards (lastPos, Vector3.Scale (transform.right, reverse) + lastPos, 0.1f);
+				transform.position = Vector3.MoveTowards (lastPos, Vector3.Scale (cam.transform.right, reverse) + lastPos, speed);
 		}
 		lastPos = transform.position;
 
