@@ -23,9 +23,9 @@ public class CollisionTest : MonoBehaviour {
 		Debug.Log (other);
 		print ("Collision");
 	}
-//
-//	void OnCollisionEnter(Collider other){
-//		Debug.Log (other);
-//		print ("Collision");
-//	}
+
+	void OnCollisionEnter(Collider other){
+		Debug.Log (other);
+		print ("Collision");
+	}
 }
