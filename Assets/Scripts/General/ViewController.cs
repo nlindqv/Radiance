@@ -7,7 +7,7 @@ public class ViewController : MonoBehaviour
 {
     public static bool gameMode = true;
 
-    private Text toogleButtonText;
+    private GameObject toogleButton;
     public enum Select { menu, replay, next, none };
     public Select select = Select.none;
     private Transform tutorial;
@@ -17,11 +17,13 @@ public class ViewController : MonoBehaviour
     void Start()
     {
         // Access button label and set default mode to lasermode
-        toogleButtonText = transform.Find("toggleGameMode").gameObject.GetComponentInChildren<Text>();
-        toogleButtonText.text = "Laser Mode";
+        toogleButton = transform.Find("toggleGameMode").gameObject;
+        Debug.Log(toogleButton);        
+        //toogleButton.GetComponent<Text>().text = "Laser Mode";
         tutorial = transform.Find("Tut_UI");
         endScreen = transform.Find("MellanMeny");
         fadePanel = transform.Find("FadePanel").GetComponent<Image>();
+        initScene();
     }
 
     public void initScene()
@@ -35,20 +37,20 @@ public class ViewController : MonoBehaviour
     public void Click()
     {
         // On button click, toggle between Mirror and Laser mode
-        if (gameMode) toogleButtonText.text = "Mirror Mode";
-        else toogleButtonText.text = "Laser Mode";
+        if (gameMode) toogleButton.GetComponent<Text>().text = "Mirror Mode";
+        else toogleButton.GetComponent<Text>().text = "Laser Mode";
 
         gameMode = !gameMode; // Toggle global variable
     }
 
     public void ShowGameModeButton()
     {
-        toogleButtonText.gameObject.SetActive(true);
+        toogleButton.SetActive(true);
     }
 
     public void HideGameModeButton()
     {
-        toogleButtonText.gameObject.SetActive(false);
+        toogleButton.SetActive(false);
     }
 
     public void OkClick()

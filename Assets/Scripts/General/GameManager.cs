@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
 	{
 		switch (gameState) {
 		case GameState.gameRunning:
+            UI.ShowGameModeButton();
 			CheckLevelCompleted ();
 			break;
 		case GameState.endScreen:
