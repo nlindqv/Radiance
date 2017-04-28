@@ -27,26 +27,29 @@ public class SMover : MonoBehaviour {
 		start = curve.GetPointAt (0);
 		end = curve.GetPointAt (1);
 
-		Debug.DrawLine (start, end, Color.cyan, 10f);
+		for (float t = 0.01f; t < 1f; t += 0.01f) {
+			Debug.DrawLine (Vector3.zero, curve.GetPointAt(t), Color.red, 10f);
+		}
+//		Debug.DrawLine (start, end, Color.cyan, 10f);
 	}
 
 
 	void OnTriggerEnter(Collider Other)
 	{
-		if (!isMoving) {
+//		if (!isMoving) {
 			Vector3 hitPoint = Other.gameObject.transform.position;
 
-			//get closest point from hitPoint to BezierCurve (approximates amongst n points)
-			float n = 20;
-	//		Might be used to better determine closest point..
-	//		n = curve.resolution * curve.pointCount;
+			//get closest point from hitPoint to BezierCurve
+//			float n = 20;
+//			Might be used to better determine closest point..
+//			float interval = 1/(curve.resolution * curve.pointCount);
 
 			Vector3 hit2Line = curve.GetPointAt(0) - hitPoint;
 
 			float minDist = Vector3.Distance (hitPoint, curve.GetPointAt (0));
-			print (minDist);
+//			print (minDist);
 
-			for (float t = 1/n; t < 1f; t += (1/n)) {
+			for (float t = 0.01f; t < 1f; t += 0.01f) {
 				float distComp = Vector3.Distance (hitPoint, curve.GetPointAt (t));
 				if (distComp < minDist) {
 					hit2Line = curve.GetPointAt(t) - hitPoint;
@@ -56,8 +59,8 @@ public class SMover : MonoBehaviour {
 			}
 			Vector3 transport = hitPoint + hit2Line;
 
-			print (curve.GetPointAt (step) + " on curve to object " + hitPoint);
-			print (hit2Line + " w/ dist " + minDist);
+//			print (curve.GetPointAt (step) + " on curve to object " + hitPoint);
+//			print (hit2Line + " w/ dist " + minDist);
 
 			Vector3 prevTransform = Other.gameObject.transform.position;
 			Other.gameObject.transform.position = Vector3.MoveTowards (prevTransform, transport, 1);
@@ -67,9 +70,9 @@ public class SMover : MonoBehaviour {
 			} else {
 				togglDir = true;
 			}
-			//		Debug.DrawLine (Vector3.zero, transport, Color.blue, 10f);
-			//		Debug.DrawLine (Vector3.zero, hitPoint, Color.red, 10f);
-		}
+//			Debug.DrawLine (Vector3.zero, transport, Color.blue, 10f);
+//			Debug.DrawLine (Vector3.zero, hitPoint, Color.red, 10f);
+//		}
 	}
 
 	void OnTriggerStay(Collider Other)
@@ -82,15 +85,16 @@ public class SMover : MonoBehaviour {
 //		}
 		if (togglDir) {
 			Other.gameObject.transform.position = Vector3.MoveTowards (prevTransform, curve.GetPointAt (step), 1f);
-			step += 0.01f;
-			if (step >= 1) {
+			step += 0.005f;
+
+			if (step >= 0.99) {
 				step = 1;
 				togglDir = !togglDir;
 			}
 		} else {
 			Other.gameObject.transform.position = Vector3.MoveTowards (prevTransform, curve.GetPointAt (step), 1f);
-			step -= 0.01f;
-			if (step <= 0.01) {
+			step -= 0.005f;
+			if (step <= 0.001) {
 				step = 0;
 				togglDir = !togglDir;
 			}
@@ -98,6 +102,7 @@ public class SMover : MonoBehaviour {
 
 	}
 	void OnTriggerExit(Collider Other){
-		isMoving = false;
+//		isMoving = false;
+//		Debug.Log (Other.transform.position);
 	}
 }
