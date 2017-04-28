@@ -45,3 +45,5 @@ Vi känner att vissa förbättringar över kommunikation om vem som gör vad beh
 ### Sprint 2
 För sprint 2 lägger vi nu fokuset på att förbättra vårt samarbete i gruppen och arbetar mot målet att alla ska vara delaktiga i det vi producerat i slutet av sprinten. Förbättringar inom kommunikation och arbetsätt är något vi tillsammans har kommit fram för att förbättra vårt samarbete och lösa diverse svårigheter och oklarheter som uppstått i den första sprinten. 
 
+Spelet fortsätter vi att uveckla med nya komponenter och förfina de gamla. Denna sprint fokuserar vi även på att knyta samman spelet med oika menyer som användaren ska kunna interagera med. 
+
