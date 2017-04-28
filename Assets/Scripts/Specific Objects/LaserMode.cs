@@ -82,7 +82,7 @@ public class LaserMode : MonoBehaviour
 
     IEnumerator FireLaser() {
         float angle = 0;
-		if (ViewController.gameMode) { //Enable laser mode	
+		if (GameManager.gameMode == GameManager.GameMode.laserMode) { //Enable laser mode	
 			if (Input.GetMouseButtonDown (0)) {
 				//sätt föregående riktningsvektor och indikera att nästa frame skall generera riktningsvektor där vinkeln kan beräknas
 				if (SetPreviousDirectionVector ())
