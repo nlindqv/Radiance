@@ -6,8 +6,7 @@ using UnityEngine;
 /// Drag BezierCurve into script
 /// </summary>
 
-[RequireComponent(typeof(BezierCurve))]
-public class BezierMove : MonoBehaviour {
+public class BezierTest : MonoBehaviour {
 
 	bool toggl;
 
