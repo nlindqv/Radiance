@@ -40,12 +40,12 @@ LaserMode hanterar input från användaren när spelet är i laserläge. Input/m
 #### Target & TargetMaster
 Target väntar på en laserstråle som vid träff anropar HandleLaserCollision. Vid träff ändras färg på target från Röd till Grön samt Hit registreras. TargetMaster är parent till alla targets som finns på banan och undersöker varje frame om samtliga targets har registrerat hit, isåfall avancerar man till nästa nivå. Nya targets måste klassas som children till TargetMaster för att hits skall registreras korrekt.
 
-### Sammanfattning för sprint 1
+## Sammanfattning för sprint 1
 Vi klarade av vårt mål gällande att utveckla ett spel med grundläggande funktionalitet. Vi har nu ett spel där vi kan använda både touch och mus-klick som input och styra både ljuskälla och speglar. Vi har inte haft några större problem gällande git utan har lyckats komma överens och kommunicera med varandra när vi har blivit osäkra.
 
 Vi känner att vissa förbättringar över kommunikation om vem som gör vad behöver förbättras och att vi behöver bli mer effektiva i avseende på möten då vi tenderar att dra ut på dessa. Vi har därför kommit på en lösning angående att time-boxa våra möten och vara tydliga med mål och syte för de olika mötena vi har. Vi har även stött på utmaningar gällande att få med alla på resan så att de känner sig bekväma med vad och hur vi arbetar. Den lösning vi har tagit fram här är att gruppen måste lyssna på alla gruppmedlemars behov om problem uppstår eller om någon inte förstår. Vi har även kommit fram till att vi måste rotera i större grad i de grupper vi sitter och arbetar i för att förbättra kunskapsutbytet i gruppen vilket kommer främja vårt arbete.
 
-### Sprint 2
+## Sprint 2
 För sprint 2 lägger vi nu fokuset på att förbättra vårt samarbete i gruppen och arbetar mot målet att alla ska vara delaktiga i det vi producerat i slutet av sprinten. Förbättringar inom kommunikation och arbetsätt är något vi tillsammans har kommit fram för att förbättra vårt samarbete och lösa diverse svårigheter och oklarheter som uppstått i den första sprinten. 
 
 Spelet fortsätter vi att uveckla med nya komponenter och förfina de gamla. Denna sprint fokuserar vi även på att knyta samman spelet med oika menyer som användaren ska kunna interagera med. 
