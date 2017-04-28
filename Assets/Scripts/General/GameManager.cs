@@ -6,13 +6,16 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-	private enum GameState {gameRunning,endScreen};
+    public enum GameMode { laserMode, mirrorMode, none };
+	public enum GameState {tutorial,gameRunning,endScreen};
 
+    public static GameMode gameMode = GameMode.none;
+    private static GameState prevGameState;
 	public GameObject laserRay;
 	public ViewController UI;
 	public TargetMaster targetMaster;
 
-	private GameState gameState;
+	public static GameState gameState;
 	private string levelName;
 	private int tutorialIndex = 1;
 
@@ -26,23 +29,36 @@ public class GameManager : MonoBehaviour
 		levelName = loadName();
 		loadScore();
 		loadTutorialIndex();
+
 		*/
-		gameState = GameState.gameRunning;
+
+		gameState = GameState.tutorial;
+        prevGameState = GameState.tutorial;
+        gameMode = GameMode.none;
+       
 		UI = GameObject.Find ("UI").GetComponent<ViewController> ();
 		targetMaster = GameObject.Find ("TargetMaster").GetComponent<TargetMaster> ();
 		UI.transform.Find ("MellanMeny").gameObject.SetActive (false);
-		Debug.Log (targetMaster.GetCollectables ());
+
 		if (tutorialIndex >= 0) {
 			LoadTutorial (tutorialIndex);
-
 		}
 	}
 
 
 	void FixedUpdate ()
 	{
+        if(prevGameState == GameState.tutorial && gameState == GameState.gameRunning)
+        {
+            gameMode = GameMode.laserMode;
+            UI.ShowGameModeButton();
+        }
 		switch (gameState) {
-		case GameState.gameRunning:
+            case GameState.tutorial:
+                
+            break;
+            case GameState.gameRunning:
+            UI.ShowGameModeButton();
 			CheckLevelCompleted ();
 			break;
 		case GameState.endScreen:
@@ -51,6 +67,7 @@ public class GameManager : MonoBehaviour
 		default:
 			break;
 		}
+        prevGameState = gameState;
 	}
 
 	private void LoadTutorial (int index)
@@ -67,6 +84,7 @@ public class GameManager : MonoBehaviour
 		if (targetMaster.CheckLevelCompleted ()) {
 			LoadLevelEndScreen ();
 			gameState = GameState.endScreen;
+            gameMode = GameMode.none;
 		}
 	}
 
@@ -100,19 +118,18 @@ public class GameManager : MonoBehaviour
 		SceneManager.LoadScene (activeScene.buildIndex + n);
 		Debug.Log ("Entering next scene");
 	}
-
-
-
-		
+    	
 
 	private void NextScene ()
 	{
 		NewScene (1);
+		gameState = GameState.gameRunning;
 	}
 
 	private void Replay ()
 	{
 		NewScene (0);
+		gameState = GameState.gameRunning;
 	}
 
 	private void MainMenu ()
