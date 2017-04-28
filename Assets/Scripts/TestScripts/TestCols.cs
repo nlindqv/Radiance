@@ -7,7 +7,7 @@ using UnityEngine;
 /// Should print collider & "Collision" upon collision with trigger
 /// decomment OnCollisionEnter() to get same behavior for non-trigger
 /// </summary>
-public class CollisionTest : MonoBehaviour {
+public class TestCols : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -19,12 +19,12 @@ public class CollisionTest : MonoBehaviour {
 		
 	}
 
-	void OnTriggerEnter(Collider other){
+	public void OnTriggerEnter(Collider other){
 		Debug.Log (other);
 		print ("Collision");
 	}
 
-	void OnCollisionEnter(Collider other){
+	public void OnCollisionEnter(Collider other){
 		Debug.Log (other);
 		print ("Collision");
 	}

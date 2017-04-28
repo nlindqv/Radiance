@@ -22,7 +22,6 @@ public class moveTest : MonoBehaviour {
 		if (rb != null) {
 			useRB = true;
 		}
-		speed = 0.1f;
 
 		cam = Camera.main;
 
