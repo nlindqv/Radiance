@@ -9,29 +9,29 @@ public class Movable : MonoBehaviour
     private bool move; // Move mode
     private float distance; //Distance moved in display coordinates
     private float startHeight;
-    private Rigidbody rigidbody;
+    private Rigidbody rigidb;
 
     public float moveHeight;
 
 	// Can be applied to any object with a rigidbody
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rigidb = GetComponent<Rigidbody>();
         GetComponent<Rigidbody>().freezeRotation = true;
         move = false;
-        previousPosition = rigidbody.position;
-        startHeight = rigidbody.position.y;
+        previousPosition = rigidb.position;
+        startHeight = rigidb.position.y;
     }
     
     private void OnMouseDown()
     {
         if (!ViewController.gameMode) { // If in mirror mode, pick up mirror
-            previousPosition = rigidbody.position;
+            previousPosition = rigidb.position;
             prevRotate = transform.rotation;
-            distance = Vector3.Distance(rigidbody.position, Camera.main.transform.position);
+            distance = Vector3.Distance(rigidb.position, Camera.main.transform.position);
             move = true;
             
-            rigidbody.position = new Vector3(rigidbody.position.x, moveHeight, rigidbody.position.z);
+            rigidb.position = new Vector3(rigidb.position.x, moveHeight, rigidb.position.z);
         }
 
     }
@@ -42,8 +42,8 @@ public class Movable : MonoBehaviour
         {
             Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
             Vector3 rayPoint = r.GetPoint(distance);
-            rigidbody.position = rayPoint;
-            rigidbody.position = new Vector3(rigidbody.position.x, moveHeight, rigidbody.position.z);
+            rigidb.position = rayPoint;
+            rigidb.position = new Vector3(rigidb.position.x, moveHeight, rigidb.position.z);
         }
     }
 
@@ -51,7 +51,7 @@ public class Movable : MonoBehaviour
     {
         if (!ViewController.gameMode) //If in mirror mode
         {          
-            rigidbody.position = new Vector3(rigidbody.position.x, startHeight, rigidbody.position.z);
+            rigidb.position = new Vector3(rigidb.position.x, startHeight, rigidb.position.z);
             move = false;
         }
     }

@@ -1,3 +1,4 @@
+﻿
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,8 @@ public class LaserRay : MonoBehaviour
     public Color Color;
     public int BounceValue;
     private LineRenderer laserRay;
-    private Transform transform;
+    private Renderer renderer;
+    private Transform tf; // ts = transform
 
     private Vector3 hitPoint;
     private Vector3 hitNormal;
@@ -19,17 +21,28 @@ public class LaserRay : MonoBehaviour
     void Start()
     {
         laserRay = GetComponent<LineRenderer>();
-        transform = GetComponent<Transform>();
+        tf = GetComponent<Transform>();
+        renderer = GetComponent<Renderer>();
+        renderer.material.SetColor("_MKGlowColor", Color);
+        renderer.material.SetColor("_MKGlowTexColor", Color);
+        renderer.material.SetColor("_Color", Color);
+        renderer.material.SetColor("_TintColor", Color);
         if (BounceValue > 0) GenerateLaserRay();
+    }
+    public void SetColor(int newBounceValue, Color existingColor)
+    {
+        float deacreaseRelativeToValue = (float)newBounceValue / (float)BounceValue;
+        Color = new Color(existingColor.r, existingColor.g, existingColor.b, existingColor.a * deacreaseRelativeToValue);
+        Color = new Color(existingColor.r, existingColor.g, existingColor.b, existingColor.a * deacreaseRelativeToValue);
     }
     public void GenerateLaserRay()
     {
-        Vector3 direction = transform.forward;
-        Ray ray = new Ray(transform.position, direction);
+        Vector3 direction = tf.forward;
+        Ray ray = new Ray(tf.position, direction);
         RaycastHit hit;
-        laserRay.SetPosition(0, transform.position);
-        Material material = laserRay.material;
-        material.color = Color;
+        laserRay.SetPosition(0, tf.position);
+        //Material material = laserRay.material;
+        //material.color = Color;
         //kolla om vi får träff
         if (Physics.Raycast(ray, out hit))
         {
