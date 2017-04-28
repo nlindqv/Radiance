@@ -24,7 +24,7 @@ public class MenuLevelsLister : MonoBehaviour {
         IEnumerable<EditorBuildSettingsScene> levelScenes = sceneList.Where(x => x.path.Contains("GameScenes/Levels")).OrderBy(x => x.path);
         // knapp för level1
        sceneList = levelScenes.ToList();
-       sceneSelectorBtn.onClick.AddListener(delegate { SceneSelector.LoadSceneByName(sceneList.First().path);});
+       sceneSelectorBtn.onClick.AddListener(delegate { SceneManager.LoadScene(sceneList.First().path); });
        Text buttonText;
        float lastHeight = sceneSelectorBtn.transform.position.y;
         //skapa nya knappar för övriga nivåer
@@ -35,7 +35,7 @@ public class MenuLevelsLister : MonoBehaviour {
          sceneSelectorBtn = newButton.GetComponent<Button>();
          string scenePath = sceneList[i].path;
          //skapa event för knappklick och byta bana
-         sceneSelectorBtn.onClick.AddListener(delegate() { SceneSelector.LoadSceneByName(scenePath); });
+         sceneSelectorBtn.onClick.AddListener(delegate() { SceneManager.LoadScene(scenePath); });
          buttonText = newButton.GetComponentInChildren<Text>();
          buttonText.text = "Level " + (i+1).ToString();
        }
