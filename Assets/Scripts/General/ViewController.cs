@@ -64,9 +64,7 @@ public class ViewController : MonoBehaviour {
 		select = Select.menu;
 		endScreen.gameObject.SetActive (false);
 	}
-	public Select getSelect(){
-		return select;
-	}
+
 	public void ShowEndScreen(string levelName, int starCount){
 		endScreen.gameObject.SetActive (true);
 		endScreen.Find ("Level").GetComponent<RectTransform> ().GetComponent<Text> ().text = levelName;

@@ -31,9 +31,9 @@ public class GameManager : MonoBehaviour
 		UI = GameObject.Find ("UI").GetComponent<ViewController> ();
 		targetMaster = GameObject.Find ("TargetMaster").GetComponent<TargetMaster> ();
 		UI.transform.Find ("MellanMeny").gameObject.SetActive (false);
-		Debug.Log (targetMaster.getCollectables ());
+		Debug.Log (targetMaster.GetCollectables ());
 		if (tutorialIndex >= 0) {
-			loadTutorial (tutorialIndex);
+			LoadTutorial (tutorialIndex);
 
 		}
 	}
@@ -43,58 +43,58 @@ public class GameManager : MonoBehaviour
 	{
 		switch (gameState) {
 		case GameState.gameRunning:
-			checkLevelCompleted ();
+			CheckLevelCompleted ();
 			break;
 		case GameState.endScreen:
-			checkNextState ();
+			CheckNextState ();
 			break;
 		default:
 			break;
 		}
 	}
 
-	private void loadTutorial (int index)
+	private void LoadTutorial (int index)
 	{
 		// Load info about tutorial
-		string Title = "title";
-		string Text = "TEXT";
-		Image Icon = null;
-		UI.NewTutorial (Title, Text, Icon);
+		string title = "title";
+		string text = "sample text";
+		Image icon = null;
+		UI.NewTutorial (title, text, icon);
 	}
 
-	private void checkLevelCompleted ()
+	private void CheckLevelCompleted ()
 	{
-		if (targetMaster.checkLevelCompleted ()) {
-			loadLevelEndScreen ();
+		if (targetMaster.CheckLevelCompleted ()) {
+			LoadLevelEndScreen ();
 			gameState = GameState.endScreen;
 		}
 	}
 
-	private void loadLevelEndScreen ()
+	private void LoadLevelEndScreen ()
 	{
 		// Load info about which level got completed
-		string Level = "Level";
-		UI.ShowEndScreen (Level, targetMaster.getCollectables ());
+		string level = "Level";
+		UI.ShowEndScreen (level, targetMaster.GetCollectables ());
 	}
 
-	private void checkNextState ()
+	private void CheckNextState ()
 	{
-		switch (UI.getSelect ()) {
+		switch (UI.select) {
 		case ViewController.Select.menu:
-			mainMenu ();
+			MainMenu ();
 			break;
 		case ViewController.Select.replay:
-			replay ();
+			Replay ();
 			break;
 		case ViewController.Select.next:
-			nextScene ();
+			NextScene ();
 			break;
 		default:
 			break;
 		}
 	}
 
-	private void newScene (int n)
+	private void NewScene (int n)
 	{ // where n is offset from current scene
 		Scene activeScene = SceneManager.GetActiveScene ();
 		SceneManager.LoadScene (activeScene.buildIndex + n);
@@ -105,19 +105,19 @@ public class GameManager : MonoBehaviour
 
 		
 
-	private void nextScene ()
+	private void NextScene ()
 	{
-		newScene (1);
+		NewScene (1);
 	}
 
-	private void replay ()
+	private void Replay ()
 	{
-		newScene (0);
+		NewScene (0);
 	}
 
-	private void mainMenu ()
+	private void MainMenu ()
 	{
-		//newScene (menuIndex);
+		//NewScene (menuIndex);
 	}
 
 }

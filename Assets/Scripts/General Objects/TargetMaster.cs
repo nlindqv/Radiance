@@ -42,10 +42,10 @@ public class TargetMaster : MonoBehaviour {
 		}
 
 	}
-	public bool checkLevelCompleted(){
+	public bool CheckLevelCompleted(){
 		return levelCompleted;
 	}
-	public int getCollectables(){
+	public int GetCollectables(){
 		int collectedCollectables = 0;
 		if (Collectables.Length == 0)
 			return 3;
