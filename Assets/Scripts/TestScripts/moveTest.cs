@@ -43,7 +43,7 @@ public class moveTest : MonoBehaviour {
 
 		cam = Camera.main;
 
-		if (speed = 0.0f) {
+		if (speed == 0.0f) {
 			speed = 0.1f;
 		}
 
