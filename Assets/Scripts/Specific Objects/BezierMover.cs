@@ -58,7 +58,7 @@ public class BezierMover : MonoBehaviour {
 					move = 0.99f;
 			}
 
-			//Otherwise we go from start to end of curve (0.0++) and then from end to start (0.99--)
+		//Otherwise we go from start to end of curve (0.0++) and then from end to start (0.99--)
 		} else {
 			
 			if (toggl)
@@ -78,4 +78,6 @@ public class BezierMover : MonoBehaviour {
 			}
 		}
 	}
+
+
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// S mover.
+/// S mover. Needs some comments but currently not used in game
 /// </summary>
 
 public class SMover : MonoBehaviour {

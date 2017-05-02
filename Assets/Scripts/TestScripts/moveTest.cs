@@ -54,6 +54,7 @@ public class moveTest : MonoBehaviour {
 	//Move-script runs in update, not very efficient but only used for testing
 	void Update () {
 		//if object has rigidbody, else use transform
+		//check specified keys for input, move in correct direction (determined by camera)
 		if (useRB) {
 			if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.UpArrow))
 				rb.position = Vector3.MoveTowards (lastPos, cam.transform.up + lastPos, speed);
