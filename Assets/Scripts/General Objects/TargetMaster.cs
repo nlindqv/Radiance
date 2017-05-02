@@ -46,10 +46,12 @@ public class TargetMaster : MonoBehaviour {
 	public bool CheckLevelCompleted(){
 		return levelCompleted;
 	}
+
 	public int GetCollectables(){
 		if (Collectables == null)
 			Collectables = new Collectable[0];
 		int collectedCollectables = 0;
+		// Calculate amount of stars achieved depending on collectables taken
 		if (Collectables.Length == 0)
 			return 3;
 		for (int i = 0; i < Collectables.Length; i++) {
