@@ -71,6 +71,7 @@ Mover förekommer i fyra olika former, varje form transporterar valfritt spelobj
 3. Cirkel
 4. S-formad
 Varje mover har en BezierCurve (script) som definierar kurvan som ett externt objekt. 
+
 *För att kunna förflytta ett objekt krävs att det tilldelas scriptet BezierMover samt att kurvan som objektet ska följa dras till parametern B (Bezier Curve).*
 * Toggl ändrar riktning på förflyttningen
 * Speed definierar hastigheten, innehar typiskt ett värde [1-20]
