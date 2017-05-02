@@ -4,80 +4,33 @@ using UnityEngine;
 [RequireComponent(typeof(Transform))]
 public class LightSplitter : MonoBehaviour, IInteractables
 {
+    //Color of gate and laserRay-conversion
+    public Color One;
+    public Color Two;
+    public Color Three;
 
-	public GameObject ray;
-	//Color of gate and laserRay-conversion
-	public Color Blue;
-	public Color Red;
-	public Color Green;
+    private Transform laserOne; 
+    private Transform laserTwo; 
+    private Transform laserThree; 
 
-	//Use dirty to render new color of gate during gameplay
-	public bool dirty;
-	private BoxCollider col;
-	private Transform child; 
+    void Start()
+    {
+        laserOne = this.transform.Find("Spawn1");
+        laserTwo = this.transform.Find("Spawn2");
+        laserThree = this.transform.Find("Spawn3");
+    }
 
-	private Vector3 tre = new Vector3(1,0,0);
-	private Vector3 tre1 = new Vector3(1,0,-1);
-	private Vector3 tre2 = new Vector3(1,0,1);
-
-	public int bounceValue;
-	void Start () {
-		col = GetComponent<BoxCollider>();
-		foreach (Renderer rend in this.GetComponentsInChildren<Renderer>())
-		{
-			rend.enabled = true;
-			//modify alpha of color
-			Blue = new Color (Blue.r, Blue.g, Blue.b, 0.6f);
-			rend.material.color = Blue;
-			Red = new Color (Red.r, Red.g, Red.b, 0.6f);
-			rend.material.color = Red;
-			Green = new Color (Green.r,Green.g, Green.b, 0.6f);
-			rend.material.color = Green;
-
-		}
-	}
-
-	void Update()
-	{
-		if(dirty)
-		{
-			UpdateColor ();
-		}
-	}
-
-	void UpdateColor()
-	{
-		foreach (Renderer rend in this.GetComponentsInChildren<Renderer>())
-		{
-			rend.enabled = true;
-			//modify alpha of color
-			Blue = new Color (Blue.r, Blue.g, Blue.b, 0.6f);
-			rend.material.color = Blue;
-
-			Red = new Color (Red.r, Red.g, Red.b, 0.6f);
-			rend.material.color = Red;
-
-			Green = new Color (Green.r,Green.g, Green.b, 0.6f);
-			rend.material.color = Green;
-		}
-	}
-
-
-	public void HandleLaserCollision(LaserRay ray)
-	{        
-		Transform parentTransform = ray.transform.parent;
-
-		if (ray.HitNormal.z >= 0) 
-		{
-			LaserRay newRay = Instantiate (ray, transform.position, Quaternion.LookRotation(tre));
-			newRay.transform.parent = parentTransform;
-			newRay.SetColor (ray.BounceValue-1, Blue);
-			LaserRay newRay1 = Instantiate (ray, transform.position, Quaternion.LookRotation(tre1));
-			newRay1.transform.parent = parentTransform;
-			newRay1.SetColor (ray.BounceValue-1, Red);
-			LaserRay newRay2 = Instantiate (ray, transform.position, Quaternion.LookRotation(tre2));
-			newRay2.transform.parent = parentTransform;
-			newRay2.SetColor (ray.BounceValue-1, Green);
-		} 
-	}
+    public void HandleLaserCollision(LaserRay ray)
+    {
+        Transform parentTransform = ray.transform.parent;        
+        LaserRay newRay = Instantiate(ray, laserOne.position, Quaternion.LookRotation(laserOne.up));
+        newRay.transform.parent = parentTransform;
+        newRay.SetColor(ray.BounceValue - 1, One);
+        LaserRay newRay1 = Instantiate(ray, laserTwo.position, Quaternion.LookRotation(laserTwo.up));
+        newRay1.transform.parent = parentTransform;
+        newRay1.SetColor(ray.BounceValue - 1, Two);
+        LaserRay newRay2 = Instantiate(ray, laserThree.position, Quaternion.LookRotation(laserThree.up));
+        newRay2.transform.parent = parentTransform;
+        newRay2.SetColor(ray.BounceValue - 1, Three);
+    }
 }

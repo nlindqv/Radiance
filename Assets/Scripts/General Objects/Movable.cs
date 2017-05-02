@@ -25,7 +25,7 @@ public class Movable : MonoBehaviour
     
     private void OnMouseDown()
     {
-        if (!ViewController.gameMode) { // If in mirror mode, pick up mirror
+        if (GameManager.gameMode == GameManager.GameMode.mirrorMode) { // If in mirror mode, pick up mirror
             previousPosition = rigidb.position;
             prevRotate = transform.rotation;
             distance = Vector3.Distance(rigidb.position, Camera.main.transform.position);
@@ -38,7 +38,7 @@ public class Movable : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (move && !ViewController.gameMode)	//If in move and mirror mode, enable to move object
+        if (move && GameManager.gameMode == GameManager.GameMode.mirrorMode)	//If in move and mirror mode, enable to move object
         {
             Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
             Vector3 rayPoint = r.GetPoint(distance);
@@ -49,7 +49,7 @@ public class Movable : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (!ViewController.gameMode) //If in mirror mode
+        if (GameManager.gameMode == GameManager.GameMode.mirrorMode) //If in mirror mode
         {          
             rigidb.position = new Vector3(rigidb.position.x, startHeight, rigidb.position.z);
             move = false;

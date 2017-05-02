@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 //Use with Targets, A master object with Targets as children
 public class TargetMaster : MonoBehaviour {
-	public GameObject MiddleMenu;
+	
 	private Target[] Targets;
 	private Collectable[] Collectables;
 
@@ -14,6 +14,7 @@ public class TargetMaster : MonoBehaviour {
 		Targets = GetComponentsInChildren<Target> ();
 		levelCompleted = false;
 		Collectables = GetComponentsInChildren<Collectable> ();
+		if (Collectables == null) Collectables = new Collectable[0];
 	}
 	
 
@@ -46,11 +47,13 @@ public class TargetMaster : MonoBehaviour {
 		return levelCompleted;
 	}
 	public int GetCollectables(){
+		if (Collectables == null)
+			Collectables = new Collectable[0];
 		int collectedCollectables = 0;
 		if (Collectables.Length == 0)
 			return 3;
 		for (int i = 0; i < Collectables.Length; i++) {
-			if (Collectables [i].collected())
+			if (Collectables [i].Collected())
 				collectedCollectables++;
 		}
 		return (int)Mathf.Floor (collectedCollectables / Collectables.Length * 2 + 1);
