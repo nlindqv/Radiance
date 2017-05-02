@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 4609222076087496}
   - component: {fileID: 114584159400327844}
   m_Layer: 0
-  m_Name: S-Mover Curve 1
+  m_Name: S-Mover Curve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
