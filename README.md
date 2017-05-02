@@ -56,3 +56,9 @@ För sprint 2 lägger vi nu fokuset på att förbättra vårt samarbete i gruppe
 
 Spelet fortsätter vi att uveckla med nya komponenter och förfina de gamla. Denna sprint fokuserar vi även på att knyta samman spelet med oika menyer som användaren ska kunna interagera med. 
 
+####Ljusdelaren - prisma
+
+Ljusdelaren är ett objekt som ska vara utplacerad på spelplanen. Den har egenskapen att dela in infallande ljustrålar i tre nya ljustrålar med färger Röd, Grön, Blå (RGB). I sin senaste version har det ändrats på så sätt att objektet - ljusdelaren - i Unity har tre tomma "barnobjekt" kopplade till sig och varje gång ljus infaller mot ena sida, genereras tre nya ljusstrålar i den position de tre knutna barnobjekt sitter i förhållande till rummet, mitt emot infallsvinkeln.
+
+####mover 
+
