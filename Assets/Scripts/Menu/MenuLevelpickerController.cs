@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEditor;
+
 /// <summary>
 /// To be attached to the panel hosting the levelpicker buttons. Class controls the paging of the levelpicker menu.
 /// </summary>
@@ -71,9 +72,9 @@ public class MenuLevelpickerController : MonoBehaviour
     {
         Text buttonText;
         float lastHeight = standardLevelBtn.transform.position.y;
+	//	float lastStarHeight = 
         //skapa nya knappar för övriga nivåer, hoppa över första knappen som alltid skall finnas på menyn
-        for (int i = ((currentPage) * 3 + 1); i < Mathf.Min(new int[] { (currentPage + 1) * 3, sceneList.Count }); i++)
-        {
+        for (int i = ((currentPage) * 3 + 1); i < Mathf.Min(new int[] { (currentPage + 1) * 3, sceneList.Count }); i++){
             lastHeight = lastHeight - 40;
             GameObject newButton = Instantiate(standardLevelBtn.gameObject, new Vector3(standardLevelBtn.transform.position.x, lastHeight, standardLevelBtn.transform.position.z), Quaternion.LookRotation(standardLevelBtn.transform.forward));
             newButton.transform.parent = standardLevelBtn.transform.parent;
@@ -83,18 +84,44 @@ public class MenuLevelpickerController : MonoBehaviour
             standardLevelBtn.onClick.AddListener(delegate() { SceneManager.LoadScene(scenePath); });
             buttonText = newButton.GetComponentInChildren<Text>();
             buttonText.text = "Level " + (i + 1).ToString();
+		//	int starCount = getStarCount ();  IMPLEMENT GETSTARCOUNT
+			int starCount = 3;
+			GenerateStars(standardLevelBtn, starCount);
         }
     }
+
+	private void GenerateStars (Button levelButton, int starCount){
+		switch(starCount){
+		case 1:
+			LightStar (levelButton, 1);
+			break;
+		case 2:
+			LightStar (levelButton, 2);
+			break;
+		case 3: 
+			LightStar (levelButton, 3);
+			break;
+		}
+	}
+
+	private void LightStar(Button levelButton, int i) {
+		for(int j=1;j<=i; j++){
+			levelButton.transform.Find ("EmptyStar" + j).transform.GetChild (0).gameObject.SetActive (true);
+		}
+	}
 
     /// <summary>
     /// Get the standard level button, the levelpicker button which always exists on the menu
     /// </summary>
     /// <returns>Returns the standard level button</returns>
-    private Button GetStandardLevelButton()
+	private Button GetStandardLevelButton()
     {
         Button[] buttons = GetComponentsInChildren<Button>();
         //hitta standard knapp för levels
         Button levelBtn = buttons.Single(x => x.name == "LevelBtn");
+		//int starCount = getStarCount ();
+		int starCount = 2;
+		GenerateStars (levelBtn, starCount);
         return levelBtn;
     }
 
@@ -105,7 +132,7 @@ public class MenuLevelpickerController : MonoBehaviour
     {
         Text buttonText;
         //hitta standard knapp för levels
-        Button levelBtn = GetStandardLevelButton();
+		Button levelBtn = GetStandardLevelButton();
         buttonText = levelBtn.GetComponentInChildren<Text>();
         // sätt leveltext för första standard levelknapp
         buttonText.text = "Level " + (currentPage * 3 + 1).ToString();
