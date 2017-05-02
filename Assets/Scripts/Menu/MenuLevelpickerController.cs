@@ -43,11 +43,12 @@ public class MenuLevelpickerController : MonoBehaviour
     /// <returns>Lista med levels sorterade på namn</returns>
     private List<EditorBuildSettingsScene> GetLevelScenes()
     {
+        //hämta alla scener
         List<EditorBuildSettingsScene> sceneList = new List<EditorBuildSettingsScene>();
         foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
             sceneList.Add(scene);
-        IEnumerable<EditorBuildSettingsScene> levelScenes = sceneList.Cast<EditorBuildSettingsScene>();
-        //IEnumerable<EditorBuildSettingsScene> levelScenes = sceneList.Where(x => x.path.Contains("GameScenes/Levels")).OrderBy(x => x.path);
+        //lista levels baserat på sökväg
+        IEnumerable<EditorBuildSettingsScene> levelScenes = sceneList.Where(x => x.path.Contains("GameScenes/Levels")).OrderBy(x => x.path);
         return levelScenes.ToList();
     }
     /// <summary>
@@ -84,6 +85,11 @@ public class MenuLevelpickerController : MonoBehaviour
             buttonText.text = "Level " + (i + 1).ToString();
         }
     }
+
+    /// <summary>
+    /// Get the standard level button, the levelpicker button which always exists on the menu
+    /// </summary>
+    /// <returns>Returns the standard level button</returns>
     private Button GetStandardLevelButton()
     {
         Button[] buttons = GetComponentsInChildren<Button>();
@@ -91,6 +97,10 @@ public class MenuLevelpickerController : MonoBehaviour
         Button levelBtn = buttons.Single(x => x.name == "LevelBtn");
         return levelBtn;
     }
+
+    /// <summary>
+    /// Set the leveltext on the standard level button
+    /// </summary>
     private void SetLevelForStandardLevelButton()
     {
         Text buttonText;
@@ -101,12 +111,19 @@ public class MenuLevelpickerController : MonoBehaviour
         buttonText.text = "Level " + (currentPage * 3 + 1).ToString();
 
     }
+
+    /// <summary>
+    /// Method for browsing to the next page
+    /// </summary>
     private void NextPage()
     {
 
         currentPage++;
         UpdatePage();
     }
+    /// <summary>
+    /// Method for browsing to the previous page
+    /// </summary>
     private void PreviousPage()
     {
         currentPage--;
@@ -118,19 +135,22 @@ public class MenuLevelpickerController : MonoBehaviour
     private void UpdatePage() {
         //hämta standard knapp för levels
         Button levelBtn = GetStandardLevelButton();
-
+        //kontrollera om vänstra swipeknappen skall vara aktiv
         CheckToDisableOrEnableLeftSwipe();
 
         List<EditorBuildSettingsScene> sceneList = GetLevelScenes();
-        //förstör kloner av knappar för levels
+        //förstör alla knappar för levels (utom standardknapp)
         DestroyButtonClones();
-
+        //sätt text på standardlevel knapp
         SetLevelForStandardLevelButton();
-
+        //generera övriga knappar
         GenerateButtons(levelBtn, sceneList);
-
+        //kontrollera om högra swipeknappen skall vara aktiv
         CheckToDisableOrEnableRightSwipe(sceneList);
     }
+    /// <summary>
+    /// Destroys all levelbuttons except standard (first) level button
+    /// </summary>
     private void DestroyButtonClones()
     {
         Button[] buttons = GetComponentsInChildren<Button>();
@@ -144,36 +164,43 @@ public class MenuLevelpickerController : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// Checks current page and identifies if more levels exists that are not listed, disables the right swipe if more levels do not exist
+    /// </summary>
+    /// <param name="sceneList">List with scenes/levels</param>
     private void CheckToDisableOrEnableRightSwipe(List<EditorBuildSettingsScene> sceneList)
     {
         Button[] buttons = GetComponentsInChildren<Button>();
         Text buttonText;
         Button rightSwipe = buttons.Single(x => x.name == RIGHT_SWIPE_BTN_NAME);
         if ((currentPage + 1) * 3 > sceneList.Count)
-        {
+        { // det finns inga fler scener/levels som inte har visats, höger swipeknapp skall vara avstängd
             rightSwipe.interactable = false;
             buttonText = rightSwipe.GetComponentInChildren<Text>();
             buttonText.color = Color.gray;
         }
-        else {
+        else { // finns fler levels/scener att visa/välja, höger swipeknapp skall vara aktiv
             rightSwipe.interactable = true;
             buttonText = rightSwipe.GetComponentInChildren<Text>();
             buttonText.color = Color.white;
         }
     }
+    /// <summary>
+    /// Checks if there are previous pages, if current page == 0, the function will disable left swipe
+    /// </summary>
     private void CheckToDisableOrEnableLeftSwipe()
     {
         Button[] buttons = GetComponentsInChildren<Button>();
         Text buttonText;
         Button leftSwipe = buttons.Single(x => x.name == LEFT_SWIPE_BTN_NAME);
         if (currentPage > 0)
-        {
+        { // vi har föregående sidor, vänsterswipe knapp skall vara aktiv
             leftSwipe.interactable = true;
             buttonText = leftSwipe.GetComponentInChildren<Text>();
             buttonText.color = Color.white;
         }
         else
-        {
+        { // inga föregående sidor, vänster swipeknapp skall vara inaktiv
             leftSwipe.interactable = false;
             buttonText = leftSwipe.GetComponentInChildren<Text>();
             buttonText.color = Color.gray;
