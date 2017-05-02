@@ -15,23 +15,24 @@ public class ColorGate : MonoBehaviour, IInteractables {
 	//Use dirty to render new color of gate during gameplay
 	public bool dirty;
 
-	//
+	//Gate has collider and model as child.
     private BoxCollider col;
     private Transform child; 
 
+
 	void Start () {
 
-		//get all renderers
+		//get collider
         col = GetComponent<BoxCollider>();
-       
+
 		UpdateColor ();
         
 		//set size of collider based on scale of object
 		Vector3 scale = this.transform.Find("GateModel").gameObject.transform.localScale;
         col.size =  new Vector3(0.0f, scale.y, scale.z);
 
-
 	}
+
 
 	//if color has changed during gameplay, update renderer
 	void Update(){
@@ -57,7 +58,7 @@ public class ColorGate : MonoBehaviour, IInteractables {
 	/// <summary>
 	/// Creates a new ray with new color w/ slight offset from original ray.
 	/// </summary>
-	/// <param name="ray">Ray.</param>
+	/// <param name="ray">LaserRay sent</param>
 	public void HandleLaserCollision(LaserRay ray){
 		//Get direction of LaserRay
 		Vector3 direction = ray.HitPoint - ray.transform.position;
