@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 23044463191832636}
   - component: {fileID: 114842414605319070}
   m_Layer: 0
-  m_Name: Line-Mover 1
+  m_Name: Line-Mover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

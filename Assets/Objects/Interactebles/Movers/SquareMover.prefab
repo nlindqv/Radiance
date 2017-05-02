@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 114279339802237964}
   - component: {fileID: 114143665654012392}
   m_Layer: 0
-  m_Name: SquareMover 1
+  m_Name: SquareMover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
