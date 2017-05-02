@@ -56,9 +56,22 @@ För sprint 2 lägger vi nu fokuset på att förbättra vårt samarbete i gruppe
 
 Spelet fortsätter vi att uveckla med nya komponenter och förfina de gamla. Denna sprint fokuserar vi även på att knyta samman spelet med oika menyer som användaren ska kunna interagera med. 
 
-####Ljusdelaren - prisma
+### Stories
 
+#### Ljusdelaren - prisma
 Ljusdelaren är ett objekt som ska vara utplacerad på spelplanen. Den har egenskapen att dela in infallande ljustrålar i tre nya ljustrålar med färger Röd, Grön, Blå (RGB). I sin senaste version har det ändrats på så sätt att objektet - ljusdelaren - i Unity har tre tomma "barnobjekt" kopplade till sig och varje gång ljus infaller mot ena sida, genereras tre nya ljusstrålar i den position de tre knutna barnobjekt sitter i förhållande till rummet, mitt emot infallsvinkeln.
 
-####mover 
+#### Gate - ColorChanger
+En ColorChanger inväntar en laserstråle och vid kollision mellan laserstråle och gatens hitbox genereras en ny laserstråle med den nya färgen specad i parametern Color.
 
+#### Mover & BezierCurve
+Mover förekommer i fyra olika former, varje form transporterar valfritt spelobjekt fram och tillbaka längs formen.
+1. Rak linje
+2. Fyrkant
+3. Cirkel
+4. S-formad
+
+Varje mover har en BezierCurve (script) som definierar kurvan som ett externt objekt. 
+* För att kunna förflytta ett objekt krävs att det tilldelas scriptet BezierMover samt att kurvan som objektet ska följa dras till parametern B (Bezier Curve). 
+  * Toggl ändrar riktning på förflyttningen
+  * Speed definierar hastigheten, innehar typiskt ett värde [1-20]
