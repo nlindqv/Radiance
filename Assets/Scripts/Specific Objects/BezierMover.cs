@@ -66,13 +66,11 @@ public class BezierMover : MonoBehaviour {
 
 		//Otherwise we go from start to end of curve (0.0++) and then from end to start (0.99--)
 		} else {
-			
+
 			if (toggl)
 				move += step;
 			else
 				move -= step;
-
-			transform.position = Vector3.MoveTowards (transform.position, b.GetPointAt (move), speed);
 
 			//if we are at end/start of curve reset move value & toggle direction
 			if (move > 0.99f) {
@@ -82,6 +80,10 @@ public class BezierMover : MonoBehaviour {
 				toggl = !toggl;
 				move = 0.0f;
 			}
+
+			transform.position = Vector3.MoveTowards (transform.position, b.GetPointAt (move), speed);
+
+
 		}
 	}
 
