@@ -8,7 +8,9 @@ using UnityEngine;
 
 public class BezierMover : MonoBehaviour {
 
-	//toggles direction, false=clockwise
+	/// <summary>
+	/// toggles direction, false=clockwise if curve is closed
+	/// </summary>
 	public bool toggl;
 
 	//private boolean to determine if curve is closed
