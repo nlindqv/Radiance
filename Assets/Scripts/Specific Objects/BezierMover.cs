@@ -22,17 +22,21 @@ public class BezierMover : MonoBehaviour {
 	//the curve to move along
 	public BezierCurve b;
 
-	//the speed to move with, needs update
+	/// <summary>
+	/// Speed to move along curve, typical values 1<speed<20
+	/// </summary>
 	public float speed;
-
+	private float step;
 
 
 	void Start () {
 		//default values of speed & curve if not set
 		if(b == null)
 			b = GetComponent<BezierCurve> ();
+
 		if (speed == 0)
-			speed = 1f;
+			speed = 10f;
+		step = speed / 2000;
 
 		closedCurve = b.close;
 
@@ -42,19 +46,19 @@ public class BezierMover : MonoBehaviour {
 		} else {
 			move = 0.0f;
 		}
-
+			
 	}
 
 	void FixedUpdate () {
 		//if curve is closed we just start over curve from 0.99 -> 0
 		if (closedCurve) {
 			if (!toggl) {
-				move += 0.005f;
+				move += step;
 				transform.position = Vector3.MoveTowards (transform.position, b.GetPointAt (move), speed);
 				if (move > 0.99f)
 					move = 0.0f;
 			} else {
-				move -= 0.005f;
+				move -= step;
 				transform.position = Vector3.MoveTowards (transform.position, b.GetPointAt (move), speed);
 				if (move <= 0.0f)
 					move = 0.99f;
@@ -64,9 +68,9 @@ public class BezierMover : MonoBehaviour {
 		} else {
 			
 			if (toggl)
-				move += 0.005f;
+				move += step;
 			else
-				move -= 0.005f;
+				move -= step;
 
 			transform.position = Vector3.MoveTowards (transform.position, b.GetPointAt (move), speed);
 
