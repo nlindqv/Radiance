@@ -108,22 +108,6 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &515061910 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1853577367299742, guid: fe47d12f5331c4f4381728e9e3fa089b,
-    type: 2}
-  m_PrefabInternal: {fileID: 819064694}
---- !u!114 &515061912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 515061910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc582babbc7ea47d091a419782f3ae18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &520102732
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +195,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &796533681
 GameObject:
@@ -276,7 +260,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &819064694
 Prefab:
@@ -286,6 +270,11 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 114178941077428366, guid: fe47d12f5331c4f4381728e9e3fa089b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114799999886874768, guid: fe47d12f5331c4f4381728e9e3fa089b,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -394,7 +383,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 515061912}
+      objectReference: {fileID: 0}
     - target: {fileID: 114178941077428366, guid: fe47d12f5331c4f4381728e9e3fa089b,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -410,9 +399,59 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: StartScene
       objectReference: {fileID: 0}
+    - target: {fileID: 1555177170276162, guid: fe47d12f5331c4f4381728e9e3fa089b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114799999886874768, guid: fe47d12f5331c4f4381728e9e3fa089b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114799999886874768, guid: fe47d12f5331c4f4381728e9e3fa089b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114799999886874768, guid: fe47d12f5331c4f4381728e9e3fa089b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 819064696}
+    - target: {fileID: 114799999886874768, guid: fe47d12f5331c4f4381728e9e3fa089b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadSceneByName
+      objectReference: {fileID: 0}
+    - target: {fileID: 114799999886874768, guid: fe47d12f5331c4f4381728e9e3fa089b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114799999886874768, guid: fe47d12f5331c4f4381728e9e3fa089b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: StartScene
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fe47d12f5331c4f4381728e9e3fa089b, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &819064695 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1861728220374516, guid: fe47d12f5331c4f4381728e9e3fa089b,
+    type: 2}
+  m_PrefabInternal: {fileID: 819064694}
+--- !u!114 &819064696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 819064695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc582babbc7ea47d091a419782f3ae18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1257638706
 GameObject:
   m_ObjectHideFlags: 0
