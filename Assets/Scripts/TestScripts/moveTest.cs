@@ -9,7 +9,7 @@ using UnityEngine;
 /// checks if object has rigidbody and uses it for transform, otherwise uses transform
 /// </summary>
 [RequireComponent(typeof(float))]
-public class moveTest : MonoBehaviour {
+public class MoveTest : MonoBehaviour {
 
 	//private variables for position & game objects
 	private Vector3 lastPos;
