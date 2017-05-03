@@ -1,11 +1,9 @@
-﻿#if UNITY_EDITOR
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using UnityEngine.UI;
-using UnityEditor;
 
 /// <summary>
 /// To be attached to the panel hosting the levelpicker buttons. Class controls the paging of the levelpicker menu.
@@ -21,7 +19,7 @@ public class MenuLevelpickerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        AddSwipeListners();
+        AddSwipeEventListeners();
 
         Button[] buttons = GetComponentsInChildren<Button>();
         // stäng ned vänster swipe
@@ -30,32 +28,20 @@ public class MenuLevelpickerController : MonoBehaviour
         Button levelBtn = GetStandardLevelButton();
 
         //hämta en lista med levels scener som finns i buildsettings
-        List<EditorBuildSettingsScene> sceneList = GetLevelScenes();
+        List<SceneInfo> sceneList = SceneInfoLoader.GetSceneInfo();
 
         // skapa action/event för level 1 knapp
-        levelBtn.onClick.AddListener(delegate { SceneManager.LoadScene(sceneList.First().path); });
+        levelBtn.onClick.AddListener(delegate { SceneManager.LoadScene(sceneList.First().Path); });
 
         // generera knappar för övriga levels
         GenerateButtons(levelBtn, sceneList);
-    }
-    /// <summary>
-    ///  Ger en ordnad lista baserat på namn på alla scener med sökväg i mappen "levels"
-    /// </summary>
-    /// <returns>Lista med levels sorterade på namn</returns>
-    private List<EditorBuildSettingsScene> GetLevelScenes()
-    {
-        //hämta alla scener
-        List<EditorBuildSettingsScene> sceneList = new List<EditorBuildSettingsScene>();
-        foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
-            sceneList.Add(scene);
-        //lista levels baserat på sökväg
-        IEnumerable<EditorBuildSettingsScene> levelScenes = sceneList.Where(x => x.path.Contains("GameScenes/Levels")).OrderBy(x => x.path);
-        return levelScenes.ToList();
+
+        CheckToDisableOrEnableRightSwipe(sceneList);
     }
     /// <summary>
     /// Creates event listners for the swipe buttons
     /// </summary>
-    private void AddSwipeListners()
+    private void AddSwipeEventListeners()
     {
         Button[] buttons = GetComponentsInChildren<Button>();
         Button rightSwipe = buttons.Single(x => x.name == RIGHT_SWIPE_BTN_NAME);
@@ -68,7 +54,7 @@ public class MenuLevelpickerController : MonoBehaviour
     /// </summary>
     /// <param name="standardLevelBtn"></param>
     /// <param name="sceneList"></param>
-    private void GenerateButtons(Button standardLevelBtn, List<EditorBuildSettingsScene> sceneList)
+    private void GenerateButtons(Button standardLevelBtn, List<SceneInfo> sceneList)
     {
         Text buttonText;
         float lastHeight = standardLevelBtn.transform.position.y;
@@ -79,7 +65,7 @@ public class MenuLevelpickerController : MonoBehaviour
             GameObject newButton = Instantiate(standardLevelBtn.gameObject, new Vector3(standardLevelBtn.transform.position.x, lastHeight, standardLevelBtn.transform.position.z), Quaternion.LookRotation(standardLevelBtn.transform.forward));
             newButton.transform.parent = standardLevelBtn.transform.parent;
             standardLevelBtn = newButton.GetComponent<Button>();
-            string scenePath = sceneList[i].path;
+            string scenePath = sceneList[i].Path;
             //skapa event för knappklick och byta bana
             standardLevelBtn.onClick.AddListener(delegate() { SceneManager.LoadScene(scenePath); });
             buttonText = newButton.GetComponentInChildren<Text>();
@@ -118,7 +104,7 @@ public class MenuLevelpickerController : MonoBehaviour
     {
         Button[] buttons = GetComponentsInChildren<Button>();
         //hitta standard knapp för levels
-        Button levelBtn = buttons.Single(x => x.name == "LevelBtn");
+        Button levelBtn = buttons.Single(x => x.name == STANDARD_LEVEL_BTN_NAME);
 		//int starCount = getStarCount ();
 		int starCount = 2;
 		GenerateStars (levelBtn, starCount);
@@ -165,7 +151,7 @@ public class MenuLevelpickerController : MonoBehaviour
         //kontrollera om vänstra swipeknappen skall vara aktiv
         CheckToDisableOrEnableLeftSwipe();
 
-        List<EditorBuildSettingsScene> sceneList = GetLevelScenes();
+        List<SceneInfo> sceneList = SceneInfoLoader.GetSceneInfo();
         //förstör alla knappar för levels (utom standardknapp)
         DestroyButtonClones();
         //sätt text på standardlevel knapp
@@ -195,7 +181,7 @@ public class MenuLevelpickerController : MonoBehaviour
     /// Checks current page and identifies if more levels exists that are not listed, disables the right swipe if more levels do not exist
     /// </summary>
     /// <param name="sceneList">List with scenes/levels</param>
-    private void CheckToDisableOrEnableRightSwipe(List<EditorBuildSettingsScene> sceneList)
+    private void CheckToDisableOrEnableRightSwipe(List<SceneInfo> sceneList)
     {
         Button[] buttons = GetComponentsInChildren<Button>();
         Text buttonText;
@@ -234,4 +220,3 @@ public class MenuLevelpickerController : MonoBehaviour
         }
     }
 }
-#endif

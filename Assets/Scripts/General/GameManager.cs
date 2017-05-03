@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
 
 	private void MainMenu ()
 	{
-		//NewScene (menuIndex);
+        SceneManager.LoadScene("StartScene");
 	}
 
 }
