@@ -43,7 +43,6 @@ public class LaserStack {
         //laser.transform.position = new Vector3(0.0f, 150.0f, 0.0f);
         //laser.transform.GetComponent<LineRenderer>().SetPosition(1, laser.transform.position);
         laser.gameObject.SetActive(false);
-        laser.onStack = true;
         if (head == null) { head = new Node(laser); return; }
         Node newNode = new Node(laser);
         newNode.SetNext(head);
@@ -55,7 +54,6 @@ public class LaserStack {
     {
         LaserRay laser = head.GetLaser();
         head = head.GetNext();
-        laser.onStack = false;
         count--;
         laser.gameObject.SetActive(true);        
         return laser;
