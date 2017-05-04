@@ -75,3 +75,9 @@ Varje mover har en BezierCurve (script) som definierar kurvan som ett externt ob
 *För att kunna förflytta ett objekt krävs att det tilldelas scriptet BezierMover samt att kurvan som objektet ska följa dras till parametern B (Bezier Curve).*
 * Toggl ändrar riktning på förflyttningen
 * Speed definierar hastigheten, innehar typiskt ett värde [1-20]
+
+## Sammanfattning för sprint 2
+
+Vi klarade av vårt mål att få hela gruppen engagerad och delaktiga i demon. Vi lyckades även förbättra samarbetet och kommunikationen i gruppen genom att rotera i högre grad runt och arbeta med "nya" partners. Vi stötte på ett par problem i sprint 2 gällande ojämn fördelning av arbete. Vi fick att ett par personer tog sig an större uppgifter och blev låsta en längre tid medan andra hade ingenting att göra. Lösningen vi föreslår till nästa sprint är att rotera partners varje dag för att involvera fler i gruppen i samma problem samtidigt som flera får arbeta med olika stora problem. 
+
+
