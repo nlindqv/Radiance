@@ -8,7 +8,7 @@ using UnityEngine;
 public abstract class IInteractables : MonoBehaviour
 {
     public   LaserStack laserStack;
-    public LaserRay ray;
+    //public LaserRay ray;
 
     public virtual void HandleLaserCollision(LaserRay laserHit) {
         Debug.Log("Hit");

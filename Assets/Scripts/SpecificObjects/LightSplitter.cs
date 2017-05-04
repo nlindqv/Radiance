@@ -3,11 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(Transform))]
-<<<<<<< Updated upstream:Assets/Scripts/SpecificObjects/LightSplitter.cs
-public class LightSplitter :  IInteractables
-=======
+
 public class LightSplitter : IInteractables
->>>>>>> Stashed changes:Assets/Scripts/Specific Objects/LightSplitter.cs
 {
     //Color of gate and laserRay-conversion
     public Color One;
