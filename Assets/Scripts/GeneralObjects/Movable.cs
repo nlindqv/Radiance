@@ -10,6 +10,9 @@ public class Movable : MonoBehaviour
     private float distance; //Distance moved in display coordinates
     private float startHeight;
     private Rigidbody rigidb;
+	private Vector3 distanceOffset;
+	private Vector3 rayPoint;
+	private Ray r;
 
     public float moveHeight;
 
@@ -27,11 +30,11 @@ public class Movable : MonoBehaviour
     {
         if (GameManager.gameMode == GameManager.GameMode.mirrorMode) { // If in mirror mode, pick up mirror
             previousPosition = rigidb.position;
-            prevRotate = transform.rotation;
-            distance = Vector3.Distance(rigidb.position, Camera.main.transform.position);
+			prevRotate = transform.rotation;
             move = true;
-            
             rigidb.position = new Vector3(rigidb.position.x, moveHeight, rigidb.position.z);
+			updateTouchPoint ();
+			distanceOffset = rayPoint - previousPosition;
         }
 
     }
@@ -40,11 +43,10 @@ public class Movable : MonoBehaviour
     {
         if (move && GameManager.gameMode == GameManager.GameMode.mirrorMode)	//If in move and mirror mode, enable to move object
         {
-            Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Vector3 rayPoint = r.GetPoint(distance);
-            rigidb.position = rayPoint;
-            rigidb.position = new Vector3(rigidb.position.x, moveHeight, rigidb.position.z);
-        }
+			updateTouchPoint ();
+ 			rigidb.position = rayPoint - distanceOffset;
+			rigidb.position = new Vector3(rigidb.position.x, moveHeight, rigidb.position.z);
+			}
     }
 
     private void OnMouseUp()
@@ -55,6 +57,12 @@ public class Movable : MonoBehaviour
             move = false;
         }
     }
+
+	private void updateTouchPoint (){
+		r = Camera.main.ScreenPointToRay(Input.mousePosition);
+		distance = Vector3.Distance(rigidb.position, Camera.main.transform.position);
+		rayPoint = r.GetPoint(distance);
+	}
 
     private void OnCollisionEnter(Collision col)
     {
