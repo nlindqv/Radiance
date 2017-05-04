@@ -1,8 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(Transform))]
+<<<<<<< Updated upstream:Assets/Scripts/SpecificObjects/LightSplitter.cs
 public class LightSplitter :  IInteractables
+=======
+public class LightSplitter : IInteractables
+>>>>>>> Stashed changes:Assets/Scripts/Specific Objects/LightSplitter.cs
 {
     //Color of gate and laserRay-conversion
     public Color One;
@@ -11,7 +16,7 @@ public class LightSplitter :  IInteractables
 
     private Transform laserOne; 
     private Transform laserTwo; 
-    private Transform laserThree; 
+    private Transform laserThree;
 
     void Start()
     {
@@ -20,7 +25,7 @@ public class LightSplitter :  IInteractables
         laserThree = this.transform.Find("Spawn3");
     }
 
-    public void HandleLaserCollision(LaserRay ray)
+    public override void HandleLaserCollision(LaserRay ray)
     {
         Transform parentTransform = ray.transform.parent;        
         LaserRay newRay = Instantiate(ray, laserOne.position, Quaternion.LookRotation(laserOne.up));
@@ -32,5 +37,5 @@ public class LightSplitter :  IInteractables
         LaserRay newRay2 = Instantiate(ray, laserThree.position, Quaternion.LookRotation(laserThree.up));
         newRay2.transform.parent = parentTransform;
         newRay2.SetColor(ray.BounceValue - 1, Three);
-    }
+    }  
 }

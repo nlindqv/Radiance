@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,15 +15,19 @@ public class GameManager : MonoBehaviour
 	public GameObject laserRay;								
 	public ViewController UI;								// UI containing all panels etc.
 	public TargetMaster targetMaster;
+    public LaserMode laserMode;
 
 	public static GameState gameState;
 	private string levelName;
 	private int tutorialIndex = 1;
 
+    private LaserStack laserStack;
+    private int numOfLasers = 20;
+
 	// Use this for initialization
 	void Start ()
 	{
-		/*
+        /*
 			"Prata med minne"
 
 
@@ -31,6 +36,20 @@ public class GameManager : MonoBehaviour
 		loadTutorialIndex();
 
 		*/
+        laserMode = GameObject.Find("LightSource").GetComponent<LaserMode>();
+
+        laserStack = new LaserStack();
+        Debug.Log(GameObject.FindObjectsOfType(typeof(IInteractables)));
+  
+        foreach (IInteractables inter in GameObject.FindObjectsOfType(typeof(IInteractables)))
+        {
+            inter.SetLasers(laserStack);
+        }
+
+        generateLaserStack();
+
+        laserMode.laserStack = laserStack;
+       
 
 		// Start game with tutorial window #1
 		gameState = GameState.tutorial;
@@ -50,8 +69,16 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+    private void generateLaserStack()
+    {
+        for (int i = 0; i < numOfLasers; i++)
+        {
+            LaserRay newLaser = Instantiate(laserRay, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<LaserRay>();
+            laserStack.push(newLaser);
+        }
+    }
 
-	void FixedUpdate ()
+    void FixedUpdate ()
 	{
 		// When entering gameRunning from tutorial, show gameModebutton
         if(prevGameState == GameState.tutorial && gameState == GameState.gameRunning)

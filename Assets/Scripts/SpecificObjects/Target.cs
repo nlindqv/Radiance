@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,13 +41,12 @@ public class Target : IInteractables
 	}
 
 	//Handles Collision with laser
-	public void HandleLaserCollision (LaserRay ray)
+	public override void HandleLaserCollision (LaserRay ray)
 	{
 		//Change material and indicate hit to targetmaster
 		Material mat = rend.material;
 		mat.color = targetHit;
 		hit = true;
 		lastHitRay = ray;
-	}
-
+	}  
 }

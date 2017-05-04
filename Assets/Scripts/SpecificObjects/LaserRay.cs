@@ -17,17 +17,21 @@ public class LaserRay : MonoBehaviour
     public Vector3 HitPoint { get { return hitPoint; } }
     public Vector3 HitNormal { get { return hitNormal; } }
 
+    public int ID;
+
+    public bool onStack;
+
 	// Use this for initialization
     void Start()
     {
-        laserRay = GetComponent<LineRenderer>();
+       /* laserRay = GetComponent<LineRenderer>();
         tf = GetComponent<Transform>();
         renderer = GetComponent<Renderer>();
         renderer.material.SetColor("_MKGlowColor", Color);
         renderer.material.SetColor("_MKGlowTexColor", Color);
         renderer.material.SetColor("_Color", Color);
         renderer.material.SetColor("_TintColor", Color);
-        if (BounceValue > 0) GenerateLaserRay();
+        if (BounceValue > 0) GenerateLaserRay();*/
     }
     public void SetColor(int newBounceValue, Color existingColor)
     {
@@ -35,8 +39,19 @@ public class LaserRay : MonoBehaviour
         Color = new Color(existingColor.r, existingColor.g, existingColor.b, existingColor.a * deacreaseRelativeToValue);
         Color = new Color(existingColor.r, existingColor.g, existingColor.b, existingColor.a * deacreaseRelativeToValue);
     }
+    int count = 0;
+    public void LateUpdate()
+    {
+    }
     public void GenerateLaserRay()
     {
+        laserRay = GetComponent<LineRenderer>();
+        tf = GetComponent<Transform>();
+        renderer = GetComponent<Renderer>();      
+        renderer.material.SetColor("_MKGlowColor", Color);
+        renderer.material.SetColor("_MKGlowTexColor", Color);
+        renderer.material.SetColor("_Color", Color);
+        renderer.material.SetColor("_TintColor", Color);
         Vector3 direction = tf.forward;
         Ray ray = new Ray(tf.position, direction);
         RaycastHit hit;
@@ -59,7 +74,7 @@ public class LaserRay : MonoBehaviour
                 ((IInteractables)interactableObj).HandleLaserCollision(this);
             }
         }else{
-            laserRay.SetPosition(1, ray.GetPoint(100));
+            laserRay.SetPosition(1, ray.GetPoint(100)); 
         }
     }
 }
