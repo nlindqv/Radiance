@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ViewController : MonoBehaviour
 {
+    private GameObject pauseButton;				    // toggle pause
     private GameObject toogleButton;				// toggle gamemode
     public enum Select { menu, replay, next, none };// states that could be entered in endscreen
     public Select select = Select.none;				// set selectstate to none
@@ -18,6 +19,8 @@ public class ViewController : MonoBehaviour
         toogleButton = transform.Find("toggleGameMode").gameObject;
         toogleButton.GetComponentInChildren<Text>().text = "Laser Mode";
 
+        pauseButton = transform.Find(GameManager.PAUSE_BTN_NAME).gameObject;
+        
 		// Access to tutorial-window, endscreen-menu and fade-panel
         tutorial = transform.Find("Tut_UI");
         endScreen = transform.Find("MellanMeny");
@@ -33,9 +36,9 @@ public class ViewController : MonoBehaviour
         HideEndScreen();
         HideFadePanel();
         HideGameModeButton();
+        HidePauseButton();
     }
-
-    public void Click()
+    public void ToggleBtnClick()
     {
 		// If gameMode is none, do nothing
         if (GameManager.gameMode == GameManager.GameMode.none) return;
@@ -63,13 +66,15 @@ public class ViewController : MonoBehaviour
             toogleButton.GetComponentInChildren<Text>().text = "Laser Mode";           
         }
     }
-
+    public void HidePauseButton() {
+        pauseButton.SetActive(false);
+    }
     public void HideGameModeButton()
     {
         toogleButton.SetActive(false);
     }
 
-    public void OkClick()
+    public void TutorialOkClick()
     {
 		// Hide tutorial window and set gamestate to gamerunning
         HideTutorial();
