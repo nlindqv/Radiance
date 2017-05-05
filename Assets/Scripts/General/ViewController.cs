@@ -11,6 +11,7 @@ public class ViewController : MonoBehaviour
     public Select select = Select.none;				// set selectstate to none
     private Transform tutorial;						// tutorial window
     private Transform endScreen;					// endscreen window
+	private Transform pauseScreen;
     private Image fadePanel;						// endscreen fade panel
 
     void Start()
@@ -24,6 +25,7 @@ public class ViewController : MonoBehaviour
 		// Access to tutorial-window, endscreen-menu and fade-panel
         tutorial = transform.Find("Tut_UI");
         endScreen = transform.Find("MellanMeny");
+		pauseScreen = transform.Find ("PauseMenu");
         fadePanel = transform.Find("FadePanel").GetComponent<Image>();
 
         initScene();
@@ -34,6 +36,7 @@ public class ViewController : MonoBehaviour
 		// Hide  Tutorial, EndScreen, Fadepanel and gamemodebutton
         //HideTutorial();
         HideEndScreen();
+		HidePauseScreen ();
         HideFadePanel();
         HideGameModeButton();
         HidePauseButton();
@@ -131,6 +134,7 @@ public class ViewController : MonoBehaviour
         ShowFadePanel();
     }
 
+
     private void HideEndScreen()
     {
 		// Close endscreen and hide fadepanel
@@ -138,10 +142,34 @@ public class ViewController : MonoBehaviour
         HideFadePanel();
     }
 
+	public void ShowPauseScreen(int starCount){
+		pauseScreen = transform.Find ("PauseMenu");
+		pauseScreen.gameObject.SetActive (true);
+		pauseScreen.Find("Level").GetComponent<RectTransform>().GetComponent<Text>().text = "Tjolahopp";
+
+		Debug.Log ("Showing pausescreen w/ " + starCount + " stars");
+		for (int i=1; i <= starCount; i++) {
+			Debug.Log (i);
+			LightStar (i);
+		}
+	}
+
+	//TODO: update pauseScreen to exist in ViewControl
+	public void HidePauseScreen(){
+		pauseScreen = transform.Find ("PauseMenu");
+		//deactivate all stars
+		pauseScreen.Find("Star1").gameObject.SetActive(false);
+		pauseScreen.Find("Star2").gameObject.SetActive(false);
+		pauseScreen.Find("Star3").gameObject.SetActive(false);
+		pauseScreen.gameObject.SetActive (false);
+
+	}
+
     private void LightStar(int i)
     {
 		// Change color on star according to a index i
         endScreen.Find("Star" + i).transform.GetChild(0).gameObject.SetActive(true);
+		pauseScreen.Find("Star" + i).gameObject.SetActive(true);
     }
 
     private void ShowFadePanel()
