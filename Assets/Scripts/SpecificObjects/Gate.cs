@@ -14,13 +14,15 @@ public class Gate : IInteractables {
 	
 	// Update is called once per frame
 	void Update () {
-
+        //hit = false;
 	}
 
     public override void HandleLaserCollision(LaserRay laserHit)
     {
-        if (laserHit.Color.Equals(gateColor))
+        hit = true;
+        if (colorEqual(laserHit.Color, gateColor))
         {
+           
             Vector3 direction = laserHit.transform.forward;
             Vector3 norm = Vector3.Normalize(direction);
             Vector3 margin = Vector3.Scale(norm, new Vector3(0.01f, 0.01f, 0.01f));
@@ -41,6 +43,11 @@ public class Gate : IInteractables {
             newRay.transform.parent = parentTranform;            
             newRay.Color = gateColor;
             newRay.GenerateLaserRay();
-        }
+        }       
+    }
+
+    public bool colorEqual(Color one,  Color two)
+    {
+        return one.r == two.r && one.g == two.g && one.b == two.b;
     }
 }

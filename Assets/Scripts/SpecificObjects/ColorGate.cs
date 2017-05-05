@@ -63,7 +63,7 @@ public class ColorGate : IInteractables {
 	/// Creates a new ray with new color w/ slight offset from original ray.
 	/// </summary>
 	/// <param name="ray">LaserRay sent</param>
-	public void HandleLaserCollision(LaserRay ray){
+	public override void HandleLaserCollision(LaserRay ray){
 		//Get direction of LaserRay
 
 		Vector3 direction = ray.HitPoint - ray.transform.position;
@@ -87,7 +87,7 @@ public class ColorGate : IInteractables {
         }
 
         newRay.transform.parent = parentTransform;
-		newRay.SetColor (ray.BounceValue-1, color);
+		newRay.SetColor (ray.BounceValue, color);
         newRay.GenerateLaserRay();
 	}
 }
