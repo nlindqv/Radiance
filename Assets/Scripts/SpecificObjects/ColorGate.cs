@@ -32,8 +32,8 @@ public class ColorGate : IInteractables {
 		UpdateColor ();
         
 		//set size of collider based on scale of object
-		Vector3 scale = this.transform.Find("GateModel").gameObject.transform.localScale;
-        col.size =  new Vector3(0.0f, scale.y, scale.z);
+		//Vector3 scale = this.transform.Find("GateModel").gameObject.transform.localScale;
+        //col.size =  new Vector3(0.0f, scale.y, scale.z);
 
 	}
 
@@ -74,17 +74,10 @@ public class ColorGate : IInteractables {
 
 		Transform parentTransform = ray.transform.parent;
 
-        LaserRay newRay; // = Instantiate (ray, ray.HitPoint+margin, Quaternion.LookRotation(direction));
-        if (laserStack.size() == 0)
-        {
-            newRay = Instantiate(ray, ray.HitPoint + margin, Quaternion.LookRotation(direction)).GetComponent<LaserRay>();
-        }
-        else
-        {
-            newRay = laserStack.pop();
-            newRay.transform.position = ray.HitPoint + margin;
-            newRay.transform.rotation = Quaternion.LookRotation(ray.transform.forward);
-        }
+        LaserRay newRay = GetLaser(ray.BounceValue); // = Instantiate (ray, ray.HitPoint+margin, Quaternion.LookRotation(direction));
+        if (newRay == null) return; 
+        newRay.transform.position = ray.HitPoint + margin;
+        newRay.transform.rotation = Quaternion.LookRotation(ray.transform.forward);
 
         newRay.transform.parent = parentTransform;
 		newRay.SetColor (ray.BounceValue, color);

@@ -14,9 +14,12 @@ public class GameManager : MonoBehaviour
 
     public static GameMode gameMode = GameMode.none;		// init gameMode to none
     private static GameState prevGameState;					// save prev gameState
-	public GameObject laserRay;								
-	public ViewController UI;								// UI containing all panels etc.
-	public TargetMaster targetMaster;
+	public GameObject laserRay;
+    [HideInInspector]
+    public ViewController UI;                               // UI containing all panels etc.
+    [HideInInspector]
+    public TargetMaster targetMaster;
+    [HideInInspector]
     public LaserMode laserMode;
 
 	public static GameState gameState;
@@ -47,6 +50,7 @@ public class GameManager : MonoBehaviour
         foreach (IInteractables inter in GameObject.FindObjectsOfType(typeof(IInteractables)))
         {
             inter.SetLasers(laserStack);
+            inter.SetLaser(laserRay.GetComponent<LaserRay>());
         }
 
         generateLaserStack();
@@ -63,9 +67,8 @@ public class GameManager : MonoBehaviour
 		UI = GameObject.Find ("UI").GetComponent<ViewController> ();
 		// Access targetMaster
 		targetMaster = GameObject.Find ("TargetMaster").GetComponent<TargetMaster> ();
-		// Hide mellanmeny
-		UI.transform.Find ("MellanMeny").gameObject.SetActive (false);
-
+        // Hide mellanmeny
+        UI.transform.Find("Canvas").transform.Find("MellanMeny").gameObject.SetActive(false);
 		// If totrial index = -1 dont show anything, otherwise load tutorial with index tutorialIndex
 		if (tutorialIndex >= 0) {
 			LoadTutorial (tutorialIndex);
