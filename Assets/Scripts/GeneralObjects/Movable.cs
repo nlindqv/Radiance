@@ -10,8 +10,13 @@ public class Movable : MonoBehaviour
     private float distance; //Distance moved in display coordinates
     private float startHeight;
     private Rigidbody rigidb;
+	private Vector3 distanceOffset;
+	private Vector3 rayPoint;
+	private Ray r;
+    private Vector3 firstTouchPos;
 
     public float moveHeight;
+    public float offsetTouch;
 
 	// Can be applied to any object with a rigidbody
     private void Start()
@@ -21,30 +26,31 @@ public class Movable : MonoBehaviour
         move = false;
         previousPosition = rigidb.position;
         startHeight = rigidb.position.y;
+        offsetTouch = 1.2f;
     }
     
     private void OnMouseDown()
     {
         if (GameManager.gameMode == GameManager.GameMode.mirrorMode) { // If in mirror mode, pick up mirror
+            firstTouchPos = Input.mousePosition;
             previousPosition = rigidb.position;
-            prevRotate = transform.rotation;
-            distance = Vector3.Distance(rigidb.position, Camera.main.transform.position);
+			prevRotate = transform.rotation;
             move = true;
-            
-            rigidb.position = new Vector3(rigidb.position.x, moveHeight, rigidb.position.z);
+         	updateTouchPoint ();
+			distanceOffset = rayPoint - previousPosition;
         }
 
     }
 
     private void OnMouseDrag()
     {
-        if (move && GameManager.gameMode == GameManager.GameMode.mirrorMode)	//If in move and mirror mode, enable to move object
-        {
-            Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Vector3 rayPoint = r.GetPoint(distance);
-            rigidb.position = rayPoint;
-            rigidb.position = new Vector3(rigidb.position.x, moveHeight, rigidb.position.z);
-        }
+        // calc difference between first touch and the next touch
+        float diff = Vector3.Distance(firstTouchPos, Input.mousePosition);
+		if (move && GameManager.gameMode == GameManager.GameMode.mirrorMode && diff > offsetTouch) {	//If in move,mirror mode and greater than offset, enable to move object
+			updateTouchPoint ();
+			rigidb.position = rayPoint - distanceOffset;
+			rigidb.position = new Vector3 (rigidb.position.x, moveHeight, rigidb.position.z);
+		}
     }
 
     private void OnMouseUp()
@@ -55,6 +61,12 @@ public class Movable : MonoBehaviour
             move = false;
         }
     }
+
+	private void updateTouchPoint (){
+		r = Camera.main.ScreenPointToRay(Input.mousePosition);
+		distance = Vector3.Distance(rigidb.position, Camera.main.transform.position);
+		rayPoint = r.GetPoint(distance);
+	}
 
     private void OnCollisionEnter(Collision col)
     {

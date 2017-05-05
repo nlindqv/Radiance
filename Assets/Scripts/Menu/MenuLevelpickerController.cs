@@ -21,7 +21,7 @@ public class MenuLevelpickerController : MonoBehaviour
     {
         AddSwipeEventListeners();
 
-        Button[] buttons = GetComponentsInChildren<Button>();
+		Button[] buttons = transform.Find("menu").GetComponentsInChildren<Button>();
         // stäng ned vänster swipe
         CheckToDisableOrEnableLeftSwipe();
         //hämta standard knapp för levels
@@ -43,7 +43,7 @@ public class MenuLevelpickerController : MonoBehaviour
     /// </summary>
     private void AddSwipeEventListeners()
     {
-        Button[] buttons = GetComponentsInChildren<Button>();
+		Button[] buttons = transform.Find("menu").GetComponentsInChildren<Button>();
         Button rightSwipe = buttons.Single(x => x.name == RIGHT_SWIPE_BTN_NAME);
         rightSwipe.onClick.AddListener(delegate { this.NextPage(); });
         Button leftSwipe = buttons.Single(x => x.name == LEFT_SWIPE_BTN_NAME);
@@ -57,12 +57,28 @@ public class MenuLevelpickerController : MonoBehaviour
     private void GenerateButtons(Button standardLevelBtn, List<SceneInfo> sceneList)
     {
         Text buttonText;
-        float lastHeight = standardLevelBtn.transform.position.y;
+        
+		RectTransform standardButton = standardLevelBtn.GetComponent<RectTransform>();
+		// get current anchors
+		Vector2 minAnchor = standardButton.anchorMin;
+		Vector2 maxAnchor = standardButton.anchorMax;
+		float height = maxAnchor.y;
 	//	float lastStarHeight = 
         //skapa nya knappar för övriga nivåer, hoppa över första knappen som alltid skall finnas på menyn
         for (int i = ((currentPage) * 3 + 1); i < Mathf.Min(new int[] { (currentPage + 1) * 3, sceneList.Count }); i++){
-            lastHeight = lastHeight - 40;
-            GameObject newButton = Instantiate(standardLevelBtn.gameObject, new Vector3(standardLevelBtn.transform.position.x, lastHeight, standardLevelBtn.transform.position.z), Quaternion.LookRotation(standardLevelBtn.transform.forward));
+			height = height - 0.12f;
+
+			GameObject newButton = Instantiate(standardLevelBtn.gameObject, new Vector3(0, 0, 0), Quaternion.LookRotation(standardLevelBtn.transform.forward));
+			// Set anchors of level-button
+			newButton.GetComponent<RectTransform> ().anchorMax = new Vector2 (maxAnchor.x, height);
+			newButton.GetComponent<RectTransform> ().anchorMin = new Vector2 (minAnchor.x, height - 0.08f);
+
+			// Set position and scale of level-buttons
+			newButton.GetComponent<RectTransform> ().localScale = new Vector3 (1.1075f, 1.1075f, 1.1075f);
+			newButton.GetComponent<RectTransform> ().offsetMin = new Vector2 (303.0f, (float)(255.40018005 - 47.231940125 * (i-1)));
+			newButton.GetComponent<RectTransform> ().offsetMax = new Vector2 (583.0f, (float)(283.83178005f - 47.231940125 * (i-1)));				
+
+            
             newButton.transform.parent = standardLevelBtn.transform.parent;
             standardLevelBtn = newButton.GetComponent<Button>();
             string scenePath = sceneList[i].Path;
@@ -75,6 +91,8 @@ public class MenuLevelpickerController : MonoBehaviour
 			GenerateStars(standardLevelBtn, starCount);
         }
     }
+
+
 
 	private void GenerateStars (Button levelButton, int starCount){
 		switch(starCount){
