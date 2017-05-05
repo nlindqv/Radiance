@@ -36,7 +36,10 @@ public class ViewController : MonoBehaviour
 		// Hide  Tutorial, EndScreen, Fadepanel and gamemodebutton
         //HideTutorial();
         HideEndScreen();
+
 		HidePauseScreen ();
+		SetupStars ();
+
         HideFadePanel();
         HideGameModeButton();
         HidePauseButton();
@@ -146,21 +149,15 @@ public class ViewController : MonoBehaviour
 		pauseScreen = transform.Find ("PauseMenu");
 		pauseScreen.gameObject.SetActive (true);
 		pauseScreen.Find("Level").GetComponent<RectTransform>().GetComponent<Text>().text = "Tjolahopp";
-
-		Debug.Log ("Showing pausescreen w/ " + starCount + " stars");
+		ShowFadePanel ();
 		for (int i=1; i <= starCount; i++) {
-			Debug.Log (i);
 			LightStar (i);
 		}
 	}
 
-	//TODO: update pauseScreen to exist in ViewControl
 	public void HidePauseScreen(){
-		pauseScreen = transform.Find ("PauseMenu");
+		HideFadePanel ();
 		//deactivate all stars
-		pauseScreen.Find("Star1").gameObject.SetActive(false);
-		pauseScreen.Find("Star2").gameObject.SetActive(false);
-		pauseScreen.Find("Star3").gameObject.SetActive(false);
 		pauseScreen.gameObject.SetActive (false);
 
 	}
@@ -169,7 +166,7 @@ public class ViewController : MonoBehaviour
     {
 		// Change color on star according to a index i
         endScreen.Find("Star" + i).transform.GetChild(0).gameObject.SetActive(true);
-		pauseScreen.Find("Star" + i).gameObject.SetActive(true);
+		pauseScreen.Find("Star" + i).transform.GetChild(0).gameObject.SetActive(true);
     }
 
     private void ShowFadePanel()
@@ -181,4 +178,20 @@ public class ViewController : MonoBehaviour
     {
         fadePanel.gameObject.SetActive(false);
     }
+
+	private void SetupStars(){
+		pauseScreen.Find("Star1").gameObject.SetActive(true);
+		pauseScreen.Find ("Star1").GetChild(0).gameObject.SetActive (false);
+		pauseScreen.Find("Star2").gameObject.SetActive(true);
+		pauseScreen.Find ("Star2").GetChild(0).gameObject.SetActive (false);
+		pauseScreen.Find("Star3").gameObject.SetActive(true);
+		pauseScreen.Find ("Star3").GetChild(0).gameObject.SetActive (false);
+
+		endScreen.Find("Star1").gameObject.SetActive(true);
+		endScreen.Find ("Star1").GetChild(0).gameObject.SetActive (true);
+		endScreen.Find("Star2").gameObject.SetActive(true);
+		endScreen.Find ("Star2").GetChild(0).gameObject.SetActive (false);
+		endScreen.Find("Star3").gameObject.SetActive(true);
+		endScreen.Find ("Star3").GetChild(0).gameObject.SetActive (false);
+	}
 }

@@ -9,26 +9,47 @@ public class PauseButton : MonoBehaviour {
 
     public void PauseGame() {
         GameManager.gameState = GameManager.GameState.gamePaused;
-        Time.timeScale = 0.0F;
+		PauseTime ();
         Button pauseButton = GetComponentInChildren<Button>();
         pauseButton.gameObject.SetActive(false);
         //här skall kod köras för att visa pause-menyn
 		//GetComponentInParent<.showPauseMenu();
 
+
 		UI = GetComponentInParent<ViewController> ();
-		UI.ShowPauseScreen (2);
+		UI.ShowPauseScreen (0);
 
 		//showPauseMenu();
 
 
     }
 
-	private void showPauseMenu (int starCount){
-		Transform pausemenu = transform.parent.Find ("PauseMenu");
-		pausemenu.gameObject.SetActive (true);
-		pausemenu.Find("Level").GetComponent<RectTransform>().GetComponent<Text>().text = "Tjolahopp";
-		for (int i=0; i <= starCount; i++) {
-		}
+	private void PauseTime(){
+		Time.timeScale = 0.0F;
+	}
+	private void ResumeTime(){
+		Time.timeScale = 1.0F;
+	}
+
+	public void resume(){
+		UI.HidePauseScreen ();
+		GameManager.gameState = GameManager.GameState.gameRunning;
+		ResumeTime ();
+		//Button pauseButton = GetComponentInChildren<Button>();
+		//pauseButton.gameObject.SetActive(true);
+	}
+
+	public void restart(){
+		UI.HidePauseScreen ();
+		ResumeTime ();
+		UI.Replay ();
+
+	}
+
+	public void menu(){
+		UI.HidePauseScreen ();
+		ResumeTime ();
+		UI.Menu ();
 	}
 
 }
