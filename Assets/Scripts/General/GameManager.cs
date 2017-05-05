@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		LoadLevelName ();
         /*
 			"Prata med minne"
 
@@ -181,6 +183,11 @@ public class GameManager : MonoBehaviour
 	private void MainMenu ()
 	{
         SceneManager.LoadScene("StartScene");
+	}
+		
+	private void LoadLevelName(){
+		string jsonString = File.ReadAllText (Application.dataPath + "/Resources/Levels.json");
+		Debug.Log (jsonString);
 	}
 
 }
