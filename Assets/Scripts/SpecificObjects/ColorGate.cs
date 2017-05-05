@@ -32,8 +32,8 @@ public class ColorGate : IInteractables {
 		UpdateColor ();
         
 		//set size of collider based on scale of object
-		Vector3 scale = this.transform.Find("GateModel").gameObject.transform.localScale;
-        col.size =  new Vector3(0.0f, scale.y, scale.z);
+		//Vector3 scale = this.transform.Find("GateModel").gameObject.transform.localScale;
+        //col.size =  new Vector3(0.0f, scale.y, scale.z);
 
 	}
 
@@ -63,7 +63,7 @@ public class ColorGate : IInteractables {
 	/// Creates a new ray with new color w/ slight offset from original ray.
 	/// </summary>
 	/// <param name="ray">LaserRay sent</param>
-	public void HandleLaserCollision(LaserRay ray){
+	public override void HandleLaserCollision(LaserRay ray){
 		//Get direction of LaserRay
 
 		Vector3 direction = ray.HitPoint - ray.transform.position;
@@ -87,7 +87,7 @@ public class ColorGate : IInteractables {
         }
 
         newRay.transform.parent = parentTransform;
-		newRay.SetColor (ray.BounceValue-1, color);
+		newRay.SetColor (ray.BounceValue, color);
         newRay.GenerateLaserRay();
 	}
 }
