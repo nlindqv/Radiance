@@ -7,8 +7,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public const string PAUSE_BTN_NAME = "PauseButton";
     public enum GameMode { laserMode, mirrorMode, none };	// gameModes
-	public enum GameState {tutorial,gameRunning,endScreen};	// gameStates available
+	public enum GameState {tutorial,gameRunning,endScreen, gamePaused};	// gameStates available
 
     public static GameMode gameMode = GameMode.none;		// init gameMode to none
     private static GameState prevGameState;					// save prev gameState
@@ -93,6 +94,8 @@ public class GameManager : MonoBehaviour
             break;
 			// Case gameRunning, show gamemode-button and check if level is completed
             case GameState.gameRunning:
+            //visa pause-knappen
+            UI.transform.Find(PAUSE_BTN_NAME).gameObject.SetActive(true);
             UI.ShowGameModeButton();
 			CheckLevelCompleted ();
 			break;
