@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
         foreach (IInteractables inter in GameObject.FindObjectsOfType(typeof(IInteractables)))
         {
             inter.SetLasers(laserStack);
+            inter.SetLaser(laserRay.GetComponent<LaserRay>());
         }
 
         generateLaserStack();

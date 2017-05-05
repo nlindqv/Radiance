@@ -15,6 +15,8 @@ public class LightSplitter : IInteractables
     private Transform laserTwo; 
     private Transform laserThree;
 
+
+
     void Start()
     {
         laserOne = this.transform.Find("Spawn1");
@@ -24,15 +26,17 @@ public class LightSplitter : IInteractables
 
     public override void HandleLaserCollision(LaserRay ray)
     {
-        Transform parentTransform = ray.transform.parent;        
-        LaserRay newRay = Instantiate(ray, laserOne.position, Quaternion.LookRotation(laserOne.up));
-        newRay.transform.parent = parentTransform;
-        newRay.SetColor(ray.BounceValue - 1, One);
-        LaserRay newRay1 = Instantiate(ray, laserTwo.position, Quaternion.LookRotation(laserTwo.up));
-        newRay1.transform.parent = parentTransform;
-        newRay1.SetColor(ray.BounceValue - 1, Two);
-        LaserRay newRay2 = Instantiate(ray, laserThree.position, Quaternion.LookRotation(laserThree.up));
-        newRay2.transform.parent = parentTransform;
-        newRay2.SetColor(ray.BounceValue - 1, Three);
+        Color[] colorArray = { One, Two, Three };
+        Transform[] positionArray = { laserOne, laserTwo, laserThree };
+        for (int i = 0; i < positionArray.Length; i++)
+        {
+            Transform parentTransform = ray.transform.parent;
+            LaserRay newRay = GetLaser(ray.BounceValue);
+            newRay.transform.position = positionArray[i].position;
+            newRay.transform.rotation = Quaternion.LookRotation(positionArray[i].up);
+            newRay.transform.parent = parentTransform;
+            newRay.SetColor(ray.BounceValue, colorArray[i]);
+            newRay.GenerateLaserRay();
+        }
     }  
 }

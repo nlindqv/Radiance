@@ -7,30 +7,27 @@ using UnityEngine;
 /// </summary>
 public abstract class IInteractables : MonoBehaviour
 {
-    public   LaserStack laserStack;
-    //public LaserRay ray;
-
-    public virtual void HandleLaserCollision(LaserRay laserHit) {
-        Debug.Log("Hit");
-            }      
+    public LaserStack laserStack;
+    public LaserRay ray;
     
-
-    public void SetLasers(LaserStack laserStack) {
-        this.laserStack = laserStack;
-    }  
-
-    /*public LaserRay GetLaser()
+    public virtual void HandleLaserCollision(LaserRay laserHit)
     {
-        LaserRay newRayGameObj;
-        if (laserStack.size() == 0)
-        {
-            newRayGameObj = Instantiate(ray, Vector3., Quaternion.LookRotation(direction)).GetComponent<LaserRay>();
-        }
-        else
-        {
-            newRayGameObj = laserStack.pop();
-            newRayGameObj.transform.position = laserHit.HitPoint;
-            newRayGameObj.transform.rotation = Quaternion.LookRotation(direction);
-        }
-    } */
+        Debug.Log("Hit");
+    }
+
+    public void SetLasers(LaserStack laserStack)
+    {
+        this.laserStack = laserStack;
+    }
+
+    public void SetLaser(LaserRay laser)
+    {
+        this.ray = laser;
+    }
+
+    public LaserRay GetLaser(int value)
+    {
+        LaserRay newRayGameObj = (laserStack.size() <= 0) ? Instantiate(ray, Vector3.zero, Quaternion.identity).GetComponent<LaserRay>() : laserStack.pop();
+        return newRayGameObj;
+    } 
 }
