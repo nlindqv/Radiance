@@ -21,11 +21,13 @@ public class MenuLevelpickerController : MonoBehaviour
     {
         AddSwipeEventListeners();
 
-		Button[] buttons = transform.Find("menu").GetComponentsInChildren<Button>();
+		Button[] buttons = transform.Find("menu").transform.Find("LevelButtons").GetComponentsInChildren<Button>();
         // stäng ned vänster swipe
         CheckToDisableOrEnableLeftSwipe();
         //hämta standard knapp för levels
         Button levelBtn = GetStandardLevelButton();
+
+
 
         //hämta en lista med levels scener som finns i buildsettings
         List<SceneInfo> sceneList = SceneInfoLoader.GetSceneInfo();
@@ -57,28 +59,32 @@ public class MenuLevelpickerController : MonoBehaviour
     private void GenerateButtons(Button standardLevelBtn, List<SceneInfo> sceneList)
     {
         Text buttonText;
-        
+		RectTransform rectParent = GetComponentInParent<RectTransform> ();
 		RectTransform standardButton = standardLevelBtn.GetComponent<RectTransform>();
 		// get current anchors
 		Vector2 minAnchor = standardButton.anchorMin;
 		Vector2 maxAnchor = standardButton.anchorMax;
 		float height = maxAnchor.y;
+
+		float scale = GetComponentInParent<RectTransform> ().lossyScale.x;
+
 	//	float lastStarHeight = 
         //skapa nya knappar för övriga nivåer, hoppa över första knappen som alltid skall finnas på menyn
         for (int i = ((currentPage) * 3 + 1); i < Mathf.Min(new int[] { (currentPage + 1) * 3, sceneList.Count }); i++){
-			height = height - 0.12f;
+			height = height - 0.375f;
 
-			GameObject newButton = Instantiate(standardLevelBtn.gameObject, new Vector3(0, 0, 0), Quaternion.LookRotation(standardLevelBtn.transform.forward));
+			GameObject newButton = Instantiate(standardLevelBtn.gameObject, new Vector3((float)(rectParent.position.x), (float)(rectParent.position.y), 0.0f), Quaternion.LookRotation(standardLevelBtn.transform.forward));
 			// Set anchors of level-button
 			newButton.GetComponent<RectTransform> ().anchorMax = new Vector2 (maxAnchor.x, height);
-			newButton.GetComponent<RectTransform> ().anchorMin = new Vector2 (minAnchor.x, height - 0.08f);
+			newButton.GetComponent<RectTransform> ().anchorMin = new Vector2 (minAnchor.x, height - 0.25f);
 
 			// Set position and scale of level-buttons
-			newButton.GetComponent<RectTransform> ().localScale = new Vector3 (1.1075f, 1.1075f, 1.1075f);
-			newButton.GetComponent<RectTransform> ().offsetMin = new Vector2 (303.0f, (float)(255.40018005 - 47.231940125 * (i-1)));
-			newButton.GetComponent<RectTransform> ().offsetMax = new Vector2 (583.0f, (float)(283.83178005f - 47.231940125 * (i-1)));				
+			newButton.GetComponent<RectTransform> ().localScale = new Vector3 ((float)rectParent.lossyScale.x, (float)rectParent.lossyScale.y, (float)rectParent.lossyScale.z);
+			//newButton.GetComponent<RectTransform> ().offsetMin = new Vector2 (303.0f, (float)(255.40018005 - 47.231940125 * (i-1)));
+			//newButton.GetComponent<RectTransform> ().offsetMax = new Vector2 (583.0f, (float)(283.83178005f - 47.231940125 * (i-1)));				
+			//newButton.GetComponent<RectTransform> ()
 
-            
+
             newButton.transform.parent = standardLevelBtn.transform.parent;
             standardLevelBtn = newButton.GetComponent<Button>();
             string scenePath = sceneList[i].Path;
