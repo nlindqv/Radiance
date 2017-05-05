@@ -10,12 +10,11 @@ public class Gate : IInteractables {
 
 	// Use this for initialization
 	void Start () {
+        //sätt färg vid skapande av gaten
+        Renderer renderer = GetComponent<Renderer>();
+        renderer.material.SetColor("_TintColor", new Color(gateColor.r, gateColor.g, gateColor.b,128));
 	}
 	
-	// Update is called once per frame
-	void Update () {
-        //hit = false;
-	}
 
     public override void HandleLaserCollision(LaserRay laserHit)
     {
