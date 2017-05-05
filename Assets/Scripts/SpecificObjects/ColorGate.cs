@@ -32,8 +32,8 @@ public class ColorGate : IInteractables {
 		UpdateColor ();
         
 		//set size of collider based on scale of object
-		Vector3 scale = this.transform.Find("GateModel").gameObject.transform.localScale;
-        col.size =  new Vector3(0.0f, scale.y, scale.z);
+		//Vector3 scale = this.transform.Find("GateModel").gameObject.transform.localScale;
+        //col.size =  new Vector3(0.0f, scale.y, scale.z);
 
 	}
 
