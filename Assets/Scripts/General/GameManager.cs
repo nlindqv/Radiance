@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
 		case GameState.tutorial:
             break;
 			// Case gameRunning, show gamemode-button and check if level is completed
-            case GameState.gameRunning:
+        case GameState.gameRunning:
             //visa pause-knappen
             UI.transform.Find(PAUSE_BTN_NAME).gameObject.SetActive(true);
             UI.ShowGameModeButton();
@@ -101,6 +101,9 @@ public class GameManager : MonoBehaviour
 			break;
 			// Case endScreen, check what next state is
 		case GameState.endScreen:
+			CheckNextState ();
+			break;
+		case GameState.gamePaused:
 			CheckNextState ();
 			break;
 
