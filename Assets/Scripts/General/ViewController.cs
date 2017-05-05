@@ -11,6 +11,7 @@ public class ViewController : MonoBehaviour
     public Select select = Select.none;				// set selectstate to none
     private Transform tutorial;						// tutorial window
     private Transform endScreen;					// endscreen window
+	private Transform pauseScreen;
     private Image fadePanel;						// endscreen fade panel
 
     void Start()
@@ -24,6 +25,7 @@ public class ViewController : MonoBehaviour
 		// Access to tutorial-window, endscreen-menu and fade-panel
         tutorial = transform.Find("Tut_UI");
         endScreen = transform.Find("MellanMeny");
+		pauseScreen = transform.Find ("PauseMenu");
         fadePanel = transform.Find("FadePanel").GetComponent<Image>();
 
         initScene();
@@ -34,6 +36,10 @@ public class ViewController : MonoBehaviour
 		// Hide  Tutorial, EndScreen, Fadepanel and gamemodebutton
         //HideTutorial();
         HideEndScreen();
+
+		HidePauseScreen ();
+		SetupStars ();
+
         HideFadePanel();
         HideGameModeButton();
         HidePauseButton();
@@ -131,6 +137,7 @@ public class ViewController : MonoBehaviour
         ShowFadePanel();
     }
 
+
     private void HideEndScreen()
     {
 		// Close endscreen and hide fadepanel
@@ -138,10 +145,28 @@ public class ViewController : MonoBehaviour
         HideFadePanel();
     }
 
+	public void ShowPauseScreen(int starCount){
+		pauseScreen = transform.Find ("PauseMenu");
+		pauseScreen.gameObject.SetActive (true);
+		pauseScreen.Find("Level").GetComponent<RectTransform>().GetComponent<Text>().text = "Tjolahopp";
+		ShowFadePanel ();
+		for (int i=1; i <= starCount; i++) {
+			LightStar (i);
+		}
+	}
+
+	public void HidePauseScreen(){
+		HideFadePanel ();
+		//deactivate all stars
+		pauseScreen.gameObject.SetActive (false);
+
+	}
+
     private void LightStar(int i)
     {
 		// Change color on star according to a index i
         endScreen.Find("Star" + i).transform.GetChild(0).gameObject.SetActive(true);
+		pauseScreen.Find("Star" + i).transform.GetChild(0).gameObject.SetActive(true);
     }
 
     private void ShowFadePanel()
@@ -153,4 +178,20 @@ public class ViewController : MonoBehaviour
     {
         fadePanel.gameObject.SetActive(false);
     }
+
+	private void SetupStars(){
+		pauseScreen.Find("Star1").gameObject.SetActive(true);
+		pauseScreen.Find ("Star1").GetChild(0).gameObject.SetActive (false);
+		pauseScreen.Find("Star2").gameObject.SetActive(true);
+		pauseScreen.Find ("Star2").GetChild(0).gameObject.SetActive (false);
+		pauseScreen.Find("Star3").gameObject.SetActive(true);
+		pauseScreen.Find ("Star3").GetChild(0).gameObject.SetActive (false);
+
+		endScreen.Find("Star1").gameObject.SetActive(true);
+		endScreen.Find ("Star1").GetChild(0).gameObject.SetActive (true);
+		endScreen.Find("Star2").gameObject.SetActive(true);
+		endScreen.Find ("Star2").GetChild(0).gameObject.SetActive (false);
+		endScreen.Find("Star3").gameObject.SetActive(true);
+		endScreen.Find ("Star3").GetChild(0).gameObject.SetActive (false);
+	}
 }
