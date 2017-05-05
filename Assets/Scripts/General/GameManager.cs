@@ -61,9 +61,8 @@ public class GameManager : MonoBehaviour
 		UI = GameObject.Find ("UI").GetComponent<ViewController> ();
 		// Access targetMaster
 		targetMaster = GameObject.Find ("TargetMaster").GetComponent<TargetMaster> ();
-		// Hide mellanmeny
-		UI.transform.Find ("MellanMeny").gameObject.SetActive (false);
-
+        // Hide mellanmeny
+        UI.transform.Find("Canvas").transform.Find("MellanMeny").gameObject.SetActive(false);
 		// If totrial index = -1 dont show anything, otherwise load tutorial with index tutorialIndex
 		if (tutorialIndex >= 0) {
 			LoadTutorial (tutorialIndex);

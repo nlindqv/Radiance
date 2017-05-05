@@ -14,6 +14,8 @@ public class ViewController : MonoBehaviour
 	private Transform pauseScreen;
     private Image fadePanel;						// endscreen fade panel
 
+    private CanvasGroup canvasGroup;
+
     void Start()
     {
         // Access button label and set default mode to lasermode
@@ -21,10 +23,15 @@ public class ViewController : MonoBehaviour
         toogleButton.GetComponentInChildren<Text>().text = "Laser Mode";
 
         pauseButton = transform.Find(GameManager.PAUSE_BTN_NAME).gameObject;
+
+        // Get Canvas object and set its alpha to 0
+        canvasGroup = transform.Find("Canvas").GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0.0f;
         
 		// Access to tutorial-window, endscreen-menu and fade-panel
         tutorial = transform.Find("Tut_UI");
-        endScreen = transform.Find("MellanMeny");
+
+        endScreen = canvasGroup.transform.Find("MellanMeny");
 		pauseScreen = transform.Find ("PauseMenu");
         fadePanel = transform.Find("FadePanel").GetComponent<Image>();
 
@@ -125,9 +132,19 @@ public class ViewController : MonoBehaviour
     }
 
     public void ShowEndScreen(string levelName, int starCount)
-    {
-		// Show endscreen, set level text, and fill right amount of stars
+    {   // Show endscreen, set level text, and fill right amount of stars
+
+        // activate the endscreen
         endScreen.gameObject.SetActive(true);
+        
+        // for the delay of the MellanMeny
+        float time = 20f;
+        while (canvasGroup.alpha < 1)
+        {
+            canvasGroup.alpha += Time.deltaTime / time;
+            Debug.Log(canvasGroup.alpha);
+        }
+
         endScreen.Find("Level").GetComponent<RectTransform>().GetComponent<Text>().text = levelName;
         endScreen.Find("Star1").transform.GetChild(0).gameObject.SetActive(true);
         if (starCount > 1)
