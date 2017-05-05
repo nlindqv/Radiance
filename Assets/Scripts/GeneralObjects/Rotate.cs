@@ -9,11 +9,12 @@ public class Rotate : MonoBehaviour
     private GameObject activeTool;
     private bool drag;
 
-    public float MoveHeight;
+    private float MoveHeight;
 
     // Use this for initialization
     void Start()
     {
+		MoveHeight = 1.5f;
         move = gameObject.GetComponent<Movable>().getMove();
     }
 
@@ -48,7 +49,8 @@ public class Rotate : MonoBehaviour
 
     private void OnMouseUp()
     {
-        activeTool = Instantiate(tool, new Vector3(transform.position.x, MoveHeight, transform.position.z), Quaternion.Euler(90.0f, 0.0f, 0.0f));
+		activeTool = Instantiate(tool, new Vector3(transform.position.x, MoveHeight, transform.position.z), Quaternion.Euler(90.0f, 0.0f, 0.0f));
+		//activeTool 
         activeTool.GetComponent<RotateTool>().setObject(gameObject.transform);
     }
 
