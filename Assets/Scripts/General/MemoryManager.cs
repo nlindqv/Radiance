@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class MemoryManager : MonoBehaviour {
 
-	private static string PATH = Application.dataPath + "/Resources/Levels.json";
-	TextAsset file = Resources.Load("Levels.json") as TextAsset;
-	private static LevelList LEVELS = JsonUtility.FromJson<LevelList> (File.ReadAllText (PATH));
+	private static string PATH = Application.persistentDataPath + "/Levels.json";
+
+//	static TextAsset file = (TextAsset)System.IO.File.ReadAllText(Application.persistentDataPath + "/Levels.json");
+	private static LevelList LEVELS = JsonUtility.FromJson<LevelList> (System.IO.File.ReadAllText(PATH));
 
 
 	//TODO implement function that gets indexoffset?

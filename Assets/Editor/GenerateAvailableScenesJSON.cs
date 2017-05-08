@@ -33,7 +33,7 @@ public static class GenerateAvailableScenesJSON
 		string jsonObj = UnityEngine.JsonUtility.ToJson(ls);
 		Debug.Log("scenes retrieved");
 
-		using (StreamWriter writer = new StreamWriter("Assets/Resources/Levels.json", false))
+		using (StreamWriter writer = new StreamWriter(Application.persistentDataPath + "/Levels.json", false))
 		{
 			writer.Write(jsonObj);
 		}
