@@ -8,33 +8,23 @@ using UnityEngine;
 [RequireComponent(typeof(Transform))]
 public class Reflective : IInteractables
 {
-    public GameObject ray;
     public int bounceValue;
 
     public override void HandleLaserCollision(LaserRay laserHit)
     {
+        int newBounceValue = laserHit.BounceValue - bounceValue;  
+
         //reflektera map. laserns riktningsvektor samt ytans normal
         Vector3 direction = Vector3.Reflect(laserHit.transform.forward, laserHit.HitNormal);
-        Transform parentTransform = laserHit.transform.parent;
-        LaserRay newRayGameObj;
-        if (laserStack.size() == 0)
-        {
-           newRayGameObj = Instantiate(ray, laserHit.HitPoint, Quaternion.LookRotation(direction)).GetComponent<LaserRay>();
-        }
-        else
-        {
-            newRayGameObj = laserStack.pop();
-            newRayGameObj.transform.position = laserHit.HitPoint;
-            newRayGameObj.transform.rotation = Quaternion.LookRotation(direction);           
-        }
-
-        newRayGameObj.transform.parent = parentTransform;
-        LaserRay newLaserRay = newRayGameObj;
-        int newBounceValue = laserHit.BounceValue - bounceValue;
+        Transform parentTransform = laserHit.transform.parent;        
+        LaserRay newLaserRay = GetLaser(newBounceValue);                    // Get laser 
+        if (newLaserRay == null) return;
+        newLaserRay.transform.parent = parentTransform;        
         newLaserRay.SetColor(newBounceValue, laserHit.Color); //, laserHit.BounceValue
                                                               //sätt färg och minska bouncevalue
+        newLaserRay.transform.position = laserHit.HitPoint;
+        newLaserRay.transform.rotation = (Quaternion.LookRotation(direction));
         newLaserRay.BounceValue = newBounceValue;
-        newLaserRay.GenerateLaserRay();
-        
+        newLaserRay.GenerateLaserRay();        
     }
 }
