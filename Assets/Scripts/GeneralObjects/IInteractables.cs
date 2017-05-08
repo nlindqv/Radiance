@@ -17,7 +17,7 @@ public abstract class IInteractables : MonoBehaviour
         Debug.Log("Hit");
     }
 
-    public virtual void HandleUpdate()
+	public virtual void HandleUpdate()
     {
         Debug.Log("Reversed hit");
     }

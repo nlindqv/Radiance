@@ -42,7 +42,7 @@ public class Target : IInteractables
 	}
     */
 
-    public override void HandleUpdate()
+	public override void HandleUpdate()
     {
         Material mat = rend.material;
         mat.color = defaultCol;
