@@ -14,6 +14,9 @@ public class LevelData{
 	//name for level
 	public string levelName;
 
+	//path to current scene
+	public string path;
+
 	//current score for level
 	public int starCount;
 
@@ -49,6 +52,14 @@ public class LevelData{
 	}
 
 	public LevelData(int levelIndex, string levelName, int starCount){
+		this.levelIndex = levelIndex;
+		this.levelName = levelName;
+		this.starCount = starCount;
+		tutorialIndex = -1;
+	}
+
+	public LevelData(string path, int levelIndex, string levelName, int starCount){
+		this.path = path;
 		this.levelIndex = levelIndex;
 		this.levelName = levelName;
 		this.starCount = starCount;

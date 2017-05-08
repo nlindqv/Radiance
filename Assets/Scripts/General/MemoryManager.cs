@@ -4,6 +4,13 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
 
+
+
+
+using UnityEditor;
+using System.Linq;
+using UnityEditor.Callbacks;
+
 public class MemoryManager : MonoBehaviour {
 
 
@@ -37,6 +44,17 @@ public class MemoryManager : MonoBehaviour {
 		return getLevel ().starCount;
 	}
 
+	/// <summary>
+	/// Loads paths for all levels.
+	/// </summary>
+	/// <returns>The paths.</returns>
+	public static List<string> LoadPaths(){
+		List<string> paths = new List<string>();
+		foreach (LevelData level in LEVELS.list) {
+			paths.Add (level.path);
+		}
+		return paths;
+	}
 
 
 
@@ -44,9 +62,9 @@ public class MemoryManager : MonoBehaviour {
 	#region TestFunctions
 
 	public static void mem(){
-		writeOnce ();
-		readData ();
-		print(Mathf.RoundToInt(2.8f));
+		//writeOnce();
+		//readData ();
+
 	}
 
 	public static void writeOnce(){
@@ -106,6 +124,9 @@ public class MemoryManager : MonoBehaviour {
 				print (ld);
 		}
 	}
+
+
+
 
 	#endregion
 
