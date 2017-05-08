@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,9 +15,12 @@ public class GameManager : MonoBehaviour
 
     public static GameMode gameMode = GameMode.none;		// init gameMode to none
     private static GameState prevGameState;					// save prev gameState
-	public GameObject laserRay;								
-	public ViewController UI;								// UI containing all panels etc.
-	public TargetMaster targetMaster;
+	public GameObject laserRay;
+    [HideInInspector]
+    public ViewController UI;                               // UI containing all panels etc.
+    [HideInInspector]
+    public TargetMaster targetMaster;
+    [HideInInspector]
     public LaserMode laserMode;
 	private int levelIndexOffset = 7;
 	public static GameState gameState;
@@ -33,7 +37,9 @@ public class GameManager : MonoBehaviour
 		
         /*
 			"Prata med minne"
-			
+
+
+		levelName = loadName();
 		loadScore();
 
 		*/
@@ -48,6 +54,7 @@ public class GameManager : MonoBehaviour
         foreach (IInteractables inter in GameObject.FindObjectsOfType(typeof(IInteractables)))
         {
             inter.SetLasers(laserStack);
+            inter.SetLaser(laserRay.GetComponent<LaserRay>());
         }
 
         generateLaserStack();
@@ -138,7 +145,8 @@ public class GameManager : MonoBehaviour
 	private void LoadLevelEndScreen ()
 	{
 		// Load info about which level got completed
-		UI.ShowEndScreen (levelName, targetMaster.GetCollectables ());
+		string level = "Level";
+		UI.ShowEndScreen (level, targetMaster.GetCollectables ());
 	}
 
 	private void CheckNextState ()
@@ -162,7 +170,7 @@ public class GameManager : MonoBehaviour
 	private void NewScene (int n)
 	{ // where n is offset from current scene
 		Scene activeScene = SceneManager.GetActiveScene ();
-		SceneManager.LoadScene (activeScene.buildIndex+ n);
+		SceneManager.LoadScene (activeScene.buildIndex + n);
 		Debug.Log ("Entering next scene");
 	}
     	
