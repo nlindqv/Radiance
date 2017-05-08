@@ -26,17 +26,20 @@ public class LightSplitter : IInteractables
 
     public override void HandleLaserCollision(LaserRay ray)
     {
-        Color[] colorArray = { One, Two, Three };
-        Transform[] positionArray = { laserOne, laserTwo, laserThree };
-        for (int i = 0; i < positionArray.Length; i++)
+        if ((ray.HitNormal.x -this.transform.right.x) <= 0.001f)
         {
-            Transform parentTransform = ray.transform.parent;
-            LaserRay newRay = GetLaser(ray.BounceValue);
-            newRay.transform.position = positionArray[i].position;
-            newRay.transform.rotation = Quaternion.LookRotation(positionArray[i].up);
-            newRay.transform.parent = parentTransform;
-            newRay.SetColor(ray.BounceValue, colorArray[i]);
-            newRay.GenerateLaserRay();
+            Color[] colorArray = { One, Two, Three };
+            Transform[] positionArray = { laserOne, laserTwo, laserThree };
+            for (int i = 0; i < positionArray.Length; i++)
+            {
+                Transform parentTransform = ray.transform.parent;
+                LaserRay newRay = GetLaser(ray.BounceValue);
+                newRay.transform.position = positionArray[i].position;
+                newRay.transform.rotation = Quaternion.LookRotation(positionArray[i].up);
+                newRay.transform.parent = parentTransform;
+                newRay.SetColor(ray.BounceValue, colorArray[i]);
+                newRay.GenerateLaserRay();
+            }
         }
     }  
 }
