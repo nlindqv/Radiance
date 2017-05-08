@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -32,7 +31,6 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		LoadLevelName ();
         /*
 			"Prata med minne"
 
@@ -51,6 +49,16 @@ public class GameManager : MonoBehaviour
         {
             inter.SetLasers(laserStack);
             inter.SetLaser(laserRay.GetComponent<LaserRay>());
+        }
+        foreach (Transform trans in GameObject.FindObjectsOfType(typeof(Transform)))
+        {
+            Rigidbody gameObjectsRigidBody = trans.gameObject.AddComponent<Rigidbody>(); // Add the rigidbody.
+            if (gameObjectsRigidBody == null) continue; 
+            //gameObjectsRigidBody.mass = 5; // Set the GO's mass to 5 via the Rigidbody.
+            gameObjectsRigidBody.velocity = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0, UnityEngine.Random.Range(-1.0f, 1.0f));
+            //gameObjectsRigidBody.MoveRotation( Quaternion.Euler(UnityEngine.Random.Range(-10.0f, 10.0f), UnityEngine.Random.Range(-0.0f, 10.0f), UnityEngine.Random.Range(-10.0f, 10.0f)))  ;
+            //floatAway(child);
+            //floatAway(trans);
         }
 
         generateLaserStack();
@@ -188,10 +196,17 @@ public class GameManager : MonoBehaviour
 	{
         SceneManager.LoadScene("StartScene");
 	}
-		
-	private void LoadLevelName(){
-		string jsonString = File.ReadAllText (Application.dataPath + "/Resources/Levels.json");
-		Debug.Log (jsonString);
-	}
+
+    private void floatAway(Transform transform)
+    {
+        foreach(Transform child in transform)
+        {
+          // .velocity =  new Vector3(UnityEngine.Random.Range(-10.0f, 10.0f), UnityEngine.Random.Range(-0.0f, 10.0f), UnityEngine.Random.Range(-10.0f, 10.0f));
+            Rigidbody gameObjectsRigidBody = child.gameObject.AddComponent<Rigidbody>(); // Add the rigidbody.
+            //gameObjectsRigidBody.mass = 5; // Set the GO's mass to 5 via the Rigidbody.
+            gameObjectsRigidBody.velocity = new Vector3(UnityEngine.Random.Range(-10.0f, 10.0f), UnityEngine.Random.Range(-0.0f, 10.0f), UnityEngine.Random.Range(-10.0f, 10.0f));
+            floatAway(child);
+        }
+    }
 
 }
