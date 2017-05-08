@@ -24,6 +24,8 @@ public class PauseButton : MonoBehaviour {
 
     }
 
+
+
 	private void PauseTime(){
 		Time.timeScale = 0.0F;
 	}

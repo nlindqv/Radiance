@@ -4,45 +4,38 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
 
-
-
-
-using UnityEditor;
-using System.Linq;
-using UnityEditor.Callbacks;
-
 public class MemoryManager : MonoBehaviour {
 
 
-	private static LevelList LEVELS = 
-		JsonUtility.FromJson<LevelList> (File.ReadAllText (Application.dataPath + "/Resources/infoTest.json"));
-	
-	private static int levelIndexOffset = 3;
+	private static LevelList LEVELS = JsonUtility.FromJson<LevelList> (File.ReadAllText (Application.dataPath + "/Resources/Levels.json"));
+
+
+	//TODO implement function that gets indexoffset?
+	private const int levelIndexOffset = 7;
+
 
 	private static LevelData getLevel(){
 		int index = SceneManager.GetActiveScene ().buildIndex;
-		return LEVELS.list [index-levelIndexOffset];
+		return LEVELS.list [index - levelIndexOffset];
 	}
 
-	public static string LoadLevelName(){
-		// Load levelName from array in a JSon-file
-//		string json = File.ReadAllText (Application.dataPath + "/Resources/Levels.json");
-//		return JsonUtility.FromJson<LevelData> (json).levelName[SceneManager.GetActiveScene ().buildIndex - levelIndexOffset];
-//		return LEVELS.list[0].levelName;
 
+
+	public static string LoadLevelName(){
+		print (getLevel ().levelName + " has starCount " + getLevel ().starCount);
 		return getLevel().levelName;
 	}
 
 	public static int LoadTutorialIndex(){
-		// Load tutorialIndex from array in a JSon-file
-//		string json = File.ReadAllText (Application.dataPath + "/Resources/Levels.json");
-//		return JsonUtility.FromJson<LevelData> (json).tutorialIndex [SceneManager.GetActiveScene ().buildIndex - levelIndexOffset];
 		return getLevel().tutorialIndex;
 	}
 
 	public static int LoadScore(){
 		return getLevel ().starCount;
 	}
+
+
+
 
 	/// <summary>
 	/// Loads paths for all levels.
@@ -55,6 +48,8 @@ public class MemoryManager : MonoBehaviour {
 		}
 		return paths;
 	}
+
+
 
 
 

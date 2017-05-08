@@ -1,5 +1,4 @@
 
-
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,7 +29,7 @@ public class GameManager : MonoBehaviour
 	private int score;
 
     private LaserStack laserStack;
-    private int numOfLasers = 100;
+    private int numOfLasers = 20;
 
 	// Use this for initialization
 	void Start ()
@@ -40,7 +39,7 @@ public class GameManager : MonoBehaviour
 		levelName = MemoryManager.LoadLevelName();
 		tutorialIndex = MemoryManager.LoadTutorialIndex();
 		score = MemoryManager.LoadScore ();
-		MemoryManager.mem ();
+		print (levelName);
 
         laserMode = GameObject.Find("LightSource").GetComponent<LaserMode>();
 
@@ -122,7 +121,7 @@ public class GameManager : MonoBehaviour
 	private void LoadTutorial (int index)
 	{
 		// Load info about tutorial
-		string title = "title";
+		string title = "title"; 
 		string text = "sample text";
 		Image icon = null;
 		UI.NewTutorial (title, text, icon);
@@ -142,7 +141,7 @@ public class GameManager : MonoBehaviour
 	{
 		// Load info about which level got completed
 		string level = "Level";
-		UI.ShowEndScreen (level, MemoryManager.LoadScore());
+		UI.ShowEndScreen (level, targetMaster.GetCollectables());
 	}
 
 	private void CheckNextState ()

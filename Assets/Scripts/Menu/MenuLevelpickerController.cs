@@ -22,7 +22,7 @@ public class MenuLevelpickerController : MonoBehaviour
     {
         AddSwipeEventListeners();
 		levelButtonCanvas = transform.Find ("menu").transform.Find ("LevelButtons");
-		Button[] buttons = levelButtonCanvas.GetComponentsInChildren<Button>();
+//		Button[] buttons = levelButtonCanvas.GetComponentsInChildren<Button>();
         // stäng ned vänster swipe
         CheckToDisableOrEnableLeftSwipe();
         //hämta standard knapp för levels

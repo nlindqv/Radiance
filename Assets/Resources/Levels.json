@@ -1,6 +1,1 @@
-{
-    "levelName": ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8", "Level 9", "Level 10", "Level 11", "Level 12", "Level 13", "Level 14", "Level 15", "Level 16", "Level 17", "Level 18", "Level 19", "Level 20"],
-    "tutorialAvalible": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
-}
-
-
+{"list":[{"levelIndex":0,"levelName":"level_1","path":"Assets/GameScenes/Levels/level_1.unity","starCount":0,"tutorialIndex":-1},{"levelIndex":1,"levelName":"level_2","path":"Assets/GameScenes/Levels/level_2.unity","starCount":1,"tutorialIndex":-1},{"levelIndex":2,"levelName":"level_3","path":"Assets/GameScenes/Levels/level_3.unity","starCount":2,"tutorialIndex":-1},{"levelIndex":3,"levelName":"level_4","path":"Assets/GameScenes/Levels/level_4.unity","starCount":2,"tutorialIndex":-1},{"levelIndex":4,"levelName":"level_5","path":"Assets/GameScenes/Levels/level_5.unity","starCount":2,"tutorialIndex":-1},{"levelIndex":5,"levelName":"level_6","path":"Assets/GameScenes/Levels/level_6.unity","starCount":1,"tutorialIndex":-1},{"levelIndex":6,"levelName":"level_7","path":"Assets/GameScenes/Levels/level_7.unity","starCount":3,"tutorialIndex":-1},{"levelIndex":7,"levelName":"level_8","path":"Assets/GameScenes/Levels/level_8.unity","starCount":0,"tutorialIndex":-1}]}
