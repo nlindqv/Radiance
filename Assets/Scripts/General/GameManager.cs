@@ -14,17 +14,15 @@ public class GameManager : MonoBehaviour
 
     public static GameMode gameMode = GameMode.none;		// init gameMode to none
     private static GameState prevGameState;					// save prev gameState
-	public GameObject laserRay;
-    [HideInInspector]
-    public ViewController UI;                               // UI containing all panels etc.
-    [HideInInspector]
-    public TargetMaster targetMaster;
-    [HideInInspector]
+	public GameObject laserRay;								
+	public ViewController UI;								// UI containing all panels etc.
+	public TargetMaster targetMaster;
     public LaserMode laserMode;
-
+	private int levelIndexOffset = 7;
 	public static GameState gameState;
+
+	private int tutorialIndex;
 	private string levelName;
-	private int tutorialIndex = 1;
 
     private LaserStack laserStack;
     private int numOfLasers = 20;
@@ -32,16 +30,16 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		LoadLevelName ();
+		
         /*
 			"Prata med minne"
-
-
-		levelName = loadName();
+			
 		loadScore();
-		loadTutorialIndex();
 
 		*/
+		levelName = LoadLevelName();
+		tutorialIndex = LoadTutorialIndex();
+
         laserMode = GameObject.Find("LightSource").GetComponent<LaserMode>();
 
         laserStack = new LaserStack();
@@ -50,7 +48,6 @@ public class GameManager : MonoBehaviour
         foreach (IInteractables inter in GameObject.FindObjectsOfType(typeof(IInteractables)))
         {
             inter.SetLasers(laserStack);
-            inter.SetLaser(laserRay.GetComponent<LaserRay>());
         }
 
         generateLaserStack();
@@ -67,8 +64,9 @@ public class GameManager : MonoBehaviour
 		UI = GameObject.Find ("UI").GetComponent<ViewController> ();
 		// Access targetMaster
 		targetMaster = GameObject.Find ("TargetMaster").GetComponent<TargetMaster> ();
-        // Hide mellanmeny
-        UI.transform.Find("Canvas").transform.Find("MellanMeny").gameObject.SetActive(false);
+		// Hide mellanmeny
+		UI.transform.Find("Canvas").transform.Find("MellanMeny").gameObject.SetActive (false);
+
 		// If totrial index = -1 dont show anything, otherwise load tutorial with index tutorialIndex
 		if (tutorialIndex >= 0) {
 			LoadTutorial (tutorialIndex);
@@ -121,7 +119,7 @@ public class GameManager : MonoBehaviour
 	private void LoadTutorial (int index)
 	{
 		// Load info about tutorial
-		string title = "title";
+		string title = "title"; 
 		string text = "sample text";
 		Image icon = null;
 		UI.NewTutorial (title, text, icon);
@@ -140,8 +138,7 @@ public class GameManager : MonoBehaviour
 	private void LoadLevelEndScreen ()
 	{
 		// Load info about which level got completed
-		string level = "Level";
-		UI.ShowEndScreen (level, targetMaster.GetCollectables ());
+		UI.ShowEndScreen (levelName, targetMaster.GetCollectables ());
 	}
 
 	private void CheckNextState ()
@@ -165,7 +162,7 @@ public class GameManager : MonoBehaviour
 	private void NewScene (int n)
 	{ // where n is offset from current scene
 		Scene activeScene = SceneManager.GetActiveScene ();
-		SceneManager.LoadScene (activeScene.buildIndex + n);
+		SceneManager.LoadScene (activeScene.buildIndex+ n);
 		Debug.Log ("Entering next scene");
 	}
     	
@@ -189,9 +186,16 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("StartScene");
 	}
 		
-	private void LoadLevelName(){
-		string jsonString = File.ReadAllText (Application.dataPath + "/Resources/Levels.json");
-		Debug.Log (jsonString);
+	private string LoadLevelName(){
+		// Load levelName from array in a JSon-file
+		string json = File.ReadAllText (Application.dataPath + "/Resources/Levels.json");
+		return JsonUtility.FromJson<LevelData> (json).levelName[SceneManager.GetActiveScene ().buildIndex - levelIndexOffset];
+	}
+
+	private int LoadTutorialIndex(){
+		// Load tutorialIndex from array in a JSon-file
+		string json = File.ReadAllText (Application.dataPath + "/Resources/Levels.json");
+		return JsonUtility.FromJson<LevelData> (json).tutorialIndex [SceneManager.GetActiveScene ().buildIndex - levelIndexOffset];
 	}
 
 }
