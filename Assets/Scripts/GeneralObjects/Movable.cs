@@ -71,8 +71,15 @@ public class Movable : MonoBehaviour
     private void OnCollisionEnter(Collision col)
     {
 		//Move to previous position if collision
-        GetComponent<Rigidbody>().position = previousPosition;
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
+//        GetComponent<Rigidbody>().position = previousPosition;
+//        GetComponent<Rigidbody>().velocity = Vector3.zero;
+		if (col.collider.name.Equals ("Plane")) {
+			Debug.Log("Plane");
+		}
+		else {
+			GetComponent<Rigidbody>().position = previousPosition;
+			GetComponent<Rigidbody>().velocity = Vector3.zero;
+		}
     }
 
     public bool getMove()

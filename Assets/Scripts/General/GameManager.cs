@@ -1,4 +1,5 @@
 
+
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
 	private int score;
 
     private LaserStack laserStack;
-    private int numOfLasers = 20;
+    private int numOfLasers = 100;
 
 	// Use this for initialization
 	void Start ()
@@ -121,7 +122,7 @@ public class GameManager : MonoBehaviour
 	private void LoadTutorial (int index)
 	{
 		// Load info about tutorial
-		string title = "title"; 
+		string title = "title";
 		string text = "sample text";
 		Image icon = null;
 		UI.NewTutorial (title, text, icon);
