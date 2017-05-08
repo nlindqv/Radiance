@@ -11,6 +11,7 @@ public class LaserRay : MonoBehaviour
     private LineRenderer laserRay;
     private Renderer renderer;
     private Transform tf; // ts = transform
+	public Vector3 dir;
 
     private Vector3 hitPoint;
     private Vector3 hitNormal;
@@ -53,6 +54,7 @@ public class LaserRay : MonoBehaviour
         renderer.material.SetColor("_Color", Color);
         renderer.material.SetColor("_TintColor", Color);
         Vector3 direction = tf.forward;
+		dir = tf.forward;
         Ray ray = new Ray(tf.position, direction);
         RaycastHit hit;
         laserRay.SetPosition(0, tf.position);
