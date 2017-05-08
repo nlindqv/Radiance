@@ -22,10 +22,10 @@ public class MemoryManager : MonoBehaviour {
 
 		LevelData l4 = new LevelData (3, "gam", 0);
 
-		print (l1);
-		print (l2);
-		print (l3);
-		print (l4);
+//		print (l1);
+//		print (l2);
+//		print (l3);
+//		print (l4);
 
 //		LevelData[] ls = { l1, l2, l3, l4 };
 		LevelList ls = new LevelList();
@@ -42,24 +42,18 @@ public class MemoryManager : MonoBehaviour {
 
 		string path2write = "Assets/Resources/infoTest.json";
 		using (StreamWriter s = new StreamWriter (path2write)) {
-			foreach (LevelData l in ls.list) {
-				string write = JsonUtility.ToJson (l);
-				s.WriteLine (write);
-			}
-
+			s.Write(JsonUtility.ToJson(ls));
 		}
 	}
 
 	private static void readData(){
-//		string path = "Assets/Resources/infoTest.json";
-//		using (StreamReader s = new StreamReader (path)) {
-//			string katt = s.ReadLine ();
-//			while (katt != null) {
-//				LevelData j = JsonUtility.FromJson<LevelData> (katt);
-//				print (j.ToString());
-//				katt = s.ReadLine ();
-//			}
-//		}
+		string path = "Assets/Resources/infoTest.json";
+		using (StreamReader s = new StreamReader (path)) {
+			string katt = s.ReadLine ();
+			LevelList l = JsonUtility.FromJson<LevelList> (katt);
+			foreach (LevelData ld in l.list)
+				print (ld);
+		}
 	}
 
 }

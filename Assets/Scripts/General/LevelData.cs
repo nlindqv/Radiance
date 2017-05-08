@@ -5,13 +5,13 @@ using UnityEngine;
 
 [Serializable]
 public class LevelData{
-	private int levelIndex;
-	public int LevelIndex { get { return levelIndex;} }
+	public int levelIndex;
+//	public int LevelIndex { get { return levelIndex;} }
 
-	private int starCount;
+	public int starCount;
 
-	private string levelName;
-	public string LevelName { get { return levelName;} }
+	public string levelName;
+//	public string LevelName { get { return levelName;} }
 
 	public LevelData(){
 		this.levelIndex = -1;
