@@ -76,7 +76,7 @@ public class LaserMode : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        StopCoroutine("FireLaser");
+        //StopCoroutine("FireLaser");
         StartCoroutine("FireLaser");
     }
 

@@ -17,6 +17,8 @@ public class LaserRay : MonoBehaviour
     public Vector3 HitPoint { get { return hitPoint; } }
     public Vector3 HitNormal { get { return hitNormal; } }
 
+    public Component lastHitInteractable; 
+
     public int ID;
 
     public bool onStack;
@@ -45,6 +47,7 @@ public class LaserRay : MonoBehaviour
     }
     public void GenerateLaserRay()
     {
+        
         laserRay = GetComponent<LineRenderer>();
         tf = GetComponent<Transform>();
         renderer = GetComponent<Renderer>();      
@@ -68,13 +71,26 @@ public class LaserRay : MonoBehaviour
             laserRay.SetPosition(1, hitPoint);
             // kolla om komponenten ugör en interactable
             Component interactableObj = hit.collider.GetComponentInParent(typeof(IInteractables));
+            Debug.Log("INSERT HERE");
             if (interactableObj != null)
             {
                 //generera event för laserträff
+                lastHitInteractable = interactableObj;
                 ((IInteractables)interactableObj).HandleLaserCollision(this);
             }
-        }else{
+            else
+            {
+                ((IInteractables)lastHitInteractable).HandleUpdate();
+                lastHitInteractable = null;
+            }
+            
+        }
+        else{
             laserRay.SetPosition(1, ray.GetPoint(100)); 
         }
+
+        //System.Threading.Thread.Sleep(1000);
+        
+        Debug.Log("färdig");
     }
 }
