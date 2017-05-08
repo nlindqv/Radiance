@@ -10,31 +10,34 @@ using UnityEngine.UI;
 /// </summary>
 [RequireComponent(typeof(RectTransform))]
 public class MenuLevelpickerController : MonoBehaviour
-{
+{	public Button menuButton;
     private const string BACK_BTN_NAME = "BackBtn";
     private const string STANDARD_LEVEL_BTN_NAME = "LevelBtn";
     private const string RIGHT_SWIPE_BTN_NAME = "RightSwipeBtn";
     private const string LEFT_SWIPE_BTN_NAME = "LeftSwipeBtn";
     private int currentPage = 0;
+	private Transform levelButtonCanvas;
     // Use this for initialization
     void Start()
     {
         AddSwipeEventListeners();
-
-		Button[] buttons = transform.Find("menu").GetComponentsInChildren<Button>();
+		levelButtonCanvas = transform.Find ("menu").transform.Find ("LevelButtons");
+		Button[] buttons = levelButtonCanvas.GetComponentsInChildren<Button>();
         // stäng ned vänster swipe
         CheckToDisableOrEnableLeftSwipe();
         //hämta standard knapp för levels
-        Button levelBtn = GetStandardLevelButton();
+        //Button levelBtn = GetStandardLevelButton();
+
+
 
         //hämta en lista med levels scener som finns i buildsettings
         List<SceneInfo> sceneList = SceneInfoLoader.GetSceneInfo();
 
         // skapa action/event för level 1 knapp
-        levelBtn.onClick.AddListener(delegate { SceneManager.LoadScene(sceneList.First().Path); });
+        //levelBtn.onClick.AddListener(delegate { SceneManager.LoadScene(sceneList.First().Path); });
 
         // generera knappar för övriga levels
-        GenerateButtons(levelBtn, sceneList);
+        GenerateButtons(sceneList);
 
         CheckToDisableOrEnableRightSwipe(sceneList);
     }
@@ -49,43 +52,27 @@ public class MenuLevelpickerController : MonoBehaviour
         Button leftSwipe = buttons.Single(x => x.name == LEFT_SWIPE_BTN_NAME);
         leftSwipe.onClick.AddListener(delegate { this.PreviousPage(); });
     }
-    /// <summary>
-    /// Generate level buttons (except the standardbutton)
-    /// </summary>
-    /// <param name="standardLevelBtn"></param>
-    /// <param name="sceneList"></param>
-    private void GenerateButtons(Button standardLevelBtn, List<SceneInfo> sceneList)
+
+    private void GenerateButtons(List<SceneInfo> sceneList)
     {
         Text buttonText;
-        
-		RectTransform standardButton = standardLevelBtn.GetComponent<RectTransform>();
-		// get current anchors
-		Vector2 minAnchor = standardButton.anchorMin;
-		Vector2 maxAnchor = standardButton.anchorMax;
-		float height = maxAnchor.y;
-	//	float lastStarHeight = 
+		RectTransform rectParent = GetComponentInParent<RectTransform> ();
+
         //skapa nya knappar för övriga nivåer, hoppa över första knappen som alltid skall finnas på menyn
-        for (int i = ((currentPage) * 3 + 1); i < Mathf.Min(new int[] { (currentPage + 1) * 3, sceneList.Count }); i++){
-			height = height - 0.12f;
+        for (int i = ((currentPage) * 3 ); i < Mathf.Min(new int[] { (currentPage + 1) * 3, sceneList.Count }); i++){
 
-			GameObject newButton = Instantiate(standardLevelBtn.gameObject, new Vector3(0, 0, 0), Quaternion.LookRotation(standardLevelBtn.transform.forward));
-			// Set anchors of level-button
-			newButton.GetComponent<RectTransform> ().anchorMax = new Vector2 (maxAnchor.x, height);
-			newButton.GetComponent<RectTransform> ().anchorMin = new Vector2 (minAnchor.x, height - 0.08f);
+			GameObject newButton = Instantiate(menuButton.gameObject, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.LookRotation(menuButton.transform.forward));
+			newButton.GetComponent<RectTransform> ().localScale = new Vector3 ((float)rectParent.lossyScale.x, (float)rectParent.lossyScale.y, (float)rectParent.lossyScale.z);
 
-			// Set position and scale of level-buttons
-			newButton.GetComponent<RectTransform> ().localScale = new Vector3 (1.1075f, 1.1075f, 1.1075f);
-			newButton.GetComponent<RectTransform> ().offsetMin = new Vector2 (303.0f, (float)(255.40018005 - 47.231940125 * (i-1)));
-			newButton.GetComponent<RectTransform> ().offsetMax = new Vector2 (583.0f, (float)(283.83178005f - 47.231940125 * (i-1)));				
 
-            
-            newButton.transform.parent = standardLevelBtn.transform.parent;
-            standardLevelBtn = newButton.GetComponent<Button>();
+			newButton.transform.SetParent(levelButtonCanvas.transform);
+            Button standardLevelBtn = newButton.GetComponent<Button>();
             string scenePath = sceneList[i].Path;
             //skapa event för knappklick och byta bana
             standardLevelBtn.onClick.AddListener(delegate() { SceneManager.LoadScene(scenePath); });
             buttonText = newButton.GetComponentInChildren<Text>();
             buttonText.text = "Level " + (i + 1).ToString();
+			newButton.SetActive (true);
 		//	int starCount = getStarCount ();  IMPLEMENT GETSTARCOUNT
 			int starCount = 3;
 			GenerateStars(standardLevelBtn, starCount);
@@ -114,10 +101,8 @@ public class MenuLevelpickerController : MonoBehaviour
 		}
 	}
 
-    /// <summary>
+
     /// Get the standard level button, the levelpicker button which always exists on the menu
-    /// </summary>
-    /// <returns>Returns the standard level button</returns>
 	private Button GetStandardLevelButton()
     {
         Button[] buttons = GetComponentsInChildren<Button>();
@@ -128,10 +113,8 @@ public class MenuLevelpickerController : MonoBehaviour
 		GenerateStars (levelBtn, starCount);
         return levelBtn;
     }
-
-    /// <summary>
+		
     /// Set the leveltext on the standard level button
-    /// </summary>
     private void SetLevelForStandardLevelButton()
     {
         Text buttonText;
@@ -164,18 +147,14 @@ public class MenuLevelpickerController : MonoBehaviour
     /// Updates current page on levelpicker menu
     /// </summary>
     private void UpdatePage() {
-        //hämta standard knapp för levels
-        Button levelBtn = GetStandardLevelButton();
         //kontrollera om vänstra swipeknappen skall vara aktiv
         CheckToDisableOrEnableLeftSwipe();
 
         List<SceneInfo> sceneList = SceneInfoLoader.GetSceneInfo();
         //förstör alla knappar för levels (utom standardknapp)
         DestroyButtonClones();
-        //sätt text på standardlevel knapp
-        SetLevelForStandardLevelButton();
         //generera övriga knappar
-        GenerateButtons(levelBtn, sceneList);
+        GenerateButtons( sceneList);
         //kontrollera om högra swipeknappen skall vara aktiv
         CheckToDisableOrEnableRightSwipe(sceneList);
     }
@@ -184,21 +163,13 @@ public class MenuLevelpickerController : MonoBehaviour
     /// </summary>
     private void DestroyButtonClones()
     {
-        Button[] buttons = GetComponentsInChildren<Button>();
+		Button[] buttons = transform.Find("menu").transform.Find("LevelButtons").GetComponentsInChildren<Button>();
         // radera andra knappar
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            if (buttons[i].name != STANDARD_LEVEL_BTN_NAME && buttons[i].name != BACK_BTN_NAME
-                && buttons[i].name != RIGHT_SWIPE_BTN_NAME && buttons[i].name != LEFT_SWIPE_BTN_NAME)
-            {
-                Destroy(buttons[i].gameObject);
-            }
-        }
+        for (int i = 0; i < buttons.Length; i++) 
+			Destroy(buttons[i].gameObject);
     }
-    /// <summary>
+
     /// Checks current page and identifies if more levels exists that are not listed, disables the right swipe if more levels do not exist
-    /// </summary>
-    /// <param name="sceneList">List with scenes/levels</param>
     private void CheckToDisableOrEnableRightSwipe(List<SceneInfo> sceneList)
     {
         Button[] buttons = GetComponentsInChildren<Button>();
