@@ -14,13 +14,14 @@ public class Movable : MonoBehaviour
 	private Vector3 rayPoint;
 	private Ray r;
     private Vector3 firstTouchPos;
-
     public float moveHeight;
     public float offsetTouch;
+	private MirrorInactive activateButton;
 
 	// Can be applied to any object with a rigidbody
     private void Start()
     {
+		activateButton = transform.parent.GetComponentInChildren<MirrorInactive> ();
         rigidb = GetComponent<Rigidbody>();
         GetComponent<Rigidbody>().freezeRotation = true;
         move = false;
@@ -31,15 +32,16 @@ public class Movable : MonoBehaviour
     
     private void OnMouseDown()
     {
-        if (GameManager.gameMode == GameManager.GameMode.mirrorMode) { // If in mirror mode, pick up mirror
-            firstTouchPos = Input.mousePosition;
-            previousPosition = rigidb.position;
-			prevRotate = transform.rotation;
-            move = true;
-         	updateTouchPoint ();
-			distanceOffset = rayPoint - previousPosition;
-        }
-
+		if (activateButton == null || activateButton.IsActivated ()) {
+			if (GameManager.gameMode == GameManager.GameMode.mirrorMode ) { // If in mirror mode, pick up mirror
+				firstTouchPos = Input.mousePosition;
+				previousPosition = rigidb.position;
+				prevRotate = transform.rotation;
+				move = true;
+				updateTouchPoint ();
+				distanceOffset = rayPoint - previousPosition;
+			}
+		}
     }
 
     private void OnMouseDrag()
