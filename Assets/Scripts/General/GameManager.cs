@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     private LaserStack laserStack;
     private int numOfLasers = 100;
 
+    private float MIN_FPS = 20;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -214,8 +216,14 @@ public class GameManager : MonoBehaviour
         style.normal.textColor = new Color(0.0f, 0.0f, 0.5f, 1.0f);
         float msec = deltaTime * 1000.0f;
         float fps = 1.0f / deltaTime;
+        if(fps < MIN_FPS)disableGlow();
         string text = string.Format("{0:0.0} ms ({1:0.} fps)", msec, fps);
         GUI.Label(rect, text, style);
+    }
+
+    private void disableGlow()
+    {
+        Camera.main.GetComponent<MKGlowSystem.MKGlow>().enabled = false;
     }
 
 }
