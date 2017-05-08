@@ -116,6 +116,8 @@ public class LaserMode : MonoBehaviour
             }
         }
 
+        if (laserStack == null) laserStack = new LaserStack();
+
         while (ls.transform.childCount > 0)
         {
             Transform child = ls.transform.GetChild(0);
@@ -124,8 +126,10 @@ public class LaserMode : MonoBehaviour
             laserStack.push(child.gameObject.GetComponent<LaserRay>());
         }
 
+        LaserRay newLaser;
         //skapa ny laserstråle
-        LaserRay newLaser = laserStack.pop();//Instantiate(laser, rb.position, rb.rotation);
+        if (laserStack == null || laserStack.size() <= 0)  newLaser = Instantiate(laser, rb.position, rb.rotation).GetComponent<LaserRay>();
+        else   newLaser = laserStack.pop();//Instantiate(laser, rb.position, rb.rotation);
         newLaser.transform.parent = ls.transform;
         newLaser.transform.position = rb.position;
         newLaser.transform.rotation = rb.rotation;
