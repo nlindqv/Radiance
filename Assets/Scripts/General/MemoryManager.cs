@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class MemoryManager : MonoBehaviour {
 
-
-	private static LevelList LEVELS = JsonUtility.FromJson<LevelList> (File.ReadAllText (Application.dataPath + "/Resources/Levels.json"));
+	private static string PATH = Application.dataPath + "/Resources/Levels.json";
+	TextAsset file = Resources.Load("Levels.json") as TextAsset;
+	private static LevelList LEVELS = JsonUtility.FromJson<LevelList> (File.ReadAllText (PATH));
 
 
 	//TODO implement function that gets indexoffset?
@@ -17,6 +18,21 @@ public class MemoryManager : MonoBehaviour {
 	private static LevelData getLevel(){
 		int index = SceneManager.GetActiveScene ().buildIndex;
 		return LEVELS.list [index - levelIndexOffset];
+	}
+
+
+	private static void Write2Json(){
+		LevelList origin = JsonUtility.FromJson<LevelList> (File.ReadAllText (PATH));
+
+		for (int i = 0; i < LEVELS.list.Count; i++) {
+			origin.list [i].starCount = LEVELS.list [i].starCount;
+		}
+		
+		string json = JsonUtility.ToJson (LEVELS);
+
+		using (StreamWriter s = new StreamWriter (PATH)) {
+			s.Write (json);
+		}
 	}
 
 
@@ -35,12 +51,16 @@ public class MemoryManager : MonoBehaviour {
 	}
 
 
-
+	public static void WriteScore2Memory(int score){
+		getLevel ().starCount = score;
+		Write2Json ();
+	}
+		
 
 	/// <summary>
 	/// Loads paths for all levels.
 	/// </summary>
-	/// <returns>The paths.</returns>
+	/// <returns>Paths as list of strings</returns>
 	public static List<string> LoadPaths(){
 		List<string> paths = new List<string>();
 		foreach (LevelData level in LEVELS.list) {
@@ -48,6 +68,11 @@ public class MemoryManager : MonoBehaviour {
 		}
 		return paths;
 	}
+
+	public static LevelList GetLevels(){
+		return LEVELS;
+	}
+
 
 
 

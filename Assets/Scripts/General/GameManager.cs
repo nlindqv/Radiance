@@ -141,7 +141,9 @@ public class GameManager : MonoBehaviour
 	{
 		// Load info about which level got completed
 		string level = "Level";
-		UI.ShowEndScreen (level, targetMaster.GetCollectables());
+		int score = targetMaster.GetCollectables ();
+		MemoryManager.WriteScore2Memory (score);
+		UI.ShowEndScreen (level, score);
 	}
 
 	private void CheckNextState ()

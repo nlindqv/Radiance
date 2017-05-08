@@ -31,15 +31,15 @@ public class MenuLevelpickerController : MonoBehaviour
 
 
         //hämta en lista med levels scener som finns i buildsettings
-		List<string> levelPaths = MemoryManager.LoadPaths();
+		LevelList levels = MemoryManager.GetLevels();
 
         // skapa action/event för level 1 knapp
         //levelBtn.onClick.AddListener(delegate { SceneManager.LoadScene(sceneList.First().Path); });
 
         // generera knappar för övriga levels
-        GenerateButtons(levelPaths);
+        GenerateButtons(levels);
 
-        CheckToDisableOrEnableRightSwipe(levelPaths);
+        CheckToDisableOrEnableRightSwipe(levels);
     }
     /// <summary>
     /// Creates event listners for the swipe buttons
@@ -53,13 +53,13 @@ public class MenuLevelpickerController : MonoBehaviour
         leftSwipe.onClick.AddListener(delegate { this.PreviousPage(); });
     }
 
-    private void GenerateButtons(List<string> levelPaths)
+	private void GenerateButtons(LevelList levels)
     {
         Text buttonText;
 		RectTransform rectParent = GetComponentInParent<RectTransform> ();
 
         //skapa nya knappar för övriga nivåer, hoppa över första knappen som alltid skall finnas på menyn
-        for (int i = ((currentPage) * 3 ); i < Mathf.Min(new int[] { (currentPage + 1) * 3, levelPaths.Count }); i++){
+        for (int i = ((currentPage) * 3 ); i < Mathf.Min(new int[] { (currentPage + 1) * 3, levels.list.Count }); i++){
 
 			GameObject newButton = Instantiate(menuButton.gameObject, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.LookRotation(menuButton.transform.forward));
 			newButton.GetComponent<RectTransform> ().localScale = new Vector3 ((float)rectParent.lossyScale.x, (float)rectParent.lossyScale.y, (float)rectParent.lossyScale.z);
@@ -67,14 +67,13 @@ public class MenuLevelpickerController : MonoBehaviour
 
 			newButton.transform.SetParent(levelButtonCanvas.transform);
             Button standardLevelBtn = newButton.GetComponent<Button>();
-            string scenePath = levelPaths[i];
+			string scenePath = levels.list[i].path;
             //skapa event för knappklick och byta bana
             standardLevelBtn.onClick.AddListener(delegate() { SceneManager.LoadScene(scenePath); });
             buttonText = newButton.GetComponentInChildren<Text>();
             buttonText.text = "Level " + (i + 1).ToString();
 			newButton.SetActive (true);
-		//	int starCount = getStarCount ();  IMPLEMENT GETSTARCOUNT
-			int starCount = 3;
+			int starCount = levels.list [i].starCount;
 			GenerateStars(standardLevelBtn, starCount);
         }
     }
@@ -150,13 +149,13 @@ public class MenuLevelpickerController : MonoBehaviour
         //kontrollera om vänstra swipeknappen skall vara aktiv
         CheckToDisableOrEnableLeftSwipe();
 
-		List<string> levelPaths = MemoryManager.LoadPaths();
+		LevelList levels = MemoryManager.GetLevels();
         //förstör alla knappar för levels (utom standardknapp)
         DestroyButtonClones();
         //generera övriga knappar
-        GenerateButtons( levelPaths);
+        GenerateButtons( levels);
         //kontrollera om högra swipeknappen skall vara aktiv
-		CheckToDisableOrEnableRightSwipe(levelPaths);
+		CheckToDisableOrEnableRightSwipe(levels);
     }
     /// <summary>
     /// Destroys all levelbuttons except standard (first) level button
@@ -170,12 +169,12 @@ public class MenuLevelpickerController : MonoBehaviour
     }
 
     /// Checks current page and identifies if more levels exists that are not listed, disables the right swipe if more levels do not exist
-    private void CheckToDisableOrEnableRightSwipe(List<string> levelPaths)
+	private void CheckToDisableOrEnableRightSwipe(LevelList levels)
     {
         Button[] buttons = GetComponentsInChildren<Button>();
         Text buttonText;
         Button rightSwipe = buttons.Single(x => x.name == RIGHT_SWIPE_BTN_NAME);
-        if ((currentPage + 1) * 3 > levelPaths.Count)
+        if ((currentPage + 1) * 3 > levels.list.Count)
         { // det finns inga fler scener/levels som inte har visats, höger swipeknapp skall vara avstängd
             rightSwipe.interactable = false;
             buttonText = rightSwipe.GetComponentInChildren<Text>();
