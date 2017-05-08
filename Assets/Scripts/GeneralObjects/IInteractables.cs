@@ -34,7 +34,7 @@ public abstract class IInteractables : MonoBehaviour
 
     public LaserRay GetLaser(int value)
     {
-        if (laserStack != null) return Instantiate(ray, Vector3.zero, Quaternion.identity).GetComponent<LaserRay>();
+        if (laserStack == null) return Instantiate(ray, Vector3.zero, Quaternion.identity).GetComponent<LaserRay>();
         LaserRay newRayGameObj = (laserStack.size() <= 0) ? Instantiate(ray, Vector3.zero, Quaternion.identity).GetComponent<LaserRay>() : laserStack.pop();
         return newRayGameObj;
     } 
