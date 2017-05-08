@@ -2,24 +2,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 [Serializable]
 public class LevelData{
 
-
-//	public int [] tutorialIndex;
-//	public string [] levelName;
-
+	//index for level
 	public int levelIndex;
-	//	public int LevelIndex { get { return levelIndex;} }
 
+	//name for level
+	public string levelName;
+
+	//current score for level
 	public int starCount;
 
-	public string levelName;
-	//	public string LevelName { get { return levelName;} }
 
+	//Tutorial variables go here
 	public int tutorialIndex;
+
+
+
+
+
+	#region Constructors
 
 	public LevelData(){
 		this.levelIndex = -1;
@@ -49,6 +55,11 @@ public class LevelData{
 		tutorialIndex = -1;
 	}
 
+	#endregion
+
+
+	#region Override Functions
+
 	public override string ToString(){
 		string s = "Index: " + this.levelIndex.ToString () + " w/ stars: " + this.starCount.ToString() + " & name " + this.levelName;
 		return s;
@@ -70,9 +81,21 @@ public class LevelData{
 			return comparer(x, y);
 		}
 	}*/
+
+	#endregion
+
+
 }
 
 [Serializable]
 public class LevelList{
 	public List<LevelData> list = new List<LevelData>();
+}
+
+
+[Serializable]
+public class Tutorial{
+	public string title;
+	public string tutorialText;
+	public Image icon;
 }

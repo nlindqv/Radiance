@@ -14,7 +14,6 @@ public class MemoryManager : MonoBehaviour {
 
 	private static LevelData getLevel(){
 		int index = SceneManager.GetActiveScene ().buildIndex;
-		print (index);
 		return LEVELS.list [index-levelIndexOffset];
 	}
 
@@ -34,6 +33,12 @@ public class MemoryManager : MonoBehaviour {
 		return getLevel().tutorialIndex;
 	}
 
+	public static int LoadScore(){
+		return getLevel ().starCount;
+	}
+
+
+
 
 
 	#region TestFunctions
@@ -41,13 +46,14 @@ public class MemoryManager : MonoBehaviour {
 	public static void mem(){
 		writeOnce ();
 		readData ();
+		print(Mathf.RoundToInt(2.8f));
 	}
 
 	public static void writeOnce(){
 		LevelList ls = new LevelList ();
 		for (int i = 1; i <= 20; i++) {
 			string name = "Level " + i;
-			LevelData t = new LevelData (i - 1, name);
+			LevelData t = new LevelData (i - 1, name, Mathf.RoundToInt(Random.Range(0,4)));
 			ls.list.Add (t);
 		}
 		string path2write = "Assets/Resources/infoTest.json";

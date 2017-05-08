@@ -17,7 +17,7 @@ public class PauseButton : MonoBehaviour {
 
 
 		UI = GetComponentInParent<ViewController> ();
-		UI.ShowPauseScreen (0);
+		UI.ShowPauseScreen (MemoryManager.LoadScore());
 
 		//showPauseMenu();
 
