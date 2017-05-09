@@ -11,19 +11,32 @@ public class Rotate : MonoBehaviour
 	private MirrorInactive activateButton;
 	private float MoveHeight;
 
+
+	public static bool rotated;
+	private Transform mirror;
+	private Vector3 prevPos;
+	private Quaternion prevRotate;
+
+
 	// Use this for initialization
 	void Start ()
 	{
 		
 		MoveHeight = 1.5f;
 		move = gameObject.GetComponent<Movable> ().getMove ();
-		if (transform.parent.GetComponentInChildren<MirrorInactive> () != null)
-			activateButton = transform.parent.GetComponentInChildren<MirrorInactive> ();
+		/*if (transform.parent.GetComponentInChildren<MirrorInactive> () != null)
+			activateButton = transform.parent.GetComponentInChildren<MirrorInactive> ();*/
+		mirror = gameObject.transform;
+		prevPos = mirror.position;
+		prevRotate = mirror.rotation;
+
 	}
 
 	// Update is called once per frame
-	void Update ()
-	{
+	void Update () {
+		prevPos = mirror.position;
+		prevRotate = mirror.rotation;
+
 		move = gameObject.GetComponent<Movable> ().getMove ();
 		//if (activateButton == null || activateButton.IsActivated()) {
 			if ((GameManager.gameMode == GameManager.GameMode.mirrorMode && !move && Input.GetMouseButton (0) && activeTool != null)&&(activateButton == null || activateButton.IsActivated())) {
@@ -58,7 +71,19 @@ public class Rotate : MonoBehaviour
 
 	private void OnCollisionEnter (Collision collision)
 	{
-		Destroy (activeTool);
+		if (!collision.collider.name.Equals ("Plane"))
+			
+		{
+		if (rotated) {
+				Debug.Log ("Rotate collision");
+			mirror.position = prevPos;
+			//mirror.rotation = prevRotate;
+		}
+
+			//rotated = false;
+		else
+			Destroy (activeTool);
+		}
 	}
 }
 
