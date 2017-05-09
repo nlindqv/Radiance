@@ -15,9 +15,12 @@ public class LaserMode : MonoBehaviour
     private Vector3 prevDirection;
 
     bool first = true;
+    public float speed;
+
     // Use this for initialization
     void Start()
     {
+        if (speed == 0.0f) speed = 3.0f;
         mainCamera = Camera.main;
         rb = GetComponent<Transform>();
         //StartCoroutine("FireLaser");
@@ -76,7 +79,7 @@ public class LaserMode : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        StopCoroutine("FireLaser");
+        //StopCoroutine("FireLaser");
         StartCoroutine("FireLaser");
     }
 
@@ -110,7 +113,7 @@ public class LaserMode : MonoBehaviour
                     angle = Vector3.Angle(prevDirection, currentDirection);
 
                     // kontrollera tecken på vinkeln med hjälp av kryssprodukten
-                    rb.eulerAngles += new Vector3(0, angle) * Mathf.Sign(Vector3.Cross(prevDirection, currentDirection).y);
+                    rb.eulerAngles += new Vector3(0, angle) * Mathf.Sign(Vector3.Cross(prevDirection, currentDirection).y)*speed;
                     next = false;
                 }
             }
@@ -123,7 +126,9 @@ public class LaserMode : MonoBehaviour
             Transform child = ls.transform.GetChild(0);
             child.SetParent(null);
             child.gameObject.SetActive(false);
-            laserStack.push(child.gameObject.GetComponent<LaserRay>());
+			LaserRay laserRayToPush = child.gameObject.GetComponent<LaserRay> ();
+			laserRayToPush.UpdateObject ();
+			laserStack.push(laserRayToPush);
         }
 
         LaserRay newLaser;
