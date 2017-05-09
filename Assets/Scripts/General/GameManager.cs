@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
 
 	private int tutorialIndex;
 	private string levelName;
-	private int score;
 
     private LaserStack laserStack;
     private int numOfLasers = 20;
@@ -38,7 +37,6 @@ public class GameManager : MonoBehaviour
         //Prata med minnet
 		levelName = MemoryManager.LoadLevelName();
 		tutorialIndex = MemoryManager.LoadTutorialIndex();
-		score = MemoryManager.LoadScore ();
 		print (levelName);
 
         laserMode = GameObject.Find("LightSource").GetComponent<LaserMode>();

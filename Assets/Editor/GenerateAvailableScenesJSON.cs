@@ -23,7 +23,7 @@ public static class GenerateAvailableScenesJSON
 
 			string name = path.Substring (lastBackslash + 1, lastDot-lastBackslash-1);
 
-			int score = Mathf.RoundToInt(Random.Range(0,4));
+			int score = 0;//Mathf.RoundToInt(Random.Range(0,4));
 
 			LevelData t = new LevelData (path, i++, name, score);
 
@@ -33,7 +33,7 @@ public static class GenerateAvailableScenesJSON
 		string jsonObj = UnityEngine.JsonUtility.ToJson(ls);
 		Debug.Log("scenes retrieved");
 
-		using (StreamWriter writer = new StreamWriter(Application.persistentDataPath + "/Levels.json", false))
+		using (StreamWriter writer = new StreamWriter(Application.dataPath + "/Resources/Levels.json", false))
 		{
 			writer.Write(jsonObj);
 		}

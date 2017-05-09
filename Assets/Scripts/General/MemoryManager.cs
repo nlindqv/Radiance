@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class MemoryManager : MonoBehaviour {
 
-	private static string PATH = Application.persistentDataPath + "/Levels.json";
+//	private static string PATH = Application.persistentDataPath + "/Levels.json";
 
-//	static TextAsset file = (TextAsset)System.IO.File.ReadAllText(Application.persistentDataPath + "/Levels.json");
-	private static LevelList LEVELS = JsonUtility.FromJson<LevelList> (System.IO.File.ReadAllText(PATH));
+	static TextAsset file = Resources.Load<TextAsset> ("Levels");
+	private static LevelList LEVELS = JsonUtility.FromJson<LevelList> (file.text);
 
 
 	//TODO implement function that gets indexoffset?
@@ -22,24 +22,10 @@ public class MemoryManager : MonoBehaviour {
 	}
 
 
-	private static void Write2Json(){
-		LevelList origin = JsonUtility.FromJson<LevelList> (File.ReadAllText (PATH));
-
-		for (int i = 0; i < LEVELS.list.Count; i++) {
-			origin.list [i].starCount = LEVELS.list [i].starCount;
-		}
-		
-		string json = JsonUtility.ToJson (LEVELS);
-
-		using (StreamWriter s = new StreamWriter (PATH)) {
-			s.Write (json);
-		}
-	}
 
 
 
 	public static string LoadLevelName(){
-		print (getLevel ().levelName + " has starCount " + getLevel ().starCount);
 		return getLevel().levelName;
 	}
 
@@ -48,13 +34,24 @@ public class MemoryManager : MonoBehaviour {
 	}
 
 	public static int LoadScore(){
-		return getLevel ().starCount;
+		int score = PlayerPrefs.GetInt (getLevel ().levelName, 0);
+		return score;
 	}
 
 
+	public static int[] LoadAllScores(){
+		int[] scores = new int[LEVELS.list.Count];
+		for(int i = 0; i < LEVELS.list.Count; i++){
+			scores [i] = PlayerPrefs.GetInt (LEVELS.list [i].levelName, 0);
+			print (LEVELS.list [i].levelName + " has starcount " + scores [i].ToString ());
+		}
+		return scores;
+	}
+
+
+
 	public static void WriteScore2Memory(int score){
-		getLevel ().starCount = score;
-		Write2Json ();
+		PlayerPrefs.SetInt (getLevel ().levelName, score);
 	}
 		
 
