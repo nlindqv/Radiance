@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 	public static GameState gameState;
 
 	private int tutorialIndex;
-	private string levelName;
+//	private string levelName;
 
     private LaserStack laserStack;
     private int numOfLasers = 20;
@@ -35,9 +35,8 @@ public class GameManager : MonoBehaviour
 	{
 		
         //Prata med minnet
-		levelName = MemoryManager.LoadLevelName();
+//		levelName = MemoryManager.LoadLevelName();
 		tutorialIndex = MemoryManager.LoadTutorialIndex();
-		MemoryManager.mem ();
 
         laserMode = GameObject.Find("LightSource").GetComponent<LaserMode>();
 
@@ -70,8 +69,6 @@ public class GameManager : MonoBehaviour
 		// If totrial index = -1 dont show anything, otherwise load tutorial with index tutorialIndex
 		if (tutorialIndex >= -1) {
 			LoadTutorial (tutorialIndex);
-		} else if (tutorialIndex == -1) {
-			LoadTutorial (-1);
 		}
 	}
 
@@ -122,9 +119,9 @@ public class GameManager : MonoBehaviour
 	{
 		// Load info about tutorial
 		Tutorial tut;
-		if (index >= 0) {
-			tut = MemoryManager.LoadTutorial (index);
-		} else
+//		if (index >= 0) {
+//			tut = MemoryManager.LoadTutorial (index);
+//		} else
 			tut = new Tutorial();
 
 		UI.NewTutorial (tut.title, tut.tutorialText, tut.icon);

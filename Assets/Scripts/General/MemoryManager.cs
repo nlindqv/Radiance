@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
-using UnityEditor;
 
 public class MemoryManager : MonoBehaviour {
 
@@ -14,35 +13,17 @@ public class MemoryManager : MonoBehaviour {
 	static TextAsset TutFile = Resources.Load<TextAsset> ("Tutorials");
 	private static TutorialList TUTORIALS = JsonUtility.FromJson<TutorialList> (TutFile.text);
 
-	private static readonly int levelIndexOffset = GetIndexOffset();
+	static TextAsset IndexOffsetFile = Resources.Load<TextAsset> ("indexOffset");
+	private static int levelIndexOffset = int.Parse(IndexOffsetFile.text);
 
 
-	#region Private functions
-
-	/// <summary>
-	/// Gets index offset for levels, that is removes all menu scenes and testlevels from
-	/// indexing to make sure we access correct space in memory
-	/// </summary>
-	/// <returns>offset</returns>
-	private static int GetIndexOffset(){
-		int offset = 0;
-		foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes) {
-			if (!scene.path.Contains ("GameScenes/Levels")) {
-				offset++;
-			}
-			else if(scene.path.Contains("GameScenes/Levels"))
-				break;
-		}
-		print (offset);
-		return offset;
-	}
 
 	private static LevelData getLevel(){
 		int index = SceneManager.GetActiveScene ().buildIndex;
+		Debug.Log ("Getting scene w/ index: " + index + " and levelind " + levelIndexOffset);
 		return LEVELS.list [index - levelIndexOffset];
 	}
 
-	#endregion
 
 	#region Public Functions
 
@@ -107,7 +88,7 @@ public class MemoryManager : MonoBehaviour {
 		//writeOnce();
 		//readData ();
 
-		writeTutorials ();
+//		writeTutorials ();
 
 	}
 

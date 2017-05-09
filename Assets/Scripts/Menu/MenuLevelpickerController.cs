@@ -40,6 +40,7 @@ public class MenuLevelpickerController : MonoBehaviour
         GenerateButtons(levelpaths);
 
         CheckToDisableOrEnableRightSwipe(levelpaths);
+
     }
     /// <summary>
     /// Creates event listners for the swipe buttons

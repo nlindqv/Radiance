@@ -8,6 +8,7 @@ using UnityEditor.Callbacks;
 
 public static class GenerateAvailableScenesJSON
 {
+
     [PostProcessBuild]
     public static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
     {
@@ -23,10 +24,11 @@ public static class GenerateAvailableScenesJSON
 
 			string name = path.Substring (lastBackslash + 1, lastDot-lastBackslash-1);
 
-			//use this to set predetermined values for starcount in each level
+			//use this to experiment w/ predetermined values for starcount and tutorial in each level
 			PlayerPrefs.SetInt (name, 0);
+			int tutind = Mathf.RoundToInt(Random.Range(0, 5));
 
-			LevelData t = new LevelData (path, i++, name);
+			LevelData t = new LevelData (path, i++, name, tutind);
 
 			ls.list.Add (t);
 		}
@@ -38,8 +40,10 @@ public static class GenerateAvailableScenesJSON
 		{
 			writer.Write(jsonObj);
 		}
+//		Debug.Log ("Index offset is " + levelIndexOffset);
+//		Debug.Log ("Number of levels: " + ls.list.Count);
 
-
+		SetIndexOffset ();
 		Debug.Log("scenes written");
     }
 
@@ -59,5 +63,22 @@ public static class GenerateAvailableScenesJSON
 		sceneList.Sort ();
 
 		return sceneList;
+	}
+		
+	private static void SetIndexOffset(){
+		int levelIndexOffset = 0;
+		foreach (UnityEditor.EditorBuildSettingsScene scene in UnityEditor.EditorBuildSettings.scenes) {
+			if (!scene.path.Contains ("GameScenes/Levels")) {
+				levelIndexOffset++;
+			} else if (scene.path.Contains ("GameScenes/Levels"))
+				break;
+		}
+		using (StreamWriter writer = new StreamWriter(Application.dataPath + "/Resources/indexOffset.txt", false))
+		{
+			writer.Write(levelIndexOffset.ToString());
+		}
+
+		Debug.Log ("Index offset written");
+
 	}
 }
