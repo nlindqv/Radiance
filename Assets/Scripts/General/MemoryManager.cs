@@ -11,8 +11,8 @@ public class MemoryManager : MonoBehaviour {
 	static TextAsset LevelFile = Resources.Load<TextAsset> ("Levels");
 	private static LevelList LEVELS = JsonUtility.FromJson<LevelList> (LevelFile.text);
 
-//	static TextAsset TutFile = Resources.Load<TextAsset> ("Tutorials");
-//	private static TutorialList TUTORIALS = JsonUtility.FromJson<TutorialList> (TutFile.text);
+	static TextAsset TutFile = Resources.Load<TextAsset> ("Tutorials");
+	private static TutorialList TUTORIALS = JsonUtility.FromJson<TutorialList> (TutFile.text);
 
 	private static readonly int levelIndexOffset = GetIndexOffset();
 
@@ -60,7 +60,7 @@ public class MemoryManager : MonoBehaviour {
 	}
 
 	public static Tutorial LoadTutorial(int index){
-		return new Tutorial();
+		return TUTORIALS.list[index];
 	}
 
 

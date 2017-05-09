@@ -52,6 +52,13 @@ public class LevelData{
 		tutorialIndex = -1;
 	}
 
+	public LevelData(string path, int levelIndex, string levelName, int tutorialIndex){
+		this.path = path;
+		this.levelIndex = levelIndex;
+		this.levelName = levelName;
+		this.tutorialIndex = tutorialIndex;
+	}
+
 	#endregion
 
 

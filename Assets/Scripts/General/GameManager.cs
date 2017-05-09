@@ -70,6 +70,8 @@ public class GameManager : MonoBehaviour
 		// If totrial index = -1 dont show anything, otherwise load tutorial with index tutorialIndex
 		if (tutorialIndex >= -1) {
 			LoadTutorial (tutorialIndex);
+		} else if (tutorialIndex == -1) {
+			LoadTutorial (-1);
 		}
 	}
 
@@ -119,7 +121,11 @@ public class GameManager : MonoBehaviour
 	private void LoadTutorial (int index)
 	{
 		// Load info about tutorial
-		Tutorial tut = MemoryManager.LoadTutorial(index);
+		Tutorial tut;
+		if (index >= 0) {
+			tut = MemoryManager.LoadTutorial (index);
+		} else
+			tut = new Tutorial();
 
 		UI.NewTutorial (tut.title, tut.tutorialText, tut.icon);
 	}
