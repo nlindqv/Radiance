@@ -26,7 +26,7 @@ public class LightSplitter : IInteractables
 
     public override void HandleLaserCollision(LaserRay ray)
     {
-        if ((ray.HitNormal.x -this.transform.right.x) <= 0.001f)
+        if (Math.Abs(ray.HitNormal.x -this.transform.right.x) <= 0.001f)
         {
             Color[] colorArray = { One, Two, Three };
             Transform[] positionArray = { laserOne, laserTwo, laserThree };
