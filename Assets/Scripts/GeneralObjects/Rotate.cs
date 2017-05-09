@@ -14,17 +14,20 @@ public class Rotate : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		activateButton = transform.parent.GetComponentInChildren<MirrorInactive> ();
+		
 		MoveHeight = 1.5f;
 		move = gameObject.GetComponent<Movable> ().getMove ();
+		if (transform.parent != null)
+			activateButton = transform.parent.GetComponentInChildren<MirrorInactive> ();
+		 
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
 		move = gameObject.GetComponent<Movable> ().getMove ();
-		if (activateButton == null || activateButton.IsActivated()) {
-			if (GameManager.gameMode == GameManager.GameMode.mirrorMode && !move && Input.GetMouseButton (0) && activeTool != null) {
+		//if (activateButton == null || activateButton.IsActivated()) {
+			if ((GameManager.gameMode == GameManager.GameMode.mirrorMode && !move && Input.GetMouseButton (0) && activeTool != null)&&(activateButton == null || activateButton.IsActivated())) {
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 				RaycastHit hit;            
 				if (Physics.Raycast (ray, out hit) && hit.collider != null && hit.collider.name.Equals (activeTool.name)) {                
@@ -37,18 +40,18 @@ public class Rotate : MonoBehaviour
 			}
 			if (GameManager.gameMode != GameManager.GameMode.mirrorMode)
 				Destroy (activeTool);
-		}
+		//}
 	}
 
 	private void OnMouseDown ()
 	{
-		Destroy (activeTool);
+			Destroy (activeTool);
 	}
 
 	private void OnMouseUp ()
 	{
 		if (activateButton == null || activateButton.IsActivated()){
-		activeTool = Instantiate (tool, new Vector3 (transform.position.x, MoveHeight, transform.position.z), Quaternion.Euler (90.0f, 0.0f, 0.0f));
+			activeTool = Instantiate (tool, new Vector3 (transform.position.x, MoveHeight, transform.position.z), Quaternion.Euler (90.0f, 0.0f, 0.0f));
 		//activeTool 
 		activeTool.GetComponent<RotateTool> ().setObject (gameObject.transform);
 		}

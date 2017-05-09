@@ -19,15 +19,17 @@ public class Movable : MonoBehaviour
 	private MirrorInactive activateButton;
 
 	// Can be applied to any object with a rigidbody
-    private void Start()
+    void Start()
     {
-		activateButton = transform.parent.GetComponentInChildren<MirrorInactive> ();
-        rigidb = GetComponent<Rigidbody>();
+		
+        this.rigidb = GetComponent<Rigidbody>();
         GetComponent<Rigidbody>().freezeRotation = true;
         move = false;
         previousPosition = rigidb.position;
         startHeight = rigidb.position.y;
         offsetTouch = 1.2f;
+		if (transform.parent != null)
+			activateButton = transform.parent.GetComponentInChildren<MirrorInactive> ();
     }
     
     private void OnMouseDown()
@@ -58,7 +60,7 @@ public class Movable : MonoBehaviour
     private void OnMouseUp()
     {
         if (GameManager.gameMode == GameManager.GameMode.mirrorMode) //If in mirror mode
-        {          
+        {   
             rigidb.position = new Vector3(rigidb.position.x, startHeight, rigidb.position.z);
             move = false;
         }

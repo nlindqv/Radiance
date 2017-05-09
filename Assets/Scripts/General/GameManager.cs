@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public LaserMode laserMode;
 
+    public Material skybox;
+
 	public static GameState gameState;
 	private string levelName;
 	private int tutorialIndex = 1;
@@ -45,6 +47,7 @@ public class GameManager : MonoBehaviour
 
 		*/
         laserMode = GameObject.Find("LightSource").GetComponent<LaserMode>();
+
 
         laserStack = new LaserStack();
         Debug.Log(GameObject.FindObjectsOfType(typeof(IInteractables)));
@@ -117,10 +120,15 @@ public class GameManager : MonoBehaviour
 		default:
 			break;
 		}
-        prevGameState = gameState; 
-	}
+        prevGameState = gameState;
+        skybox.SetFloat("_Rotation", 2 * Time.deltaTime + skybox.GetFloat("_Rotation"));
+        skybox.SetFloat("_Exposure", Mathf.Sin(2 * Time.deltaTime + skybox.GetFloat("_Rotation"))/8.0f + 1.2f);
+        Debug.Log(skybox.GetFloat("_Exposure"));
+        RenderSettings.skybox = skybox;
 
-	private void LoadTutorial (int index)
+    }
+
+    private void LoadTutorial (int index)
 	{
 		// Load info about tutorial
 		string title = "title";
