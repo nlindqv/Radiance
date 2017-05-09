@@ -79,7 +79,7 @@ public class LaserMode : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        StopCoroutine("FireLaser");
+        //StopCoroutine("FireLaser");
         StartCoroutine("FireLaser");
     }
 
@@ -126,7 +126,9 @@ public class LaserMode : MonoBehaviour
             Transform child = ls.transform.GetChild(0);
             child.SetParent(null);
             child.gameObject.SetActive(false);
-            laserStack.push(child.gameObject.GetComponent<LaserRay>());
+			LaserRay laserRayToPush = child.gameObject.GetComponent<LaserRay> ();
+			laserRayToPush.UpdateObject ();
+			laserStack.push(laserRayToPush);
         }
 
         LaserRay newLaser;

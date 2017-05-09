@@ -28,7 +28,8 @@ public class Target : IInteractables
 	}
 
 
-	void Update() {
+
+	/*void Update() {
 		//If there is no hit make sure target is default color
 		if (!hit) {
 			Material mat = rend.material;
@@ -39,6 +40,15 @@ public class Target : IInteractables
 		//updates hit to false every frame, happens before laserCollision
 		//hit = false;
 	}
+    */
+
+	public override void HandleUpdate()
+    {
+        Material mat = rend.material;
+        mat.color = defaultCol;
+        hit = false;
+        Debug.Log("Not hit anymore");
+    }
 
 	//Handles Collision with laser
 	public override void HandleLaserCollision (LaserRay ray)
@@ -49,4 +59,14 @@ public class Target : IInteractables
 		hit = true;
 		lastHitRay = ray;
 	}  
+
+    public bool getHitState()
+    {
+        return hit;
+    }
+
+    public void setHitState()
+    {
+        hit = false;
+    }
 }
