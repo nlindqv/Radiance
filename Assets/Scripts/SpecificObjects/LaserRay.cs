@@ -89,7 +89,7 @@ public class LaserRay : MonoBehaviour
 
         //System.Threading.Thread.Sleep(1000);
         
-        Debug.Log("färdig");
+        //Debug.Log("färdig");
     }
 	public void UpdateObject(){
 		if(lastHitInteractable !=null)
