@@ -65,6 +65,7 @@ public static class GenerateAvailableScenesJSON
 		return sceneList;
 	}
 		
+	//Write indexoffset to file to be read from memorymanager
 	private static void SetIndexOffset(){
 		int levelIndexOffset = 0;
 		foreach (UnityEditor.EditorBuildSettingsScene scene in UnityEditor.EditorBuildSettings.scenes) {

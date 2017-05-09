@@ -20,7 +20,7 @@ public class MemoryManager : MonoBehaviour {
 
 	private static LevelData getLevel(){
 		int index = SceneManager.GetActiveScene ().buildIndex;
-		Debug.Log ("Getting scene w/ index: " + index + " and levelind " + levelIndexOffset);
+//		Debug.Log ("Getting scene w/ index: " + index + " and levelind " + levelIndexOffset);
 		return LEVELS.list [index - levelIndexOffset];
 	}
 
@@ -55,7 +55,7 @@ public class MemoryManager : MonoBehaviour {
 		int[] scores = new int[LEVELS.list.Count];
 		for(int i = 0; i < LEVELS.list.Count; i++){
 			scores [i] = PlayerPrefs.GetInt (LEVELS.list [i].levelName, 0);
-			print (LEVELS.list [i].levelName + " has starcount " + scores [i].ToString ());
+//			print (LEVELS.list [i].levelName + " has starcount " + scores [i].ToString ());
 		}
 		return scores;
 	}

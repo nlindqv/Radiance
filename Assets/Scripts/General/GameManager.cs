@@ -119,9 +119,9 @@ public class GameManager : MonoBehaviour
 	{
 		// Load info about tutorial
 		Tutorial tut;
-//		if (index >= 0) {
-//			tut = MemoryManager.LoadTutorial (index);
-//		} else
+		if (index >= 0) {
+			tut = MemoryManager.LoadTutorial (index);
+		} else
 			tut = new Tutorial();
 
 		UI.NewTutorial (tut.title, tut.tutorialText, tut.icon);
