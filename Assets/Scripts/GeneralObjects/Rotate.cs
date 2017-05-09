@@ -17,8 +17,9 @@ public class Rotate : MonoBehaviour
 		
 		MoveHeight = 1.5f;
 		move = gameObject.GetComponent<Movable> ().getMove ();
-		if (transform.parent.GetComponentInChildren<MirrorInactive> () != null)
+		if (transform.parent != null)
 			activateButton = transform.parent.GetComponentInChildren<MirrorInactive> ();
+		 
 	}
 
 	// Update is called once per frame
