@@ -33,6 +33,10 @@ public class Movable : MonoBehaviour
 			activateButton = null;*/
     }
     
+	private void Update(){
+		this.rigidb.velocity = Vector3.zero;
+		this.rigidb.freezeRotation = true;
+	}
     private void OnMouseDown()
     {
 		//Debug.Log (activateButton + " 10");

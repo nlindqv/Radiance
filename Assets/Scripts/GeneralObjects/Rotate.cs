@@ -21,22 +21,18 @@ public class Rotate : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		
 		MoveHeight = 1.5f;
 		move = gameObject.GetComponent<Movable> ().getMove ();
 		/*if (transform.parent.GetComponentInChildren<MirrorInactive> () != null)
 			activateButton = transform.parent.GetComponentInChildren<MirrorInactive> ();*/
+		
 		mirror = gameObject.transform;
 		prevPos = mirror.position;
 		prevRotate = mirror.rotation;
 
 	}
-
-	// Update is called once per frame
+		
 	void Update () {
-		prevPos = mirror.position;
-		prevRotate = mirror.rotation;
-
 		move = gameObject.GetComponent<Movable> ().getMove ();
 		//if (activateButton == null || activateButton.IsActivated()) {
 			if ((GameManager.gameMode == GameManager.GameMode.mirrorMode && !move && Input.GetMouseButton (0) && activeTool != null)&&(activateButton == null || activateButton.IsActivated())) {
@@ -53,6 +49,14 @@ public class Rotate : MonoBehaviour
 			if (GameManager.gameMode != GameManager.GameMode.mirrorMode)
 				Destroy (activeTool);
 		//}
+
+		// om prev och nuvarande är olika om rotate är true
+		if (rotated && !prevPos.Equals (transform.position)) {
+			transform.position = this.prevPos;
+			transform.rotation = this.prevRotate;
+			Destroy (activeTool);
+
+		}
 	}
 
 	private void OnMouseDown ()
@@ -71,19 +75,22 @@ public class Rotate : MonoBehaviour
 
 	private void OnCollisionEnter (Collision collision)
 	{
-		if (!collision.collider.name.Equals ("Plane"))
-			
-		{
-		if (rotated) {
+		if (!collision.collider.name.Equals ("Plane")){
+			if (rotated) {
 				Debug.Log ("Rotate collision");
-			mirror.position = prevPos;
-			//mirror.rotation = prevRotate;
-		}
-
-			//rotated = false;
-		else
-			Destroy (activeTool);
-		}
+				Debug.Log (prevPos);
+				Debug.Log (prevRotate);
+				mirror.position = this.prevPos;
+				mirror.rotation = this.prevRotate;
+				mirror.GetComponent<Rigidbody> ().freezeRotation = true;
+			}
+			else
+				Destroy (activeTool);
+			}
+	}
+	public void SetPrevPosition(Vector3 prevPos, Quaternion prevRotate){
+		this.prevPos = prevPos;
+		this.prevRotate = prevRotate;
 	}
 }
 
