@@ -26,6 +26,9 @@ public class MirrorInactive : IInteractables {
         //sätt färg för aktiv spegel
         renderer.material.SetColor("_RimColour", activeMirrorColor);
 		mirrorActive = true;
+
+		GetComponent<Renderer> ().material.color = new Color32 (27, 57, 154, 255);
+
 	}
 	// Return state of locked mirror
 	public bool IsActivated(){

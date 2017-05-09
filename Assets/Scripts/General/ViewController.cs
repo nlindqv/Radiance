@@ -142,7 +142,7 @@ public class ViewController : MonoBehaviour
         while (canvasGroup.alpha < 1)
         {
             canvasGroup.alpha += Time.deltaTime / time;
-            Debug.Log(canvasGroup.alpha);
+            //Debug.Log(canvasGroup.alpha);
         }
 
         endScreen.Find("Level").GetComponent<RectTransform>().GetComponent<Text>().text = levelName;
