@@ -17,12 +17,14 @@ public class PauseButton : MonoBehaviour {
 
 
 		UI = GetComponentInParent<ViewController> ();
-		UI.ShowPauseScreen (0);
+		UI.ShowPauseScreen (MemoryManager.LoadScore());
 
 		//showPauseMenu();
 
 
     }
+
+
 
 	private void PauseTime(){
 		Time.timeScale = 0.0F;

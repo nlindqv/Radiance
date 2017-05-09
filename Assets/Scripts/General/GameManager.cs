@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,12 +22,10 @@ public class GameManager : MonoBehaviour
     public TargetMaster targetMaster;
     [HideInInspector]
     public LaserMode laserMode;
-
-    //public Material skybox;
-
 	public static GameState gameState;
-	private string levelName;
-	private int tutorialIndex = 1;
+
+	private int tutorialIndex;
+//	private string levelName;
 
     private LaserStack laserStack;
     private int numOfLasers = 100;
@@ -36,18 +35,12 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		//LoadLevelName ();
-        /*
-			"Prata med minne"
+		
+        //Prata med minnet
+//		levelName = MemoryManager.LoadLevelName();
+		tutorialIndex = MemoryManager.LoadTutorialIndex();
 
-
-		levelName = loadName();
-		loadScore();
-		loadTutorialIndex();
-
-		*/
         laserMode = GameObject.Find("LightSource").GetComponent<LaserMode>();
-
 
         laserStack = new LaserStack();
         Debug.Log(GameObject.FindObjectsOfType(typeof(IInteractables)));
@@ -72,10 +65,11 @@ public class GameManager : MonoBehaviour
 		UI = GameObject.Find ("UI").GetComponent<ViewController> ();
 		// Access targetMaster
 		targetMaster = GameObject.Find ("TargetMaster").GetComponent<TargetMaster> ();
-        // Hide mellanmeny
-        UI.transform.Find("Canvas").transform.Find("MellanMeny").gameObject.SetActive(false);
+		// Hide mellanmeny
+		UI.transform.Find("Canvas").transform.Find("MellanMeny").gameObject.SetActive (false);
+
 		// If totrial index = -1 dont show anything, otherwise load tutorial with index tutorialIndex
-		if (tutorialIndex >= 0) {
+		if (tutorialIndex >= -1) {
 			LoadTutorial (tutorialIndex);
 		}
 	}
@@ -131,10 +125,13 @@ public class GameManager : MonoBehaviour
     private void LoadTutorial (int index)
 	{
 		// Load info about tutorial
-		string title = "title";
-		string text = "sample text";
-		Image icon = null;
-		UI.NewTutorial (title, text, icon);
+		Tutorial tut;
+		if (index >= 0) {
+			tut = MemoryManager.LoadTutorial (index);
+		} else
+			tut = new Tutorial();
+
+		UI.NewTutorial (tut.title, tut.tutorialText, tut.icon);
 	}
 
 	private void CheckLevelCompleted ()
@@ -151,7 +148,9 @@ public class GameManager : MonoBehaviour
 	{
 		// Load info about which level got completed
 		string level = "Level";
-		UI.ShowEndScreen (level, targetMaster.GetCollectables ());
+		int score = targetMaster.GetCollectables ();
+		MemoryManager.WriteScore2Memory (score);
+		UI.ShowEndScreen (level, score);
 	}
 
 	private void CheckNextState ()
