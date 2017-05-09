@@ -4,30 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Checkpoints : IInteractables, ICollectable
-{
-	public GameObject r;
-	public int bounceValue;
+{	public int bounceValue;
 	public float speed = 1f;
 	bool taken;
-	Vector3 hit;
-	Vector3 pr;
-	Vector3 pr1;
-	Vector3 perp;
 	Behaviour halo;
-	Renderer renderer;
-	float s;
-	Vector3 proj;
-	Vector3 dire;
-	float magn;
-	float dist;
-	void Start()
-	{
-		renderer = GetComponent<Renderer> ();
-		halo = (Behaviour)GetComponent("Halo");
-		s = Vector3.Distance (r.transform.position,transform.position);
-		pr = transform.position - r.transform.position;
-		pr1 = r.transform.position - transform.position;
 
+    private Material mat;
+    private static Color darkPink = new Color32(155, 13, 107, 255);
+    private static Color lightPink = new Color32(224, 53, 166, 255);
+
+    void Start()
+	{		
+		halo = (Behaviour)GetComponent("Halo");
+        mat = GetComponentInChildren<Renderer>().material;
+        Debug.Log(mat);
+        Off();
 	}
 	bool ICollectable.Collected()
 	{
@@ -35,12 +26,16 @@ public class Checkpoints : IInteractables, ICollectable
 	}
 	void Update()
 	{
-		transform.Rotate (new Vector3(15,30,45) * Time.deltaTime * speed); 
-		pr = transform.position - r.transform.position;
-		s = Vector3.Distance (r.transform.position,transform.position);
-		Debug.DrawLine (r.transform.position,transform.position,Color.green);
+		transform.Rotate (new Vector3(15,30,45) * Time.deltaTime * speed); 		
 	}
-	public override void HandleLaserCollision(LaserRay laserHit)
+
+    public override void HandleUpdate()
+    {
+        taken = false;
+        Off();
+    }
+
+    public override void HandleLaserCollision(LaserRay laserHit)
 	{
 		Vector3 norm = Vector3.Normalize(laserHit.dir);
 		Vector3 margin = Vector3.Scale(norm, new Vector3(0.01f, 0.01f, 0.01f));
@@ -53,33 +48,25 @@ public class Checkpoints : IInteractables, ICollectable
 		newRay.transform.rotation = (Quaternion.LookRotation(laserHit.dir));
 		newRay.Color = laserHit.Color;
 		newRay.GenerateLaserRay();
-
-		dire = laserHit.dir;
-		proj = Vector3.Project (pr,laserHit.dir);
-		perp = pr - proj;
-		float distance = perp.magnitude;
-		magn = proj.magnitude;
-		dist = Mathf.Sqrt (Mathf.Pow(magn,2) + Mathf.Pow(s,2));
-		float angle = Vector3.Angle (pr, dire);
-
-		if (angle > 0 && angle < 1.2)
-		{
-			On ();
-		} 
-		else
-		{
-			Off ();
-		}
-		taken = true;
+        taken = true;
+        On();
 	}
 
 	void On()
 	{
 		halo.enabled = true;
+        speed = 10.0f;
+        // change color to light pink
+        mat.color = lightPink;
+        //color
+
 	}
 	void Off()
 	{
 		halo.enabled = false;
+        // chnage color to dark pink
+        speed = 1.0f;
+        mat.color = darkPink;
 	}
 
 }

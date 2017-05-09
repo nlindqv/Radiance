@@ -17,6 +17,11 @@ public abstract class IInteractables : MonoBehaviour
         Debug.Log("Hit");
     }
 
+	public virtual void HandleUpdate()
+    {
+        Debug.Log("Reversed hit");
+    }
+
     public void SetLasers(LaserStack laserStack)
     {
         this.laserStack = laserStack;

@@ -28,7 +28,9 @@ public class GameManager : MonoBehaviour
 //	private string levelName;
 
     private LaserStack laserStack;
-    private int numOfLasers = 20;
+    private int numOfLasers = 100;
+
+    private float MIN_FPS = 20;
 
 	// Use this for initialization
 	void Start ()
@@ -112,10 +114,15 @@ public class GameManager : MonoBehaviour
 		default:
 			break;
 		}
-        prevGameState = gameState; 
-	}
+        prevGameState = gameState;
+        RenderSettings.skybox.SetFloat("_Rotation", 2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"));
+        RenderSettings.skybox.SetFloat("_Exposure", Mathf.Sin(2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"))/8.0f + 1.2f);
+        //Debug.Log(skybox.GetFloat("_Exposure"));
+        //RenderSettings.skybox = skybox;
 
-	private void LoadTutorial (int index)
+    }
+
+    private void LoadTutorial (int index)
 	{
 		// Load info about tutorial
 		Tutorial tut;
@@ -190,5 +197,40 @@ public class GameManager : MonoBehaviour
 	{
         SceneManager.LoadScene("StartScene");
 	}
+		
+	private void LoadLevelName(){
+		string jsonString = File.ReadAllText (Application.dataPath + "/Resources/Levels.json");
+		Debug.Log (jsonString);
+	}
+
+
+    float deltaTime = 0.0f;
+
+    void Update()
+    {
+        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+    }
+
+    void OnGUI()
+    {
+        int w = Screen.width, h = Screen.height;
+
+        GUIStyle style = new GUIStyle();
+
+        Rect rect = new Rect(0, 0, w, h * 2 / 100);
+        style.alignment = TextAnchor.UpperLeft;
+        style.fontSize = h * 2 / 100;
+        style.normal.textColor = new Color(0.0f, 0.0f, 0.5f, 1.0f);
+        float msec = deltaTime * 1000.0f;
+        float fps = 1.0f / deltaTime;
+        if(fps < MIN_FPS)disableGlow();
+        string text = string.Format("{0:0.0} ms ({1:0.} fps)", msec, fps);
+        GUI.Label(rect, text, style);
+    }
+
+    private void disableGlow()
+    {
+        Camera.main.GetComponent<MKGlowSystem.MKGlow>().enabled = false;
+    }
 
 }
