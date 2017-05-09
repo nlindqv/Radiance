@@ -17,9 +17,6 @@ public class LevelData{
 	//path to current scene
 	public string path;
 
-	//current score for level
-	public int starCount;
-
 
 	//Tutorial variables go here
 	public int tutorialIndex;
@@ -32,7 +29,6 @@ public class LevelData{
 
 	public LevelData(){
 		this.levelIndex = -1;
-		this.starCount = 3;
 		this.levelName = "testing";
 		tutorialIndex = -1;
 	}
@@ -40,29 +36,19 @@ public class LevelData{
 	public LevelData(int levelIndex){
 		this.levelIndex = levelIndex;
 		this.levelName = "Level" + levelIndex;
-		starCount = 3;
 		tutorialIndex = -1;
 	}
 
 	public LevelData(int levelIndex, string levelName){
 		this.levelIndex = levelIndex;
 		this.levelName = levelName;
-		starCount = 3;
 		tutorialIndex = -1;
 	}
 
-	public LevelData(int levelIndex, string levelName, int starCount){
-		this.levelIndex = levelIndex;
-		this.levelName = levelName;
-		this.starCount = starCount;
-		tutorialIndex = -1;
-	}
-
-	public LevelData(string path, int levelIndex, string levelName, int starCount){
+	public LevelData(string path, int levelIndex, string levelName){
 		this.path = path;
 		this.levelIndex = levelIndex;
 		this.levelName = levelName;
-		this.starCount = starCount;
 		tutorialIndex = -1;
 	}
 
@@ -76,7 +62,7 @@ public class LevelData{
 	#region Override Functions
 
 	public override string ToString(){
-		string s = "Index: " + this.levelIndex.ToString () + " w/ stars: " + this.starCount.ToString() + " & name " + this.levelName;
+		string s = "Index: " + this.levelIndex.ToString () + " w/ path: " + this.path + " & name " + this.levelName;
 		return s;
 	}
 	/*
@@ -113,4 +99,21 @@ public class Tutorial{
 	public string title;
 	public string tutorialText;
 	public Image icon;
+
+	public Tutorial(){
+		this.title = "Title";
+		this.tutorialText = "text";
+		this.icon = null;
+	}
+
+	public Tutorial(string title, string text){
+		this.title = title;
+		this.tutorialText = text;
+		this.icon = null;
+	}
+}
+
+[Serializable]
+public class TutorialList{
+	public List<Tutorial> list = new List<Tutorial> ();
 }

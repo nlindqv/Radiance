@@ -23,9 +23,10 @@ public static class GenerateAvailableScenesJSON
 
 			string name = path.Substring (lastBackslash + 1, lastDot-lastBackslash-1);
 
-			int score = 0;//Mathf.RoundToInt(Random.Range(0,4));
+			//use this to set predetermined values for starcount in each level
+			PlayerPrefs.SetInt (name, 0);
 
-			LevelData t = new LevelData (path, i++, name, score);
+			LevelData t = new LevelData (path, i++, name);
 
 			ls.list.Add (t);
 		}

@@ -3,27 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class MemoryManager : MonoBehaviour {
 
-//	private static string PATH = Application.persistentDataPath + "/Levels.json";
 
-	static TextAsset file = Resources.Load<TextAsset> ("Levels");
-	private static LevelList LEVELS = JsonUtility.FromJson<LevelList> (file.text);
+	static TextAsset LevelFile = Resources.Load<TextAsset> ("Levels");
+	private static LevelList LEVELS = JsonUtility.FromJson<LevelList> (LevelFile.text);
+
+//	static TextAsset TutFile = Resources.Load<TextAsset> ("Tutorials");
+//	private static TutorialList TUTORIALS = JsonUtility.FromJson<TutorialList> (TutFile.text);
+
+	private static readonly int levelIndexOffset = GetIndexOffset();
 
 
-	//TODO implement function that gets indexoffset?
-	private const int levelIndexOffset = 7;
+	#region Private functions
 
+	/// <summary>
+	/// Gets index offset for levels, that is removes all menu scenes and testlevels from
+	/// indexing to make sure we access correct space in memory
+	/// </summary>
+	/// <returns>offset</returns>
+	private static int GetIndexOffset(){
+		int offset = 0;
+		foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes) {
+			if (!scene.path.Contains ("GameScenes/Levels")) {
+				offset++;
+			}
+			else if(scene.path.Contains("GameScenes/Levels"))
+				break;
+		}
+		print (offset);
+		return offset;
+	}
 
 	private static LevelData getLevel(){
 		int index = SceneManager.GetActiveScene ().buildIndex;
 		return LEVELS.list [index - levelIndexOffset];
 	}
 
+	#endregion
 
-
-
+	#region Public Functions
 
 	public static string LoadLevelName(){
 		return getLevel().levelName;
@@ -38,6 +59,16 @@ public class MemoryManager : MonoBehaviour {
 		return score;
 	}
 
+	public static Tutorial LoadTutorial(int index){
+		return new Tutorial();
+	}
+
+
+	public static void WriteScore2Memory(int score){
+		PlayerPrefs.SetInt (getLevel ().levelName, score);
+	}
+
+
 
 	public static int[] LoadAllScores(){
 		int[] scores = new int[LEVELS.list.Count];
@@ -47,13 +78,6 @@ public class MemoryManager : MonoBehaviour {
 		}
 		return scores;
 	}
-
-
-
-	public static void WriteScore2Memory(int score){
-		PlayerPrefs.SetInt (getLevel ().levelName, score);
-	}
-		
 
 	/// <summary>
 	/// Loads paths for all levels.
@@ -70,9 +94,9 @@ public class MemoryManager : MonoBehaviour {
 	public static LevelList GetLevels(){
 		return LEVELS;
 	}
+		
 
-
-
+	#endregion
 
 
 
@@ -83,13 +107,27 @@ public class MemoryManager : MonoBehaviour {
 		//writeOnce();
 		//readData ();
 
+		writeTutorials ();
+
+	}
+
+	public static void writeTutorials(){
+		TutorialList tut = new TutorialList();
+		for (int i = 0; i < 5; i++) {
+			Tutorial t = new Tutorial (LEVELS.list [i].levelName, "item #" + i + " does a lot of fun stuff.");
+			tut.list.Add(t);
+		}
+		string path2write = "Assets/Resources/Tutorials.json";
+		using (StreamWriter s = new StreamWriter (path2write)) {
+			s.Write(JsonUtility.ToJson(tut));
+		}
 	}
 
 	public static void writeOnce(){
 		LevelList ls = new LevelList ();
 		for (int i = 1; i <= 20; i++) {
 			string name = "Level " + i;
-			LevelData t = new LevelData (i - 1, name, Mathf.RoundToInt(Random.Range(0,4)));
+			LevelData t = new LevelData (i - 1, name);
 			ls.list.Add (t);
 		}
 		string path2write = "Assets/Resources/infoTest.json";
@@ -101,13 +139,13 @@ public class MemoryManager : MonoBehaviour {
 
 	public static void writeData(string data){
 
-		LevelData l1 = new LevelData (1, data, 2);
+		LevelData l1 = new LevelData (1, data);
 
-		LevelData l2 = new LevelData (2, "men", 1);
+		LevelData l2 = new LevelData (2, "men");
 
-		LevelData l3 = new LevelData (5, "nytt", 4);
+		LevelData l3 = new LevelData (5, "nytt");
 
-		LevelData l4 = new LevelData (3, "gam", 0);
+		LevelData l4 = new LevelData (3, "gam");
 
 //		print (l1);
 //		print (l2);

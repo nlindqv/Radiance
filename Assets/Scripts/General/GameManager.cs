@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         //Prata med minnet
 		levelName = MemoryManager.LoadLevelName();
 		tutorialIndex = MemoryManager.LoadTutorialIndex();
-		print (levelName);
+		MemoryManager.mem ();
 
         laserMode = GameObject.Find("LightSource").GetComponent<LaserMode>();
 
@@ -119,10 +119,9 @@ public class GameManager : MonoBehaviour
 	private void LoadTutorial (int index)
 	{
 		// Load info about tutorial
-		string title = "title"; 
-		string text = "sample text";
-		Image icon = null;
-		UI.NewTutorial (title, text, icon);
+		Tutorial tut = MemoryManager.LoadTutorial(index);
+
+		UI.NewTutorial (tut.title, tut.tutorialText, tut.icon);
 	}
 
 	private void CheckLevelCompleted ()
