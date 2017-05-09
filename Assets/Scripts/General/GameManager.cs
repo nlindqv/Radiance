@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public LaserMode laserMode;
 
-    public Material skybox;
+    //public Material skybox;
 
 	public static GameState gameState;
 	private string levelName;
@@ -121,10 +121,10 @@ public class GameManager : MonoBehaviour
 			break;
 		}
         prevGameState = gameState;
-        skybox.SetFloat("_Rotation", 2 * Time.deltaTime + skybox.GetFloat("_Rotation"));
-        skybox.SetFloat("_Exposure", Mathf.Sin(2 * Time.deltaTime + skybox.GetFloat("_Rotation"))/8.0f + 1.2f);
-        Debug.Log(skybox.GetFloat("_Exposure"));
-        RenderSettings.skybox = skybox;
+        RenderSettings.skybox.SetFloat("_Rotation", 2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"));
+        RenderSettings.skybox.SetFloat("_Exposure", Mathf.Sin(2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"))/8.0f + 1.2f);
+        //Debug.Log(skybox.GetFloat("_Exposure"));
+        //RenderSettings.skybox = skybox;
 
     }
 
