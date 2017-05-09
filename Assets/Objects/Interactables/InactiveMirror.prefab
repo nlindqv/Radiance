@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 136060553630846570}
   - component: {fileID: 23857863952889038}
   - component: {fileID: 114188027858522986}
+  - component: {fileID: 122891538401945136}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -263,6 +264,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tool: {fileID: 1566759639936482, guid: 017de6d5e222d584db6c14e65feedc81, type: 2}
+--- !u!122 &122891538401945136
+Halo:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1381960384908662}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4292072406
+  m_Size: 1
 --- !u!136 &136060553630846570
 CapsuleCollider:
   m_ObjectHideFlags: 1
