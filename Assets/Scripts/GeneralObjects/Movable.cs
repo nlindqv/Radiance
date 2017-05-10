@@ -21,27 +21,20 @@ public class Movable : MonoBehaviour
 	// Can be applied to any object with a rigidbody
     void Start()
     {
-		this.rigidb = GetComponent<Rigidbody>();
+		
+        this.rigidb = GetComponent<Rigidbody>();
         GetComponent<Rigidbody>().freezeRotation = true;
         move = false;
         previousPosition = rigidb.position;
         startHeight = rigidb.position.y;
         offsetTouch = 1.2f;
-
 		if (transform.parent != null)
 			activateButton = transform.parent.GetComponentInChildren<MirrorInactive> ();
-
     }
     
-	private void Update(){
-		this.rigidb.velocity = Vector3.zero;
-		this.rigidb.freezeRotation = true;
-	}
     private void OnMouseDown()
     {
-
 		if (activateButton == null || activateButton.IsActivated ()) {
-
 			if (GameManager.gameMode == GameManager.GameMode.mirrorMode ) { // If in mirror mode, pick up mirror
 				firstTouchPos = Input.mousePosition;
 				previousPosition = rigidb.position;
@@ -56,7 +49,6 @@ public class Movable : MonoBehaviour
     private void OnMouseDrag()
     {
         // calc difference between first touch and the next touch
-		Rotate.rotated = false;
         float diff = Vector3.Distance(firstTouchPos, Input.mousePosition);
 		if (move && GameManager.gameMode == GameManager.GameMode.mirrorMode && diff > offsetTouch) {	//If in move,mirror mode and greater than offset, enable to move object
 			updateTouchPoint ();
@@ -89,11 +81,8 @@ public class Movable : MonoBehaviour
 			Debug.Log("Plane");
 		}
 		else {
-			Debug.Log ("Movable collision");
-			if (!Rotate.rotated) {
-				GetComponent<Rigidbody> ().position = previousPosition;
-				GetComponent<Rigidbody> ().velocity = Vector3.zero;
-			} 
+			GetComponent<Rigidbody>().position = previousPosition;
+			GetComponent<Rigidbody>().velocity = Vector3.zero;
 		}
     }
 
