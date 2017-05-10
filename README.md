@@ -80,4 +80,15 @@ Varje mover har en BezierCurve (script) som definierar kurvan som ett externt ob
 
 Vi klarade av vårt mål att få hela gruppen engagerad och delaktiga i demon. Vi lyckades även förbättra samarbetet och kommunikationen i gruppen genom att rotera i högre grad runt och arbeta med "nya" partners. Vi stötte på ett par problem i sprint 2 gällande ojämn fördelning av arbete. Vi fick att ett par personer tog sig an större uppgifter och blev låsta en längre tid medan andra hade ingenting att göra. Lösningen vi föreslår till nästa sprint är att rotera partners varje dag för att involvera fler i gruppen i samma problem samtidigt som flera får arbeta med olika stora problem. 
 
+## Sprint 3 
+
+Inför sprint 3 lägger vi nu fokus på att sätta ihop alla delar i spelet och har som mål att producera en första release-kandidat. I den första releasen ska vi fokusera på att skapa ett häftigare och mer sammanhängande spel genom att introducera ett tema för alla komponenter samt att lägga på animeringar i spelet. En annan viktig egenskap som vi har tänkt att prioritera i denna sprint är minnes-hanteringen i spelet så att användaren kan avancera i spelet och hålla koll på sin utveckling mellan spelomgångar samtidigt som vi utvecklare kan implementera spelet på ett mer effektivt sätt. Vi tänker även prioritera feedback så att vi får en bredare insyn i hur vi kan förbättra vårt spel.
+
+I vårt arbetssätt kommer vi att försöka fördela arbetsuppgifter mer jämt mellan personer så att flera får bättre kunskap om designen i vitala delar av spelet och flera får mer varierade arbetsuppgifter. 
+
+## Sammanfattning för sprint 3
+
+Vi klarade av vårt sprint mål och har en release-kandidat. Vi har lyckats implementera både animeringar, minne samt kunnat få lite feedback på vad som behöver förbättras i vårt spel. Vi behöver dock fortfarande se över våra komponenter i spelet så att de håller sig till samma tema samt fixa en del buggar. 
+
+TBC
 
