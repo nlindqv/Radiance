@@ -56,10 +56,6 @@ public class GameManager : MonoBehaviour
         laserMode.laserStack = laserStack;
        
 
-		// Start game with tutorial window #1
-		gameState = GameState.tutorial;
-        prevGameState = GameState.tutorial;
-        gameMode = GameMode.none;
        
 		// Access UIs components and children
 		UI = GameObject.Find ("UI").GetComponent<ViewController> ();
@@ -69,8 +65,18 @@ public class GameManager : MonoBehaviour
 		UI.transform.Find("Canvas").transform.Find("MellanMeny").gameObject.SetActive (false);
 
 		// If totrial index = -1 dont show anything, otherwise load tutorial with index tutorialIndex
-		if (tutorialIndex >= -1) {
+		if (tutorialIndex >= 0) {
+			// Start game with tutorial window #1
+			gameState = GameState.tutorial;
+			prevGameState = GameState.tutorial;
+			gameMode = GameMode.none;
+
 			LoadTutorial (tutorialIndex);
+		} else {
+			// Start game without tutorial
+			gameState = GameState.gameRunning;
+			prevGameState = GameState.gameRunning;
+			gameMode = GameMode.laserMode;
 		}
 	}
 
