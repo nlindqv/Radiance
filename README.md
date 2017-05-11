@@ -90,5 +90,5 @@ I vårt arbetssätt kommer vi att försöka fördela arbetsuppgifter mer jämt m
 
 Vi klarade av vårt sprint mål och har en release-kandidat. Vi har lyckats implementera både animeringar, minne samt kunnat få lite feedback på vad som behöver förbättras i vårt spel. Vi behöver dock fortfarande se över våra komponenter i spelet så att de håller sig till samma tema samt fixa en del buggar. 
 
-TBC
+Det vi tyckte gick bra i sprint 3 är att vi fördelade arbetet bättre och arbetade bra i grupperna som vi även roterade. Vi tycker även att vi har en bra gruppsammanhållning och att ingen tar illa vid sig vid input från andra. Vi har dock fortfarande en del saker att förbättra i vårt arbetssätt och vi har kommit fram till att vi behöver bli bättre på att ge feedback på ett bra sätt. Vi ska även låta alla arbeta med sitt och inte störa varandra.
 
