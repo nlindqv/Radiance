@@ -56,7 +56,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1324387840937878}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.513, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 4808818618553770}
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tool: {fileID: 1566759639936482, guid: 017de6d5e222d584db6c14e65feedc81, type: 2}
-  MoveHeight: 5
+  rotated: 0
 --- !u!114 &114132208916218106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveHeight: 5
+  offsetTouch: 0
 --- !u!114 &114415434974771958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -190,5 +191,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de761147480b4b449a2e6a995d7a587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ray: {fileID: 1549347449294414, guid: 7b43f807828af40b582199ab1902235b, type: 2}
+  ray: {fileID: 0}
   bounceValue: 0
