@@ -60,6 +60,13 @@ public class MemoryManager : MonoBehaviour {
 		return scores;
 	}
 
+	public static TutorialList LoadAllTutorials(){
+		TutorialList tutorials = new TutorialList();
+		for(int i = 0; i < TUTORIALS.list.Count; i++)
+			tutorials.list.Add(TUTORIALS.list[i]);
+		return tutorials;
+	}
+
 	/// <summary>
 	/// Loads paths for all levels.
 	/// </summary>
