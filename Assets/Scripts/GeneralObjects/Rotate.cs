@@ -15,11 +15,12 @@ public class Rotate : MonoBehaviour
     private Transform mirror;
     private Vector3 prevPos;
     private Quaternion prevRotate;
+    private Quaternion prevRotation;
 
     // Use this for initialization
     void Start()
     {
-        MoveHeight = 1.5f;
+        MoveHeight = 2.0f;
         move = gameObject.GetComponent<Movable>().getMove();
         /*if (transform.parent.GetComponentInChildren<MirrorInactive> () != null)
 			activateButton = transform.parent.GetComponentInChildren<MirrorInactive> ();*/
@@ -84,7 +85,12 @@ public class Rotate : MonoBehaviour
             //rotated = true;
         }
     }
-  
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        prevRotation = GetComponent<Rigidbody>().rotation;
+    }
+
     private void OnCollisionStay(Collision collision)
     {
         /*if (!collision.collider.name.Equals("Plane"))
@@ -101,7 +107,16 @@ public class Rotate : MonoBehaviour
            // else
                // Destroy(activeTool);
         }*/
+        Debug.Log("Stuck!");
+        //transform.Rotate(Vector3.up * 100.0f, Space.World);
+        //rigidbody
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+       // GetComponent<Rigidbody>().rotation = prevRotation;
+    }
+
     public void SetPrevPosition(Vector3 prevPos, Quaternion prevRotate)
     {
         this.prevPos = prevPos;
