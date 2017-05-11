@@ -32,7 +32,16 @@ public class MemoryManager : MonoBehaviour {
 	}
 
 	public static int LoadTutorialIndex(){
-		return getLevel().tutorialIndex;
+		int index;
+		try
+		{
+			index = getLevel().tutorialIndex;
+		}
+		catch(System.ArgumentOutOfRangeException e){
+			index = -1;
+		}
+
+		return index;
 	}
 
 	public static int LoadScore(){

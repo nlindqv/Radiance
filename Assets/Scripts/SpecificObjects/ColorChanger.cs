@@ -20,14 +20,17 @@ public class ColorChanger : IInteractables {
 	//Gate has collider and model as child.
     private BoxCollider col;
     private Transform child;
-    private Renderer renderer;
-
+    private ParticleSystem ps;
+    private ParticleSystem p1;
+    private ParticleSystem p2;
+    private ParticleSystem p3;
 	void Start () {
-
 		//get collider
         col = GetComponent<BoxCollider>();
-        renderer = GetComponentInChildren<Renderer>();
-
+        ps = this.transform.FindChild("core_tint").gameObject.GetComponent<ParticleSystem>() ;
+        p1 = this.transform.FindChild("glow_birth").transform.FindChild("p1").GetComponent<ParticleSystem>();
+        p2 = this.transform.FindChild("glow_birth").transform.FindChild("p2").GetComponent<ParticleSystem>();
+        p3 = this.transform.FindChild("glow_birth").transform.FindChild("p3").GetComponent<ParticleSystem>();
 		UpdateColor ();
 	}
 
@@ -35,8 +38,22 @@ public class ColorChanger : IInteractables {
 	/// Updates color of gate.
 	/// </summary>
 	void UpdateColor(){
-            //set color of gate with alpha 128=half transparancy
-            renderer.material.SetColor("_TintColor", new Color(color.r, color.g, color.b, 128));
+        //update core-glow
+        UnityEngine.ParticleSystem.MainModule main = ps.main;
+        main.startColor = color;
+        Gradient grad = new Gradient();
+        grad.SetKeys(new GradientColorKey[] { new GradientColorKey(color, 1f) }, new GradientAlphaKey[] {new GradientAlphaKey(0.0f, 0.0f), 
+            new GradientAlphaKey(1f, 0.25f),new GradientAlphaKey(1f, 0.75f), new GradientAlphaKey(0.0f, 1.0f) } );
+        var col = ps.colorOverLifetime;
+        col.color = grad;
+
+        //update particle glow color
+        main = p1.main;
+        main.startColor = color;
+        main = p2.main;
+        main.startColor = color;
+        main = p3.main;
+        main.startColor = color;
 	}
 
 	/// <summary>

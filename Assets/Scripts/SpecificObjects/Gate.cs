@@ -37,6 +37,6 @@ public class Gate : IInteractables {
 
     public bool colorEqual(Color one,  Color two)
     {
-        return one.r == two.r && one.g == two.g && one.b == two.b;
+        return Math.Abs(one.r - two.r + one.g - two.g + one.b - two.b) <= 0.001f;
     }
 }
