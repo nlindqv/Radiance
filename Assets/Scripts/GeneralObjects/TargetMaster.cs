@@ -46,16 +46,16 @@ public class TargetMaster : MonoBehaviour {
 		return levelCompleted;
 	}
 	public int GetCollectables(){
-		if (Collectables == null)
-			Collectables = new ICollectable[0];
-		int collectedCollectables = 0;
 		if (Collectables.Length == 0)
 			return 3;
+
+		int collectedCollectables = 0;
 		for (int i = 0; i < Collectables.Length; i++) {
 			if (Collectables [i].Collected())
 				collectedCollectables++;
 		}
-		return (int)Mathf.Floor (collectedCollectables / Collectables.Length * 2 + 1);
+		float score = Mathf.Floor (((float)collectedCollectables / Collectables.Length) * 2 + 1);
+		return (int) score;
 	}
 }
 

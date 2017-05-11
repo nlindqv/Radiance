@@ -32,7 +32,16 @@ public class MemoryManager : MonoBehaviour {
 	}
 
 	public static int LoadTutorialIndex(){
-		return getLevel().tutorialIndex;
+		int index;
+		try
+		{
+			index = getLevel().tutorialIndex;
+		}
+		catch(System.ArgumentOutOfRangeException e){
+			index = -1;
+		}
+
+		return index;
 	}
 
 	public static int LoadScore(){
@@ -58,6 +67,13 @@ public class MemoryManager : MonoBehaviour {
 //			print (LEVELS.list [i].levelName + " has starcount " + scores [i].ToString ());
 		}
 		return scores;
+	}
+
+	public static TutorialList LoadAllTutorials(){
+		TutorialList tutorials = new TutorialList();
+		for(int i = 0; i < TUTORIALS.list.Count; i++)
+			tutorials.list.Add(TUTORIALS.list[i]);
+		return tutorials;
 	}
 
 	/// <summary>
