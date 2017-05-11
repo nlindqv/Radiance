@@ -17,6 +17,7 @@ public class Movable : MonoBehaviour
     public float moveHeight;
     public float offsetTouch;
 	private MirrorInactive activateButton;
+	private bool prevMove;
 
 	// Can be applied to any object with a rigidbody
     void Start()
@@ -37,6 +38,7 @@ public class Movable : MonoBehaviour
 		this.rigidb.velocity = Vector3.zero;
 		this.rigidb.freezeRotation = true;
 	}
+		
     private void OnMouseDown()
     {
 		//Debug.Log (activateButton + " 10");

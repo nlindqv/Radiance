@@ -42,6 +42,7 @@ public class Rotate : MonoBehaviour
 					drag = true;
 				} else if (!drag) {                
 					Destroy (activeTool);
+				SetPrevPosition (mirror.position, mirror.rotation);
 				}
 			} else {
 				drag = false;
@@ -51,7 +52,11 @@ public class Rotate : MonoBehaviour
 		//}
 
 		// om prev och nuvarande är olika om rotate är true
-		if (rotated && !prevPos.Equals (transform.position)) {
+		bool x = NearlyEqual (prevPos.x, transform.position.x, 0.001f);
+		bool y = NearlyEqual (prevPos.y, transform.position.y, 0.001f);
+		bool z = NearlyEqual (prevPos.z, transform.position.z, 0.001f);
+
+		if (rotated && (!x||!y||!z)) {
 			transform.position = this.prevPos;
 			transform.rotation = this.prevRotate;
 			Destroy (activeTool);
@@ -92,5 +97,27 @@ public class Rotate : MonoBehaviour
 		this.prevPos = prevPos;
 		this.prevRotate = prevRotate;
 	}
+
+	public static bool NearlyEqual(float a, float b, float epsilon)
+			{
+				float absA = Mathf.Abs(a);
+				float absB = Mathf.Abs(b);
+				float diff = Mathf.Abs(a - b);
+
+				if (a == b)
+				{ // shortcut, handles infinities
+					return true;
+				}
+				else if (a == 0 || b == 0 || diff < float.Epsilon)
+				{
+					// a or b is zero or both are extremely close to it
+					// relative error is less meaningful here
+					return diff < epsilon;
+				}
+				else
+				{ // use relative error
+					return diff / (absA + absB) < epsilon;
+				}
+		}
 }
 
