@@ -166,7 +166,8 @@ public class ViewController : MonoBehaviour
 	public void ShowPauseScreen(int starCount){
 		pauseScreen = transform.Find ("PauseMenu");
 		pauseScreen.gameObject.SetActive (true);
-		pauseScreen.Find("Level").GetComponent<RectTransform>().GetComponent<Text>().text = "Tjolahopp";
+		string levelTitle = "Level " + MemoryManager.LoadLevelIndex ().ToString();
+		pauseScreen.Find("Level").GetComponent<RectTransform>().GetComponent<Text>().text = levelTitle;
 		ShowFadePanel ();
 		for (int i=1; i <= starCount; i++) {
 			LightStar (i);

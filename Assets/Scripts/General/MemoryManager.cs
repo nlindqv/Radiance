@@ -29,7 +29,7 @@ public class MemoryManager : MonoBehaviour {
 		//We account for index because menuscenes count as scenes but not as levels
 		//indexoffset maintains correlation between buildindex and level-index, e.g. level_1 can have buildindex=4
 		int index = SceneManager.GetActiveScene ().buildIndex;
-        Debug.Log ("Getting scene w/ index: " + index + " and levelind " + levelIndexOffset);
+//        Debug.Log ("Getting scene w/ index: " + index + " and levelind " + levelIndexOffset);
 //        Debug.Log("index - levelIndexOffset: " + (index - levelIndexOffset));
 		return LEVELS.list [index - levelIndexOffset];
 	}
@@ -39,6 +39,10 @@ public class MemoryManager : MonoBehaviour {
 
 	public static string LoadLevelName(){
 		return getLevel().levelName;
+	}
+
+	public static int LoadLevelIndex(){
+		return getLevel().levelIndex;
 	}
 
 	public static int LoadTutorialIndex(){
