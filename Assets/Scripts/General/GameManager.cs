@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		
+		Input.multiTouchEnabled = false;
         //Prata med minnet
 //		levelName = MemoryManager.LoadLevelName();
 		tutorialIndex = MemoryManager.LoadTutorialIndex();
