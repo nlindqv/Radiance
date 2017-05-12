@@ -7,21 +7,30 @@ using UnityEngine.SceneManagement;
 
 public class MemoryManager : MonoBehaviour {
 
-
+	//load a file from Resources-folder, then convert it to corresponding datastructure
+	//see Assets/DataObjects/Leveldata.cs for data structures
 	static TextAsset LevelFile = Resources.Load<TextAsset> ("Levels");
 	private static LevelList LEVELS = JsonUtility.FromJson<LevelList> (LevelFile.text);
 
 	static TextAsset TutFile = Resources.Load<TextAsset> ("Tutorials");
 	private static TutorialList TUTORIALS = JsonUtility.FromJson<TutorialList> (TutFile.text);
 
+	//load indexOffset, written at build in Assets/Editor/GenerateAvailableScenesJSON.cs
 	static TextAsset IndexOffsetFile = Resources.Load<TextAsset> ("indexOffset");
 	private static int levelIndexOffset = int.Parse(IndexOffsetFile.text);
 
 
-
+	/// <summary>
+	/// Gets current level from LEVELS-datastructure
+	/// </summary>
+	/// <returns>The level</returns>
 	private static LevelData getLevel(){
+
+		//We account for index because menuscenes count as scenes but not as levels
+		//indexoffset maintains correlation between buildindex and level-index, e.g. level_1 can have buildindex=4
 		int index = SceneManager.GetActiveScene ().buildIndex;
 //		Debug.Log ("Getting scene w/ index: " + index + " and levelind " + levelIndexOffset);
+
 		return LEVELS.list [index - levelIndexOffset];
 	}
 
@@ -45,6 +54,7 @@ public class MemoryManager : MonoBehaviour {
 		return index;
 	}
 
+	//Get score from memory
 	public static int LoadScore(){
 		int score = PlayerPrefs.GetInt (getLevel ().levelName, 0);
 		return score;
@@ -54,13 +64,13 @@ public class MemoryManager : MonoBehaviour {
 		return TUTORIALS.list[index];
 	}
 
-
+	//Write score to memory using Unity-class PlayerPrefs
 	public static void WriteScore2Memory(int score){
 		PlayerPrefs.SetInt (getLevel ().levelName, score);
 	}
 
 
-
+	//Get all scores
 	public static int[] LoadAllScores(){
 		int[] scores = new int[LEVELS.list.Count];
 		for(int i = 0; i < LEVELS.list.Count; i++){
@@ -118,7 +128,7 @@ public class MemoryManager : MonoBehaviour {
 
 
 
-	#region WriterHelpFunctions
+	#region Writer HelpFunctions & Debug
 
 	public static void mem(){
 		//writeOnce();
