@@ -29,10 +29,8 @@ public class Movable : MonoBehaviour
         previousPosition = rigidb.position;
         startHeight = rigidb.position.y;
         offsetTouch = 1.2f;
-        /*if (transform.parent.GetComponentInChildren<MirrorInactive> () != null)
+        if (transform.parent != null)
 			activateButton = transform.parent.GetComponentInChildren<MirrorInactive> ();
-		else
-			activateButton = null;*/
     }
 
     private void Update()

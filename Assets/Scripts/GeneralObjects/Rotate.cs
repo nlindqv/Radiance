@@ -22,8 +22,8 @@ public class Rotate : MonoBehaviour
     {
         MoveHeight = 2.0f;
         move = gameObject.GetComponent<Movable>().getMove();
-        /*if (transform.parent.GetComponentInChildren<MirrorInactive> () != null)
-			activateButton = transform.parent.GetComponentInChildren<MirrorInactive> ();*/
+        if (transform.parent != null)
+			activateButton = transform.parent.GetComponentInChildren<MirrorInactive> ();
 
         mirror = gameObject.transform;
         prevPos = mirror.position;
@@ -33,7 +33,7 @@ public class Rotate : MonoBehaviour
     void Update()
     {
         move = gameObject.GetComponent<Movable>().getMove();
-        //if (activateButton == null || activateButton.IsActivated()) {
+        if (activateButton == null || activateButton.IsActivated()) {
         if ((GameManager.gameMode == GameManager.GameMode.mirrorMode && !move && Input.GetMouseButton(0) && activeTool != null) && (activateButton == null || activateButton.IsActivated()))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -55,7 +55,7 @@ public class Rotate : MonoBehaviour
         }
         if (GameManager.gameMode != GameManager.GameMode.mirrorMode)
             Destroy(activeTool);
-        //}
+        }
 
         // om prev och nuvarande är olika om rotate är true
         /*bool x = NearlyEqual(prevPos.x, transform.position.x, 0.001f);
