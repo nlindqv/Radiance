@@ -18,6 +18,7 @@ public class Movable : MonoBehaviour
     public float offsetTouch;
     private MirrorInactive activateButton;
     private bool prevMove;
+    private bool prevPrevMove;
 
     // Can be applied to any object with a rigidbody
     void Start()
@@ -53,6 +54,8 @@ public class Movable : MonoBehaviour
                 move = true;
                 updateTouchPoint();
                 distanceOffset = rayPoint - previousPosition;
+                prevMove = false;
+                prevPrevMove = false;
             }
         }
     }
@@ -90,19 +93,35 @@ public class Movable : MonoBehaviour
         rayPoint = r.GetPoint(distance);
     }
 
-    private void OnCollisionStay(Collision col)
+    private void LateUpdate()
+    {
+        if (prevPrevMove && !prevMove && !move)
+        {
+            previousPosition = transform.position;
+            prevRotate = transform.rotation;
+            Debug.Log("Update");
+        }
+        prevPrevMove = prevMove;
+        prevMove = move;
+    }
+
+    private void OnCollisionEnter(Collision col)
     {
         //Move to previous position if collision
         //        GetComponent<Rigidbody>().position = previousPosition;
         //        GetComponent<Rigidbody>().velocity = Vector3.zero;
-        /*if (col.collider.name.Equals("Plane"))
+        
+        if (col.collider.name.Equals("Plane"))
         {
             Debug.Log("Plane");
         }
-        else
+        else if (col.gameObject.GetComponent<Reflective>() == null)
         {
-            Debug.Log("Bajs");
-        }*/
+            Debug.Log("Hit ");
+            this.transform.position = previousPosition;
+            this.transform.rotation = prevRotate;
+            prevPrevMove = false;
+        }
     }
 
     public bool getMove()

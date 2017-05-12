@@ -58,7 +58,7 @@ public class Rotate : MonoBehaviour
         }
 
         // om prev och nuvarande är olika om rotate är true
-        bool x = NearlyEqual(prevPos.x, transform.position.x, 0.001f);
+        /*bool x = NearlyEqual(prevPos.x, transform.position.x, 0.001f);
         bool y = NearlyEqual(prevPos.y, transform.position.y, 0.001f);
         bool z = NearlyEqual(prevPos.z, transform.position.z, 0.001f);
 
@@ -67,7 +67,7 @@ public class Rotate : MonoBehaviour
             transform.position = this.prevPos;
             transform.rotation = this.prevRotate;
             Destroy(activeTool);
-        }
+        }*/
     }
 
     private void OnMouseDown()
@@ -107,7 +107,7 @@ public class Rotate : MonoBehaviour
            // else
                // Destroy(activeTool);
         }*/
-        Debug.Log("Stuck!");
+        //Debug.Log("Stuck!");
         //transform.Rotate(Vector3.up * 100.0f, Space.World);
         //rigidbody
     }
