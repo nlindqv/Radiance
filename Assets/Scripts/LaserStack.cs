@@ -40,10 +40,8 @@ public class LaserStack {
 
     public void push(LaserRay laser)
     {
-        //laser.transform.position = new Vector3(0.0f, 150.0f, 0.0f);
-        //laser.transform.GetComponent<LineRenderer>().SetPosition(1, laser.transform.position);
         laser.gameObject.SetActive(false);
-        laser.Color = new Color(laser.Color.r, laser.Color.g, laser.Color.b, 1.0f);
+        laser.SetColor(100, laser.Color);
         if (head == null) { head = new Node(laser); return; }
         Node newNode = new Node(laser);
         newNode.SetNext(head);

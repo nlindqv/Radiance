@@ -77,7 +77,7 @@ public class ColorChanger : IInteractables {
         newRay.transform.rotation = Quaternion.LookRotation(ray.transform.forward);
 
         newRay.transform.parent = parentTransform;
-		newRay.SetColor (ray.BounceValue, color);
+        newRay.SetColor(ray.BounceValue, color);
         newRay.GenerateLaserRay();
 	}
 }

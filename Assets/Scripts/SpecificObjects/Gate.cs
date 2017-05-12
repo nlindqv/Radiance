@@ -23,7 +23,7 @@ public class Gate : IInteractables {
             Vector3 direction = laserHit.transform.forward;
             Vector3 norm = Vector3.Normalize(direction);
             Vector3 margin = Vector3.Scale(norm, new Vector3(0.01f, 0.01f, 0.01f));
-            Vector3 startPoint = laserHit.HitPoint + margin;//new Vector3(laserHit.HitPoint.x + 0.01f, laserHit.HitPoint.y, laserHit.HitPoint.z + 0.01f);
+            Vector3 startPoint = laserHit.HitPoint + margin;
             LaserRay newRay = GetLaser(laserHit.BounceValue);
             if (newRay == null) return;
             Transform parentTranform = laserHit.transform.parent;
@@ -37,6 +37,6 @@ public class Gate : IInteractables {
 
     public bool colorEqual(Color one,  Color two)
     {
-        return Math.Abs(one.r - two.r + one.g - two.g + one.b - two.b) <= 0.01f;
+        return Math.Abs(one.r - two.r + one.g - two.g + one.b - two.b) <= 0.001f;
     }
 }
