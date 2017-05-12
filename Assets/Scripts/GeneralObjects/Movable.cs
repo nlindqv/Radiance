@@ -19,6 +19,7 @@ public class Movable : MonoBehaviour
     private MirrorInactive activateButton;
     private bool prevMove;
     private bool prevPrevMove;
+	private int touchIndex;
 
     // Can be applied to any object with a rigidbody
     void Start()
@@ -35,47 +36,74 @@ public class Movable : MonoBehaviour
 
     private void Update()
     {
-        this.rigidb.velocity = Vector3.zero;
+		this.rigidb.velocity = Vector3.zero;
         this.rigidb.freezeRotation = true;
         if(!move)transform.position = new Vector3(transform.position.x, startHeight, transform.position.z);
     }
 
-    private void OnMouseDown()
+    /*private void OnMouseDown()
     {
-        //Debug.Log (activateButton + " 10");
-        if (activateButton == null || activateButton.IsActivated())
-        {
-            //	Debug.Log (activateButton + "0");
-            if (GameManager.gameMode == GameManager.GameMode.mirrorMode)
-            { // If in mirror mode, pick up mirror
-                firstTouchPos = Input.mousePosition;
-                previousPosition = rigidb.position;
-                prevRotate = transform.rotation;
-                move = true;
-                updateTouchPoint();
-                distanceOffset = rayPoint - previousPosition;
-                prevMove = false;
-                prevPrevMove = false;
-            }
-        }
+		//Debug.Log (activateButton + " 10");
+			if (activateButton == null || activateButton.IsActivated ()) {
+				//	Debug.Log (activateButton + "0");
+				if (GameManager.gameMode == GameManager.GameMode.mirrorMode) { // If in mirror mode, pick up mirror
+					firstTouchPos = Input.mousePosition;
+					previousPosition = rigidb.position;
+					prevRotate = transform.rotation;
+					move = true;
+					updateTouchPoint ();
+					distanceOffset = rayPoint - previousPosition;
+					prevMove = false;
+					prevPrevMove = false;
+				}
+			}
     }
+    */
 
-    private void OnMouseDrag()
-    {
-        //Debug.Log (activateButton + "1");
-        // calc difference between first touch and the next touch
-        GetComponent<Rotate>().rotated = false;
-        float diff = Vector3.Distance(firstTouchPos, Input.mousePosition);
-        if (move && GameManager.gameMode == GameManager.GameMode.mirrorMode && diff > offsetTouch)
-        {   //If in move,mirror mode and greater than offset, enable to move object
-            updateTouchPoint();
-            rigidb.position = rayPoint - distanceOffset;
-            rigidb.position = new Vector3(rigidb.position.x, startHeight, rigidb.position.z);
-            GetComponent<Collider>().isTrigger = true;
-        }
-    }
+	public void FirstInputClick(Touch touch){
+		if (activateButton == null || activateButton.IsActivated ()) {
+			//	Debug.Log (activateButton + "0");
+			if (GameManager.gameMode == GameManager.GameMode.mirrorMode) { // If in mirror mode, pick up mirror
+				firstTouchPos = touch.position;
+				previousPosition = rigidb.position;
+				prevRotate = transform.rotation;
+				move = true;
+				updateTouchPoint (touch);
+				distanceOffset = rayPoint - previousPosition;
+				prevMove = false;
+				prevPrevMove = false;
+			}
+		}
+	}
 
-    private void OnMouseUp()
+
+  /*  private void OnMouseDrag()
+	{
+			//Debug.Log (activateButton + "1");
+			// calc difference between first touch and the next touch
+			GetComponent<Rotate> ().rotated = false;
+			float diff = Vector3.Distance (firstTouchPos, Input.mousePosition);
+			if (move && GameManager.gameMode == GameManager.GameMode.mirrorMode && diff > offsetTouch) {   //If in move,mirror mode and greater than offset, enable to move object
+				updateTouchPoint ();
+				rigidb.position = rayPoint - distanceOffset;
+				rigidb.position = new Vector3 (rigidb.position.x, startHeight, rigidb.position.z);
+				GetComponent<Collider> ().isTrigger = true;
+			}
+		}
+		*/
+	public void FirstInputDrag(Touch touch){
+		GetComponent<Rotate> ().rotated = false;
+		float diff = Vector3.Distance (firstTouchPos, touch.position);
+		if (move && GameManager.gameMode == GameManager.GameMode.mirrorMode && diff > offsetTouch) {   //If in move,mirror mode and greater than offset, enable to move object
+			updateTouchPoint (touch);
+			rigidb.position = rayPoint - distanceOffset;
+			rigidb.position = new Vector3 (rigidb.position.x, startHeight, rigidb.position.z);
+			GetComponent<Collider> ().isTrigger = true;
+		}
+	}
+
+
+    /*private void OnMouseUp()
     {
         if (GameManager.gameMode == GameManager.GameMode.mirrorMode) //If in mirror mode
         {
@@ -84,11 +112,20 @@ public class Movable : MonoBehaviour
             move = false;
             GetComponent<Collider>().isTrigger = false;
         }
-    }
+    }*/
+	public void FirstInputUp(Touch touch){
+		if (GameManager.gameMode == GameManager.GameMode.mirrorMode) //If in mirror mode
+		{
+			//Debug.Log (activateButton + "2");
+			rigidb.position = new Vector3(rigidb.position.x, startHeight, rigidb.position.z);
+			move = false;
+			GetComponent<Collider>().isTrigger = false;
+		}
+	}
 
-    private void updateTouchPoint()
+	private void updateTouchPoint(Touch touch)
     {
-        r = Camera.main.ScreenPointToRay(Input.mousePosition);
+		r = Camera.main.ScreenPointToRay(touch.position);
         distance = Vector3.Distance(rigidb.position, Camera.main.transform.position);
         rayPoint = r.GetPoint(distance);
     }
