@@ -106,8 +106,9 @@ public class Tutorial{
 	public string title;
 	public string tutorialText;
 	public Image icon;
+    public bool tutorialPlayedBefore;
 
-	public Tutorial(){
+    public Tutorial(){
 		this.title = "Title";
 		this.tutorialText = "text";
 		this.icon = null;
