@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.IO;
 using UnityEngine.SceneManagement;
 
@@ -104,20 +105,22 @@ public class MemoryManager : MonoBehaviour {
 		//writeOnce();
 		//readData ();
 
-//		writeTutorials ();
+		writeTutorials ();
 
 	}
 
 	public static void writeTutorials(){
 		TutorialList tut = new TutorialList();
 		for (int i = 0; i < 5; i++) {
-			Tutorial t = new Tutorial (LEVELS.list [i].levelName, "item #" + i + " does a lot of fun stuff.");
+			string iconPath = Application.dataPath + "/Resources/icons/tutorial" + i + ".png";
+			Tutorial t = new Tutorial (LEVELS.list [i].levelName, "item #" + i + " does a lot of fun stuff.", iconPath);
 			tut.list.Add(t);
 		}
 		string path2write = "Assets/Resources/Tutorials.json";
 		using (StreamWriter s = new StreamWriter (path2write)) {
 			s.Write(JsonUtility.ToJson(tut));
 		}
+
 	}
 
 	public static void writeOnce(){
@@ -180,6 +183,21 @@ public class MemoryManager : MonoBehaviour {
 
 
 
+	/// <summary>
+	/// Loads a .png from path and returns it as a Sprite.
+	/// </summary>
+	/// <returns>.png as Sprite</returns>
+	/// <param name="path">Path to object</param>
+	public static Sprite loadIcon(string path){
+		byte[] data = File.ReadAllBytes(path);
+
+		Texture2D texture = new Texture2D(64, 64, TextureFormat.ARGB32, false);
+		texture.LoadImage(data);
+		texture.name = Path.GetFileNameWithoutExtension(path);
+
+		Sprite s = Sprite.Create (texture, new Rect (0, 0, texture.width, texture.height), Vector2.zero);
+		return s;
+	}
 
 	#endregion
 
