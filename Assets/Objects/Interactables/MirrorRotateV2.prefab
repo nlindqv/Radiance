@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ray: {fileID: 0}
-  bounceValue: 0
+  bounceValue: 10
 --- !u!114 &114548916474432250
 MonoBehaviour:
   m_ObjectHideFlags: 1
