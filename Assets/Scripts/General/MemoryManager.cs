@@ -118,12 +118,14 @@ public class MemoryManager : MonoBehaviour {
 	/// <param name="path">Path to object</param>
 	public static Sprite loadIcon(string path){
 		//get file
-		byte[] data = File.ReadAllBytes(path);
+//		byte[] data = File.ReadAllBytes(path);
 
 		//create texture from file
-		Texture2D texture = new Texture2D(64, 64, TextureFormat.ARGB32, false);
-		texture.LoadImage(data);
-		texture.name = Path.GetFileNameWithoutExtension(path);
+//		Texture2D texture = new Texture2D(64, 64, TextureFormat.ARGB32, false);
+//		texture.LoadImage(data);
+//		texture.name = Path.GetFileNameWithoutExtension(path);
+
+		Texture2D texture = Resources.Load<Texture2D>(path);
 
 		//create sprite from texture
 		Sprite s = Sprite.Create (texture, new Rect (0, 0, texture.width, texture.height), Vector2.zero);
