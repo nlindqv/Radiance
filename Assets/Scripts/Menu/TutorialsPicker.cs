@@ -21,7 +21,7 @@ public class TutorialsPicker : MonoBehaviour {
 	private void GenerateButtons(){
 		for (int i = 0; i < tutorials.list.Count; i++) {
 			GameObject newButton = Instantiate(tutorialButton.gameObject, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.LookRotation(tutorialButton.transform.forward));
-			//newButton.GetComponent<RectTransform> ().localScale = new Vector3 ((float)rectParent.lossyScale.x, (float)rectParent.lossyScale.y, (float)rectParent.lossyScale.z);
+			newButton.GetComponent<RectTransform> ().localScale = new Vector3 ((float)GetComponentInParent<RectTransform>().lossyScale.x, (float)GetComponentInParent<RectTransform>().lossyScale.y, (float)GetComponentInParent<RectTransform>().lossyScale.z);
 
 			int index = i;
 			newButton.transform.SetParent(tutorialButtonCanvas.transform);
