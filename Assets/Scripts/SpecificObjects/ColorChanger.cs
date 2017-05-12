@@ -37,7 +37,7 @@ public class ColorChanger : IInteractables {
 	/// <summary>
 	/// Updates color of gate.
 	/// </summary>
-	void UpdateColor(){
+	public void UpdateColor(){
         //update core-glow
         UnityEngine.ParticleSystem.MainModule main = ps.main;
         main.startColor = color;

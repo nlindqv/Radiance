@@ -38,8 +38,8 @@ public class LaserRay : MonoBehaviour
     public void SetColor(int newBounceValue, Color existingColor)
     {
         float deacreaseRelativeToValue = (float)newBounceValue / (float)BounceValue;
-        Color = new Color(existingColor.r, existingColor.g, existingColor.b, existingColor.a * deacreaseRelativeToValue);
-        Color = new Color(existingColor.r, existingColor.g, existingColor.b, existingColor.a * deacreaseRelativeToValue);
+        Color = new Color(existingColor.r, existingColor.g, existingColor.b, 1.0f * deacreaseRelativeToValue);
+        Color = new Color(existingColor.r, existingColor.g, existingColor.b, 1.0f * deacreaseRelativeToValue);
     }
     int count = 0;
     public void LateUpdate()
@@ -47,7 +47,7 @@ public class LaserRay : MonoBehaviour
     }
     public void GenerateLaserRay()
     {
-        
+        //SetColor(BounceValue, Color);
         laserRay = GetComponent<LineRenderer>();
         tf = GetComponent<Transform>();
         renderer = GetComponent<Renderer>();      

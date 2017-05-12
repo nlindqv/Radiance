@@ -96,7 +96,7 @@ public class ViewController : MonoBehaviour
 
 
 
-    public void NewTutorial(string title, string text, Image image)
+    public void NewTutorial(string title, string text, Sprite image)
     {
         if (tutorial == null)
             tutorial = transform.Find("Tut_UI");
@@ -105,6 +105,7 @@ public class ViewController : MonoBehaviour
         tutorial.gameObject.SetActive(true);
         tutorial.Find("Title").GetComponent<RectTransform>().GetComponent<Text>().text = title;
         tutorial.Find("Text").GetComponent<RectTransform>().GetComponent<Text>().text = text;
+		tutorial.Find ("Icon").GetComponent<Image> ().sprite = image;
     }
 
     public void HideTutorial()

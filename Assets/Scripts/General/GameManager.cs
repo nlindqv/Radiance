@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public enum GameMode { laserMode, mirrorMode, none };	// gameModes
 	public enum GameState {tutorial,gameRunning,endScreen, gamePaused};	// gameStates available
 
+
     public static GameMode gameMode = GameMode.none;		// init gameMode to none
     private static GameState prevGameState;					// save prev gameState
 	public GameObject laserRay;
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		
+		Input.multiTouchEnabled = false;
         //Prata med minnet
 //		levelName = MemoryManager.LoadLevelName();
 		tutorialIndex = MemoryManager.LoadTutorialIndex();
@@ -59,25 +60,34 @@ public class GameManager : MonoBehaviour
        
 		// Access UIs components and children
 		UI = GameObject.Find ("UI").GetComponent<ViewController> ();
+
 		// Access targetMaster
 		targetMaster = GameObject.Find ("TargetMaster").GetComponent<TargetMaster> ();
 		// Hide mellanmeny
 		UI.transform.Find("Canvas").transform.Find("MellanMeny").gameObject.SetActive (false);
 
-        Debug.Log("tutorialIndex: " + tutorialIndex);
-        Debug.Log("playedBefore: " + MemoryManager.TutorialPlayedBefore(tutorialIndex));
+//        Debug.Log("tutorialIndex: " + tutorialIndex);
+//        Debug.Log("playedBefore: " + MemoryManager.TutorialPlayedBefore(tutorialIndex));
 
 		// If tutorial index = -1 dont show anything, otherwise load tutorial with index tutorialIndex
-		if (tutorialIndex >= 0 && MemoryManager.TutorialPlayedBefore(tutorialIndex) == false) {
-			// Start game with tutorial window #1
-			gameState = GameState.tutorial;
-			prevGameState = GameState.tutorial;
-			gameMode = GameMode.none;
+		if (tutorialIndex >= 0) {
+			if (MemoryManager.TutorialPlayedBefore (tutorialIndex) == false) {
+				// Start game with tutorial window #1
+				// Start game with tutorial window #1
+				gameState = GameState.tutorial;
+				prevGameState = GameState.tutorial;
+				gameMode = GameMode.none;
 
-			LoadTutorial (tutorialIndex);
-            Debug.Log("tutorialPlayedBefore: " + MemoryManager.TutorialPlayedBefore(tutorialIndex));
-            //Debug.Log(SceneManager.GetActiveScene().buildIndex);
-            MemoryManager.SetTutorialPlayedBefore(tutorialIndex);
+				LoadTutorial (tutorialIndex);
+				Debug.Log ("tutorialPlayedBefore: " + MemoryManager.TutorialPlayedBefore (tutorialIndex));
+				//Debug.Log(SceneManager.GetActiveScene().buildIndex);
+				MemoryManager.SetTutorialPlayedBefore (tutorialIndex);
+			} else {
+				// Start game without tutorial
+				gameState = GameState.gameRunning;
+				prevGameState = GameState.gameRunning;
+				gameMode = GameMode.laserMode;
+			}
         } else {
 			// Start game without tutorial
 			gameState = GameState.gameRunning;
@@ -131,7 +141,6 @@ public class GameManager : MonoBehaviour
         RenderSettings.skybox.SetFloat("_Exposure", Mathf.Sin(2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"))/8.0f + 1.2f);
         //Debug.Log(skybox.GetFloat("_Exposure"));
         //RenderSettings.skybox = skybox;
-
     }
 
     private void LoadTutorial (int index)
@@ -143,7 +152,10 @@ public class GameManager : MonoBehaviour
 		} else
 			tut = new Tutorial();
 
-		UI.NewTutorial (tut.title, tut.tutorialText, tut.icon);
+		//load image from iconpath
+		Sprite icon = MemoryManager.loadIcon (tut.iconPath);
+
+		UI.NewTutorial (tut.title, tut.tutorialText, icon);
 	}
 
 	private void CheckLevelCompleted ()

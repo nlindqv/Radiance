@@ -30,13 +30,13 @@ public class Gate : IInteractables {
             newRay.transform.parent = parentTranform;
             newRay.transform.position = startPoint;
             newRay.transform.rotation = (Quaternion.LookRotation(direction));
-            newRay.Color = gateColor;
+            newRay.SetColor(laserHit.BounceValue, gateColor);
             newRay.GenerateLaserRay();
         }       
     }
 
     public bool colorEqual(Color one,  Color two)
     {
-        return Math.Abs(one.r - two.r + one.g - two.g + one.b - two.b) <= 0.001f;
+        return Math.Abs(one.r - two.r + one.g - two.g + one.b - two.b) <= 0.01f;
     }
 }

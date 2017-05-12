@@ -1,27 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.IO;
 using UnityEngine.SceneManagement;
 
 public class MemoryManager : MonoBehaviour {
 
-
+	//load a file from Resources-folder, then convert it to corresponding datastructure
+	//see Assets/DataObjects/Leveldata.cs for data structures
 	static TextAsset LevelFile = Resources.Load<TextAsset> ("Levels");
 	private static LevelList LEVELS = JsonUtility.FromJson<LevelList> (LevelFile.text);
 
 	static TextAsset TutFile = Resources.Load<TextAsset> ("Tutorials");
 	private static TutorialList TUTORIALS = JsonUtility.FromJson<TutorialList> (TutFile.text);
 
+	//load indexOffset, written at build in Assets/Editor/GenerateAvailableScenesJSON.cs
 	static TextAsset IndexOffsetFile = Resources.Load<TextAsset> ("indexOffset");
 	private static int levelIndexOffset = int.Parse(IndexOffsetFile.text);
 
 
-
+	/// <summary>
+	/// Gets current level from LEVELS-datastructure
+	/// </summary>
+	/// <returns>The level</returns>
 	private static LevelData getLevel(){
+
+		//We account for index because menuscenes count as scenes but not as levels
+		//indexoffset maintains correlation between buildindex and level-index, e.g. level_1 can have buildindex=4
 		int index = SceneManager.GetActiveScene ().buildIndex;
-        //Debug.Log ("Getting scene w/ index: " + index + " and levelind " + levelIndexOffset);
-        Debug.Log("index - levelIndexOffset: " + (index - levelIndexOffset));
+        Debug.Log ("Getting scene w/ index: " + index + " and levelind " + levelIndexOffset);
+//        Debug.Log("index - levelIndexOffset: " + (index - levelIndexOffset));
 		return LEVELS.list [index - levelIndexOffset];
 	}
 
@@ -45,6 +54,7 @@ public class MemoryManager : MonoBehaviour {
 		return index;
 	}
 
+	//Get score from memory
 	public static int LoadScore(){
 		int score = PlayerPrefs.GetInt (getLevel ().levelName, 0);
 		return score;
@@ -64,15 +74,15 @@ public class MemoryManager : MonoBehaviour {
         TUTORIALS.list[index].tutorialPlayedBefore = true;
         string tutorialSet = JsonUtility.ToJson(TUTORIALS);
         Debug.Log("JSONstring: " + tutorialSet);
-        File.WriteAllText("Assets/Resources/Tutorials.json", tutorialSet);
-    }
+		File.WriteAllText ("Assets/Resources/Tutorials.json", tutorialSet);
+	}
 
     public static void WriteScore2Memory(int score){
 		PlayerPrefs.SetInt (getLevel ().levelName, score);
 	}
 
 
-
+	//Get all scores
 	public static int[] LoadAllScores(){
 		int[] scores = new int[LEVELS.list.Count];
 		for(int i = 0; i < LEVELS.list.Count; i++){
@@ -101,6 +111,25 @@ public class MemoryManager : MonoBehaviour {
 		return paths;
 	}
 
+	/// <summary>
+	/// Loads a .png from path and returns it as a Sprite.
+	/// </summary>
+	/// <returns>.png as Sprite</returns>
+	/// <param name="path">Path to object</param>
+	public static Sprite loadIcon(string path){
+		//get file
+		byte[] data = File.ReadAllBytes(path);
+
+		//create texture from file
+		Texture2D texture = new Texture2D(64, 64, TextureFormat.ARGB32, false);
+		texture.LoadImage(data);
+		texture.name = Path.GetFileNameWithoutExtension(path);
+
+		//create sprite from texture
+		Sprite s = Sprite.Create (texture, new Rect (0, 0, texture.width, texture.height), Vector2.zero);
+		return s;
+	}
+
 	public static LevelList GetLevels(){
 		return LEVELS;
 	}
@@ -111,26 +140,28 @@ public class MemoryManager : MonoBehaviour {
 
 
 
-	#region TestFunctions
+	#region Writer HelpFunctions & Debug
 
 	public static void mem(){
 		//writeOnce();
 		//readData ();
 
-//		writeTutorials ();
+		//writeTutorials ();
 
 	}
 
 	public static void writeTutorials(){
 		TutorialList tut = new TutorialList();
 		for (int i = 0; i < 5; i++) {
-			Tutorial t = new Tutorial (LEVELS.list [i].levelName, "item #" + i + " does a lot of fun stuff.");
+			string iconPath = Application.dataPath + "/Resources/icons/tutorial" + i + ".png";
+			Tutorial t = new Tutorial (LEVELS.list [i].levelName, "item #" + i + " does a lot of fun stuff.", iconPath);
 			tut.list.Add(t);
 		}
 		string path2write = "Assets/Resources/Tutorials.json";
 		using (StreamWriter s = new StreamWriter (path2write)) {
 			s.Write(JsonUtility.ToJson(tut));
 		}
+
 	}
 
 	public static void writeOnce(){
@@ -190,9 +221,6 @@ public class MemoryManager : MonoBehaviour {
 				print (ld);
 		}
 	}
-
-
-
 
 	#endregion
 
