@@ -66,15 +66,22 @@ public class GameManager : MonoBehaviour
 		// Hide mellanmeny
 		UI.transform.Find("Canvas").transform.Find("MellanMeny").gameObject.SetActive (false);
 
+        Debug.Log("tutorialIndex: " + tutorialIndex);
+        Debug.Log("playedBefore: " + MemoryManager.TutorialPlayedBefore(tutorialIndex));
+
 		// If tutorial index = -1 dont show anything, otherwise load tutorial with index tutorialIndex
-		if (tutorialIndex >= 0) {
+		if (tutorialIndex >= 0 && MemoryManager.TutorialPlayedBefore(tutorialIndex) == false) {
+			// Start game with tutorial window #1
 			// Start game with tutorial window #1
 			gameState = GameState.tutorial;
 			prevGameState = GameState.tutorial;
 			gameMode = GameMode.none;
 
 			LoadTutorial (tutorialIndex);
-		} else {
+            Debug.Log("tutorialPlayedBefore: " + MemoryManager.TutorialPlayedBefore(tutorialIndex));
+            //Debug.Log(SceneManager.GetActiveScene().buildIndex);
+            MemoryManager.SetTutorialPlayedBefore(tutorialIndex);
+        } else {
 			// Start game without tutorial
 			gameState = GameState.gameRunning;
 			prevGameState = GameState.gameRunning;
@@ -122,11 +129,9 @@ public class GameManager : MonoBehaviour
 		default:
 			break;
 		}
-        
-
-		prevGameState = gameState;
-//        RenderSettings.skybox.SetFloat("_Rotation", 2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"));
-//        RenderSettings.skybox.SetFloat("_Exposure", Mathf.Sin(2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"))/8.0f + 1.2f);
+        prevGameState = gameState;
+        RenderSettings.skybox.SetFloat("_Rotation", 2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"));
+        RenderSettings.skybox.SetFloat("_Exposure", Mathf.Sin(2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"))/8.0f + 1.2f);
         //Debug.Log(skybox.GetFloat("_Exposure"));
         //RenderSettings.skybox = skybox;
     }

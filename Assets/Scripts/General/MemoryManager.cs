@@ -29,8 +29,8 @@ public class MemoryManager : MonoBehaviour {
 		//We account for index because menuscenes count as scenes but not as levels
 		//indexoffset maintains correlation between buildindex and level-index, e.g. level_1 can have buildindex=4
 		int index = SceneManager.GetActiveScene ().buildIndex;
-//		Debug.Log ("Getting scene w/ index: " + index + " and levelind " + levelIndexOffset);
-
+        //Debug.Log ("Getting scene w/ index: " + index + " and levelind " + levelIndexOffset);
+        Debug.Log("index - levelIndexOffset: " + (index - levelIndexOffset));
 		return LEVELS.list [index - levelIndexOffset];
 	}
 
@@ -64,8 +64,19 @@ public class MemoryManager : MonoBehaviour {
 		return TUTORIALS.list[index];
 	}
 
-	//Write score to memory using Unity-class PlayerPrefs
-	public static void WriteScore2Memory(int score){
+    public static bool TutorialPlayedBefore(int index)
+    {
+        return TUTORIALS.list[index].tutorialPlayedBefore;
+    }
+
+    public static void SetTutorialPlayedBefore(int index)
+    {
+        TUTORIALS.list[index].tutorialPlayedBefore = true;
+        string tutorialSet = JsonUtility.ToJson(TUTORIALS);
+        Debug.Log("JSONstring: " + tutorialSet);
+        File.WriteAllText("Assets/Resources/Tutorials.json, tutorialSet);
+
+    public static void WriteScore2Memory(int score){
 		PlayerPrefs.SetInt (getLevel ().levelName, score);
 	}
 
