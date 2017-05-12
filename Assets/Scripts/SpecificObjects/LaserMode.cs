@@ -138,8 +138,8 @@ public class LaserMode : MonoBehaviour
         newLaser.transform.parent = ls.transform;
         newLaser.transform.position = rb.position;
         newLaser.transform.rotation = rb.rotation;
-        newLaser.SetColor(newLaser.BounceValue, Color.white);
         newLaser.BounceValue = 100;
+        newLaser.SetColor(newLaser.BounceValue, Color.white);        
         newLaser.GenerateLaserRay();
     }
 }
