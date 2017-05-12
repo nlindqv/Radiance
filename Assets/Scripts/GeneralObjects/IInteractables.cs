@@ -19,7 +19,7 @@ public abstract class IInteractables : MonoBehaviour
 
 	public virtual void HandleUpdate()
     {
-        Debug.Log("Reversed hit");
+        //Debug.Log("Reversed hit");
     }
 
     public void SetLasers(LaserStack laserStack)
