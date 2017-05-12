@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public enum GameMode { laserMode, mirrorMode, none };	// gameModes
 	public enum GameState {tutorial,gameRunning,endScreen, gamePaused};	// gameStates available
 
+
     public static GameMode gameMode = GameMode.none;		// init gameMode to none
     private static GameState prevGameState;					// save prev gameState
 	public GameObject laserRay;
@@ -59,12 +60,13 @@ public class GameManager : MonoBehaviour
        
 		// Access UIs components and children
 		UI = GameObject.Find ("UI").GetComponent<ViewController> ();
+
 		// Access targetMaster
 		targetMaster = GameObject.Find ("TargetMaster").GetComponent<TargetMaster> ();
 		// Hide mellanmeny
 		UI.transform.Find("Canvas").transform.Find("MellanMeny").gameObject.SetActive (false);
 
-		// If totrial index = -1 dont show anything, otherwise load tutorial with index tutorialIndex
+		// If tutorial index = -1 dont show anything, otherwise load tutorial with index tutorialIndex
 		if (tutorialIndex >= 0) {
 			// Start game with tutorial window #1
 			gameState = GameState.tutorial;
@@ -120,12 +122,13 @@ public class GameManager : MonoBehaviour
 		default:
 			break;
 		}
-        prevGameState = gameState;
-        RenderSettings.skybox.SetFloat("_Rotation", 2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"));
-        RenderSettings.skybox.SetFloat("_Exposure", Mathf.Sin(2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"))/8.0f + 1.2f);
+        
+
+		prevGameState = gameState;
+//        RenderSettings.skybox.SetFloat("_Rotation", 2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"));
+//        RenderSettings.skybox.SetFloat("_Exposure", Mathf.Sin(2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"))/8.0f + 1.2f);
         //Debug.Log(skybox.GetFloat("_Exposure"));
         //RenderSettings.skybox = skybox;
-
     }
 
     private void LoadTutorial (int index)
@@ -137,7 +140,10 @@ public class GameManager : MonoBehaviour
 		} else
 			tut = new Tutorial();
 
-		UI.NewTutorial (tut.title, tut.tutorialText, tut.icon);
+		//load image from iconpath
+		Sprite icon = MemoryManager.loadIcon (tut.iconPath);
+
+		UI.NewTutorial (tut.title, tut.tutorialText, icon);
 	}
 
 	private void CheckLevelCompleted ()
