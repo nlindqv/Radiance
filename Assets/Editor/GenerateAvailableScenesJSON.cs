@@ -17,7 +17,7 @@ public static class GenerateAvailableScenesJSON
 		LevelList ls = new LevelList ();
 		List<string> paths = GetLevelScenes();
 
-		int i = 0;
+		int i = 1;
 		foreach (string path in paths) {
 			int lastBackslash = path.LastIndexOf ('/');
 			int lastDot = path.LastIndexOf ('.');
@@ -91,7 +91,7 @@ public static class GenerateAvailableScenesJSON
 			writer.Write(levelIndexOffset.ToString());
 		}
 
-		Debug.Log ("Index offset written");
+		Debug.Log ("Index offset written: " + levelIndexOffset);
 
 	}
 }

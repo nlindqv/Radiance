@@ -66,21 +66,28 @@ public class GameManager : MonoBehaviour
 		// Hide mellanmeny
 		UI.transform.Find("Canvas").transform.Find("MellanMeny").gameObject.SetActive (false);
 
-        Debug.Log("tutorialIndex: " + tutorialIndex);
-        Debug.Log("playedBefore: " + MemoryManager.TutorialPlayedBefore(tutorialIndex));
+//        Debug.Log("tutorialIndex: " + tutorialIndex);
+//        Debug.Log("playedBefore: " + MemoryManager.TutorialPlayedBefore(tutorialIndex));
 
 		// If tutorial index = -1 dont show anything, otherwise load tutorial with index tutorialIndex
-		if (tutorialIndex >= 0 && MemoryManager.TutorialPlayedBefore(tutorialIndex) == false) {
-			// Start game with tutorial window #1
-			// Start game with tutorial window #1
-			gameState = GameState.tutorial;
-			prevGameState = GameState.tutorial;
-			gameMode = GameMode.none;
+		if (tutorialIndex >= 0) {
+			if (MemoryManager.TutorialPlayedBefore (tutorialIndex) == false) {
+				// Start game with tutorial window #1
+				// Start game with tutorial window #1
+				gameState = GameState.tutorial;
+				prevGameState = GameState.tutorial;
+				gameMode = GameMode.none;
 
-			LoadTutorial (tutorialIndex);
-            Debug.Log("tutorialPlayedBefore: " + MemoryManager.TutorialPlayedBefore(tutorialIndex));
-            //Debug.Log(SceneManager.GetActiveScene().buildIndex);
-            MemoryManager.SetTutorialPlayedBefore(tutorialIndex);
+				LoadTutorial (tutorialIndex);
+				Debug.Log ("tutorialPlayedBefore: " + MemoryManager.TutorialPlayedBefore (tutorialIndex));
+				//Debug.Log(SceneManager.GetActiveScene().buildIndex);
+				MemoryManager.SetTutorialPlayedBefore (tutorialIndex);
+			} else {
+				// Start game without tutorial
+				gameState = GameState.gameRunning;
+				prevGameState = GameState.gameRunning;
+				gameMode = GameMode.laserMode;
+			}
         } else {
 			// Start game without tutorial
 			gameState = GameState.gameRunning;
