@@ -9,26 +9,19 @@ public class Target : IInteractables
 	private Renderer rend;
 	private LaserRay lastHitRay;
 	public bool hit;
-	//Colors to toggle between laser hit and not hit
-	public Color defaultCol;
-	public Color targetHit;
+    private Behaviour halo;
 
-	void Start()
+
+    void Start()
 	{
-		//Get the renderer and enable rendering
-		rend = GetComponentInChildren<Renderer>();
-		rend.enabled = true;
-
-		//Default is no hit from laser
-		hit = false;
-
-		//Assign the default color
-		Material mat = rend.material;
-		mat.color = defaultCol;
+        //Default is no hit from laser
+        halo = (Behaviour)GetComponent("Halo");
+        hit = false;
 	}
 
 
-	void Update() {
+
+	/*void Update() {
 		//If there is no hit make sure target is default color
 		if (!hit) {
 			Material mat = rend.material;
@@ -39,13 +32,20 @@ public class Target : IInteractables
 		//updates hit to false every frame, happens before laserCollision
 		//hit = false;
 	}
+    */
+
+	public override void HandleUpdate()
+    {
+        // updated when no hit is register -> turn halo of
+        halo.enabled = false;
+        hit = false;
+    }
 
 	//Handles Collision with laser
 	public override void HandleLaserCollision (LaserRay ray)
 	{
-		//Change material and indicate hit to targetmaster
-		Material mat = rend.material;
-		mat.color = targetHit;
+		//Turn on halo and indicate hit to targetmaster
+        halo.enabled = true;
 		hit = true;
 		lastHitRay = ray;
 	}  
