@@ -24,9 +24,21 @@ public static class GenerateAvailableScenesJSON
 
 			string name = path.Substring (lastBackslash + 1, lastDot-lastBackslash-1);
 
-			//use this to experiment w/ predetermined values for starcount and tutorial in each level
+			//use this to experiment w/ predetermined values for starcount in each level
 			PlayerPrefs.SetInt (name, 0);
-			int tutind = Mathf.RoundToInt(Random.Range(0, 5));
+
+			//Determine tutorial index
+			int tutind = -1;
+			if (i == 1) {
+				tutind = 0;
+			} else if (i == 5) {
+				tutind = 1;
+			} else if (i == 8) {
+				tutind = 2;
+			} else if (i == 11) {
+				tutind = 3;
+			}
+
 
 			LevelData t = new LevelData (path, i++, name, tutind);
 
