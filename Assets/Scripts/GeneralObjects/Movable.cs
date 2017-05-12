@@ -115,7 +115,7 @@ public class Movable : MonoBehaviour
         {
             Debug.Log("Plane");
         }
-        else if (!col.collider.name.Equals(this.transform.name))
+        else if (col.gameObject.GetComponent<Reflective>() == null)
         {
             Debug.Log("Hit ");
             this.transform.position = previousPosition;
