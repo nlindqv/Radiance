@@ -36,6 +36,7 @@ public class TutorialsPicker : MonoBehaviour {
 		Debug.Log (i);
 		tutorialWindow.Find("Title").GetComponent<RectTransform>().GetComponent<Text>().text = tutorials.list[i].title;
 		tutorialWindow.Find("Text").GetComponent<RectTransform>().GetComponent<Text>().text = tutorials.list[i].tutorialText;
+		tutorialWindow.Find ("Icon").GetComponent<Image> ().sprite = MemoryManager.loadIcon(tutorials.list[i].iconPath);
 		tutorialWindow.gameObject.SetActive (true);
 	}
 	private void HideTutorial(){

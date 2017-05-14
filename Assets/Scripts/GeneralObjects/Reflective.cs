@@ -19,12 +19,11 @@ public class Reflective : IInteractables
         Transform parentTransform = laserHit.transform.parent;        
         LaserRay newLaserRay = GetLaser(newBounceValue);                    // Get laser 
         if (newLaserRay == null) return;
-        newLaserRay.transform.parent = parentTransform;        
-        newLaserRay.SetColor(newBounceValue, laserHit.Color); //, laserHit.BounceValue
-                                                              //sätt färg och minska bouncevalue
+        newLaserRay.transform.parent = parentTransform;
+        //sätt färg och minska bouncevalue
+        newLaserRay.SetColor(newBounceValue, laserHit.Color);
         newLaserRay.transform.position = laserHit.HitPoint;
         newLaserRay.transform.rotation = (Quaternion.LookRotation(direction));
-        newLaserRay.BounceValue = newBounceValue;
         newLaserRay.GenerateLaserRay();        
     }
 }

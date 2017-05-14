@@ -5,8 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Transform))]
 public class LaserRay : MonoBehaviour
 {
-    public Color Color;
+    public Color Color { get; private set; }
     public int BounceValue;
+    private int startBounceValue = 100;
     private LineRenderer laserRay;
     private Renderer renderer;
     private Transform tf; // ts = transform
@@ -26,35 +27,25 @@ public class LaserRay : MonoBehaviour
 	// Use this for initialization
     void Start()
     {
-       /* laserRay = GetComponent<LineRenderer>();
-        tf = GetComponent<Transform>();
+
+    }
+    public void SetColor(int newBounceValue, Color newColor)
+    {
+        float deacreaseRelativeToValue = (float)(newBounceValue) / (float)startBounceValue;
+        Color = new Color(newColor.r, newColor.g, newColor.b, 1f * deacreaseRelativeToValue);
         renderer = GetComponent<Renderer>();
         renderer.material.SetColor("_MKGlowColor", Color);
         renderer.material.SetColor("_MKGlowTexColor", Color);
         renderer.material.SetColor("_Color", Color);
         renderer.material.SetColor("_TintColor", Color);
-        if (BounceValue > 0) GenerateLaserRay();*/
     }
-    public void SetColor(int newBounceValue, Color existingColor)
-    {
-        float deacreaseRelativeToValue = (float)newBounceValue / (float)BounceValue;
-        Color = new Color(existingColor.r, existingColor.g, existingColor.b, 1.0f * deacreaseRelativeToValue);
-        Color = new Color(existingColor.r, existingColor.g, existingColor.b, 1.0f * deacreaseRelativeToValue);
-    }
-    int count = 0;
     public void LateUpdate()
     {
     }
     public void GenerateLaserRay()
     {
-        //SetColor(BounceValue, Color);
         laserRay = GetComponent<LineRenderer>();
         tf = GetComponent<Transform>();
-        renderer = GetComponent<Renderer>();      
-        renderer.material.SetColor("_MKGlowColor", Color);
-        renderer.material.SetColor("_MKGlowTexColor", Color);
-        renderer.material.SetColor("_Color", Color);
-        renderer.material.SetColor("_TintColor", Color);
         Vector3 direction = tf.forward;
         Ray ray = new Ray(tf.position, direction);
         RaycastHit hit;

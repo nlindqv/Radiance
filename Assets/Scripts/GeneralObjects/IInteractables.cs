@@ -32,11 +32,11 @@ public abstract class IInteractables : MonoBehaviour
         this.ray = laser;
     }
 
-    public LaserRay GetLaser(int value)
+    public LaserRay GetLaser(int bounceValue)
     {
-        if (value <= 0) return null;
-        if (laserStack == null) return Instantiate(ray, Vector3.zero, Quaternion.identity).GetComponent<LaserRay>();
-        LaserRay newRayGameObj = (laserStack.size() <= 0) ? Instantiate(ray, Vector3.zero, Quaternion.identity).GetComponent<LaserRay>() : laserStack.pop();
+        if (bounceValue <= 0) return null;
+        LaserRay newRayGameObj = (laserStack == null || laserStack.size() <= 0) ? Instantiate(ray, Vector3.zero, Quaternion.identity).GetComponent<LaserRay>() : laserStack.pop();
+        newRayGameObj.BounceValue = bounceValue;
         return newRayGameObj;
     } 
 }
