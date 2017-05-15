@@ -94,7 +94,7 @@ Det vi tyckte gick bra i sprint 3 är att vi fördelade arbetet bättre och arbe
 
 ## Sprint 4
 
-Inför sprint 4 lägger vi om fokuset från att komma på ny funktionalitet till att finjustera det vi redan har implementerat. Vi planerar att gå på regelbundna feedback-rundor i skolan för att bredda perspektivet och få en mer objektiv åsikt för att förbättra vår nuvarande implementation. Vi fokuserar även på att få en mer enhetlig design på spelet samt undersöka spelet för att reducera antalet buggar. 
+Inför sprint 4 lägger vi om fokuset från att komma på ny funktionalitet till att finjustera det vi redan har implementerat. Vårt mål med denna sprint är att släppa en release av spelet. Vi planerar att gå på regelbundna feedback-rundor i skolan för att bredda perspektivet och få en mer objektiv åsikt för att förbättra vår nuvarande implementation. Vi fokuserar även på att få en mer enhetlig design på spelet samt undersöka spelet för att reducera antalet buggar. 
 
 Inom vårt arbetssätt har vi sagt att vi fortsätter i stora drag som vi har gjort innan med att ta hjälp från varandra och våga vara involverad i alla delar i projektet. Det vi tar med oss från tidigare sprinter är hur vi ger feedback till varandra för att effektivisera arbetet samt hålla en trevlig stämmning inom gruppen. 
 
