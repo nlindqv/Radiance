@@ -11,7 +11,7 @@ public class AudioScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		DontDestroyOnLoad (this.gameObject);
 		SetSound ();
 		audioSource = this.gameObject.GetComponent <AudioSource> ();
 		if(this.transform.FindChild ("Sound Effect") !=null)
@@ -22,11 +22,12 @@ public class AudioScript : MonoBehaviour {
 		volumeSlider.value = PlayerPrefs.GetFloat ("Volume", 0.5f);
 		audioSource.Play ();
 
-		audioSource.time = PlayerPrefs.GetFloat ("Audio position", 0.0f);
+		//audioSource.time = PlayerPrefs.GetFloat ("Audio position", 0.0f)+0.4f;
 
 	}
 	private void Update(){
-		SaveSound ();
+		//SaveSound ();
+		audioSource.volume = PlayerPrefs.GetFloat ("Volume", 0.5f);
 	}
 
 	public void SaveSound(){
