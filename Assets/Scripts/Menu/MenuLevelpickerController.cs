@@ -82,11 +82,11 @@ public class MenuLevelpickerController : MonoBehaviour
 			// have been played before, <-> scores[i] > 0 
 
 			if (k > 0) {
-				if (findthat [k-1] > 0)
-				{
+				if (findthat [k - 1] > 0) {
 					standardLevelBtn.onClick.AddListener (delegate() {SceneManager.LoadScene (scenePath);});
-
 				}
+			} else if (k == 0) {
+				standardLevelBtn.onClick.AddListener (delegate() {SceneManager.LoadScene (scenePath);});
 			}
 			else 
 			{
@@ -95,6 +95,7 @@ public class MenuLevelpickerController : MonoBehaviour
 					standardLevelBtn.onClick.AddListener(delegate() { SceneManager.LoadScene(scenePath); });
 				} 
 			}
+
 
             //standardLevelBtn.onClick.AddListener(delegate() { SceneManager.LoadScene(scenePath); });
             buttonText = newButton.GetComponentInChildren<Text>();

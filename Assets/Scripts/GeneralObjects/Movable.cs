@@ -115,9 +115,9 @@ public class Movable : MonoBehaviour
         {
             Debug.Log("Plane");
         }
-        else if (col.gameObject.GetComponent<Reflective>() == null)
-        {
-            Debug.Log("Hit ");
+		else if ((col.collider.GetComponentInParent(typeof(IInteractables)) == null && col.collider.GetComponent(typeof(IInteractables)) == null) || (col.collider.GetComponentInChildren<Gate>() != null || col.collider.GetComponentInParent<Gate>() != null))
+		{//If we (do not collide w/ an interactable) OR (collide w/ a gate), move back to previous position
+//			Debug.Log("Hit " + col.collider);
             this.transform.position = previousPosition;
             this.transform.rotation = prevRotate;
             prevPrevMove = false;
