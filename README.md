@@ -92,3 +92,9 @@ Vi klarade av vårt sprint mål och har en release-kandidat. Vi har lyckats impl
 
 Det vi tyckte gick bra i sprint 3 är att vi fördelade arbetet bättre och arbetade bra i grupperna som vi även roterade. Vi tycker även att vi har en bra gruppsammanhållning och att ingen tar illa vid sig vid input från andra. Vi har dock fortfarande en del saker att förbättra i vårt arbetssätt och vi har kommit fram till att vi behöver bli bättre på att ge feedback på ett bra sätt. Vi ska även låta alla arbeta med sitt och inte störa varandra.
 
+## Sprint 4
+
+Inför sprint 4 lägger vi om fokuset från att komma på ny funktionalitet till att finjustera det vi redan har implementerat. Vi planerar att gå på regelbundna feedback-rundor i skolan för att bredda perspektivet och få en mer objektiv åsikt för att förbättra vår nuvarande implementation. Vi fokuserar även på att få en mer enhetlig design på spelet samt undersöka spelet för att reducera antalet buggar. 
+
+Inom vårt arbetssätt har vi sagt att vi fortsätter i stora drag som vi har gjort innan med att ta hjälp från varandra och våga vara involverad i alla delar i projektet. Det vi tar med oss från tidigare sprinter är hur vi ger feedback till varandra för att effektivisera arbetet samt hålla en trevlig stämmning inom gruppen. 
+
