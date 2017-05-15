@@ -178,10 +178,10 @@ public class GameManager : MonoBehaviour
 	private void LoadLevelEndScreen ()
 	{
         string level = "Level " + MemoryManager.LoadLevelIndex();
-
-        //int score = targetMaster.GetCollectables();
-        MemoryManager.WriteScore2Memory(level, score);
-
+        int score = targetMaster.GetCollectables();
+        //ändrat!
+        MemoryManager.WriteScore2Memory(score);
+        //yield return new WaitForSeconds(3.0f);
         UI.ShowEndScreen(level, score);                
     }
   
@@ -284,7 +284,7 @@ public class GameManager : MonoBehaviour
         //if(fps < MIN_FPS)disableGlow();
 
         // check in memory if we should disable glow
-        if (MemoryManager.LoadScore("glow") != 1) disableGlow();
+        if (MemoryManager.LoadGlow() != 1) disableGlow();
         string text = string.Format("{0:0.0} ms ({1:0.} fps)", msec, fps);
         GUI.Label(rect, text, style);
     }
