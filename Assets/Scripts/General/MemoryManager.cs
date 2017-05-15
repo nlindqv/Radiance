@@ -95,8 +95,12 @@ public class MemoryManager : MonoBehaviour {
         PlayerPrefs.SetInt("glow", glowValue);
     }
     
+	//Writes score to memory, only write if previous score is less than current
     public static void WriteScore2Memory(int score){
-		PlayerPrefs.SetInt (getLevel ().levelName, score);
+		int prevScore = LoadScore ();
+		print ("Write " + score + " to " + getLevel ().levelName);
+		if(prevScore < score)
+			PlayerPrefs.SetInt (getLevel ().levelName, score);
 	}
     
 	//Get all scores

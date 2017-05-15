@@ -178,7 +178,6 @@ public class GameManager : MonoBehaviour
 	private void LoadLevelEndScreen ()
 	{
         string level = "Level " + MemoryManager.LoadLevelIndex();
-        int score = targetMaster.GetCollectables();
         //ändrat!
         MemoryManager.WriteScore2Memory(score);
         //yield return new WaitForSeconds(3.0f);
