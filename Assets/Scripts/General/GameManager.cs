@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public const string PAUSE_BTN_NAME = "PauseButton";
     public enum GameMode { laserMode, mirrorMode, none };	// gameModes
 	public enum GameState {tutorial,gameRunning,endScreen, gamePaused};	// gameStates available
-
+	private int score = 0;
 
     public static GameMode gameMode = GameMode.none;		// init gameMode to none
     private static GameState prevGameState;					// save prev gameState
@@ -170,6 +170,7 @@ public class GameManager : MonoBehaviour
 			//LoadLevelEndScreen ();
 			gameState = GameState.endScreen;
             gameMode = GameMode.none;
+			score = targetMaster.GetCollectables();
             StartCoroutine(Order());
 		}
 	}
@@ -177,9 +178,8 @@ public class GameManager : MonoBehaviour
 	private void LoadLevelEndScreen ()
 	{
         string level = "Level " + MemoryManager.LoadLevelIndex();
-        int score = targetMaster.GetCollectables();
         //ändrat!
-        MemoryManager.WriteScore2Memory(level, score);
+        MemoryManager.WriteScore2Memory(score);
         //yield return new WaitForSeconds(3.0f);
         UI.ShowEndScreen(level, score);                
     }
@@ -283,7 +283,7 @@ public class GameManager : MonoBehaviour
         //if(fps < MIN_FPS)disableGlow();
 
         // check in memory if we should disable glow
-        if (MemoryManager.LoadScore("glow") != 1) disableGlow();
+        if (MemoryManager.LoadGlow() != 1) disableGlow();
         string text = string.Format("{0:0.0} ms ({1:0.} fps)", msec, fps);
         GUI.Label(rect, text, style);
     }

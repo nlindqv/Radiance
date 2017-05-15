@@ -11,11 +11,11 @@ public class Glow : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         // Check to see if we have stored a value 
-        int savedValue = MemoryManager.LoadScore("glow");
-        if (savedValue == 1)
-            glow = true;
-        else
+        int savedValue = MemoryManager.LoadGlow();
+        if (savedValue == 2)
             glow = false;
+        else
+            glow = true;
         toggleButton.GetComponent<Toggle>().isOn = glow;
     }
 	
@@ -33,6 +33,6 @@ public class Glow : MonoBehaviour {
         } else
             glowValue = 2;
 
-        MemoryManager.WriteScore2Memory("glow", glowValue);
+        MemoryManager.WriteGlow2Memory(glowValue);
     }
 }
