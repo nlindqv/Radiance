@@ -9,38 +9,80 @@ EditorBuildSettings:
     path: Assets/GameScenes/Menu/StartScene.unity
     guid: d8d0a8e60e94046f6a804d31b94e8142
   - enabled: 1
+    path: Assets/GameScenes/Menu/AboutScene.unity
+    guid: 01d1772429396404da21512ee40b87ae
+  - enabled: 1
+    path: Assets/GameScenes/Menu/TutorialsMenu.unity
+    guid: 33a6fbe9c27fc416abcc6bfa1bb99dfb
+  - enabled: 1
     path: Assets/GameScenes/Menu/LevelPicker.unity
     guid: 464d4541a18f7465c8854bb7348b779e
   - enabled: 1
     path: Assets/GameScenes/Menu/SoundScene.unity
     guid: 127155780ac1b4afeacb90623c072bef
   - enabled: 1
-    path: Assets/GameScenes/Levels/level_1.unity
-    guid: efa1ba0456c51254592928e4f9416fbb
+    path: Assets/GameScenes/Levels/level_01.unity
+    guid: a03136d998ca849faac71a168c181eed
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_02.unity
+    guid: 57f2235ccc703452b8c9e4f9c50d651e
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_03.unity
+    guid: 823c2b660e1884e57b06525e31967996
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_04.unity
+    guid: 8dbbedeadcba84ba6a296419894e1418
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_05.unity
+    guid: 0ae0aedd868074a4194113c74ba9bd1c
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_06.unity
+    guid: e74fec96a1f174ae5a389a7174474b73
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_07.unity
+    guid: 728e754e1d6724465856c5d2ebbc0396
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_08.unity
+    guid: 21944ce89984243a98fa0757c8ffdcc6
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_09.unity
+    guid: f61036c6236974c48af69f4bdfc71820
   - enabled: 1
     path: Assets/GameScenes/Levels/level_10.unity
     guid: c8216a5b5fa7441e8ba4c77808dc1353
   - enabled: 1
-    path: Assets/GameScenes/Levels/level_2.unity
-    guid: e566757877f61c14180f3d64c62eefb5
+    path: Assets/GameScenes/Levels/level_11.unity
+    guid: 2b8715b0fdb43604f91fc81eb5c35b85
   - enabled: 1
-    path: Assets/GameScenes/Levels/level_3.unity
-    guid: a78d657f1834052439ae6c3453548b3f
+    path: Assets/GameScenes/Levels/level_12.unity
+    guid: 1b91ab3cabba163469058eaafead2e36
   - enabled: 1
-    path: Assets/GameScenes/Levels/level_4.unity
-    guid: 33495ec0f67d795459be192321198073
+    path: Assets/GameScenes/Levels/level_13.unity
+    guid: 8c8b4a57d5e408845991096d4af26d05
   - enabled: 1
-    path: Assets/GameScenes/Levels/level_5.unity
-    guid: 393382c16f1ca774c9ef7fbdc315f0ae
+    path: Assets/GameScenes/Levels/level_14.unity
+    guid: a1bef1ca4d496e8458f202d5c63fac2e
   - enabled: 1
-    path: Assets/GameScenes/Levels/level_6.unity
-    guid: 5a2c38755d4bde04b93e688c756ee0bd
+    path: Assets/GameScenes/Levels/level_15.unity
+    guid: 4555f4f02587d4224b4443c76e78c216
   - enabled: 1
-    path: Assets/GameScenes/Levels/level_7.unity
-    guid: 6843045c518e39d479828606cecc3d0f
+    path: Assets/GameScenes/Levels/level_16.unity
+    guid: eefafac3e77804254968e3a71c948194
   - enabled: 1
-    path: Assets/GameScenes/Levels/level_8.unity
-    guid: b39d8e2aa2dd01b408f889328c2e5775
+    path: Assets/GameScenes/Levels/level_17.unity
+    guid: 5e8bb41df899b4be2b21dbaad2ee302a
   - enabled: 1
-    path: Assets/GameScenes/Levels/level_9.unity
-    guid: cbd1566203e0248ffa9c949fc66d0ff4
+    path: Assets/GameScenes/Levels/level_18.unity
+    guid: 4e16a22ae619c476a9983f0ace9670af
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_19.unity
+    guid: cbccd9fdb6277413fa802961d56dba96
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_20.unity
+    guid: de0e555399d8547538787dfa9b488a89
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_21.unity
+    guid: 63c4958536e952e4490ee71910b3acd1
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_22.unity
+    guid: 695d4f5b30df21448b7213f2e7437369

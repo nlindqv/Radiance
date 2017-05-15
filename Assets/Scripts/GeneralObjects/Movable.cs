@@ -69,8 +69,8 @@ public class Movable : MonoBehaviour
         if (move && GameManager.gameMode == GameManager.GameMode.mirrorMode && diff > offsetTouch)
         {   //If in move,mirror mode and greater than offset, enable to move object
             updateTouchPoint();
-            rigidb.position = rayPoint - distanceOffset;
-            rigidb.position = new Vector3(rigidb.position.x, startHeight, rigidb.position.z);
+            Vector3 pos = rayPoint - distanceOffset;
+            rigidb.position = new Vector3(pos.x, startHeight, pos.z);
             GetComponent<Collider>().isTrigger = true;
         }
     }
