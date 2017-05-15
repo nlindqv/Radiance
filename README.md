@@ -86,6 +86,15 @@ Inför sprint 3 lägger vi nu fokus på att sätta ihop alla delar i spelet och 
 
 I vårt arbetssätt kommer vi att försöka fördela arbetsuppgifter mer jämt mellan personer så att flera får bättre kunskap om designen i vitala delar av spelet och flera får mer varierade arbetsuppgifter. 
 
+### Checkpoints
+
+### Inaktiverade speglar
+
+### Minneshantering
+Spelet använder sig av två typer av minne. Ett statiskt och ett dynamiskt. 
+* Det dynamiska används för att upprätthålla poängräkning för spelarens resultat och bygger på inbyggda minnesfunktioner i Unity.
+* Det statiska minnet använder sig av JSON-filer som skrivs vid varje build och läses in vid runtime. JSON-minnet används för att ladda in tutorials och information om nivåer.
+
 ## Sammanfattning för sprint 3
 
 Vi klarade av vårt sprint mål och har en release-kandidat. Vi har lyckats implementera både animeringar, minne samt kunnat få lite feedback på vad som behöver förbättras i vårt spel. Vi behöver dock fortfarande se över våra komponenter i spelet så att de håller sig till samma tema samt fixa en del buggar. 
@@ -97,4 +106,3 @@ Det vi tyckte gick bra i sprint 3 är att vi fördelade arbetet bättre och arbe
 Inför sprint 4 lägger vi om fokuset från att komma på ny funktionalitet till att finjustera det vi redan har implementerat. Vårt mål med denna sprint är att släppa en release av spelet. Vi planerar att gå på regelbundna feedback-rundor i skolan för att bredda perspektivet och få en mer objektiv åsikt för att förbättra vår nuvarande implementation. Vi fokuserar även på att få en mer enhetlig design på spelet samt undersöka spelet för att reducera antalet buggar. 
 
 Inom vårt arbetssätt har vi sagt att vi fortsätter i stora drag som vi har gjort innan med att ta hjälp från varandra och våga vara involverad i alla delar i projektet. Det vi tar med oss från tidigare sprinter är hur vi ger feedback till varandra för att effektivisera arbetet samt hålla en trevlig stämmning inom gruppen. 
-
