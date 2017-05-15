@@ -20,7 +20,7 @@ public class LaserMode : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (speed == 0.0f) speed = 3.0f;
+        if (speed == 0.0f) speed = 2.0f;
         mainCamera = Camera.main;
         rb = GetComponent<Transform>();
         //StartCoroutine("FireLaser");

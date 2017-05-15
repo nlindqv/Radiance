@@ -24,7 +24,7 @@ public class MemoryManager : MonoBehaviour {
 	/// Gets current level from LEVELS-datastructure
 	/// </summary>
 	/// <returns>The level</returns>
-	private static LevelData getLevel(){
+	public static LevelData getLevel(){
 
 		//We account for index because menuscenes count as scenes but not as levels
 		//indexoffset maintains correlation between buildindex and level-index, e.g. level_1 can have buildindex=4
@@ -58,13 +58,21 @@ public class MemoryManager : MonoBehaviour {
 		return index;
 	}
 
-	//Get score from memory
-	public static int LoadScore(){
-		int score = PlayerPrefs.GetInt (getLevel ().levelName, 0);
-		return score;
-	}
+    //Get score from memory
+    public static int LoadScore()
+    {
+        int score = PlayerPrefs.GetInt(getLevel().levelName, 0);
+        return score;
+    }
 
-	public static Tutorial LoadTutorial(int index){
+    // get glow-value from memory
+    public static int LoadGlow()
+    {
+        int glowValue = PlayerPrefs.GetInt("glow", 0);
+        return glowValue;
+    }
+
+    public static Tutorial LoadTutorial(int index){
 		return TUTORIALS.list[index];
 	}
 
@@ -81,11 +89,20 @@ public class MemoryManager : MonoBehaviour {
 		File.WriteAllText ("Assets/Resources/Tutorials.json", tutorialSet);
 	}
 
+    // write glow-value to memory
+    public static void WriteGlow2Memory(int glowValue)
+    {
+        PlayerPrefs.SetInt("glow", glowValue);
+    }
+    
+	//Writes score to memory, only write if previous score is less than current
     public static void WriteScore2Memory(int score){
-		PlayerPrefs.SetInt (getLevel ().levelName, score);
+		int prevScore = LoadScore ();
+		print ("Write " + score + " to " + getLevel ().levelName);
+		if(prevScore < score)
+			PlayerPrefs.SetInt (getLevel ().levelName, score);
 	}
-
-
+    
 	//Get all scores
 	public static int[] LoadAllScores(){
 		int[] scores = new int[LEVELS.list.Count];

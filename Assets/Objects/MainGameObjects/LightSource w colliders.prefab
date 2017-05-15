@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 136243662564126768}
   - component: {fileID: 136069222446963216}
   m_Layer: 0
-  m_Name: LightSource 1
+  m_Name: LightSource w colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
