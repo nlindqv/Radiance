@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: befb6152e755b4840a883d54cf3884bf, type: 3}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1382981, g: 0.11226644, b: 0.086056106, a: 1}
+  m_IndirectSpecularColor: {r: 0.13331306, g: 0.10076941, b: 0.060326353, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -359,8 +359,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 336075084}
   m_HandleRect: {fileID: 1073045913}
   m_Direction: 3
-  m_Value: 0.97999996
-  m_Size: 0.4250067
+  m_Value: 0.9800001
+  m_Size: 0.5223716
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Text: "\n\n<GameName> is a project made in april & may 2017 in the course ID1003
     at KTH\r\n\n*The Team*\nAlbin Bystr\xF6m\r\nBenedith Mulongo\r\nEmma Good\r\nMichaela
     Jangefalk\r\nNiklas Lindqvist\r\nSara Ersson\r\nSenad Matuh [Product Owner]\r\nVictor
-    Bodell [Scrum Master]\r\n\nVisit our website for more info:\ngithub.com/Byssis/Project2017\r\n\n*Special
+    Bodell [Scrum Master]\r\n\nVisit our website for more info:\nhttps://byssis.github.io/Project2017/\n\n*Special
     Thanks*\nUnity Plugins\r\nMKGlow / Michael Kremmel\r\nBezierCurve / Arkham Interactive\r\nParticle
     Ribbon / Moonflower Carnivore\n"
 --- !u!222 &355657448
