@@ -34,13 +34,14 @@ public class GameManager : MonoBehaviour
 
     private bool prevMouseDown = true;
 
-	private AudioSource audioSource;
 
-	// Use this for initialization
-	void Start ()
+    float deltaTime = 0.0f;
+    private float speed = 2.0f;
+    private float lastClickTime = 0;
+    private float catchTime = 0.3f;
+    // Use this for initialization
+    void Start ()
 	{
-		audioSource = GetComponent<AudioSource> ();
-		audioSource.volume = PlayerPrefs.GetFloat ("Volume");
 		Input.multiTouchEnabled = false;
         //Prata med minnet
 //		levelName = MemoryManager.LoadLevelName();
@@ -127,6 +128,7 @@ public class GameManager : MonoBehaviour
                 UI.transform.Find(PAUSE_BTN_NAME).gameObject.SetActive(true);
                 UI.ShowGameModeButton();
                 CheckLevelCompleted();
+                DoubleClick();
                 break;
             // Case endScreen, check what next state is
             case GameState.endScreen:
@@ -150,6 +152,22 @@ public class GameManager : MonoBehaviour
         RenderSettings.skybox.SetFloat("_Exposure", Mathf.Sin(2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"))/8.0f + 1.0f);
         //Debug.Log(skybox.GetFloat("_Exposure"));
         //RenderSettings.skybox = skybox;
+    }
+
+    private void DoubleClick()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Time.time - lastClickTime < catchTime)
+            {
+                if (gameMode == GameMode.laserMode) gameMode = GameMode.mirrorMode;
+                else gameMode = GameMode.laserMode;
+                //print("double click " + gameMode);
+
+            }
+         
+            lastClickTime = Time.time;
+        }
     }
 
     private void LoadTutorial (int index)
@@ -261,11 +279,7 @@ public class GameManager : MonoBehaviour
 	private void LoadLevelName(){
 		string jsonString = File.ReadAllText (Application.dataPath + "/Resources/Levels.json");
 		Debug.Log (jsonString);
-	}
-
-
-    float deltaTime = 0.0f;
-    private float speed = 2.0f;
+	}   
 
     void Update()
     {
