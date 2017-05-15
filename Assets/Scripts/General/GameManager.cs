@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public const string PAUSE_BTN_NAME = "PauseButton";
     public enum GameMode { laserMode, mirrorMode, none };	// gameModes
 	public enum GameState {tutorial,gameRunning,endScreen, gamePaused};	// gameStates available
-
+	private int score = 0;
 
     public static GameMode gameMode = GameMode.none;		// init gameMode to none
     private static GameState prevGameState;					// save prev gameState
@@ -170,6 +170,7 @@ public class GameManager : MonoBehaviour
 			//LoadLevelEndScreen ();
 			gameState = GameState.endScreen;
             gameMode = GameMode.none;
+			score = targetMaster.GetCollectables();
             StartCoroutine(Order());
 		}
 	}
@@ -177,7 +178,7 @@ public class GameManager : MonoBehaviour
 	private void LoadLevelEndScreen ()
 	{
         string level = "Level " + MemoryManager.LoadLevelIndex();
-        int score = targetMaster.GetCollectables();
+        //int score = targetMaster.GetCollectables();
         MemoryManager.WriteScore2Memory(score);
         //yield return new WaitForSeconds(3.0f);
         UI.ShowEndScreen(level, score);                
