@@ -1,4 +1,3 @@
-
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +11,7 @@ public class GameManager : MonoBehaviour
     public const string PAUSE_BTN_NAME = "PauseButton";
     public enum GameMode { laserMode, mirrorMode, none };	// gameModes
 	public enum GameState {tutorial,gameRunning,endScreen, gamePaused};	// gameStates available
+
 
     public static GameMode gameMode = GameMode.none;		// init gameMode to none
     private static GameState prevGameState;					// save prev gameState
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		
+		Input.multiTouchEnabled = false;
         //Prata med minnet
 //		levelName = MemoryManager.LoadLevelName();
 		tutorialIndex = MemoryManager.LoadTutorialIndex();
@@ -52,27 +52,39 @@ public class GameManager : MonoBehaviour
         }
 
         generateLaserStack();
+        laserMode.laserStack = laserStack;       
 
-        laserMode.laserStack = laserStack;
-       
+        // Access UIs components and children
+        UI = GameObject.Find ("UI").GetComponent<ViewController> ();
 
-       
-		// Access UIs components and children
-		UI = GameObject.Find ("UI").GetComponent<ViewController> ();
 		// Access targetMaster
 		targetMaster = GameObject.Find ("TargetMaster").GetComponent<TargetMaster> ();
 		// Hide mellanmeny
 		UI.transform.Find("Canvas").transform.Find("MellanMeny").gameObject.SetActive (false);
 
-		// If totrial index = -1 dont show anything, otherwise load tutorial with index tutorialIndex
-		if (tutorialIndex >= 0) {
-			// Start game with tutorial window #1
-			gameState = GameState.tutorial;
-			prevGameState = GameState.tutorial;
-			gameMode = GameMode.none;
+//        Debug.Log("tutorialIndex: " + tutorialIndex);
+//        Debug.Log("playedBefore: " + MemoryManager.TutorialPlayedBefore(tutorialIndex));
 
-			LoadTutorial (tutorialIndex);
-		} else {
+		// If tutorial index = -1 dont show anything, otherwise load tutorial with index tutorialIndex
+		if (tutorialIndex >= 0) {
+			if (MemoryManager.TutorialPlayedBefore (tutorialIndex) == false) {
+				// Start game with tutorial window #1
+				// Start game with tutorial window #1
+				gameState = GameState.tutorial;
+				prevGameState = GameState.tutorial;
+				gameMode = GameMode.none;
+
+				LoadTutorial (tutorialIndex);
+				Debug.Log ("tutorialPlayedBefore: " + MemoryManager.TutorialPlayedBefore (tutorialIndex));
+				//Debug.Log(SceneManager.GetActiveScene().buildIndex);
+				MemoryManager.SetTutorialPlayedBefore (tutorialIndex);
+			} else {
+				// Start game without tutorial
+				gameState = GameState.gameRunning;
+				prevGameState = GameState.gameRunning;
+				gameMode = GameMode.laserMode;
+			}
+        } else {
 			// Start game without tutorial
 			gameState = GameState.gameRunning;
 			prevGameState = GameState.gameRunning;
@@ -121,11 +133,10 @@ public class GameManager : MonoBehaviour
 			break;
 		}
         prevGameState = gameState;
-        RenderSettings.skybox.SetFloat("_Rotation", 2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"));
-        RenderSettings.skybox.SetFloat("_Exposure", Mathf.Sin(2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"))/8.0f + 1.2f);
+        RenderSettings.skybox.SetFloat("_Rotation", speed * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"));
+        RenderSettings.skybox.SetFloat("_Exposure", Mathf.Sin(2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"))/8.0f + 1.0f);
         //Debug.Log(skybox.GetFloat("_Exposure"));
         //RenderSettings.skybox = skybox;
-
     }
 
     private void LoadTutorial (int index)
@@ -137,7 +148,10 @@ public class GameManager : MonoBehaviour
 		} else
 			tut = new Tutorial();
 
-		UI.NewTutorial (tut.title, tut.tutorialText, tut.icon);
+		//load image from iconpath
+		Sprite icon = MemoryManager.loadIcon (tut.iconPath);
+
+		UI.NewTutorial (tut.title, tut.tutorialText, icon);
 	}
 
 	private void CheckLevelCompleted ()
@@ -152,14 +166,40 @@ public class GameManager : MonoBehaviour
 
 	private void LoadLevelEndScreen ()
 	{
-		// Load info about which level got completed
-		string level = "Level";
-		int score = targetMaster.GetCollectables ();
-		MemoryManager.WriteScore2Memory (score);
-		UI.ShowEndScreen (level, score);
-	}
+        // Load info about which level got completed
+        //EndScript.FloatAway(GameObject.FindObjectsOfType<IInteractables>());        
+        StartCoroutine(Order());        
+    }
+  
 
-	private void CheckNextState ()
+    IEnumerator Order()
+    {
+        foreach (IInteractables item in GameObject.FindObjectsOfType<IInteractables>())
+        {
+            EndScript.FloatAway(item.transform);
+        }
+        foreach (Target item in GameObject.FindObjectsOfType<Target>())
+        {
+            EndScript.FloatAway(item.transform);
+        }
+        foreach (LaserMode item in GameObject.FindObjectsOfType<LaserMode>())
+        {
+            EndScript.FloatAway(item.transform);
+        }
+        foreach (GameObject item in GameObject.FindGameObjectsWithTag("FloatAway"))
+        {
+            Debug.Log(GameObject.FindGameObjectsWithTag("FloatAway"));
+            EndScript.FloatAway(item.transform);
+        }
+        speed = 4.0f;
+		string level = "Level " + MemoryManager.LoadLevelIndex();
+        int score = targetMaster.GetCollectables();
+        MemoryManager.WriteScore2Memory(score);
+        yield return new WaitForSeconds(3.0f);        
+        UI.ShowEndScreen(level, score);
+    }
+
+    private void CheckNextState ()
 	{
 		// Check select to decide what next state is
 		switch (UI.select) {
@@ -211,6 +251,7 @@ public class GameManager : MonoBehaviour
 
 
     float deltaTime = 0.0f;
+    private float speed = 2.0f;
 
     void Update()
     {
@@ -238,5 +279,4 @@ public class GameManager : MonoBehaviour
     {
         Camera.main.GetComponent<MKGlowSystem.MKGlow>().enabled = false;
     }
-
 }

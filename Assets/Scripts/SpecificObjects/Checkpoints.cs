@@ -46,7 +46,7 @@ public class Checkpoints : IInteractables, ICollectable
 		newRay.transform.parent = parentTranform;
 		newRay.transform.position = startPoint;
 		newRay.transform.rotation = (Quaternion.LookRotation(laserHit.dir));
-		newRay.Color = laserHit.Color;
+        newRay.SetColor(laserHit.BounceValue, laserHit.Color);
 		newRay.GenerateLaserRay();
         taken = true;
         On();

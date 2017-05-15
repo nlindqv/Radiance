@@ -105,18 +105,14 @@ public class LevelList{
 public class Tutorial{
 	public string title;
 	public string tutorialText;
-	public Image icon;
+	public string iconPath;
+    public bool tutorialPlayedBefore;
 
-	public Tutorial(){
-		this.title = "Title";
-		this.tutorialText = "text";
-		this.icon = null;
-	}
 
-	public Tutorial(string title, string text){
+	public Tutorial(string title = "Title", string text = "text", string path = ""){
 		this.title = title;
 		this.tutorialText = text;
-		this.icon = null;
+		this.iconPath = path;
 	}
 }
 

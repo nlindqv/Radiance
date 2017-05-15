@@ -19,7 +19,7 @@ public abstract class IInteractables : MonoBehaviour
 
 	public virtual void HandleUpdate()
     {
-        Debug.Log("Reversed hit");
+        //Debug.Log("Reversed hit");
     }
 
     public void SetLasers(LaserStack laserStack)
@@ -32,10 +32,11 @@ public abstract class IInteractables : MonoBehaviour
         this.ray = laser;
     }
 
-    public LaserRay GetLaser(int value)
+    public LaserRay GetLaser(int bounceValue)
     {
-        if (laserStack == null) return Instantiate(ray, Vector3.zero, Quaternion.identity).GetComponent<LaserRay>();
-        LaserRay newRayGameObj = (laserStack.size() <= 0) ? Instantiate(ray, Vector3.zero, Quaternion.identity).GetComponent<LaserRay>() : laserStack.pop();
+        if (bounceValue <= 0) return null;
+        LaserRay newRayGameObj = (laserStack == null || laserStack.size() <= 0) ? Instantiate(ray, Vector3.zero, Quaternion.identity).GetComponent<LaserRay>() : laserStack.pop();
+        newRayGameObj.BounceValue = bounceValue;
         return newRayGameObj;
     } 
 }

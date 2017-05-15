@@ -37,7 +37,7 @@ public class ColorChanger : IInteractables {
 	/// <summary>
 	/// Updates color of gate.
 	/// </summary>
-	void UpdateColor(){
+	public void UpdateColor(){
         //update core-glow
         UnityEngine.ParticleSystem.MainModule main = ps.main;
         main.startColor = color;
@@ -77,7 +77,7 @@ public class ColorChanger : IInteractables {
         newRay.transform.rotation = Quaternion.LookRotation(ray.transform.forward);
 
         newRay.transform.parent = parentTransform;
-		newRay.SetColor (ray.BounceValue, color);
+        newRay.SetColor(ray.BounceValue, color);
         newRay.GenerateLaserRay();
 	}
 }

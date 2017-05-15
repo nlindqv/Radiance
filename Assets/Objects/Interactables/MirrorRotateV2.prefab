@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 114548916474432250}
   m_Layer: 0
   m_Name: MirrorRotateV2
-  m_TagString: Untagged
+  m_TagString: FloatAway
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ray: {fileID: 0}
-  bounceValue: 0
+  bounceValue: 10
 --- !u!114 &114548916474432250
 MonoBehaviour:
   m_ObjectHideFlags: 1
