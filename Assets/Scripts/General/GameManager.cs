@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
 
     private float MIN_FPS = 20;
 
+    private bool prevMouseDown = true;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -109,29 +111,36 @@ public class GameManager : MonoBehaviour
             gameMode = GameMode.laserMode;
             UI.ShowGameModeButton();
         }
-		// Decide which code is running according to gameState
-		switch (gameState) {
-		// Case tutorial, do something...
-		case GameState.tutorial:
-            break;
-			// Case gameRunning, show gamemode-button and check if level is completed
-        case GameState.gameRunning:
-            //visa pause-knappen
-            UI.transform.Find(PAUSE_BTN_NAME).gameObject.SetActive(true);
-            UI.ShowGameModeButton();
-			CheckLevelCompleted ();
-			break;
-			// Case endScreen, check what next state is
-		case GameState.endScreen:
-			CheckNextState ();
-			break;
-		case GameState.gamePaused:
-			CheckNextState ();
-			break;
+        // Decide which code is running according to gameState
+        switch (gameState)
+        {
+            // Case tutorial, do something...
+            case GameState.tutorial:
+                break;
+            // Case gameRunning, show gamemode-button and check if level is completed
+            case GameState.gameRunning:
+                //visa pause-knappen
+                UI.transform.Find(PAUSE_BTN_NAME).gameObject.SetActive(true);
+                UI.ShowGameModeButton();
+                CheckLevelCompleted();
+                break;
+            // Case endScreen, check what next state is
+            case GameState.endScreen:
+                if (Input.GetMouseButtonDown(0))
+                {
+                    StopCoroutine(Order());
+                    LoadLevelEndScreen();
+                }
+                CheckNextState();
+                //prevMouseDown = Input.GetMouseButtonDown(0);
+                break;
+            case GameState.gamePaused:
+                CheckNextState();
+                break;
 
-		default:
-			break;
-		}
+            default:
+                break;
+        }
         prevGameState = gameState;
         RenderSettings.skybox.SetFloat("_Rotation", speed * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"));
         RenderSettings.skybox.SetFloat("_Exposure", Mathf.Sin(2 * Time.deltaTime + RenderSettings.skybox.GetFloat("_Rotation"))/8.0f + 1.0f);
@@ -158,17 +167,20 @@ public class GameManager : MonoBehaviour
 	{
 		// If all targets are hit, load endScreen and set gameMode = none
 		if (targetMaster.CheckLevelCompleted ()) {
-			LoadLevelEndScreen ();
+			//LoadLevelEndScreen ();
 			gameState = GameState.endScreen;
             gameMode = GameMode.none;
+            StartCoroutine(Order());
 		}
 	}
 
 	private void LoadLevelEndScreen ()
 	{
-        // Load info about which level got completed
-        //EndScript.FloatAway(GameObject.FindObjectsOfType<IInteractables>());        
-        StartCoroutine(Order());        
+        string level = "Level " + MemoryManager.LoadLevelIndex();
+        int score = targetMaster.GetCollectables();
+        MemoryManager.WriteScore2Memory(score);
+        //yield return new WaitForSeconds(3.0f);
+        UI.ShowEndScreen(level, score);                
     }
   
 
@@ -192,11 +204,8 @@ public class GameManager : MonoBehaviour
             EndScript.FloatAway(item.transform);
         }
         speed = 4.0f;
-		string level = "Level " + MemoryManager.LoadLevelIndex();
-        int score = targetMaster.GetCollectables();
-        MemoryManager.WriteScore2Memory(score);
-        yield return new WaitForSeconds(3.0f);        
-        UI.ShowEndScreen(level, score);
+        yield return new WaitForSeconds(3.0f);
+        LoadLevelEndScreen();
     }
 
     private void CheckNextState ()
