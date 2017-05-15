@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 114548916474432250}
   m_Layer: 0
   m_Name: MirrorRotateV2
-  m_TagString: Untagged
+  m_TagString: FloatAway
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
