@@ -192,7 +192,7 @@ public class GameManager : MonoBehaviour
             EndScript.FloatAway(item.transform);
         }
         speed = 4.0f;
-        string level = "Level";
+		string level = "Level " + MemoryManager.LoadLevelIndex();
         int score = targetMaster.GetCollectables();
         MemoryManager.WriteScore2Memory(score);
         yield return new WaitForSeconds(3.0f);        
