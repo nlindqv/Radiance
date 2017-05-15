@@ -34,9 +34,13 @@ public class GameManager : MonoBehaviour
 
     private bool prevMouseDown = true;
 
+	private AudioSource audioSource;
+
 	// Use this for initialization
 	void Start ()
 	{
+		audioSource = GetComponent<AudioSource> ();
+		audioSource.volume = PlayerPrefs.GetFloat ("Volume");
 		Input.multiTouchEnabled = false;
         //Prata med minnet
 //		levelName = MemoryManager.LoadLevelName();

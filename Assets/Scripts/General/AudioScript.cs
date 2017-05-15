@@ -1,16 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioScript : MonoBehaviour {
 
     public AudioSource audioSource;
+	public Slider volumeSlider;
 
 	// Use this for initialization
 	void Start () {
-        audioSource.volume = 0.5f;
-        audioSource.Play();
+		audioSource.volume = PlayerPrefs.GetFloat ("Volume");
+		volumeSlider.value = PlayerPrefs.GetFloat ("Volume");
+		audioSource.Play ();
+
 	}
+
 
     // Fades the sound source out
     public void fadeOut()
@@ -29,6 +34,16 @@ public class AudioScript : MonoBehaviour {
     {
         audioSource.volume = 0.2f;
     }
-	
-	
+
+	/*public void VolumeController(){
+		volumeSlider.value = audioSource.volume;
+	}
+	*/
+
+	// Changes the volume according to slider value
+	public void ChangeVolume(){
+		Debug.Log ("changed");
+		audioSource.volume = volumeSlider.value;
+		PlayerPrefs.SetFloat ("Volume", volumeSlider.value);
+	}
 }
