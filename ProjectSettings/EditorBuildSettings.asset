@@ -86,3 +86,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/GameScenes/Levels/level_22.unity
     guid: 695d4f5b30df21448b7213f2e7437369
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_23.unity
+    guid: 534824c8bd14e4f9fac38582b1c14b42
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_24.unity
+    guid: bd985958640694e2184cb45eeaf9a53b
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_25.unity
+    guid: 904c9972c285345a9a6def21fb63c569
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_26.unity
+    guid: b7f1a72e0f52343b9a5d19788433fe4e
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_27.unity
+    guid: 772f90ac8963f4255ba52c520b00bd22
+  - enabled: 1
+    path: Assets/GameScenes/Levels/level_28.unity
+    guid: f188e928190464f5abc126b9c529b34e
