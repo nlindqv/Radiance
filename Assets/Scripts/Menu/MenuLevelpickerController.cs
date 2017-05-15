@@ -10,13 +10,18 @@ using UnityEngine.UI;
 /// </summary>
 [RequireComponent(typeof(RectTransform))]
 public class MenuLevelpickerController : MonoBehaviour
-{	public Button menuButton;
+{	
+	//--- this is it
+	public Button menuButton;
+	//--
     private const string BACK_BTN_NAME = "BackBtn";
     private const string STANDARD_LEVEL_BTN_NAME = "LevelBtn";
     private const string RIGHT_SWIPE_BTN_NAME = "RightSwipeBtn";
     private const string LEFT_SWIPE_BTN_NAME = "LeftSwipeBtn";
     private int currentPage = 0;
+	List<string> levelpaths;
 	private Transform levelButtonCanvas;
+
     // Use this for initialization
     void Start()
     {
@@ -31,7 +36,7 @@ public class MenuLevelpickerController : MonoBehaviour
 
 
         //hämta en lista med levels scener som finns i buildsettings
-		List<string> levelpaths = MemoryManager.LoadPaths();
+		levelpaths = MemoryManager.LoadPaths();
 
         // skapa action/event för level 1 knapp
         //levelBtn.onClick.AddListener(delegate { SceneManager.LoadScene(sceneList.First().Path); });
@@ -59,24 +64,45 @@ public class MenuLevelpickerController : MonoBehaviour
         Text buttonText;
 		RectTransform rectParent = GetComponentInParent<RectTransform> ();
 		int[] scores = MemoryManager.LoadAllScores ();
-
+		int[] findthat = MemoryManager.LoadAllScores ();
+		int k;
         //skapa nya knappar för övriga nivåer, hoppa över första knappen som alltid skall finnas på menyn
-        for (int i = ((currentPage) * 3 ); i < Mathf.Min(new int[] { (currentPage + 1) * 3, paths.Count }); i++){
+        for (int i = ((currentPage) * 3 ); i < Mathf.Min(new int[] { (currentPage + 1) * 3, paths.Count }); i++)
+		{
 
 			GameObject newButton = Instantiate(menuButton.gameObject, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.LookRotation(menuButton.transform.forward));
 			newButton.GetComponent<RectTransform> ().localScale = new Vector3 ((float)rectParent.lossyScale.x, (float)rectParent.lossyScale.y, (float)rectParent.lossyScale.z);
-
-
+			// asssign i to k
+			k = i;
 			newButton.transform.SetParent(levelButtonCanvas.transform);
             Button standardLevelBtn = newButton.GetComponent<Button>();
 			string scenePath = paths[i];
             //skapa event för knappklick och byta bana
-            standardLevelBtn.onClick.AddListener(delegate() { SceneManager.LoadScene(scenePath); });
+			//add listener for next level if and only if the level 
+			// have been played before, <-> scores[i] > 0 
+
+			if (k > 0) {
+				if (findthat [k-1] > 0)
+				{
+					standardLevelBtn.onClick.AddListener (delegate() {SceneManager.LoadScene (scenePath);});
+
+				}
+			}
+			else 
+			{
+				if (findthat [k] > 0) 
+				{
+					standardLevelBtn.onClick.AddListener(delegate() { SceneManager.LoadScene(scenePath); });
+				} 
+			}
+
+            //standardLevelBtn.onClick.AddListener(delegate() { SceneManager.LoadScene(scenePath); });
             buttonText = newButton.GetComponentInChildren<Text>();
             buttonText.text = "Level " + (i + 1).ToString();
 			newButton.SetActive (true);
 			int starCount = scores[i];
 			GenerateStars(standardLevelBtn, starCount);
+
         }
     }
 
@@ -84,6 +110,9 @@ public class MenuLevelpickerController : MonoBehaviour
 
 	private void GenerateStars (Button levelButton, int starCount){
 		switch(starCount){
+		case 0:
+			LightStar (levelButton, 0);
+			break;
 		case 1:
 			LightStar (levelButton, 1);
 			break;
@@ -96,8 +125,10 @@ public class MenuLevelpickerController : MonoBehaviour
 		}
 	}
 
-	private void LightStar(Button levelButton, int i) {
-		for(int j=1;j<=i; j++){
+	private void LightStar(Button levelButton, int i) 
+	{
+		for(int j=1;j<=i; j++)
+		{
 			levelButton.transform.Find ("EmptyStar" + j).transform.GetChild (0).gameObject.SetActive (true);
 		}
 	}
