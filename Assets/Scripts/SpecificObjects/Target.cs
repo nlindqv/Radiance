@@ -34,6 +34,10 @@ public class Target : IInteractables
 	}
     */
 
+	void Update(){
+		transform.Rotate (new Vector3(30,15,45) * Time.deltaTime * 0.5f); 	
+	}
+
 	public override void HandleUpdate()
     {
         // updated when no hit is register -> turn halo of
