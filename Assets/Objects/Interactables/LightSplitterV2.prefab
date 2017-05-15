@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114551303955617230}
   - component: {fileID: 64665981387647940}
   m_Layer: 0
-  m_Name: LightSplitter 1
+  m_Name: LightSplitterV2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
