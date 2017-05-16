@@ -27,7 +27,7 @@ public class MirrorInactive : IInteractables {
         renderer.material.SetColor("_RimColour", activeMirrorColor);
 		mirrorActive = true;
 
-		GetComponent<Renderer> ().material.color = new Color32 (27, 57, 154, 255);
+		GetComponent<Renderer> ().material.color = new Color32 (255, 0, 206, 255);
 
 	}
 	// Return state of locked mirror
