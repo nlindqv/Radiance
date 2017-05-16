@@ -124,8 +124,8 @@ GameObject:
   - component: {fileID: 4707951203097188}
   - component: {fileID: 114126281964419140}
   m_Layer: 0
-  m_Name: LightSource 1
-  m_TagString: Untagged
+  m_Name: LightSourceV2
+  m_TagString: FloatAway
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
