@@ -25,6 +25,14 @@ public class MenuLevelpickerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        int [] scores = MemoryManager.LoadAllScores();
+        for (int i = 0; i < scores.Length; i++)
+        {
+            if (scores[i] == 0) {   
+                currentPage = i / 3;
+                break;
+            }
+        }
         AddSwipeEventListeners();
 		levelButtonCanvas = transform.Find ("menu").transform.Find ("LevelButtons");
 //		Button[] buttons = levelButtonCanvas.GetComponentsInChildren<Button>();
