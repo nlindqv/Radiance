@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: befb6152e755b4840a883d54cf3884bf, type: 3}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.13331306, g: 0.10076941, b: 0.060326353, a: 1}
+  m_IndirectSpecularColor: {r: 0.18062443, g: 0.14573753, b: 0.11066986, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -467,7 +467,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\n\n<GameName> is a project made in april & may 2017 in the course ID1003
+  m_Text: "\n\nRADIANCE is a game-project made in april & may 2017 in the course ID1003
     at KTH\r\n\n*The Team*\nAlbin Bystr\xF6m\r\nBenedith Mulongo\r\nEmma Good\r\nMichaela
     Jangefalk\r\nNiklas Lindqvist\r\nSara Ersson\r\nSenad Matuh [Product Owner]\r\nVictor
     Bodell [Scrum Master]\r\n\nVisit our website for more info:\nhttps://byssis.github.io/Project2017/\n\n*Special
