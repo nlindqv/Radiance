@@ -83,7 +83,12 @@ public class MenuLevelpickerController : MonoBehaviour
 
 			if (k > 0) {
 				if (findthat [k - 1] > 0) {
-					standardLevelBtn.onClick.AddListener (delegate() {SceneManager.LoadScene (scenePath);});
+					standardLevelBtn.onClick.AddListener (delegate() {
+						SceneManager.LoadScene (scenePath);
+					});
+					standardLevelBtn.interactable = true;
+				} else {
+					standardLevelBtn.interactable = false;
 				}
 			} else if (k == 0) {
 				standardLevelBtn.onClick.AddListener (delegate() {SceneManager.LoadScene (scenePath);});
@@ -103,12 +108,27 @@ public class MenuLevelpickerController : MonoBehaviour
 			newButton.SetActive (true);
 			int starCount = scores[i];
 			GenerateStars(standardLevelBtn, starCount);
+			if (starCount <= 0) {
+				standardLevelBtn.transform.Find ("lock").gameObject.SetActive (true);
+				for(int j=1;j<=3; j++)
+				{
+					standardLevelBtn.transform.Find ("EmptyStar" + j).gameObject.SetActive (false);
+					//transform.GetChild (0).gameObject.SetActive (true);
+				}
+
+			} else {
+				standardLevelBtn.transform.Find ("lock").gameObject.SetActive (false);
+				for(int j=1;j<=3; j++)
+				{
+					standardLevelBtn.transform.Find ("EmptyStar" + j).gameObject.SetActive (true);
+					//transform.GetChild (0).gameObject.SetActive (true);
+				}
+
+			}
 
         }
     }
-
-
-
+		
 	private void GenerateStars (Button levelButton, int starCount){
 		switch(starCount){
 		case 0:
