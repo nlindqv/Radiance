@@ -312,7 +312,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4698141444663626, guid: 06788e11f3ca32645a4fbbd455394ceb, type: 2}
       propertyPath: m_RootOrder
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 1631251713665980, guid: 06788e11f3ca32645a4fbbd455394ceb, type: 2}
       propertyPath: m_Name
@@ -430,7 +430,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4142851587603700, guid: dab8a3b09bfa9174595cd30523af5f96, type: 2}
       propertyPath: m_RootOrder
-      value: 24
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1352917985356226, guid: dab8a3b09bfa9174595cd30523af5f96, type: 2}
       propertyPath: m_Name
@@ -851,7 +851,6 @@ GameObject:
   - component: {fileID: 671071721}
   - component: {fileID: 671071720}
   - component: {fileID: 671071719}
-  - component: {fileID: 671071718}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -859,13 +858,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &671071718
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 671071717}
-  m_Enabled: 1
 --- !u!92 &671071719
 Behaviour:
   m_ObjectHideFlags: 0
@@ -927,7 +919,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 110, y: 0, z: 0}
 --- !u!4 &790222372 stripped
 Transform:
@@ -1040,7 +1032,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4710144602710198, guid: ca86f7105a61a894a8102ca2d5142521, type: 2}
       propertyPath: m_RootOrder
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 114354323946359720, guid: ca86f7105a61a894a8102ca2d5142521,
         type: 2}
@@ -1832,7 +1824,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4022861190005402, guid: 8ee444adc7f7c2247a1e8d9293c56536, type: 2}
       propertyPath: m_RootOrder
-      value: 22
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 1263231707684056, guid: 8ee444adc7f7c2247a1e8d9293c56536, type: 2}
       propertyPath: m_Name
@@ -1916,7 +1908,7 @@ Transform:
   - {fileID: 377989202}
   - {fileID: 1784960367}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1945650410
 GameObject:
