@@ -28,16 +28,7 @@ public static class GenerateAvailableScenesJSON
 			PlayerPrefs.SetInt (name, 0);
 
 			//Determine tutorial index
-			int tutind = -1;
-			if (i == 1) {
-				tutind = 0;
-			} else if (i == 5) {
-				tutind = 1;
-			} else if (i == 8) {
-				tutind = 2;
-			} else if (i == 11) {
-				tutind = 3;
-			}
+			int tutind = GetTutorialIndex(i);
 
 
 			LevelData t = new LevelData (path, i++, name, tutind);
@@ -93,5 +84,34 @@ public static class GenerateAvailableScenesJSON
 
 		Debug.Log ("Index offset written: " + levelIndexOffset);
 
+	}
+
+	private static int GetTutorialIndex(int i){
+		int tutorialIndex = -1;
+		switch (i) 
+		{
+			case 1://Lightsource
+				tutorialIndex = 0;
+				break;
+			case 2://Mirror
+				tutorialIndex = 1;
+				break;
+			case 7://Checkpoint
+				tutorialIndex = 2;
+				break;
+			case 14://ColorChanger
+				tutorialIndex = 3;
+				break;
+			case 19://LightSplitter
+				tutorialIndex = 4;
+				break;
+			case 27://Mover
+				tutorialIndex = 5;
+				break;
+			default:
+				tutorialIndex = -1;
+				break;
+		}
+		return tutorialIndex;
 	}
 }
