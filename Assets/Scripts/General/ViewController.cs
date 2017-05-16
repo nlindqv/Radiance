@@ -7,7 +7,7 @@ public class ViewController : MonoBehaviour
 {
     private GameObject pauseButton;				    // toggle pause
     private GameObject toogleButton;				// toggle gamemode
-    public enum Select { gameCompleted, menu, replay, next, none };// states that could be entered in endscreen
+    public enum Select { menu, replay, next, none, gameCompleted };// states that could be entered in endscreen
     public Select select = Select.none;				// set selectstate to none
     private Transform tutorial;						// tutorial window
     private Transform endScreen;					// endscreen window
