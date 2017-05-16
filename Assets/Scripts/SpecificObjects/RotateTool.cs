@@ -27,7 +27,9 @@ public class RotateTool : MonoBehaviour {
 
     private void Update()
     {
-        this.transform.position = new Vector3(mirror.position.x, this.transform.position.y, mirror.position.z);  
+        this.transform.position = new Vector3(mirror.position.x, this.transform.position.y, mirror.position.z);
+        if (GameManager.gameMode == GameManager.GameMode.none)
+            this.gameObject.SetActive(false);
     }
 
     private void OnMouseDrag()
