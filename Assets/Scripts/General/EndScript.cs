@@ -15,6 +15,7 @@ public class EndScript : MonoBehaviour {
         gameObjectsRigidBody.angularVelocity = new Vector3(UnityEngine.Random.Range(-2.0f, 2.0f), UnityEngine.Random.Range(-2.0f, 2.0f), UnityEngine.Random.Range(-2.0f, 2.0f)) ;
         if (gameObjectsRigidBody.GetComponent<Movable>()) gameObjectsRigidBody.GetComponent<Movable>().enabled = false;
         if (gameObjectsRigidBody.GetComponent<Movable>()) gameObjectsRigidBody.GetComponent<Rotate>().enabled = false;
+        if (gameObjectsRigidBody.GetComponent<MeshCollider>()) gameObjectsRigidBody.GetComponent<MeshCollider>().enabled = false;
         gameObjectsRigidBody.freezeRotation = false;
      }
 }

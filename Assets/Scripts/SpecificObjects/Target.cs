@@ -1,4 +1,4 @@
-﻿using System;
+﻿//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,12 +11,21 @@ public class Target : IInteractables
 	public bool hit;
     private Behaviour halo;
 
+	private Vector3 v;
 
     void Start()
 	{
         //Default is no hit from laser
         halo = (Behaviour)GetComponent("Halo");
         hit = false;
+
+		//Assign random rotation to each target
+		int x = Mathf.RoundToInt(Random.Range(0, 90));
+		int y = Mathf.RoundToInt(Random.Range(0, 90));
+		int z = Mathf.RoundToInt(Random.Range(0, 90));
+
+		v = new Vector3 (x, y, z);
+//		v = new Vector3 (90, 0, 0);
 	}
 
 
@@ -35,7 +44,7 @@ public class Target : IInteractables
     */
 
 	void Update(){
-		transform.Rotate (new Vector3(30,15,45) * Time.deltaTime * 0.5f); 	
+		transform.Rotate (v * Time.deltaTime * 0.25f); 	
 	}
 
 	public override void HandleUpdate()
