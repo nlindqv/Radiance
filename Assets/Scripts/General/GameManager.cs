@@ -42,7 +42,8 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
-		Input.multiTouchEnabled = false;
+        
+        Input.multiTouchEnabled = false;
         //Prata med minnet
 //		levelName = MemoryManager.LoadLevelName();
 		tutorialIndex = MemoryManager.LoadTutorialIndex();
@@ -97,7 +98,8 @@ public class GameManager : MonoBehaviour
 			prevGameState = GameState.gameRunning;
 			gameMode = GameMode.laserMode;
 		}
-	}
+        //StartCoroutine(ModeText("Mirror Mode"));
+    }
 
     private void generateLaserStack()
     {
@@ -155,6 +157,9 @@ public class GameManager : MonoBehaviour
     }
 
     int prevCount = 0;
+    private GameMode prevGameMode;
+    private string gameModeText;
+
     private void DoubleClick()
     {
         if (Input.touchCount > 0)
@@ -163,8 +168,16 @@ public class GameManager : MonoBehaviour
             {
                 //if (Time.time - lastClickTime < catchTime)
                 //{
-                    if (gameMode == GameMode.laserMode) gameMode = GameMode.mirrorMode;
-                    else gameMode = GameMode.laserMode;
+                if (gameMode == GameMode.laserMode)
+                {
+                    gameMode = GameMode.mirrorMode;
+                    StartCoroutine(ModeText("Mirror Mode"));
+                }
+                else
+                {
+                    gameMode = GameMode.laserMode;
+                    StartCoroutine(ModeText("Laser Mode"));
+                }
                     //print("double click " + gameMode);
                 //}
                 //lastClickTime = Time.time;
@@ -172,6 +185,21 @@ public class GameManager : MonoBehaviour
             prevCount = Input.GetTouch(0).tapCount;
         }       
     }
+
+    IEnumerator ModeText(string text)
+    {
+        Text t = UI.transform.FindChild("GameMode").GetComponent<Text>();
+        t.text = text;
+        t.color = new Color(t.color.r, t.color.g, t.color.b, 1.0f);
+        float time = 1.0f;
+        while (t.color.a > 0)
+        {
+            t.color = new Color(t.color.r, t.color.g, t.color.b, t.color.a - Time.deltaTime / time);
+            yield return null;
+        }
+       // UI.transform.FindChild("GameMode").GetComponent<Text>().text = "";
+    }
+
 
     private void LoadTutorial (int index)
 	{
@@ -300,9 +328,7 @@ public class GameManager : MonoBehaviour
     void OnGUI()
     {
         int w = Screen.width, h = Screen.height;
-
         GUIStyle style = new GUIStyle();
-
         Rect rect = new Rect(0, 0, w, h * 2 / 100);
         style.alignment = TextAnchor.UpperLeft;
         style.fontSize = h * 2 / 50;
@@ -310,11 +336,10 @@ public class GameManager : MonoBehaviour
         float msec = deltaTime * 1000.0f;
         float fps = 1.0f / deltaTime;
         //if(fps < MIN_FPS)disableGlow();
-
         // check in memory if we should disable glow
         if (MemoryManager.LoadGlow() != 1) disableGlow();
         string text = string.Format("{0:0.0} ms ({1:0.} fps)", msec, fps);
-        GUI.Label(rect, text, style);
+        GUI.Label(rect, text, style);        
     }
 
     private void disableGlow()
