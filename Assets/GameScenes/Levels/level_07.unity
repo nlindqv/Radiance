@@ -613,6 +613,14 @@ Prefab:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: a62cbb9645187774a88e2b18dcb8cf07, type: 2}
+    - target: {fileID: 1611909254392696, guid: 901ecb29522c8bd40b58bff9e6ea5e2b, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
+    - target: {fileID: 1455039744213196, guid: 901ecb29522c8bd40b58bff9e6ea5e2b, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 901ecb29522c8bd40b58bff9e6ea5e2b, type: 2}
   m_IsPrefabParent: 0
@@ -789,6 +797,14 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0.9124998
       objectReference: {fileID: 0}
+    - target: {fileID: 1357834422705208, guid: ed03c135bd5445244b03b222e08792a7, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
+    - target: {fileID: 1047224959130494, guid: ed03c135bd5445244b03b222e08792a7, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed03c135bd5445244b03b222e08792a7, type: 2}
   m_IsPrefabParent: 0
@@ -959,6 +975,10 @@ Prefab:
         type: 2}
       propertyPath: gateColor.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675561585118434, guid: ca86f7105a61a894a8102ca2d5142521, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca86f7105a61a894a8102ca2d5142521, type: 2}
@@ -1168,6 +1188,14 @@ Prefab:
     - target: {fileID: 4366490004919802, guid: ed03c135bd5445244b03b222e08792a7, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0.9124998
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357834422705208, guid: ed03c135bd5445244b03b222e08792a7, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
+    - target: {fileID: 1047224959130494, guid: ed03c135bd5445244b03b222e08792a7, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed03c135bd5445244b03b222e08792a7, type: 2}
@@ -1569,6 +1597,10 @@ Prefab:
         type: 2}
       propertyPath: gateColor.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675561585118434, guid: ca86f7105a61a894a8102ca2d5142521, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca86f7105a61a894a8102ca2d5142521, type: 2}

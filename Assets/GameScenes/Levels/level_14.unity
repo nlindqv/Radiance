@@ -678,6 +678,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: a62cbb9645187774a88e2b18dcb8cf07, type: 2}
+    - target: {fileID: 1554707501100384, guid: 9155a1b722104f04d90d83789b3db95b, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9155a1b722104f04d90d83789b3db95b, type: 2}
   m_IsPrefabParent: 0
