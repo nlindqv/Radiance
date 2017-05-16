@@ -7,7 +7,7 @@ public class ViewController : MonoBehaviour
 {
     private GameObject pauseButton;				    // toggle pause
     private GameObject toogleButton;				// toggle gamemode
-    public enum Select { menu, replay, next, none };// states that could be entered in endscreen
+    public enum Select { gameCompleted, menu, replay, next, none };// states that could be entered in endscreen
     public Select select = Select.none;				// set selectstate to none
     private Transform tutorial;						// tutorial window
     private Transform endScreen;					// endscreen window
@@ -131,6 +131,12 @@ public class ViewController : MonoBehaviour
         select = Select.menu;
         endScreen.gameObject.SetActive(false);
     }
+	public void LastLevel()
+	{
+		//Final menu, gameManager loads Credits
+		select = Select.gameCompleted;
+		endScreen.gameObject.SetActive(false);
+	}
 
     public void ShowEndScreen(string levelName, int starCount)
     {   // Show endscreen, set level text, and fill right amount of stars
