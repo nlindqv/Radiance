@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 336770314}
   m_Layer: 0
   m_Name: L-obstacle
-  m_TagString: Untagged
+  m_TagString: FloatAway
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -796,7 +796,7 @@ GameObject:
   - component: {fileID: 1104940269}
   m_Layer: 0
   m_Name: R-obstacle
-  m_TagString: Untagged
+  m_TagString: FloatAway
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1427,7 +1427,7 @@ GameObject:
   - component: {fileID: 1914888592}
   m_Layer: 0
   m_Name: S-obstacle
-  m_TagString: Untagged
+  m_TagString: FloatAway
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

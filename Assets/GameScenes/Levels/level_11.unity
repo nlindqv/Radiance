@@ -247,6 +247,10 @@ Prefab:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1911478144434748, guid: 699465bc5bb62114b8a6b1cde0f84a3e, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 699465bc5bb62114b8a6b1cde0f84a3e, type: 2}
   m_IsPrefabParent: 0
@@ -729,6 +733,10 @@ Prefab:
     - target: {fileID: 1174042201530140, guid: afb8c32b56a95404296a90d658785971, type: 2}
       propertyPath: m_Name
       value: Obstacle 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174042201530140, guid: afb8c32b56a95404296a90d658785971, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: afb8c32b56a95404296a90d658785971, type: 2}
