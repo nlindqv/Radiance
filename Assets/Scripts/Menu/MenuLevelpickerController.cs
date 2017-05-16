@@ -109,7 +109,19 @@ public class MenuLevelpickerController : MonoBehaviour
 			int starCount = scores[i];
 			GenerateStars(standardLevelBtn, starCount);
 			if (starCount <= 0) {
-				standardLevelBtn.transform.Find ("lock").gameObject.SetActive (true);
+				if( k == 0)
+				{
+					standardLevelBtn.transform.Find ("lock").gameObject.SetActive (false);
+					for(int j=1;j<=3; j++)
+					{
+						standardLevelBtn.transform.Find ("EmptyStar" + j).gameObject.SetActive (true);
+						//transform.GetChild (0).gameObject.SetActive (true);
+					}
+				}
+				else
+				{
+					standardLevelBtn.transform.Find ("lock").gameObject.SetActive (true);
+				}
 				for(int j=1;j<=3; j++)
 				{
 					standardLevelBtn.transform.Find ("EmptyStar" + j).gameObject.SetActive (false);
