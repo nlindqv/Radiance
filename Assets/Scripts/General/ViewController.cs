@@ -159,6 +159,8 @@ public class ViewController : MonoBehaviour
         if (starCount > 2)
             LightStar(3);
         ShowFadePanel();
+
+		endScreen.GetComponent<RotateStarsEndScreen>().InitStars ();
     }
 
 
