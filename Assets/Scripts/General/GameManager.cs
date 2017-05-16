@@ -170,13 +170,13 @@ public class GameManager : MonoBehaviour
                 //{
                 if (gameMode == GameMode.laserMode)
                 {
-                    gameMode = GameMode.mirrorMode;
-                    StartCoroutine(ModeText("Mirror Mode"));
+                    //gameMode = GameMode.mirrorMode;
+                    StartCoroutine(ModeText("Mirror Mode", GameMode.mirrorMode));
                 }
                 else
                 {
-                    gameMode = GameMode.laserMode;
-                    StartCoroutine(ModeText("Laser Mode"));
+                    //gameMode = GameMode.laserMode;
+                    StartCoroutine(ModeText("Laser Mode", GameMode.laserMode));
                 }
                     //print("double click " + gameMode);
                 //}
@@ -186,8 +186,9 @@ public class GameManager : MonoBehaviour
         }       
     }
 
-    IEnumerator ModeText(string text)
+    IEnumerator ModeText(string text, GameMode gameMode)
     {
+        GameManager.gameMode = GameMode.none;
         Text t = UI.transform.FindChild("GameMode").GetComponent<Text>();
         t.text = text;
         t.color = new Color(t.color.r, t.color.g, t.color.b, 1.0f);
@@ -195,8 +196,10 @@ public class GameManager : MonoBehaviour
         while (t.color.a > 0)
         {
             t.color = new Color(t.color.r, t.color.g, t.color.b, t.color.a - Time.deltaTime / time);
+            if(t.color.a < 0.5f) GameManager.gameMode = gameMode;
             yield return null;
         }
+        
        // UI.transform.FindChild("GameMode").GetComponent<Text>().text = "";
     }
 
