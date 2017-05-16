@@ -154,20 +154,23 @@ public class GameManager : MonoBehaviour
         //RenderSettings.skybox = skybox;
     }
 
+    int prevCount = 0;
     private void DoubleClick()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount > 0)
         {
-            if (Time.time - lastClickTime < catchTime)
+            if (Input.GetTouch(0).tapCount == 2 && prevCount == 1)
             {
-                if (gameMode == GameMode.laserMode) gameMode = GameMode.mirrorMode;
-                else gameMode = GameMode.laserMode;
-                //print("double click " + gameMode);
-
+                //if (Time.time - lastClickTime < catchTime)
+                //{
+                    if (gameMode == GameMode.laserMode) gameMode = GameMode.mirrorMode;
+                    else gameMode = GameMode.laserMode;
+                    //print("double click " + gameMode);
+                //}
+                //lastClickTime = Time.time;
             }
-         
-            lastClickTime = Time.time;
-        }
+            prevCount = Input.GetTouch(0).tapCount;
+        }       
     }
 
     private void LoadTutorial (int index)
