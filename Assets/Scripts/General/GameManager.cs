@@ -247,6 +247,9 @@ public class GameManager : MonoBehaviour
 		case ViewController.Select.next:
 			NextScene ();
 			break;
+		case ViewController.Select.gameCompleted:
+			RollCredits ();
+			break;
 		default:
 			break;
 		}
@@ -277,6 +280,11 @@ public class GameManager : MonoBehaviour
 	private void MainMenu ()
 	{
         SceneManager.LoadScene("StartScene");
+	}
+
+	private void RollCredits ()
+	{
+		SceneManager.LoadScene("AboutScene");
 	}
 		
 	private void LoadLevelName(){
