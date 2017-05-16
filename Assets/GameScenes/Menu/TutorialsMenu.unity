@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18247104, g: 0.15162045, b: 0.121199645, a: 1}
+  m_IndirectSpecularColor: {r: 0.13164452, g: 0.09771595, b: 0.0530681, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -969,8 +969,8 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 220, y: 60}
-  m_Spacing: {x: 20, y: 20}
+  m_CellSize: {x: 220, y: 50}
+  m_Spacing: {x: 10, y: 10}
   m_Constraint: 1
   m_ConstraintCount: 2
 --- !u!114 &1040943794
