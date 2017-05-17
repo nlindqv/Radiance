@@ -42,7 +42,9 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
-        
+        // check glow value
+        if (MemoryManager.LoadGlow() == 2) disableGlow();
+
         Input.multiTouchEnabled = false;
         //Prata med minnet
 //		levelName = MemoryManager.LoadLevelName();
@@ -344,7 +346,8 @@ public class GameManager : MonoBehaviour
             float fps = 1.0f / deltaTime;
             //if(fps < MIN_FPS)disableGlow();
             // check in memory if we should disable glow
-            if (MemoryManager.LoadGlow() != 1) disableGlow();
+            if (MemoryManager.LoadGlow() == 2) disableGlow();
+            //if (MemoryManager.LoadGlow() == 0) disableGlow();
             string text = string.Format("{0:0.0} ms ({1:0.} fps)", LaserMode.max, fps);
             GUI.Label(rect, text, style);
         }
