@@ -179,6 +179,7 @@ public class GameManager : MonoBehaviour
             {
                 EndScript.Float(laserMode.transform);
                 StartCoroutine(ModeText("Lazer Krizters for life! ", GameMode.none, 100.0f));
+				speed = 100.0f;
             }
             prevCount = Input.GetTouch(0).tapCount;
         }       
