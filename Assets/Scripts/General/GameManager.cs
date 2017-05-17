@@ -193,7 +193,7 @@ public class GameManager : MonoBehaviour
             Text t = UI.transform.FindChild("GameMode").GetComponent<Text>();
             t.text = text;
             t.color = new Color(t.color.r, t.color.g, t.color.b, 1.0f);
-            Handheld.Vibrate();
+			if (MemoryManager.LoadVibration() != 2) Handheld.Vibrate();
             while (t.color.a > 0)
             {
                 t.color = new Color(t.color.r, t.color.g, t.color.b, t.color.a - Time.deltaTime / time);
