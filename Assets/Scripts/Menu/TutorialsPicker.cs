@@ -34,6 +34,12 @@ public class TutorialsPicker : MonoBehaviour {
 	}
 	private void showTutorial(int i){
 		Debug.Log (i);
+		//Deactivate tutorial-menu-buttons
+		transform.Find("Tutorials").gameObject.SetActive(false);
+		transform.Find("Button").gameObject.SetActive (false);
+		tutorialButtonCanvas.gameObject.SetActive (false);
+
+		//Initiate Tutorial
 		tutorialWindow.Find("Title").GetComponent<RectTransform>().GetComponent<Text>().text = tutorials.list[i].title;
 		tutorialWindow.Find("Text").GetComponent<RectTransform>().GetComponent<Text>().text = tutorials.list[i].tutorialText;
 		tutorialWindow.Find ("Icon").GetComponent<Image> ().sprite = MemoryManager.loadIcon(tutorials.list[i].iconPath);
@@ -41,5 +47,11 @@ public class TutorialsPicker : MonoBehaviour {
 	}
 	private void HideTutorial(){
 		tutorialWindow.gameObject.SetActive (false);
+
+		//Activate tutorial-menu-buttons
+		transform.Find("Tutorials").gameObject.SetActive(true);
+		transform.Find("Button").gameObject.SetActive (true);
+		tutorialButtonCanvas.gameObject.SetActive (true);
+
 	}
 }
