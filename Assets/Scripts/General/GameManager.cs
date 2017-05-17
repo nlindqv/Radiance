@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 //	private string levelName;
 
     private LaserStack laserStack;
-    private int numOfLasers = 100;
+    private int numOfLasers = 10;
 
     private float MIN_FPS = 20;
 
