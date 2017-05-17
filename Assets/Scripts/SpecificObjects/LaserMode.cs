@@ -16,6 +16,7 @@ public class LaserMode : MonoBehaviour
 
     bool first = true;
     public float speed;
+    public static float max = 0.0f;
 
     // Use this for initialization
     void Start()
@@ -111,12 +112,23 @@ public class LaserMode : MonoBehaviour
                     Vector3 currentDirection = CalculateDirectionVector(planeHitPoint.Value);
                     //beräkna vinkel mellan föregående riktningsvektor och nuvarande
                     angle = Vector3.Angle(prevDirection, currentDirection);
-
-                    // kontrollera tecken på vinkeln med hjälp av kryssprodukten
-                    rb.eulerAngles += new Vector3(0, angle) * Mathf.Sign(Vector3.Cross(prevDirection, currentDirection).y)*speed;
-                    next = false;
+                    max = Mathf.Max(angle, max);
+                    if (angle < 10.0f)
+                    {
+                        // kontrollera tecken på vinkeln med hjälp av kryssprodukten
+                        rb.eulerAngles += new Vector3(0, angle) * Mathf.Sign(Vector3.Cross(prevDirection, currentDirection).y) * speed;
+                        next = false;
+                    }
+                    else
+                    {
+                        prevDirection = CalculateDirectionVector(planeHitPoint.Value);
+                    }
                 }
             }
+        }
+        else
+        {
+            next = false;
         }
 
         if (laserStack == null) laserStack = new LaserStack();
