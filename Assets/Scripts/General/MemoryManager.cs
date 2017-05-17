@@ -72,6 +72,11 @@ public class MemoryManager : MonoBehaviour {
         return glowValue;
     }
 
+	public static int LoadVibration(){
+		int vibrationValue = PlayerPrefs.GetInt ("vibration", 0);
+		return vibrationValue;
+	}
+
     public static Tutorial LoadTutorial(int index){
 		return TUTORIALS.list[index];
 	}
@@ -94,6 +99,11 @@ public class MemoryManager : MonoBehaviour {
     {
         PlayerPrefs.SetInt("glow", glowValue);
     }
+
+	public static void WriteVibration2Memory(int vibrationValue)
+	{
+		PlayerPrefs.SetInt("vibration", vibrationValue);
+	}
     
 	//Writes score to memory, only write if previous score is less than current
     public static void WriteScore2Memory(int score){

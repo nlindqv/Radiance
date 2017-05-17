@@ -108,6 +108,9 @@ public static class GenerateAvailableScenesJSON
 			case 27://Mover
 				tutorialIndex = 5;
 				break;
+			case 29://Inactive Mirror
+				tutorialIndex = 6;
+				break;
 			default:
 				tutorialIndex = -1;
 				break;
