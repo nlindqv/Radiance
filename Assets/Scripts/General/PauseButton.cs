@@ -20,10 +20,10 @@ public class PauseButton : MonoBehaviour {
 		UI.ShowPauseScreen (MemoryManager.LoadScore());
 
 		//showPauseMenu();
-
+		UI.transform.Find("PauseMenu").GetComponent<RotateStarsPaused>().InitStars();
+//		RotateStarsPaused.InitStars();
 
     }
-
 
 
 	private void PauseTime(){

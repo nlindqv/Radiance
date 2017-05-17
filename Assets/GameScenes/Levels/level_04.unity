@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: befb6152e755b4840a883d54cf3884bf, type: 3}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.062044643, g: 0.023254968, b: 0.032674305, a: 1}
+  m_IndirectSpecularColor: {r: 0.073412724, g: 0.027706364, b: 0.03909201, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -191,6 +191,14 @@ Prefab:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: db851a7996ad9428aaaaf33a8d2e4da9, type: 2}
+    - target: {fileID: 1455039744213196, guid: 901ecb29522c8bd40b58bff9e6ea5e2b, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
+    - target: {fileID: 1611909254392696, guid: 901ecb29522c8bd40b58bff9e6ea5e2b, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 901ecb29522c8bd40b58bff9e6ea5e2b, type: 2}
   m_IsPrefabParent: 0
@@ -302,6 +310,26 @@ Prefab:
     - target: {fileID: 4980140622915372, guid: 422c959ee86ed7643b65f5e3f95efde1, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820932601646996, guid: 422c959ee86ed7643b65f5e3f95efde1, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429382883038228, guid: 422c959ee86ed7643b65f5e3f95efde1, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
+    - target: {fileID: 1119534936324374, guid: 422c959ee86ed7643b65f5e3f95efde1, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
+    - target: {fileID: 1870375754090848, guid: 422c959ee86ed7643b65f5e3f95efde1, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003849096041620, guid: 422c959ee86ed7643b65f5e3f95efde1, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 422c959ee86ed7643b65f5e3f95efde1, type: 2}
@@ -692,6 +720,14 @@ Prefab:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: db851a7996ad9428aaaaf33a8d2e4da9, type: 2}
+    - target: {fileID: 1455039744213196, guid: 901ecb29522c8bd40b58bff9e6ea5e2b, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
+    - target: {fileID: 1611909254392696, guid: 901ecb29522c8bd40b58bff9e6ea5e2b, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 901ecb29522c8bd40b58bff9e6ea5e2b, type: 2}
   m_IsPrefabParent: 0
@@ -1117,6 +1153,14 @@ Prefab:
       propertyPath: m_Name
       value: L_wall (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1357834422705208, guid: ed03c135bd5445244b03b222e08792a7, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
+    - target: {fileID: 1047224959130494, guid: ed03c135bd5445244b03b222e08792a7, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed03c135bd5445244b03b222e08792a7, type: 2}
   m_IsPrefabParent: 0
@@ -1231,6 +1275,14 @@ Prefab:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: db851a7996ad9428aaaaf33a8d2e4da9, type: 2}
+    - target: {fileID: 1357834422705208, guid: ed03c135bd5445244b03b222e08792a7, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
+    - target: {fileID: 1047224959130494, guid: ed03c135bd5445244b03b222e08792a7, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed03c135bd5445244b03b222e08792a7, type: 2}
   m_IsPrefabParent: 0
@@ -1296,6 +1348,14 @@ Prefab:
     - target: {fileID: 1658103246901806, guid: ed03c135bd5445244b03b222e08792a7, type: 2}
       propertyPath: m_Name
       value: L_wall (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1047224959130494, guid: ed03c135bd5445244b03b222e08792a7, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357834422705208, guid: ed03c135bd5445244b03b222e08792a7, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed03c135bd5445244b03b222e08792a7, type: 2}

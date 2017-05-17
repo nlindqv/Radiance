@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 224828756728763918}
   - component: {fileID: 222870737784585284}
   - component: {fileID: 114315428085791590}
+  - component: {fileID: 114448887171860712}
   m_Layer: 5
   m_Name: MellanMeny
   m_TagString: Untagged
@@ -175,6 +176,7 @@ GameObject:
   - component: {fileID: 224963188723366556}
   - component: {fileID: 222450614073960636}
   - component: {fileID: 114151245694423544}
+  - component: {fileID: 114287552480855462}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -1450,6 +1452,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Level
+--- !u!114 &114287552480855462
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1214702591423796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8afbd832ea0154d1ebcbce43c333c159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114302286249456350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1707,6 +1720,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114448887171860712
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1101775325802994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18931bc50b31643f3846487620168b1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114472774798523196
 MonoBehaviour:
   m_ObjectHideFlags: 1

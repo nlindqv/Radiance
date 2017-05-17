@@ -295,6 +295,10 @@ Prefab:
       propertyPath: gateColor.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1675561585118434, guid: ca86f7105a61a894a8102ca2d5142521, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca86f7105a61a894a8102ca2d5142521, type: 2}
   m_IsPrefabParent: 0
@@ -582,6 +586,10 @@ Prefab:
         type: 2}
       propertyPath: hit
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675561585118434, guid: ca86f7105a61a894a8102ca2d5142521, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca86f7105a61a894a8102ca2d5142521, type: 2}

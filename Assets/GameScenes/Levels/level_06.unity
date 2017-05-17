@@ -792,6 +792,10 @@ Prefab:
       propertyPath: gateColor.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1675561585118434, guid: ca86f7105a61a894a8102ca2d5142521, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca86f7105a61a894a8102ca2d5142521, type: 2}
   m_IsPrefabParent: 0
@@ -1569,6 +1573,10 @@ Prefab:
       propertyPath: gateColor.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1675561585118434, guid: ca86f7105a61a894a8102ca2d5142521, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca86f7105a61a894a8102ca2d5142521, type: 2}
   m_IsPrefabParent: 0
@@ -1892,6 +1900,10 @@ Prefab:
         type: 2}
       propertyPath: gateColor.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675561585118434, guid: ca86f7105a61a894a8102ca2d5142521, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca86f7105a61a894a8102ca2d5142521, type: 2}
@@ -2360,6 +2372,26 @@ Prefab:
     - target: {fileID: 4690029480295172, guid: e33eb756d5ce1ef4eab56b8ea892a2bb, type: 2}
       propertyPath: m_LocalPosition.z
       value: -0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 1824600807317134, guid: e33eb756d5ce1ef4eab56b8ea892a2bb, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177838635326176, guid: e33eb756d5ce1ef4eab56b8ea892a2bb, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
+    - target: {fileID: 1858475430830712, guid: e33eb756d5ce1ef4eab56b8ea892a2bb, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647410273076504, guid: e33eb756d5ce1ef4eab56b8ea892a2bb, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
+      objectReference: {fileID: 0}
+    - target: {fileID: 1166539017720790, guid: e33eb756d5ce1ef4eab56b8ea892a2bb, type: 2}
+      propertyPath: m_TagString
+      value: FloatAway
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e33eb756d5ce1ef4eab56b8ea892a2bb, type: 2}
