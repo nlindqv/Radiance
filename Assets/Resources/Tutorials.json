@@ -5,4 +5,4 @@
 	{"title":"Gate","tutorialText":"A color gate lets the light pass if and only if the light beam you shine on it has the same color as the color of the gate.","iconPath":"icons/gate","tutorialPlayedBefore":false},
 	{"title":"Light Splitter","tutorialText":"A Light splitter splits a beam of light (regardless of color) to three light beams with three different colors.","iconPath":"icons/lightsplitter","tutorialPlayedBefore":false},
 	{"title":"Mover","tutorialText":"Some objects will follow a certain pattern on the playing field, make sure not to get frustrated by having to time your pattern solving!","iconPath":"icons/mover","tutorialPlayedBefore":false},
-	{"title":"Deactivated Mirror","tutorialText":"Functions just like other mirrors except they need to be activated by shining light on the connected button to become rotatable and movable.","iconPath":"icons/deactivatedMirror","tutorialPlayedBefore":false}]}
+	{"title":"Inactive Mirror","tutorialText":"Functions just like other mirrors except they need to be activated by shining light on the connected button to become rotatable and movable.","iconPath":"icons/deactivatedMirror","tutorialPlayedBefore":false}]}
