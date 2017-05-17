@@ -165,42 +165,43 @@ public class GameManager : MonoBehaviour
         if (Input.touchCount > 0)
         {
             if (Input.GetTouch(0).tapCount == 2 && prevCount == 1)
-            {
-                //if (Time.time - lastClickTime < catchTime)
-                //{
+            {                   
                 if (gameMode == GameMode.laserMode)
-                {
-                    //gameMode = GameMode.mirrorMode;
-                    StartCoroutine(ModeText("Mirror Mode", GameMode.mirrorMode));
+                {                   
+                    StartCoroutine(ModeText("Mirror Mode", GameMode.mirrorMode, 1.0f));
                 }
                 else
-                {
-                    //gameMode = GameMode.laserMode;
-                    StartCoroutine(ModeText("Laser Mode", GameMode.laserMode));
+                {                  
+                    StartCoroutine(ModeText("Laser Mode", GameMode.laserMode, 1.0f));
                 }
-                    //print("double click " + gameMode);
-                //}
-                //lastClickTime = Time.time;
+            }
+            else if(Input.GetTouch(0).tapCount == 25)
+            {
+                EndScript.Float(laserMode.transform);
+                StartCoroutine(ModeText("Lazer Krizters for life! ", GameMode.none, 100.0f));
             }
             prevCount = Input.GetTouch(0).tapCount;
         }       
     }
 
-    IEnumerator ModeText(string text, GameMode gameMode)
-    {
-        GameManager.gameMode = GameMode.none;
-        Text t = UI.transform.FindChild("GameMode").GetComponent<Text>();
-        t.text = text;
-        t.color = new Color(t.color.r, t.color.g, t.color.b, 1.0f);
-        float time = 1.0f;
-        while (t.color.a > 0)
+    IEnumerator ModeText(string text, GameMode gameMode, float time)
+    {   if (GameManager.gameMode == GameMode.none) { yield return null; }
+        else
         {
-            t.color = new Color(t.color.r, t.color.g, t.color.b, t.color.a - Time.deltaTime / time);
-            if(t.color.a < 0.5f) GameManager.gameMode = gameMode;
-            yield return null;
+            GameManager.gameMode = GameMode.none;
+            Text t = UI.transform.FindChild("GameMode").GetComponent<Text>();
+            t.text = text;
+            t.color = new Color(t.color.r, t.color.g, t.color.b, 1.0f);
+            Handheld.Vibrate();
+            while (t.color.a > 0)
+            {
+                t.color = new Color(t.color.r, t.color.g, t.color.b, t.color.a - Time.deltaTime / time);
+                // if(t.color.a < 0.5f) 
+                yield return null;
+            }
+            GameManager.gameMode = gameMode;
+            // UI.transform.FindChild("GameMode").GetComponent<Text>().text = "";
         }
-        
-       // UI.transform.FindChild("GameMode").GetComponent<Text>().text = "";
     }
 
 
@@ -330,19 +331,22 @@ public class GameManager : MonoBehaviour
 
     void OnGUI()
     {
-        int w = Screen.width, h = Screen.height;
-        GUIStyle style = new GUIStyle();
-        Rect rect = new Rect(0, 0, w, h * 2 / 100);
-        style.alignment = TextAnchor.UpperLeft;
-        style.fontSize = h * 2 / 50;
-        style.normal.textColor = new Color(0.0f, 0.0f, 0.5f, 1.0f);
-        float msec = deltaTime * 1000.0f;
-        float fps = 1.0f / deltaTime;
-        //if(fps < MIN_FPS)disableGlow();
-        // check in memory if we should disable glow
-        if (MemoryManager.LoadGlow() != 1) disableGlow();
-        string text = string.Format("{0:0.0} ms ({1:0.} fps)", msec, fps);
-        GUI.Label(rect, text, style);        
+        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.IPhonePlayer)
+        {
+            int w = Screen.width, h = Screen.height;
+            GUIStyle style = new GUIStyle();
+            Rect rect = new Rect(0, 0, w, h * 2 / 100);
+            style.alignment = TextAnchor.UpperLeft;
+            style.fontSize = h * 2 / 50;
+            style.normal.textColor = new Color(0.0f, 0.0f, 0.5f, 1.0f);
+            float msec = deltaTime * 1000.0f;
+            float fps = 1.0f / deltaTime;
+            //if(fps < MIN_FPS)disableGlow();
+            // check in memory if we should disable glow
+            if (MemoryManager.LoadGlow() != 1) disableGlow();
+            string text = string.Format("{0:0.0} ms ({1:0.} fps)", LaserMode.max, fps);
+            GUI.Label(rect, text, style);
+        }
     }
 
     private void disableGlow()
