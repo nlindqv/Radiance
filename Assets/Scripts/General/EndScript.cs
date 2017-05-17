@@ -18,4 +18,19 @@ public class EndScript : MonoBehaviour {
         if (gameObjectsRigidBody.GetComponent<MeshCollider>()) gameObjectsRigidBody.GetComponent<MeshCollider>().enabled = false;
         gameObjectsRigidBody.freezeRotation = false;
      }
+
+    public static void Float(Transform trans)
+    {
+        Rigidbody gameObjectsRigidBody = (trans.gameObject.GetComponent<Rigidbody>() == null) ? trans.gameObject.AddComponent<Rigidbody>() : trans.gameObject.GetComponent<Rigidbody>(); // Add the rigidbody.
+        if (gameObjectsRigidBody == null) return;
+        gameObjectsRigidBody.mass = UnityEngine.Random.Range(0.0f, 10.0f); // Set the GO's mass to 5 via the Rigidbody.
+        gameObjectsRigidBody.velocity = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), UnityEngine.Random.Range(0.0f, 2.0f), UnityEngine.Random.Range(-1.0f, 1.0f));
+        gameObjectsRigidBody.isKinematic = false;
+        gameObjectsRigidBody.useGravity = false;
+        gameObjectsRigidBody.angularVelocity = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), UnityEngine.Random.Range(-1.0f, 1.0f), UnityEngine.Random.Range(-1.0f, 1.0f));
+        if (gameObjectsRigidBody.GetComponent<Movable>()) gameObjectsRigidBody.GetComponent<Movable>().enabled = false;
+        if (gameObjectsRigidBody.GetComponent<Movable>()) gameObjectsRigidBody.GetComponent<Rotate>().enabled = false;
+        if (gameObjectsRigidBody.GetComponent<MeshCollider>()) gameObjectsRigidBody.GetComponent<MeshCollider>().enabled = false;
+        gameObjectsRigidBody.freezeRotation = false;
+    }
 }

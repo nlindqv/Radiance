@@ -21,7 +21,8 @@ public class ViewController : MonoBehaviour
         // Access button label and set default mode to lasermode
         toogleButton = transform.Find("toggleGameMode").gameObject;
         toogleButton.GetComponentInChildren<Text>().text = "Laser Mode";
-
+        
+            toogleButton.SetActive(false);
         pauseButton = transform.Find(GameManager.PAUSE_BTN_NAME).gameObject;
 
         // Get Canvas object and set its alpha to 0
@@ -68,7 +69,12 @@ public class ViewController : MonoBehaviour
 
     public void ShowGameModeButton()
     {
-		// Show GameMode-button and set label text
+        // Show GameMode-button and set label text
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            toogleButton.SetActive(false);
+            return;
+        }
         toogleButton.SetActive(true);
         if (GameManager.gameMode == GameManager.GameMode.mirrorMode)
         {

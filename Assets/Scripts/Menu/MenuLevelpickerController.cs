@@ -25,7 +25,7 @@ public class MenuLevelpickerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        // Calculate current page index
+        // Calculate current page index 
         int [] scores = MemoryManager.LoadAllScores();
         for (int i = 0; i < scores.Length; i++)
         {
