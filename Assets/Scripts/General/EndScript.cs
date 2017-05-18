@@ -16,6 +16,13 @@ public class EndScript : MonoBehaviour {
         if (gameObjectsRigidBody.GetComponent<Movable>()) gameObjectsRigidBody.GetComponent<Movable>().enabled = false;
         if (gameObjectsRigidBody.GetComponent<Movable>()) gameObjectsRigidBody.GetComponent<Rotate>().enabled = false;
         if (gameObjectsRigidBody.GetComponent<MeshCollider>()) gameObjectsRigidBody.GetComponent<MeshCollider>().enabled = false;
+        Renderer objRenderer = trans.gameObject.GetComponent<Renderer>();
+        if (objRenderer != null)
+        {
+            objRenderer.material.SetFloat("_GlossyReflections", 0);
+            objRenderer.material.SetFloat("_SpecularHighlights", 0f);
+            objRenderer.material.EnableKeyword("_SPECULARHIGHLIGHTS_OFF");   
+        }
         gameObjectsRigidBody.freezeRotation = false;
      }
 
