@@ -1219,7 +1219,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 114302286249456350}
+  m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -1482,9 +1482,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c79f189dc47741648ab0b7a8a3222f2c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3cc42e71b63d34876a5d7458e562819f, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2964,10 +2964,10 @@ RectTransform:
   m_Father: {fileID: 224908844234847678}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.9, y: 0.010416666}
-  m_AnchorMax: {x: 0.99100006, y: 0.1562639}
-  m_AnchoredPosition: {x: 0.5, y: 0}
-  m_SizeDelta: {x: -3.699997, y: 0.90999985}
+  m_AnchorMin: {x: 0.95, y: 0.02}
+  m_AnchorMax: {x: 0.99, y: 0.11000001}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224459509757175786
 RectTransform:

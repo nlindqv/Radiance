@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 //	private string levelName;
 
     private LaserStack laserStack;
-    private int numOfLasers = 100;
+    private int numOfLasers = 10;
 
     private float MIN_FPS = 20;
 
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         laserMode = GameObject.Find("LightSource").GetComponent<LaserMode>();
 
         laserStack = new LaserStack();
-        Debug.Log(GameObject.FindObjectsOfType(typeof(IInteractables)));
+        //Debug.Log(GameObject.FindObjectsOfType(typeof(IInteractables)));
   
         foreach (IInteractables inter in GameObject.FindObjectsOfType(typeof(IInteractables)))
         {
@@ -257,11 +257,13 @@ public class GameManager : MonoBehaviour
         }
         foreach (LaserMode item in GameObject.FindObjectsOfType<LaserMode>())
         {
+            foreach (MeshCollider mesh in item.transform.FindChild("Body").GetComponentsInChildren<MeshCollider>())
+                mesh.enabled = false;
             EndScript.FloatAway(item.transform);
         }
         foreach (GameObject item in GameObject.FindGameObjectsWithTag("FloatAway"))
         {
-            Debug.Log(GameObject.FindGameObjectsWithTag("FloatAway"));
+            //Debug.Log(GameObject.FindGameObjectsWithTag("FloatAway"));
             EndScript.FloatAway(item.transform);
         }
         speed = 4.0f;
