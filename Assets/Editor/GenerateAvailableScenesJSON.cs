@@ -67,7 +67,7 @@ public static class GenerateAvailableScenesJSON
 
 		return sceneList;
 	}
-		
+
 	//Write indexoffset to file to be read from memorymanager
 	private static void SetIndexOffset(){
 		int levelIndexOffset = 0;
@@ -88,7 +88,7 @@ public static class GenerateAvailableScenesJSON
 
 	private static int GetTutorialIndex(int i){
 		int tutorialIndex = -1;
-		switch (i) 
+		switch (i)
 		{
 			case 1://Lightsource
 				tutorialIndex = 0;
@@ -99,17 +99,20 @@ public static class GenerateAvailableScenesJSON
 			case 7://Checkpoint
 				tutorialIndex = 2;
 				break;
-			case 14://ColorChanger
+			case 13://ColorChanger
 				tutorialIndex = 3;
 				break;
+      case 14://Gate
+  			tutorialIndex = 4;
+  			break;
 			case 19://LightSplitter
-				tutorialIndex = 4;
-				break;
-			case 27://Mover
 				tutorialIndex = 5;
 				break;
-			case 29://Inactive Mirror
+			case 27://Mover
 				tutorialIndex = 6;
+				break;
+			case 29://Inactive Mirror
+				tutorialIndex = 7;
 				break;
 			default:
 				tutorialIndex = -1;
