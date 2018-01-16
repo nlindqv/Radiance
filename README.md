@@ -1,7 +1,4 @@
 # Radiance
-
-[Editor on GitHub](https://github.com/Byssis/Project2017/edit/master/README.md) 
-
 ### Contributors
 **Product owner:** Senad Delic <senadmd@kth.se> <br/>
 **Scrum master:** Victor Bodell <vbodell@kth.se> <br/>
