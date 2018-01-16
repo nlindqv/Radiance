@@ -1,10 +1,8 @@
-# Ljusspel 
-
-Projektsida för grupp 4
+# Radiance
 
 [Editor on GitHub](https://github.com/Byssis/Project2017/edit/master/README.md) 
 
-### Gruppmedlemmar
+### Contributors
 **Product owner:** Senad Delic <senadmd@kth.se> <br/>
 **Scrum master:** Victor Bodell <vbodell@kth.se> <br/>
 Sara Ersson <saraers@kth.se><br/>
@@ -14,9 +12,7 @@ Niklas Lindqvist <nlindqv@kth.se><br/>
 Emma Good <egood@kth.se><br/>
 Michaela Jangefalk <mija5666@kth.se><br/>
 
-### Kontakt
-
-[Mail](https://github.com/contact).
+[Link to Google Play](https://play.google.com/store/apps/details?id=superkittyproduction.Radiance)
 
 ## Spelidé
 Vi har tänkt att utveckla ett "laserspel" som först och främst kommer utvecklas för android och eventuellt för IOS om vi har tid. Spelidén grundar sig i att spelaren ska kunna styra en ljuskälla som i sin tur genererar en laserstråle. Denna laserstråle ska riktas mot olika objekt på spelplanen. Ett exempel på ett objekt som vi ska implementera är speglar som används för att vinkla laserstrålen för att ta sig fram till målet och klara av banan. 
